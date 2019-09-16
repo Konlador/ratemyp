@@ -1,0 +1,9 @@
+.dotnet/
+bin/
+obj/
+out/
+packages/
+Winx64/
+x64/
+*proj.user
+.vs
