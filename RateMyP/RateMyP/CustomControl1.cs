@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace RateMyP
     {
-    public partial class Form1 : Form
+    public partial class CustomControl1 : Control
         {
-        public Form1()
+        public CustomControl1()
             {
             InitializeComponent();
             }
 
-        private void Form1_Load(object sender, EventArgs e)
+        protected override void OnPaint(PaintEventArgs pe)
             {
-
+            base.OnPaint(pe);
             }
         }
     }
