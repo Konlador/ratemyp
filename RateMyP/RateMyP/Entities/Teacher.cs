@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RateMyP
+namespace RateMyP.Entities
     {
     public enum AcademicRank
         {
@@ -12,6 +8,7 @@ namespace RateMyP
         Professor
         }
 
+    [Serializable]
     public class Teacher
         {
         public Guid Id { get; set; }

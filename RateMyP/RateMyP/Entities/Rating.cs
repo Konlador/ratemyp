@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RateMyP
+namespace RateMyP.Entities
     {
+    [Serializable]
     public class Rating
         {
-        public Guid TeacherGuid { get; set; }
-        public int TeacherMark { get; set; }
+        public Guid Id { get; set; }
+        public Guid TeacherId { get; set; }
+        public Guid StudentId { get; set; }
+        public int OverallMark { get; set; }
         public int LevelOfDifficulty { get; set; }
         public bool WouldTakeTeacherAgain { get; set; }
         public List<string> Tags { get; set; }
