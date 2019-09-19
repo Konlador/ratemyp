@@ -1,51 +1,49 @@
 ﻿using NUnit.Framework;
+using RateMyP.Entities;
+using RateMyP.Managers;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace RateMyP.Tests
     {
     [TestFixture]
-    public class TeacherStatisticsManagerTests
+    public class TeacherStatisticsAnalyzerTests
         {
-        private TeacherStatisticsManager m_manager;
+        private TeacherStatisticsAnalyzer m_manager;
+        private RatingManager m_ratingManager;
 
         [SetUp]
         public void SetUp ()
             {
-            var assemblyDirectory = Path.GetDirectoryName(GetType().Assembly.Location);
-            var databasePath = Path.Combine(assemblyDirectory, "database");
-            var ratingsFileName = Path.Combine (databasePath, "ratings.csv");
-            var teachersFileName = Path.Combine (databasePath, "teachers.csv");
-
-            var databaseConnection = new DatabaseConnection (ratingsFileName, teachersFileName);
-            databaseConnection.Clear ();
-            m_manager = new TeacherStatisticsManager (databaseConnection);
+            var databaseConnection = new SQLDbConnection();
+            databaseConnection.Clear();
+            m_ratingManager = new RatingManager(databaseConnection);
+            m_manager = new TeacherStatisticsAnalyzer(m_ratingManager);
             }
 
         [Test]
-        public void GetTeacherAverageRating_NoRating ()
+        public void GetTeacherAverageMark_NoRating()
             {
-            var averageRating = m_manager.GetTeacherAverageRating(Guid.NewGuid ());
+            var averageRating = m_manager.GetTeacherAverageMark(Guid.NewGuid ());
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public void GetTeacherAverageRating_SingleRating()
+        public void GetTeacherAverageMark_SingleRating()
             {
-            var teacherGuid = Guid.NewGuid ();
             var rating = new Rating
                 {
-                TeacherGuid = teacherGuid,
-                TeacherMark = 4,
+                Id = Guid.NewGuid(),
+                TeacherId = Guid.NewGuid(),
+                StudentId = Guid.NewGuid(),
+                OverallMark = 4,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<string> {"Lots of homework"},
+                Tags = "Lots of homework",
                 Comment = "Cool guy"
                 };
 
-            m_manager.AddRating (rating);
-            var averageRating = m_manager.GetTeacherAverageRating (teacherGuid);
+            m_ratingManager.AddRating(rating);
+            var averageRating = m_manager.GetTeacherAverageMark(rating.TeacherId);
             Assert.AreEqual (4, averageRating);
             }
         }

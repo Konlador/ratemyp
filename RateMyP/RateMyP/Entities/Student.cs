@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RateMyP
+namespace RateMyP.Entities
     {
+    [Serializable]
     public class Student
         {
-        public int StudentNumber { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Studies { get; set; }

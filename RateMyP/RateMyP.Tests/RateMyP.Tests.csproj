@@ -53,7 +53,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TeacherManagerTests.cs" />
+    <Compile Include="Managers\StudentManagerTests.cs" />
+    <Compile Include="Managers\RatingManagerTests.cs" />
+    <Compile Include="Managers\TeacherManagerTests.cs" />
     <Compile Include="TeacherStatisticsManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
