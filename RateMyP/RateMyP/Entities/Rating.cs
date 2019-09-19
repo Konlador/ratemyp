@@ -12,7 +12,7 @@ namespace RateMyP.Entities
         public int OverallMark { get; set; }
         public int LevelOfDifficulty { get; set; }
         public bool WouldTakeTeacherAgain { get; set; }
-        public List<string> Tags { get; set; }
+        public string Tags { get; set; }
         public string Comment { get; set; }
         }
     }
