@@ -206,10 +206,10 @@
         private System.Windows.Forms.Panel pagePanel;
         private Forms.UserControls.LandingPage landingPage;
         private Forms.UserControls.BrowsePage browsePage;
-        private Forms.UserControls.RatePage ratePage;
+        public Forms.UserControls.RatePage ratePage;
         private Forms.UserControls.LeaderboardPage leaderboardPage;
         private System.Windows.Forms.Button profilePageButton;
-        private Forms.UserControls.ProfilePage profilePage;
+        public Forms.UserControls.ProfilePage profilePage;
     }
     }
 

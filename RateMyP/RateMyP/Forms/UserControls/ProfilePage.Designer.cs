@@ -40,6 +40,7 @@
             this.profileNameLabel = new System.Windows.Forms.Label();
             this.activityView = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Rate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -107,6 +108,7 @@
             this.tableLayoutPanel2.Controls.Add(this.profileGenderLabel, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.profileFacultyLabel, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.profileNameLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Rate, 0, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -158,6 +160,7 @@
             this.profileNameLabel.Size = new System.Drawing.Size(41, 20);
             this.profileNameLabel.TabIndex = 0;
             this.profileNameLabel.Text = "Name: ";
+            this.profileNameLabel.Click += new System.EventHandler(this.ProfileNameLabel_Click);
             // 
             // activityView
             // 
@@ -186,6 +189,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(663, 555);
             this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // Rate
+            // 
+            this.Rate.Location = new System.Drawing.Point(3, 83);
+            this.Rate.Name = "Rate";
+            this.Rate.Size = new System.Drawing.Size(61, 39);
+            this.Rate.TabIndex = 4;
+            this.Rate.Text = "Rate";
+            this.Rate.UseVisualStyleBackColor = true;
+            this.Rate.Click += new System.EventHandler(this.Rate_Click);
             // 
             // ProfilePage
             // 
@@ -222,5 +235,6 @@
         private System.Windows.Forms.Label profileNameLabel;
         private System.Windows.Forms.ListView activityView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button Rate;
     }
 }

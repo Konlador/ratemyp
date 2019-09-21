@@ -31,11 +31,12 @@ namespace RateMyP.Managers
                 while (reader.Read())
                     {
                     var teacher = new Teacher
-                        {
+                    {
                         Id = reader.SafeGetGuid(PROPERTY_ID, Guid.Empty),
                         Name = reader.SafeGetString(PROPERTY_NAME),
                         Surname = reader.SafeGetString(PROPERTY_SURNAME),
-                        Rank = reader.SafeGetEnum(PROPERTY_RANK, AcademicRank.Lecturer)
+                        Rank = reader.SafeGetEnum(PROPERTY_RANK, AcademicRank.Lecturer),
+                        Faculty = reader.SafeGetString(PROPERTY_FACULTY)
                         };
                     teachers.Add(teacher);
                     }

@@ -15,5 +15,6 @@ namespace RateMyP.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public AcademicRank Rank { get; set; }
+        public string Faculty { get; set; }
         }
     }

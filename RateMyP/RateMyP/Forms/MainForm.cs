@@ -12,9 +12,13 @@ namespace RateMyP
     {
     public partial class MainForm : Form
         {
+
+        public static MainForm Self;
+
         public MainForm()
         {
             InitializeComponent();
+            Self = this;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,7 +66,7 @@ namespace RateMyP
             browsePage.BringToFront();
         }
 
-        private void RatePageButton_Click(object sender, EventArgs e)
+        public void RatePageButton_Click(object sender, EventArgs e)
         {
             landingPage.Hide();
             browsePage.Hide();
@@ -82,7 +86,7 @@ namespace RateMyP
             leaderboardPage.BringToFront();
         }
 
-        private void ProfilePageButton_Click(object sender, EventArgs e)
+        public void ProfilePageButton_Click(object sender, EventArgs e)
         {
             landingPage.Hide();
             browsePage.Hide();
@@ -91,5 +95,6 @@ namespace RateMyP
             profilePage.Show();
             profilePage.BringToFront();
         }
+
     }
     }

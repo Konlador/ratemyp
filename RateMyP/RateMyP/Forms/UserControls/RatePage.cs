@@ -11,7 +11,8 @@ using System.Windows.Forms;
 namespace RateMyP.Forms.UserControls
 {
     public partial class RatePage : UserControl
-    {
+    { 
+
         public RatePage()
         {
             InitializeComponent();
@@ -25,6 +26,12 @@ namespace RateMyP.Forms.UserControls
         private void ProfPictureBox_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void UpdateInfo()
+        {
+            ratePageNameLabel.Text = "Name: " + BrowsePage.teacherName;
+            ratePageDegreeLabel.Text = "Rank: " + BrowsePage.teacherRank.ToString();
         }
     }
 }
