@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("TrendProf1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("TrendProf2");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Course1");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Course2");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Course1");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Course2");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.filterBox = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.profListView = new System.Windows.Forms.ListView();
-            this.courseListView = new System.Windows.Forms.ListView();
-            this.browseFilterButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.browseSearchBox = new System.Windows.Forms.TextBox();
             this.browseSearchButton = new System.Windows.Forms.Button();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.browseFilterButton = new System.Windows.Forms.Button();
+            this.filterBox = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.profListView = new System.Windows.Forms.ListView();
+            this.tName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tRank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.courseListView = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -55,11 +55,11 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -126,88 +126,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(657, 55);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer3.Panel2.Controls.Add(this.browseFilterButton);
-            this.splitContainer3.Panel2.Controls.Add(this.filterBox);
-            this.splitContainer3.Size = new System.Drawing.Size(657, 129);
-            this.splitContainer3.SplitterDistance = 33;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // filterBox
-            // 
-            this.filterBox.FormattingEnabled = true;
-            this.filterBox.Items.AddRange(new object[] {
-            "Filter1",
-            "Filter2",
-            "Filter3",
-            "..."});
-            this.filterBox.Location = new System.Drawing.Point(6, 3);
-            this.filterBox.Name = "filterBox";
-            this.filterBox.Size = new System.Drawing.Size(250, 21);
-            this.filterBox.TabIndex = 0;
-            this.filterBox.Text = "Filter by";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.profListView, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.courseListView, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(657, 357);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // profListView
-            // 
-            this.profListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profListView.HideSelection = false;
-            this.profListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.profListView.Location = new System.Drawing.Point(3, 3);
-            this.profListView.Name = "profListView";
-            this.profListView.Size = new System.Drawing.Size(322, 351);
-            this.profListView.TabIndex = 2;
-            this.profListView.UseCompatibleStateImageBehavior = false;
-            this.profListView.View = System.Windows.Forms.View.List;
-            // 
-            // courseListView
-            // 
-            this.courseListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.courseListView.HideSelection = false;
-            this.courseListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.courseListView.Location = new System.Drawing.Point(331, 3);
-            this.courseListView.Name = "courseListView";
-            this.courseListView.Size = new System.Drawing.Size(323, 351);
-            this.courseListView.TabIndex = 3;
-            this.courseListView.UseCompatibleStateImageBehavior = false;
-            this.courseListView.View = System.Windows.Forms.View.List;
-            // 
-            // browseFilterButton
-            // 
-            this.browseFilterButton.Location = new System.Drawing.Point(272, 1);
-            this.browseFilterButton.Name = "browseFilterButton";
-            this.browseFilterButton.Size = new System.Drawing.Size(75, 23);
-            this.browseFilterButton.TabIndex = 1;
-            this.browseFilterButton.Text = "Filter";
-            this.browseFilterButton.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -241,6 +159,99 @@
             this.browseSearchButton.TabIndex = 1;
             this.browseSearchButton.Text = "Search";
             this.browseSearchButton.UseVisualStyleBackColor = true;
+            this.browseSearchButton.Click += new System.EventHandler(this.BrowseSearchButton_Click);
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer3.Panel2.Controls.Add(this.browseFilterButton);
+            this.splitContainer3.Panel2.Controls.Add(this.filterBox);
+            this.splitContainer3.Size = new System.Drawing.Size(657, 129);
+            this.splitContainer3.SplitterDistance = 33;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // browseFilterButton
+            // 
+            this.browseFilterButton.Location = new System.Drawing.Point(272, 1);
+            this.browseFilterButton.Name = "browseFilterButton";
+            this.browseFilterButton.Size = new System.Drawing.Size(75, 23);
+            this.browseFilterButton.TabIndex = 1;
+            this.browseFilterButton.Text = "Filter";
+            this.browseFilterButton.UseVisualStyleBackColor = true;
+            // 
+            // filterBox
+            // 
+            this.filterBox.FormattingEnabled = true;
+            this.filterBox.Items.AddRange(new object[] {
+            "Filter1",
+            "Filter2",
+            "Filter3",
+            "..."});
+            this.filterBox.Location = new System.Drawing.Point(6, 3);
+            this.filterBox.Name = "filterBox";
+            this.filterBox.Size = new System.Drawing.Size(250, 21);
+            this.filterBox.TabIndex = 0;
+            this.filterBox.Text = "Filter by";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.profListView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.courseListView, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(657, 357);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // profListView
+            // 
+            this.profListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.tName,
+            this.tRank});
+            this.profListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.profListView.FullRowSelect = true;
+            this.profListView.HideSelection = false;
+            this.profListView.Location = new System.Drawing.Point(3, 3);
+            this.profListView.Name = "profListView";
+            this.profListView.Size = new System.Drawing.Size(322, 351);
+            this.profListView.TabIndex = 2;
+            this.profListView.UseCompatibleStateImageBehavior = false;
+            this.profListView.View = System.Windows.Forms.View.Details;
+            // 
+            // tName
+            // 
+            this.tName.Text = "Full Name";
+            this.tName.Width = 259;
+            // 
+            // tRank
+            // 
+            this.tRank.Text = "Rank";
+            // 
+            // courseListView
+            // 
+            this.courseListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.courseListView.HideSelection = false;
+            this.courseListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem7,
+            listViewItem8});
+            this.courseListView.Location = new System.Drawing.Point(331, 3);
+            this.courseListView.Name = "courseListView";
+            this.courseListView.Size = new System.Drawing.Size(323, 351);
+            this.courseListView.TabIndex = 3;
+            this.courseListView.UseCompatibleStateImageBehavior = false;
+            this.courseListView.View = System.Windows.Forms.View.List;
             // 
             // BrowsePage
             // 
@@ -260,12 +271,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -285,5 +296,7 @@
         private System.Windows.Forms.TextBox browseSearchBox;
         private System.Windows.Forms.Button browseSearchButton;
         private System.Windows.Forms.Button browseFilterButton;
+        private System.Windows.Forms.ColumnHeader tName;
+        private System.Windows.Forms.ColumnHeader tRank;
     }
 }

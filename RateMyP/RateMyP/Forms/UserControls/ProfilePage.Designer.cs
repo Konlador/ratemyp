@@ -40,6 +40,10 @@
             this.profileNameLabel = new System.Windows.Forms.Label();
             this.activityView = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.sStudies = new System.Windows.Forms.Label();
+            this.sFaculty = new System.Windows.Forms.Label();
+            this.sName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -51,6 +55,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer
@@ -103,6 +108,7 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.profileDegreeLabel, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.profileGenderLabel, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.profileFacultyLabel, 0, 1);
@@ -111,6 +117,9 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -187,6 +196,58 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(663, 555);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.sStudies, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.sFaculty, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.sName, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 83);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(422, 126);
+            this.tableLayoutPanel3.TabIndex = 4;
+            // 
+            // sStudies
+            // 
+            this.sStudies.AutoSize = true;
+            this.sStudies.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sStudies.Location = new System.Drawing.Point(3, 60);
+            this.sStudies.Name = "sStudies";
+            this.sStudies.Size = new System.Drawing.Size(45, 20);
+            this.sStudies.TabIndex = 3;
+            this.sStudies.Text = "Studies:";
+            // 
+            // sFaculty
+            // 
+            this.sFaculty.AutoSize = true;
+            this.sFaculty.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sFaculty.Location = new System.Drawing.Point(3, 20);
+            this.sFaculty.Name = "sFaculty";
+            this.sFaculty.Size = new System.Drawing.Size(47, 20);
+            this.sFaculty.TabIndex = 1;
+            this.sFaculty.Text = "Faculty: ";
+            // 
+            // sName
+            // 
+            this.sName.AutoSize = true;
+            this.sName.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sName.Location = new System.Drawing.Point(3, 0);
+            this.sName.Name = "sName";
+            this.sName.Size = new System.Drawing.Size(41, 20);
+            this.sName.TabIndex = 0;
+            this.sName.Text = "Name: ";
+            // 
             // ProfilePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,6 +267,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -222,5 +285,9 @@
         private System.Windows.Forms.Label profileNameLabel;
         private System.Windows.Forms.ListView activityView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label sStudies;
+        private System.Windows.Forms.Label sFaculty;
+        private System.Windows.Forms.Label sName;
     }
 }
