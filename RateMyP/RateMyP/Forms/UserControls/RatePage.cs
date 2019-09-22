@@ -25,21 +25,22 @@ namespace RateMyP.Forms.UserControls
         }
 
         // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, displays teacher's rating data.
-        private void InitDb(Guid tId)
+        private void InitDb(Guid teacherId)
         {
-            if(tId != Guid.Empty)
+            if(teacherId != Guid.Empty)
             {
-                var databaseConnection = new SQLDbConnection();
-                databaseConnection.Clear();
-                ITeacherManager t_manager = new TeacherManager(databaseConnection);
-                IRatingManager r_manager = new RatingManager(databaseConnection);
-                var selTeacher = t_manager.GetTeacher(tId);
-                nameLabel.Text = selTeacher.Name + " " + selTeacher.Surname;
-                rankLabel.Text = selTeacher.Rank.ToString();
-                var ratings = r_manager.GetAllRatings();
+                var databaseConnection = new SQLDbConnection();                             //
+                databaseConnection.Clear();                                                 //Connection to
+                ITeacherManager teacherManager = new TeacherManager(databaseConnection);    //data
+                IRatingManager ratingManager = new RatingManager(databaseConnection);       //
+
+                var selectedTeacher = teacherManager.GetTeacher(teacherId);
+                nameLabel.Text = selectedTeacher.Name + " " + selectedTeacher.Surname;
+                rankLabel.Text = selectedTeacher.Rank.ToString();
+                var ratings = ratingManager.GetAllRatings();
                 foreach (var rating in ratings)
                 {
-                    if (rating.TeacherId == tId)
+                    if (rating.TeacherId == teacherId)
                     {
                         difficultyLabel.Text = rating.LevelOfDifficulty.ToString();
                         overallMarkLabel.Text = rating.OverallMark.ToString();
@@ -62,25 +63,25 @@ namespace RateMyP.Forms.UserControls
             Search();
         }
         // Gets all teacher data, performs a search by comparing search box contents with the full names of the teachers by using 'Contains' string method.
-        // If teacher is found, initiates InitDb method while passing along the teacher's Id
+        // If teacher is found, initiates InitDb method while passing along the teacher's Id, if not - passes along Guid.Empty
         private void Search()
         {
             var databaseConnection = new SQLDbConnection();
             databaseConnection.Clear();
-            ITeacherManager t_manager = new TeacherManager(databaseConnection);
-            var Teachers = t_manager.GetAllTeachers();
+            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
+            var teachers = teacherManager.GetAllTeachers();
             if (searchBoxRate.Text != "")
             {
-                for (int i = Teachers.Count - 1; i >= 0; i--)
+                for (int i = teachers.Count - 1; i >= 0; i--)
                 {
-                    var item = Teachers[i];
+                    var item = teachers[i];
                     string fullName = item.Name + " " + item.Surname;
                     if (!fullName.ToLower().Contains(searchBoxRate.Text.ToLower()))
-                        Teachers.Remove(item);
+                        teachers.Remove(item);
                 }
-                if (Teachers.Count == 1)
+                if (teachers.Count == 1)
                 {
-                    foreach (var n in Teachers)
+                    foreach (var n in teachers)
                         InitDb(n.Id);
                 }
             }

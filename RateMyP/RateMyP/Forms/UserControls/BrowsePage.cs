@@ -19,43 +19,20 @@ namespace RateMyP.Forms.UserControls
             InitProfListView();
         }
 
-        //private void ProfListView_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        var selectedItem = (Teacher)profListView.SelectedItems[0].Tag;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
         // Connects to the data, gets all teacher class data and displays it in the ListView.
         private void InitProfListView()
         {
             var databaseConnection = new SQLDbConnection();
             databaseConnection.Clear();
-            ITeacherManager t_manager = new TeacherManager(databaseConnection);
-            var teachers = t_manager.GetAllTeachers();
+            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
+            var teachers = teacherManager.GetAllTeachers();
             profListView.Items.Clear();
-            foreach (var Teacher in teachers)
+            foreach (var teacher in teachers)
             {
-                var row = new string[] { Teacher.Name + " " + Teacher.Surname, Teacher.Rank.ToString() };
-                var lvi = new ListViewItem(row) { Tag = Teacher };
+                var row = new string[] { teacher.Name + " " + teacher.Surname, teacher.Rank.ToString() };
+                var lvi = new ListViewItem(row);
                 profListView.Items.Add(lvi);
             }
-
-            //test code for test list and class
-            //var people = GetPeopleList();
-            //profListView.Items.Clear();
-            //foreach (var person in people)
-            //{
-            //    var row = new string[] { person.FN + " " + person.LN };
-            //    var lvi = new ListViewItem(row);
-            //    profListView.Items.Add(lvi);
-            //}
         }
 
         private void BrowseSearchButton_Click(object sender, EventArgs e)
@@ -91,33 +68,5 @@ namespace RateMyP.Forms.UserControls
         }
 
         //TODO: Filtering
-
-        //test list
-        //private List<Person> GetPeopleList()
-        //{
-        //    var list = new List<Person>
-        //    {
-        //        new Person() { FN = "lis", LN = "bon" },
-        //        new Person() { FN = "lis", LN = "bon" },
-        //        new Person() { FN = "lis", LN = "bon" },
-        //        new Person() { FN = "wasc", LN = "bytbv" },
-        //        new Person() { FN = "wasc", LN = "bytbv" },
-        //        new Person() { FN = "wasc", LN = "bytbv" }
-        //    };
-        //    return list;
-        //}
     }
-
-    //test class
-    //internal class Person
-    //{
-    //    public Person()
-    //    {
-    //        Id = new Random().Next(1, 10000);
-    //    }
-
-    //    public int Id { get; set; }
-    //    public string FN { get; set; }
-    //    public string LN { get; set; }
-    //}
 }

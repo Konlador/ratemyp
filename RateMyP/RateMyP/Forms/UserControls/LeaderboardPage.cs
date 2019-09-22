@@ -23,15 +23,15 @@ namespace RateMyP.Forms.UserControls
         {
             var databaseConnection = new SQLDbConnection();
             databaseConnection.Clear();
-            ITeacherManager t_manager = new TeacherManager(databaseConnection);
-            IRatingManager r_manager = new RatingManager(databaseConnection);
-            var ratings = r_manager.GetAllRatings();
+            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
+            IRatingManager ratingManager = new RatingManager(databaseConnection);
+            var ratings = ratingManager.GetAllRatings();
             topProfView.Items.Clear();
             ratings = ratings.OrderByDescending(o => o.OverallMark).ToList();
             foreach (var rating in ratings)
             {
-                var Teacher = t_manager.GetTeacher(rating.TeacherId);
-                var row = new string[] { Teacher.Name + " " + Teacher.Surname, rating.OverallMark.ToString() };
+                var teacher = teacherManager.GetTeacher(rating.TeacherId);
+                var row = new string[] { teacher.Name + " " + teacher.Surname, rating.OverallMark.ToString() };
                 var lvi = new ListViewItem(row);
                 topProfView.Items.Add(lvi);
             }

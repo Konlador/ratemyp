@@ -20,17 +20,17 @@ namespace RateMyP.Forms.UserControls
         }
 
         // Connects to the data, gets student class data by matching the StudentId and displays it in the labels.
-        private void InitDb(Guid sId)
+        private void InitDb(Guid studentId)
         {
-            if (sId != Guid.Empty)
+            if (studentId != Guid.Empty)
             {
                 var databaseConnection = new SQLDbConnection();
                 databaseConnection.Clear();
-                IStudentManager s_manager = new StudentManager(databaseConnection);
-                var selStudent = s_manager.GetStudent(sId);
-                sName.Text = selStudent.Name + " " + selStudent.Surname;
-                sFaculty.Text = selStudent.Faculty;
-                sStudies.Text = selStudent.Studies;
+                IStudentManager studentManager = new StudentManager(databaseConnection);
+                var selectedStudent = studentManager.GetStudent(studentId);
+                sName.Text = selectedStudent.Name + " " + selectedStudent.Surname;
+                sFaculty.Text = selectedStudent.Faculty;
+                sStudies.Text = selectedStudent.Studies;
             }
             else
             {
