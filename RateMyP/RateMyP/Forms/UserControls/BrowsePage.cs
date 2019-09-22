@@ -13,23 +13,24 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class BrowsePage : UserControl
     {
+        var databaseConnection = new SQLDbConnection();
+
         public BrowsePage()
         {
             InitializeComponent();
-            InitProfListView();
+            InitializeTeacherListView();
         }
 
         // Connects to the data, gets all teacher class data and displays it in the ListView.
-        private void InitProfListView()
+        private void InitializeTeacherListView()
         {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear();
-            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
+            
+            var teacherManager = new TeacherManager(databaseConnection);
             var teachers = teacherManager.GetAllTeachers();
             profListView.Items.Clear();
             foreach (var teacher in teachers)
             {
-                var row = new string[] { teacher.Name + " " + teacher.Surname, teacher.Rank.ToString() };
+                var row = new string[] { $"{teacher.Name} {teacher.Surname}", teacher.Rank.ToString() };
                 var lvi = new ListViewItem(row);
                 profListView.Items.Add(lvi);
             }
@@ -64,7 +65,7 @@ namespace RateMyP.Forms.UserControls
                 }
             }
             else
-                InitProfListView();
+                InitializeTeacherListView();
         }
 
         //TODO: Filtering

@@ -13,10 +13,12 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class RatePage : UserControl
     {
+        var databaseConnection = new SQLDbConnection();
+
         public RatePage()
         {
             InitializeComponent();
-            InitDb(Guid.Empty);
+            InitializeData(Guid.Empty);
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -25,17 +27,15 @@ namespace RateMyP.Forms.UserControls
         }
 
         // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, displays teacher's rating data.
-        private void InitDb(Guid teacherId)
+        private void InitializeData(Guid teacherId)
         {
             if(teacherId != Guid.Empty)
             {
-                var databaseConnection = new SQLDbConnection();                             //
-                databaseConnection.Clear();                                                 //Connection to
-                ITeacherManager teacherManager = new TeacherManager(databaseConnection);    //data
-                IRatingManager ratingManager = new RatingManager(databaseConnection);       //
+                var teacherManager = new TeacherManager(databaseConnection);          //Connection todata
+                var ratingManager = new RatingManager(databaseConnection);
 
                 var selectedTeacher = teacherManager.GetTeacher(teacherId);
-                nameLabel.Text = selectedTeacher.Name + " " + selectedTeacher.Surname;
+                nameLabel.Text = $"{selectedTeacher.Name} {selectedTeacher.Surname}";
                 rankLabel.Text = selectedTeacher.Rank.ToString();
                 var ratings = ratingManager.GetAllRatings();
                 foreach (var rating in ratings)
@@ -63,12 +63,10 @@ namespace RateMyP.Forms.UserControls
             Search();
         }
         // Gets all teacher data, performs a search by comparing search box contents with the full names of the teachers by using 'Contains' string method.
-        // If teacher is found, initiates InitDb method while passing along the teacher's Id, if not - passes along Guid.Empty
+        // If teacher is found, initiates InitializeData method while passing along the teacher's Id, if not - passes along Guid.Empty
         private void Search()
         {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear();
-            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
+            var teacherManager = new TeacherManager(databaseConnection);
             var teachers = teacherManager.GetAllTeachers();
             if (searchBoxRate.Text != "")
             {
@@ -82,11 +80,11 @@ namespace RateMyP.Forms.UserControls
                 if (teachers.Count == 1)
                 {
                     foreach (var n in teachers)
-                        InitDb(n.Id);
+                        InitializeData(n.Id);
                 }
             }
             else
-                InitDb(Guid.Empty);
+                InitializeData(Guid.Empty);
         }
     }
 }

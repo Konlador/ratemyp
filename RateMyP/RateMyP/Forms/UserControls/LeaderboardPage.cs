@@ -13,25 +13,25 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class LeaderboardPage : UserControl
     {
+        var databaseConnection = new SQLDbConnection();
+
         public LeaderboardPage()
         {
             InitializeComponent();
-            InitTopProfView();
+            InitializeTopTeacherView();
         }
         // Connects to the data, gets all ratings and orders them max -> min, cross-references TeacherId to get extra teacher details and displays the results
-        private void InitTopProfView()
+        private void InitializeTopTeacherView()
         {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear();
-            ITeacherManager teacherManager = new TeacherManager(databaseConnection);
-            IRatingManager ratingManager = new RatingManager(databaseConnection);
+            var teacherManager = new TeacherManager(databaseConnection);
+            var ratingManager = new RatingManager(databaseConnection);
             var ratings = ratingManager.GetAllRatings();
             topProfView.Items.Clear();
             ratings = ratings.OrderByDescending(o => o.OverallMark).ToList();
             foreach (var rating in ratings)
             {
                 var teacher = teacherManager.GetTeacher(rating.TeacherId);
-                var row = new string[] { teacher.Name + " " + teacher.Surname, rating.OverallMark.ToString() };
+                var row = new string[] { $"{teacher.Name} {teacher.Surname}", rating.OverallMark.ToString() };
                 var lvi = new ListViewItem(row);
                 topProfView.Items.Add(lvi);
             }
