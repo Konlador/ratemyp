@@ -15,7 +15,7 @@ namespace RateMyP
 
         public double GetTeacherAverageMark (Guid teacherId)
             {
-            var allRatings = m_ratingManger.GetAllRatings();
+            var allRatings = m_ratingManger.GetAll();
             var ratings = allRatings.Where ((r) => r.TeacherId.ToString() == teacherId.ToString()).ToList();
             double sum = 0;
             foreach (var rating in ratings)

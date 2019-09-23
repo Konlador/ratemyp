@@ -6,24 +6,22 @@ using System;
 namespace RateMyP.Tests
     {
     [TestFixture]
-    public class TeacherStatisticsAnalyzerTests
+    public class TeacherStatisticsAnalyzerTests : RateMyPFixture
         {
-        private TeacherStatisticsAnalyzer m_manager;
+        private TeacherStatisticsAnalyzer m_analyzer;
         private RatingManager m_ratingManager;
 
         [SetUp]
         public void SetUp ()
             {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear();
-            m_ratingManager = new RatingManager(databaseConnection);
-            m_manager = new TeacherStatisticsAnalyzer(m_ratingManager);
+            m_ratingManager = new RatingManager();
+            m_analyzer = new TeacherStatisticsAnalyzer(m_ratingManager);
             }
 
         [Test]
         public void GetTeacherAverageMark_NoRating()
             {
-            var averageRating = m_manager.GetTeacherAverageMark(Guid.NewGuid ());
+            var averageRating = m_analyzer.GetTeacherAverageMark(Guid.NewGuid ());
             Assert.AreEqual(0, averageRating);
             }
 
@@ -39,11 +37,13 @@ namespace RateMyP.Tests
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
                 Tags = "Lots of homework",
-                Comment = "Cool guy"
+                Comment = "Cool guy",
+                CourseId = Guid.NewGuid(),
+                DateCreated = DateTime.Now
                 };
 
-            m_ratingManager.AddRating(rating);
-            var averageRating = m_manager.GetTeacherAverageMark(rating.TeacherId);
+            m_ratingManager.Add(rating);
+            var averageRating = m_analyzer.GetTeacherAverageMark(rating.TeacherId);
             Assert.AreEqual (4, averageRating);
             }
         }

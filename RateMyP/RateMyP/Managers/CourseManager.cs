@@ -6,36 +6,36 @@ using System.Linq;
 
 namespace RateMyP.Managers
     {
-    public interface IRatingManager
+    public interface ICourseManager
         {
-        List<Rating> GetAll();
-        Rating GetById(Guid ratingId);
-        void Add(Rating rating);
+        List<Course> GetAll();
+        Course GetById(Guid courseId);
+        void Add(Course course);
         }
 
-    public class RatingManager : IRatingManager
+    public class CourseManager : ICourseManager
         {
-        public List<Rating> GetAll()
+        public List<Course> GetAll()
             {
             using (var dbConnection = SQLDbConnection.CreateToDb())
             using (var dataContext = new DataContext(dbConnection.Connection))
                 {
-                return dataContext.GetTable<Rating>().ToList();
+                return dataContext.GetTable<Course>().ToList();
                 }
             }
 
-        public Rating GetById(Guid ratingId)
+        public Course GetById(Guid courseId)
             {
-            return GetAll().First(rating => rating.Id.Equals(ratingId));
+            return GetAll().First(course => course.Id.Equals(courseId));
             }
 
-        public void Add(Rating rating)
+        public void Add(Course course)
             {
             using (var dbConnection = SQLDbConnection.CreateToDb())
             using (var dataContext = new DataContext(dbConnection.Connection))
                 {
-                var ratings = dataContext.GetTable<Rating>();
-                ratings.InsertOnSubmit(rating);
+                var courses = dataContext.GetTable<Course>();
+                courses.InsertOnSubmit(course);
                 dataContext.SubmitChanges();
                 }
             }

@@ -13,8 +13,6 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class BrowsePage : UserControl
     {
-        var databaseConnection = new SQLDbConnection();
-
         public BrowsePage()
         {
             InitializeComponent();
@@ -24,9 +22,8 @@ namespace RateMyP.Forms.UserControls
         // Connects to the data, gets all teacher class data and displays it in the ListView.
         private void InitializeTeacherListView()
         {
-            
-            var teacherManager = new TeacherManager(databaseConnection);
-            var teachers = teacherManager.GetAllTeachers();
+            var teacherManager = new TeacherManager();
+            var teachers = teacherManager.GetAll();
             profListView.Items.Clear();
             foreach (var teacher in teachers)
             {

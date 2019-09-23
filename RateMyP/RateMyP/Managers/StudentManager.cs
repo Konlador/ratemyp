@@ -1,58 +1,43 @@
-﻿using RateMyP.Db;
-using RateMyP.Entities;
+﻿using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
-using static RateMyP.Constants;
 
 namespace RateMyP.Managers
     {
     public interface IStudentManager
         {
-        List<Student> GetAllStudents();
-        Student GetStudent(Guid studentId);
-        void AddStudent(Student student);
+        List<Student> GetAll();
+        Student GetById(Guid studentId);
+        void Add(Student student);
         }
 
     public class StudentManager : IStudentManager
         {
-        private readonly ISQLDbConnection m_connection;
-
-        public StudentManager(ISQLDbConnection connection)
+        public List<Student> GetAll()
             {
-            m_connection = connection;
-            }
-
-        public List<Student> GetAllStudents()
-            {
-            var students = new List<Student>();
-            using (var reader = m_connection.ExecuteQuery($"SELECT * FROM [{TABLE_STUDENTS}]"))
+            using (var dbConnection = SQLDbConnection.CreateToDb())
+            using (var dataContext = new DataContext(dbConnection.Connection))
                 {
-                while (reader.Read())
-                    {
-                    var student = new Student
-                        {
-                        Id = reader.SafeGetGuid(PROPERTY_ID, Guid.Empty),
-                        Name = reader.SafeGetString(PROPERTY_NAME),
-                        Surname = reader.SafeGetString(PROPERTY_SURNAME),
-                        Studies = reader.SafeGetString(PROPERTY_STUDIES),
-                        Faculty = reader.SafeGetString(PROPERTY_FACULTY)
-                        };
-                    students.Add(student);
-                    }
+                return dataContext.GetTable<Student>().ToList();
                 }
-
-            return students;
             }
 
-        public Student GetStudent(Guid studentId)
+        public Student GetById(Guid studentId)
             {
-            return GetAllStudents().First(student => student.Id.Equals(studentId));
+            return GetAll().First(student => student.Id.Equals(studentId));
             }
 
-        public void AddStudent(Student student)
+        public void Add(Student student)
             {
-            m_connection.ExecuteNonQuery($"INSERT INTO [{TABLE_STUDENTS}]", student);
+            using (var dbConnection = SQLDbConnection.CreateToDb())
+            using (var dataContext = new DataContext(dbConnection.Connection))
+                {
+                var students = dataContext.GetTable<Student>();
+                students.InsertOnSubmit(student);
+                dataContext.SubmitChanges();
+                }
             }
         }
     }
