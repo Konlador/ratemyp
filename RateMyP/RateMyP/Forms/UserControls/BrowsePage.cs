@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RateMyP.Managers;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
 {
@@ -81,10 +82,9 @@ namespace RateMyP.Forms.UserControls
                     fullName = $"{teacher.Name} {teacher.Surname}";
                     if (selectedItem.Text == fullName)
                     {
-                        var guid = teacher.Id;
+                        Teacher selectedTeacher = teacher;                    
                         this.Hide();
-                        MainForm.self.teacherProfilePage.UpdateInfo(fullName, teacher.Faculty, teacher.Studies, teacher.Rank.ToString(), 
-                                                                    teacher.Description, teacher.Id);
+                        MainForm.self.teacherProfilePage.UpdateInfo(selectedTeacher);
                         MainForm.self.teacherProfilePage.Show();
                         MainForm.self.teacherProfilePage.BringToFront();
                         break;

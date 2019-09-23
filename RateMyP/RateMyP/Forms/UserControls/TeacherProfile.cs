@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
 {
@@ -21,14 +22,14 @@ namespace RateMyP.Forms.UserControls
         }
 
         //Updates labels with relevant info
-        public void UpdateInfo(string teacherName, string teacherFaculty, string teacherStudies, string teacherRank, string teacherDescription, Guid id)
+        public void UpdateInfo(Teacher teacher)
         {
-            teacherNameLabel.Text = $"Name: {teacherName}";
-            teacherFacultyLabel.Text = $"Faculty: { teacherFaculty}";
-            teacherRankLabel.Text = $"Rank: {teacherRank}";
-            teacherStudiesLabel.Text = $"Studies: {teacherStudies}";
-            teacherInfoLabel.Text = $"Description: {teacherDescription}";
-            m_id = id;
+            teacherNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
+            teacherFacultyLabel.Text = $"Faculty: {teacher.Faculty}";
+            teacherRankLabel.Text = $"Rank: {teacher.Rank}";
+            teacherStudiesLabel.Text = $"Studies: {teacher.Studies}";
+            teacherInfoLabel.Text = $"Description: {teacher.Description}";
+            m_id = teacher.Id;
         }
 
         //Called when the button is clicked. Sends user to the RatePage
