@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RateMyP.Managers;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
 {
@@ -18,7 +19,7 @@ namespace RateMyP.Forms.UserControls
         public RatePage()
         {
             InitializeComponent();
-            InitializeData(Guid.Empty);
+            InitializeData(null);
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -27,20 +28,17 @@ namespace RateMyP.Forms.UserControls
         }
 
         // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, displays teacher's rating data.
-        public void InitializeData(Guid teacherId)
+        public void InitializeData(Teacher teacher)
         {
-            if(teacherId != Guid.Empty)
+            if(teacher != null)
             {
-                var teacherManager = new TeacherManager(databaseConnection);          //Connection todata
                 var ratingManager = new RatingManager(databaseConnection);
-
-                var selectedTeacher = teacherManager.GetTeacher(teacherId);
-                ratePageNameLabel.Text = $"Name: {selectedTeacher.Name} {selectedTeacher.Surname}";
-                ratePageDegreeLabel.Text = $"Degree: {selectedTeacher.Rank.ToString()}";
+                ratePageNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
+                ratePageDegreeLabel.Text = $"Degree: {teacher.Rank.ToString()}";
                 var ratings = ratingManager.GetAllRatings();
                 foreach (var rating in ratings)
                 {
-                    if (rating.TeacherId == teacherId)
+                    if (rating.TeacherId == teacher.Id)
                     {
                         ratePageDifficultyLabel.Text = $"Difficulty: {rating.LevelOfDifficulty.ToString()}";
                         ratePageOverallMarkLabel.Text = $"Overall Mark: {rating.OverallMark.ToString()}";
@@ -79,12 +77,12 @@ namespace RateMyP.Forms.UserControls
                 }
                 if (teachers.Count == 1)
                 {
-                    foreach (var n in teachers)
-                        InitializeData(n.Id);
+                    foreach (var teacher in teachers)
+                        InitializeData(teacher);
                 }
             }
             else
-                InitializeData(Guid.Empty);
+                InitializeData(null);
         }
     }
 }

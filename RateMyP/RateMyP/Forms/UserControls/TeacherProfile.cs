@@ -13,7 +13,7 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class TeacherProfile : UserControl
     {
-        private Guid m_id;
+        private Teacher m_teacher;
 
         public TeacherProfile()
         {
@@ -29,15 +29,15 @@ namespace RateMyP.Forms.UserControls
             teacherRankLabel.Text = $"Rank: {teacher.Rank}";
             teacherStudiesLabel.Text = $"Studies: {teacher.Studies}";
             teacherInfoLabel.Text = $"Description: {teacher.Description}";
-            m_id = teacher.Id;
+            m_teacher = teacher;
         }
 
         //Called when the button is clicked. Sends user to the RatePage
         private void TeacherRateButton_Click(object sender, EventArgs e)
         {
-            if (m_id != Guid.Empty)
+            if (m_teacher != null)
             {
-                MainForm.self.ratePage.InitializeData(m_id);
+                MainForm.self.ratePage.InitializeData(m_teacher);
                 this.Hide();
                 MainForm.self.ratePage.Show();
                 MainForm.self.ratePage.BringToFront();
