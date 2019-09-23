@@ -13,7 +13,7 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class BrowsePage : UserControl
     {
-        var databaseConnection = new SQLDbConnection();
+        SQLDbConnection databaseConnection = new SQLDbConnection();
 
         public BrowsePage()
         {
@@ -68,6 +68,30 @@ namespace RateMyP.Forms.UserControls
                 InitializeTeacherListView();
         }
 
+        private void ProfListView_ItemActivate(object sender, EventArgs e)
+        {
+            ListViewItem selectedItem = profListView.SelectedItems[0];
+            if (selectedItem.Text != null)
+            {
+                var teacherManager = new TeacherManager(databaseConnection);
+                var teachers = teacherManager.GetAllTeachers();
+                string fullName;
+                foreach (var teacher in teachers)
+                {
+                    fullName = $"{teacher.Name} {teacher.Surname}";
+                    if (selectedItem.Text == fullName)
+                    {
+                        var guid = teacher.Id;
+                        this.Hide();
+                        MainForm.self.teacherProfilePage.UpdateInfo(fullName, teacher.Faculty, teacher.Studies, teacher.Rank.ToString(), 
+                                                                    teacher.Description, teacher.Id);
+                        MainForm.self.teacherProfilePage.Show();
+                        MainForm.self.teacherProfilePage.BringToFront();
+                        break;
+                    }
+                }
+            }
+        }
         //TODO: Filtering
     }
 }
