@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "#tag1"}, -1, System.Drawing.SystemColors.MenuText, System.Drawing.SystemColors.ScrollBar, null);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "#tag2"}, -1, System.Drawing.SystemColors.MenuText, System.Drawing.SystemColors.ScrollBar, null);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
@@ -38,17 +38,15 @@
             this.searchBoxRate = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.profPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ratePageNameLabel = new System.Windows.Forms.Label();
             this.ratePageDegreeLabel = new System.Windows.Forms.Label();
+            this.ratePageOverallMarkLabel = new System.Windows.Forms.Label();
+            this.ratePageDifficultyLabel = new System.Windows.Forms.Label();
+            this.ratePageTakeAgainLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tagsLabelsView = new System.Windows.Forms.ListView();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.rankLabel = new System.Windows.Forms.Label();
-            this.overallMarkLabel = new System.Windows.Forms.Label();
-            this.difficultyLabel = new System.Windows.Forms.Label();
-            this.againLabel = new System.Windows.Forms.Label();
+            this.profPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -62,9 +60,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -160,29 +158,15 @@
             this.splitContainer2.SplitterDistance = 192;
             this.splitContainer2.TabIndex = 0;
             // 
-            // profPictureBox
-            // 
-            this.profPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.profPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profPictureBox.Image = global::RateMyP.Properties.Resources.profile;
-            this.profPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.profPictureBox.Name = "profPictureBox";
-            this.profPictureBox.Size = new System.Drawing.Size(192, 219);
-            this.profPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.profPictureBox.TabIndex = 0;
-            this.profPictureBox.TabStop = false;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.ratePageNameLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.ratePageDegreeLabel, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.nameLabel, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.rankLabel, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.overallMarkLabel, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.difficultyLabel, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.againLabel, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.ratePageOverallMarkLabel, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.ratePageDifficultyLabel, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.ratePageTakeAgainLabel, 0, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -217,6 +201,33 @@
             this.ratePageDegreeLabel.TabIndex = 1;
             this.ratePageDegreeLabel.Text = "Degree: ";
             // 
+            // ratePageOverallMarkLabel
+            // 
+            this.ratePageOverallMarkLabel.AutoSize = true;
+            this.ratePageOverallMarkLabel.Location = new System.Drawing.Point(3, 76);
+            this.ratePageOverallMarkLabel.Name = "ratePageOverallMarkLabel";
+            this.ratePageOverallMarkLabel.Size = new System.Drawing.Size(70, 13);
+            this.ratePageOverallMarkLabel.TabIndex = 4;
+            this.ratePageOverallMarkLabel.Text = "Overall Mark:";
+            // 
+            // ratePageDifficultyLabel
+            // 
+            this.ratePageDifficultyLabel.AutoSize = true;
+            this.ratePageDifficultyLabel.Location = new System.Drawing.Point(3, 95);
+            this.ratePageDifficultyLabel.Name = "ratePageDifficultyLabel";
+            this.ratePageDifficultyLabel.Size = new System.Drawing.Size(35, 13);
+            this.ratePageDifficultyLabel.TabIndex = 5;
+            this.ratePageDifficultyLabel.Text = "label2";
+            // 
+            // ratePageTakeAgainLabel
+            // 
+            this.ratePageTakeAgainLabel.AutoSize = true;
+            this.ratePageTakeAgainLabel.Location = new System.Drawing.Point(3, 194);
+            this.ratePageTakeAgainLabel.Name = "ratePageTakeAgainLabel";
+            this.ratePageTakeAgainLabel.Size = new System.Drawing.Size(35, 13);
+            this.ratePageTakeAgainLabel.TabIndex = 6;
+            this.ratePageTakeAgainLabel.Text = "label3";
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
@@ -237,58 +248,25 @@
             this.tagsLabelsView.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.tagsLabelsView.HideSelection = false;
             this.tagsLabelsView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.tagsLabelsView.Location = new System.Drawing.Point(331, 3);
             this.tagsLabelsView.Name = "tagsLabelsView";
             this.tagsLabelsView.Size = new System.Drawing.Size(323, 236);
             this.tagsLabelsView.TabIndex = 0;
             this.tagsLabelsView.UseCompatibleStateImageBehavior = false;
             // 
-            // nameLabel
+            // profPictureBox
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(3, 38);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(35, 13);
-            this.nameLabel.TabIndex = 2;
-            this.nameLabel.Text = "label1";
-            // 
-            // rankLabel
-            // 
-            this.rankLabel.AutoSize = true;
-            this.rankLabel.Location = new System.Drawing.Point(3, 57);
-            this.rankLabel.Name = "rankLabel";
-            this.rankLabel.Size = new System.Drawing.Size(35, 13);
-            this.rankLabel.TabIndex = 3;
-            this.rankLabel.Text = "label2";
-            // 
-            // overallMarkLabel
-            // 
-            this.overallMarkLabel.AutoSize = true;
-            this.overallMarkLabel.Location = new System.Drawing.Point(3, 76);
-            this.overallMarkLabel.Name = "overallMarkLabel";
-            this.overallMarkLabel.Size = new System.Drawing.Size(35, 13);
-            this.overallMarkLabel.TabIndex = 4;
-            this.overallMarkLabel.Text = "label1";
-            // 
-            // difficultyLabel
-            // 
-            this.difficultyLabel.AutoSize = true;
-            this.difficultyLabel.Location = new System.Drawing.Point(3, 95);
-            this.difficultyLabel.Name = "difficultyLabel";
-            this.difficultyLabel.Size = new System.Drawing.Size(35, 13);
-            this.difficultyLabel.TabIndex = 5;
-            this.difficultyLabel.Text = "label2";
-            // 
-            // againLabel
-            // 
-            this.againLabel.AutoSize = true;
-            this.againLabel.Location = new System.Drawing.Point(3, 194);
-            this.againLabel.Name = "againLabel";
-            this.againLabel.Size = new System.Drawing.Size(35, 13);
-            this.againLabel.TabIndex = 6;
-            this.againLabel.Text = "label3";
+            this.profPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.profPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.profPictureBox.Image = global::RateMyP.Properties.Resources.profile;
+            this.profPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.profPictureBox.Name = "profPictureBox";
+            this.profPictureBox.Size = new System.Drawing.Size(192, 219);
+            this.profPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profPictureBox.TabIndex = 0;
+            this.profPictureBox.TabStop = false;
             // 
             // RatePage
             // 
@@ -311,10 +289,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -332,10 +310,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label ratePageNameLabel;
         private System.Windows.Forms.Label ratePageDegreeLabel;
-        private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label rankLabel;
-        private System.Windows.Forms.Label overallMarkLabel;
-        private System.Windows.Forms.Label difficultyLabel;
-        private System.Windows.Forms.Label againLabel;
+        private System.Windows.Forms.Label ratePageOverallMarkLabel;
+        private System.Windows.Forms.Label ratePageDifficultyLabel;
+        private System.Windows.Forms.Label ratePageTakeAgainLabel;
     }
 }

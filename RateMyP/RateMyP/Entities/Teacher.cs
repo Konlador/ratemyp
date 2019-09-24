@@ -23,5 +23,9 @@ namespace RateMyP.Entities
         public string Description { get; set; }
         [Column(Name = "Rank")]
         public AcademicRank Rank { get; set; }
+        public string Faculty { get; set; }
+        public string Studies { get; set; }
+        public string Description { get; set; }
+
         }
     }

@@ -229,6 +229,9 @@
             this.profListView.TabIndex = 2;
             this.profListView.UseCompatibleStateImageBehavior = false;
             this.profListView.View = System.Windows.Forms.View.Details;
+            this.profListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
+            this.profListView.ItemActivate += new System.EventHandler(this.ProfListView_ItemActivate);
+
             // 
             // tName
             // 
