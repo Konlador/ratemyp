@@ -1,4 +1,4 @@
-# (project name in progress)
+# RateMyP(rofessor)
 
 # Features
 
