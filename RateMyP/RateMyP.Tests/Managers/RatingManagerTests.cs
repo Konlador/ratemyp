@@ -7,22 +7,21 @@ using System;
 namespace RateMyP.Tests
     {
     [TestFixture]
-    public class RatingManagerTests
+    public class RatingManagerTests : RateMyPFixture
         {
         private RatingManager m_manager;
 
         [SetUp]
         public void SetUp()
             {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear ();
-            m_manager = new RatingManager(databaseConnection);
+            PrepareDb();
+            m_manager = new RatingManager();
             }
 
         [Test]
         public void GetAllRatings_NoRating()
             {
-            var teachers = m_manager.GetAllRatings();
+            var teachers = m_manager.GetAll();
             Assert.AreEqual(0, teachers.Count);
             }
             
@@ -38,11 +37,13 @@ namespace RateMyP.Tests
                 LevelOfDifficulty = 5,
                 WouldTakeTeacherAgain = true,
                 Tags = "nice|smart",
-                Comment = "good guy"
-            };
+                Comment = "good guy",
+                CourseId = Guid.NewGuid(),
+                DateCreated = DateTime.Now
+                };
 
-            m_manager.AddRating(rating);
-            var ratings = m_manager.GetAllRatings();
+            m_manager.Add(rating);
+            var ratings = m_manager.GetAll();
             Assert.AreEqual(1, ratings.Count);
             Assert.AreEqual (rating.Id, ratings[0].Id);
             Assert.AreEqual (rating.Comment, "good guy");
@@ -51,7 +52,7 @@ namespace RateMyP.Tests
         [Test]
         public void GetAllRatings_MultipleRatings()
             {
-            m_manager.AddRating(new Rating
+            m_manager.Add(new Rating
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = Guid.NewGuid(),
@@ -60,10 +61,12 @@ namespace RateMyP.Tests
                 LevelOfDifficulty = 5,
                 WouldTakeTeacherAgain = true,
                 Tags = "nice|smart",
-                Comment = "good guy"
+                Comment = "good guy",
+                CourseId = Guid.NewGuid(),
+                DateCreated = DateTime.Now
                 });
 
-            m_manager.AddRating(new Rating
+            m_manager.Add(new Rating
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = Guid.NewGuid(),
@@ -72,10 +75,12 @@ namespace RateMyP.Tests
                 LevelOfDifficulty = 9,
                 WouldTakeTeacherAgain = false,
                 Tags = "bad|smells",
-                Comment = "meh"
+                Comment = "meh",
+                CourseId = Guid.NewGuid(),
+                DateCreated = DateTime.Now
                 });
 
-            var ratings = m_manager.GetAllRatings();
+            var ratings = m_manager.GetAll();
             Assert.AreEqual(2, ratings.Count);
             }
         }

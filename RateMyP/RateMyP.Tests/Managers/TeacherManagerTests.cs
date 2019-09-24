@@ -7,22 +7,21 @@ using System;
 namespace RateMyP.Tests
     {
     [TestFixture]
-    public class TeacherManagerTests
+    public class TeacherManagerTests: RateMyPFixture
         {
         private TeacherManager m_manager;
 
         [SetUp]
         public void SetUp()
             {
-            var databaseConnection = new SQLDbConnection();
-            databaseConnection.Clear ();
-            m_manager = new TeacherManager(databaseConnection);
+            PrepareDb();
+            m_manager = new TeacherManager();
             }
 
         [Test]
         public void GetAllTeachers_NoTeacher()
             {
-            var teachers = m_manager.GetAllTeachers();
+            var teachers = m_manager.GetAll();
             Assert.AreEqual(0, teachers.Count);
             }
             
@@ -37,8 +36,8 @@ namespace RateMyP.Tests
                 Rank = AcademicRank.Professor
                 };
 
-            m_manager.AddTeacher(teacher);
-            var teachers = m_manager.GetAllTeachers();
+            m_manager.Add(teacher);
+            var teachers = m_manager.GetAll();
             Assert.AreEqual(1, teachers.Count);
             Assert.AreEqual (teacher.Id, teachers[0].Id);
             Assert.AreEqual (teacher.Name, teachers[0].Name);
@@ -47,14 +46,14 @@ namespace RateMyP.Tests
         [Test]
         public void GetAllTeachers_MultipleTeachers()
             {
-            m_manager.AddTeacher(new Teacher
+            m_manager.Add(new Teacher
                 {
                 Id = Guid.NewGuid(),
                 Name = "Kestis",
                 Surname = "Morka",
                 Rank = AcademicRank.Professor
                 });
-            m_manager.AddTeacher(new Teacher
+            m_manager.Add(new Teacher
                 {
                 Id = Guid.NewGuid(),
                 Name = "Coupe",
@@ -62,7 +61,7 @@ namespace RateMyP.Tests
                 Rank = AcademicRank.Lecturer
                 });
 
-            var teachers = m_manager.GetAllTeachers();
+            var teachers = m_manager.GetAll();
             Assert.AreEqual(2, teachers.Count);
             }
         }

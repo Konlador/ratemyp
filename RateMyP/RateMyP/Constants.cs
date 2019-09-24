@@ -1,26 +1,28 @@
-﻿using System;
-
-namespace RateMyP
+﻿namespace RateMyP
     {
     public static class Constants
         {
         // SQL Table names
-        public const String TABLE_RATINGS                      = "Ratings";
-        public const String TABLE_STUDENTS                     = "Students";
-        public const String TABLE_TEACHERS                     = "Teachers";
+        public const string TABLE_RATINGS                       = "Ratings";
+        public const string TABLE_TEACHERS                      = "Teachers";
+        public const string TABLE_STUDENTS                      = "Students";
+        public const string TABLE_TEACHER_ACTIVITIES            = "TeacherActivities";
+        public const string TABLE_COURSES                       = "Courses";
+        public const string TABLE_COMMENTS                      = "Comments";
+        public const string TABLE_COMMENT_LIKES                 = "CommentLikes";
 
-        public const String PROPERTY_ID                        = "Id";
-        public const String PROPERTY_TEACHER_ID                = "TeacherId";
-        public const String PROPERTY_STUDENT_ID                = "StudentId";
-        public const String PROPERTY_OVERALL_MARK              = "OverallMark";
-        public const String PROPERTY_LEVEL_OF_DIFFICULTY       = "LevelOfDifficulty";
-        public const String PROPERTY_WOULD_TAKE_TEACHER_AGAIN  = "WouldTakeTeacherAgain";
-        public const String PROPERTY_TAGS                      = "Tags";
-        public const String PROPERTY_COMMENT                   = "Comment";
-        public const String PROPERTY_NAME                      = "Name";
-        public const String PROPERTY_SURNAME                   = "Surname";
-        public const String PROPERTY_STUDIES                   = "Studies";
-        public const String PROPERTY_FACULTY                   = "Faculty";
-        public const String PROPERTY_RANK                      = "Rank";
+        public const string PROPERTY_ID                        = "Id";
+        public const string PROPERTY_TEACHER_ID                = "TeacherId";
+        public const string PROPERTY_STUDENT_ID                = "StudentId";
+        public const string PROPERTY_OVERALL_MARK              = "OverallMark";
+        public const string PROPERTY_LEVEL_OF_DIFFICULTY       = "LevelOfDifficulty";
+        public const string PROPERTY_WOULD_TAKE_TEACHER_AGAIN  = "WouldTakeTeacherAgain";
+        public const string PROPERTY_TAGS                      = "Tags";
+        public const string PROPERTY_COMMENT                   = "Comment";
+        public const string PROPERTY_NAME                      = "Name";
+        public const string PROPERTY_SURNAME                   = "Surname";
+        public const string PROPERTY_STUDIES                   = "Studies";
+        public const string PROPERTY_FACULTY                   = "Faculty";
+        public const string PROPERTY_RANK                      = "Rank";
         }
     }

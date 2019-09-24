@@ -1,57 +1,43 @@
 ﻿using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
-using RateMyP.Db;
-using static RateMyP.Constants;
 
 namespace RateMyP.Managers
     {
     public interface ITeacherManager
         {
-        List<Teacher> GetAllTeachers();
-        Teacher GetTeacher(Guid teacherId);
-        void AddTeacher(Teacher teacher);
+        List<Teacher> GetAll();
+        Teacher GetById(Guid teacherId);
+        void Add(Teacher teacher);
         }
 
     public class TeacherManager : ITeacherManager
         {
-        private readonly ISQLDbConnection m_connection;
-
-        public TeacherManager(ISQLDbConnection connection)
+        public List<Teacher> GetAll()
             {
-            m_connection = connection;
-            }
-
-        public List<Teacher> GetAllTeachers()
-            {
-            var teachers = new List<Teacher>();
-            using (var reader = m_connection.ExecuteQuery($"SELECT * FROM [{TABLE_TEACHERS}]"))
+            using (var dbConnection = SQLDbConnection.CreateToDb())
+            using (var dataContext = new DataContext(dbConnection.Connection))
                 {
-                while (reader.Read())
-                    {
-                    var teacher = new Teacher
-                        {
-                        Id = reader.SafeGetGuid(PROPERTY_ID, Guid.Empty),
-                        Name = reader.SafeGetString(PROPERTY_NAME),
-                        Surname = reader.SafeGetString(PROPERTY_SURNAME),
-                        Rank = reader.SafeGetEnum(PROPERTY_RANK, AcademicRank.Lecturer)
-                        };
-                    teachers.Add(teacher);
-                    }
+                return dataContext.GetTable<Teacher>().ToList();
                 }
-
-            return teachers;
             }
 
-        public Teacher GetTeacher(Guid teacherId)
+        public Teacher GetById(Guid teacherId)
             {
-            return GetAllTeachers().First(teacher => teacher.Id.Equals(teacherId));
+            return GetAll().FirstOrDefault(teacher => teacher.Id.Equals(teacherId));
             }
 
-        public void AddTeacher(Teacher teacher)
+        public void Add(Teacher teacher)
             {
-            m_connection.ExecuteNonQuery($"INSERT INTO [{TABLE_TEACHERS}]", teacher);
+            using (var dbConnection = SQLDbConnection.CreateToDb())
+            using (var dataContext = new DataContext(dbConnection.Connection))
+                {
+                var teachers = dataContext.GetTable<Teacher>();
+                teachers.InsertOnSubmit(teacher);
+                dataContext.SubmitChanges();
+                }
             }
         }
     }

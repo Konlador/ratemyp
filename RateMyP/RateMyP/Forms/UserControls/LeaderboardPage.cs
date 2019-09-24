@@ -1,40 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
+﻿using RateMyP.Managers;
+using System;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using RateMyP.Managers;
 
 namespace RateMyP.Forms.UserControls
-{
-    public partial class LeaderboardPage : UserControl
     {
-        SQLDbConnection databaseConnection = new SQLDbConnection();
-
-        public LeaderboardPage()
+    public partial class LeaderboardPage : UserControl
         {
+        public LeaderboardPage()
+            {
             InitializeComponent();
             InitializeTopTeacherView();
-        }
+            }
+
         // Connects to the data, gets all ratings and orders them max -> min, cross-references TeacherId to get extra teacher details and displays the results
         private void InitializeTopTeacherView()
-        {
-            var teacherManager = new TeacherManager(databaseConnection);
-            var ratingManager = new RatingManager(databaseConnection);
-            var ratings = ratingManager.GetAllRatings();
+            {
+            var teacherManager = new TeacherManager();
+            var ratingManager = new RatingManager();
+            var ratings = ratingManager.GetAll();
             topProfView.Items.Clear();
             ratings = ratings.OrderByDescending(o => o.OverallMark).ToList();
             foreach (var rating in ratings)
-            {
-                var teacher = teacherManager.GetTeacher(rating.TeacherId);
-                var row = new string[] { $"{teacher.Name} {teacher.Surname}", rating.OverallMark.ToString() };
-                var lvi = new ListViewItem(row);
-                topProfView.Items.Add(lvi);
+                {
+                var teacher = teacherManager.GetById(rating.TeacherId);
+                if (null == teacher)
+                    throw new Exception("No teacher found.");
+
+                var row = new[] { $"{teacher.Name} {teacher.Surname}", rating.OverallMark.ToString() };
+                var listViewItem = new ListViewItem(row);
+                topProfView.Items.Add(listViewItem);
+                }
             }
         }
     }
-}
