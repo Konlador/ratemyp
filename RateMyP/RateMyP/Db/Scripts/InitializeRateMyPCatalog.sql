@@ -4,7 +4,8 @@
 	Name                    NVARCHAR(255) NOT NULL,
     Surname                 NVARCHAR(255) NOT NULL,
     Description             NVARCHAR(255),
-	Rank					INT NOT NULL
+	Rank					INT NOT NULL,
+    Faculty                 NVARCHAR(255)
 	);
 
 CREATE TABLE Students
