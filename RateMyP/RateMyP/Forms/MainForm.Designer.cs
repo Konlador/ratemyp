@@ -41,6 +41,7 @@
             this.landingPage = new RateMyP.Forms.UserControls.LandingPage();
             this.browsePage = new RateMyP.Forms.UserControls.BrowsePage();
             this.profilePage = new RateMyP.Forms.UserControls.ProfilePage();
+            this.teacherProfilePage = new RateMyP.Forms.UserControls.TeacherProfile();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.pagePanel.SuspendLayout();
@@ -133,6 +134,7 @@
             this.pagePanel.Controls.Add(this.ratePage);
             this.pagePanel.Controls.Add(this.landingPage);
             this.pagePanel.Controls.Add(this.browsePage);
+            this.pagePanel.Controls.Add(this.teacherProfilePage);
             this.pagePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pagePanel.Location = new System.Drawing.Point(118, 3);
             this.pagePanel.Name = "pagePanel";
@@ -177,6 +179,14 @@
             this.profilePage.Name = "profilePage";
             this.profilePage.Size = new System.Drawing.Size(663, 555);
             this.profilePage.TabIndex = 6;
+            //
+            // teacherProfilePage
+            //
+            this.teacherProfilePage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teacherProfilePage.Location = new System.Drawing.Point(0, 0);
+            this.teacherProfilePage.Name = "teacherProfilePage";
+            this.teacherProfilePage.Size = new System.Drawing.Size(663, 555);
+            this.teacherProfilePage.TabIndex = 7;
             // 
             // MainForm
             // 
@@ -206,10 +216,11 @@
         private System.Windows.Forms.Panel pagePanel;
         private Forms.UserControls.LandingPage landingPage;
         private Forms.UserControls.BrowsePage browsePage;
-        private Forms.UserControls.RatePage ratePage;
+        public Forms.UserControls.RatePage ratePage;
         private Forms.UserControls.LeaderboardPage leaderboardPage;
         private System.Windows.Forms.Button profilePageButton;
         private Forms.UserControls.ProfilePage profilePage;
+        public Forms.UserControls.TeacherProfile teacherProfilePage;
     }
     }
 

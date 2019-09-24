@@ -13,7 +13,7 @@ namespace RateMyP.Forms.UserControls
 {
     public partial class LeaderboardPage : UserControl
     {
-        var databaseConnection = new SQLDbConnection();
+        SQLDbConnection databaseConnection = new SQLDbConnection();
 
         public LeaderboardPage()
         {

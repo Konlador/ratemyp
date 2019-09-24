@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RateMyP.Managers;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
 {
     public partial class RatePage : UserControl
     {
-        var databaseConnection = new SQLDbConnection();
+        SQLDbConnection databaseConnection = new SQLDbConnection();
 
         public RatePage()
         {
             InitializeComponent();
-            InitializeData(Guid.Empty);
+            InitializeData(null);
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
@@ -27,34 +28,31 @@ namespace RateMyP.Forms.UserControls
         }
 
         // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, displays teacher's rating data.
-        private void InitializeData(Guid teacherId)
+        public void InitializeData(Teacher teacher)
         {
-            if(teacherId != Guid.Empty)
+            if(teacher != null)
             {
-                var teacherManager = new TeacherManager(databaseConnection);          //Connection todata
                 var ratingManager = new RatingManager(databaseConnection);
-
-                var selectedTeacher = teacherManager.GetTeacher(teacherId);
-                nameLabel.Text = $"{selectedTeacher.Name} {selectedTeacher.Surname}";
-                rankLabel.Text = selectedTeacher.Rank.ToString();
+                ratePageNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
+                ratePageDegreeLabel.Text = $"Degree: {teacher.Rank.ToString()}";
                 var ratings = ratingManager.GetAllRatings();
                 foreach (var rating in ratings)
                 {
-                    if (rating.TeacherId == teacherId)
+                    if (rating.TeacherId == teacher.Id)
                     {
-                        difficultyLabel.Text = rating.LevelOfDifficulty.ToString();
-                        overallMarkLabel.Text = rating.OverallMark.ToString();
-                        againLabel.Text = rating.WouldTakeTeacherAgain.ToString();
+                        ratePageDifficultyLabel.Text = $"Difficulty: {rating.LevelOfDifficulty.ToString()}";
+                        ratePageOverallMarkLabel.Text = $"Overall Mark: {rating.OverallMark.ToString()}";
+                        ratePageTakeAgainLabel.Text = $"Would take teacher again: {rating.WouldTakeTeacherAgain.ToString()}";
                     }
                 }
             }
             else
             {
-                nameLabel.Text = " ";
-                rankLabel.Text = " ";
-                difficultyLabel.Text = " ";
-                overallMarkLabel.Text = " ";
-                againLabel.Text = " ";
+                ratePageNameLabel.Text = " ";
+                ratePageDegreeLabel.Text = " ";
+                ratePageDifficultyLabel.Text = " ";
+                ratePageOverallMarkLabel.Text = " ";
+                ratePageTakeAgainLabel.Text = " ";
             }
         }
 
@@ -79,12 +77,12 @@ namespace RateMyP.Forms.UserControls
                 }
                 if (teachers.Count == 1)
                 {
-                    foreach (var n in teachers)
-                        InitializeData(n.Id);
+                    foreach (var teacher in teachers)
+                        InitializeData(teacher);
                 }
             }
             else
-                InitializeData(Guid.Empty);
+                InitializeData(null);
         }
     }
 }

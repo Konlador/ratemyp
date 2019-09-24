@@ -72,6 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Db\SQLExtensions.cs" />
+    <Compile Include="Forms\UserControls\TeacherProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\TeacherProfile.Designer.cs">
+      <DependentUpon>TeacherProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ArgumentChecker.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="CustomControl1.cs">
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\RatePage.resx">
       <DependentUpon>RatePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\TeacherProfile.resx">
+      <DependentUpon>TeacherProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

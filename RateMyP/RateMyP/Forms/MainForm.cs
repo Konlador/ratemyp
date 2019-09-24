@@ -12,9 +12,12 @@ namespace RateMyP
     {
     public partial class MainForm : Form
         {
+
+        public static MainForm self;
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();          
+            self = this;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -23,6 +26,7 @@ namespace RateMyP
             ratePage.Hide();
             leaderboardPage.Hide();
             profilePage.Hide();
+            teacherProfilePage.Hide();
             landingPage.Show();
             landingPage.BringToFront();
         }

@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RateMyP.Managers;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
 {
     public partial class BrowsePage : UserControl
     {
-        var databaseConnection = new SQLDbConnection();
+        SQLDbConnection databaseConnection = new SQLDbConnection();
 
         public BrowsePage()
         {
@@ -68,6 +69,29 @@ namespace RateMyP.Forms.UserControls
                 InitializeTeacherListView();
         }
 
+        private void ProfListView_ItemActivate(object sender, EventArgs e)
+        {
+            ListViewItem selectedItem = profListView.SelectedItems[0];
+            if (selectedItem.Text != null)
+            {
+                var teacherManager = new TeacherManager(databaseConnection);
+                var teachers = teacherManager.GetAllTeachers();
+                string fullName;
+                foreach (var teacher in teachers)
+                {
+                    fullName = $"{teacher.Name} {teacher.Surname}";
+                    if (selectedItem.Text == fullName)
+                    {
+                        Teacher selectedTeacher = teacher;                    
+                        this.Hide();
+                        MainForm.self.teacherProfilePage.UpdateInfo(selectedTeacher);
+                        MainForm.self.teacherProfilePage.Show();
+                        MainForm.self.teacherProfilePage.BringToFront();
+                        break;
+                    }
+                }
+            }
+        }
         //TODO: Filtering
     }
 }
