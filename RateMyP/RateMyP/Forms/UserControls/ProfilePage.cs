@@ -1,37 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms.UserControls
     {
     public partial class ProfilePage : UserControl
         {
+        private Student m_student;
+
         public ProfilePage()
             {
             InitializeComponent();
-            //InitializeData(Guid.Empty);  // current student Id in place of 'empty'
             }
 
-        /*
-        // Connects to the data, gets student class data by matching the Id and displays it in the labels.
-        private void InitializeData(Guid studentId)
+        public void LoadStudentInfo()
             {
-            if (studentId != Guid.Empty)
-                {
-                var studentManager = new StudentManager();
-                var selectedStudent = studentManager.GetById(studentId);
-                sName.Text = $"{selectedStudent.FirstName} {selectedStudent.LastName}";
-                sFaculty.Text = selectedStudent.Faculty;
-                sStudies.Text = selectedStudent.Studies;
-                }
-            else
-                {
-                sName.Text = " ";
-                sFaculty.Text = " ";
-                sStudies.Text = " ";
-                }
+            m_student = null; // Get current user and load it
+            sName.Text = $"{m_student.FirstName} {m_student.LastName}";
+            sFaculty.Text = m_student.Faculty;
+            sStudies.Text = m_student.Studies;
             }
-            */
-
-        //TODO: Tags
         }
     }

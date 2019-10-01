@@ -38,6 +38,7 @@
             this.searchBoxRate = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.profPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ratePageNameLabel = new System.Windows.Forms.Label();
             this.ratePageDegreeLabel = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.ratePageTakeAgainLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tagsLabelsView = new System.Windows.Forms.ListView();
-            this.profPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -60,9 +60,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -157,6 +157,18 @@
             this.splitContainer2.Size = new System.Drawing.Size(657, 219);
             this.splitContainer2.SplitterDistance = 192;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // profPictureBox
+            // 
+            this.profPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.profPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.profPictureBox.Image = global::RateMyP.Properties.Resources.profile;
+            this.profPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.profPictureBox.Name = "profPictureBox";
+            this.profPictureBox.Size = new System.Drawing.Size(192, 219);
+            this.profPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profPictureBox.TabIndex = 0;
+            this.profPictureBox.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
@@ -256,18 +268,6 @@
             this.tagsLabelsView.TabIndex = 0;
             this.tagsLabelsView.UseCompatibleStateImageBehavior = false;
             // 
-            // profPictureBox
-            // 
-            this.profPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.profPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profPictureBox.Image = global::RateMyP.Properties.Resources.profile;
-            this.profPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.profPictureBox.Name = "profPictureBox";
-            this.profPictureBox.Size = new System.Drawing.Size(192, 219);
-            this.profPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.profPictureBox.TabIndex = 0;
-            this.profPictureBox.TabStop = false;
-            // 
             // RatePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,10 +289,10 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.profPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }

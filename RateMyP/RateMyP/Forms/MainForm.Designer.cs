@@ -32,7 +32,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.mainPageButton = new System.Windows.Forms.Button();
             this.browserPageButton = new System.Windows.Forms.Button();
-            this.ratePageButton = new System.Windows.Forms.Button();
             this.leaderboardsPageButton = new System.Windows.Forms.Button();
             this.profilePageButton = new System.Windows.Forms.Button();
             this.pagePanel = new System.Windows.Forms.Panel();
@@ -68,7 +67,6 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.mainPageButton);
             this.flowLayoutPanel1.Controls.Add(this.browserPageButton);
-            this.flowLayoutPanel1.Controls.Add(this.ratePageButton);
             this.flowLayoutPanel1.Controls.Add(this.leaderboardsPageButton);
             this.flowLayoutPanel1.Controls.Add(this.profilePageButton);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -96,16 +94,6 @@
             this.browserPageButton.Text = "Browse";
             this.browserPageButton.UseVisualStyleBackColor = true;
             this.browserPageButton.Click += new System.EventHandler(this.BrowsePageButton_Click);
-            // 
-            // ratePageButton
-            // 
-            this.ratePageButton.Location = new System.Drawing.Point(3, 215);
-            this.ratePageButton.Name = "ratePageButton";
-            this.ratePageButton.Size = new System.Drawing.Size(100, 100);
-            this.ratePageButton.TabIndex = 0;
-            this.ratePageButton.Text = "Rate";
-            this.ratePageButton.UseVisualStyleBackColor = true;
-            this.ratePageButton.Click += new System.EventHandler(this.RatePageButton_Click);
             // 
             // leaderboardsPageButton
             // 
@@ -210,7 +198,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button browserPageButton;
-        private System.Windows.Forms.Button ratePageButton;
         private System.Windows.Forms.Button leaderboardsPageButton;
         private System.Windows.Forms.Button mainPageButton;
         private System.Windows.Forms.Panel pagePanel;
