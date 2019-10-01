@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using RateMyP.Managers;
 
 namespace RateMyP.Forms.UserControls
     {
@@ -10,7 +9,7 @@ namespace RateMyP.Forms.UserControls
         public LandingPage()
             {
             InitializeComponent();
-            InitializeNewComments();
+            //InitializeNewComments();
             }
 
         private void TrendProfListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -18,19 +17,21 @@ namespace RateMyP.Forms.UserControls
 
             }
 
+        /*
         //Connects to comment data and displays their content in the ListView. Displays up to maxComments most recent comments.
         private void InitializeNewComments()
-        {
+            {
             var commentManager = new CommentManager();
             var comments = commentManager.GetAll();
             recentCommentsListView.Items.Clear();
             for (int i = comments.Count - 1; i > 0; i--)
-            {
+                {
                 var lvi = new ListViewItem(comments[i].Content);
                 recentCommentsListView.Items.Add(lvi);
                 if (recentCommentsListView.Items.Count > maxComments)
                     break;
+                }
             }
-        }
+            */
         }
     }

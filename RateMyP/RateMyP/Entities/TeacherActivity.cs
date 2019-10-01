@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
-using static RateMyP.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.Entities
     {
@@ -11,18 +10,13 @@ namespace RateMyP.Entities
         Lecture
         }
 
-    [Table(Name = TABLE_TEACHER_ACTIVITIES)]
     public class TeacherActivity
         {
-        [Column(IsPrimaryKey = true, Name = "Id")]
+        [Key]
         public Guid Id { get; set; }
-        [Column(Name = "DateStarted")]
+        public Teacher Teacher { get; set; }
+        public Course Course { get; set; }
         public DateTime DateStarted { get; set; }
-        [Column(Name = "CourseId")]
-        public Guid CourseId { get; set; }
-        [Column(Name = "TeacherId")]
-        public Guid TeacherId { get; set; }
-        [Column(Name = "Type")]
         public LectureType Type { get; set; }
         }
     }

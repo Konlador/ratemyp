@@ -12,8 +12,8 @@
         public const string TABLE_COMMENT_LIKES                 = "CommentLikes";
 
         public const string PROPERTY_ID                        = "Id";
-        public const string PROPERTY_TEACHER_ID                = "TeacherId";
-        public const string PROPERTY_STUDENT_ID                = "StudentId";
+        public const string PROPERTY_TEACHER_ID                = "Id";
+        public const string PROPERTY_STUDENT_ID                = "Id";
         public const string PROPERTY_OVERALL_MARK              = "OverallMark";
         public const string PROPERTY_LEVEL_OF_DIFFICULTY       = "LevelOfDifficulty";
         public const string PROPERTY_WOULD_TAKE_TEACHER_AGAIN  = "WouldTakeTeacherAgain";

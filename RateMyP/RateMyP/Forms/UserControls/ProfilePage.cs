@@ -1,5 +1,4 @@
-﻿using RateMyP.Managers;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace RateMyP.Forms.UserControls
@@ -9,17 +8,18 @@ namespace RateMyP.Forms.UserControls
         public ProfilePage()
             {
             InitializeComponent();
-            InitializeData(Guid.Empty);  // current student Id in place of 'empty'
+            //InitializeData(Guid.Empty);  // current student Id in place of 'empty'
             }
 
-        // Connects to the data, gets student class data by matching the StudentId and displays it in the labels.
+        /*
+        // Connects to the data, gets student class data by matching the Id and displays it in the labels.
         private void InitializeData(Guid studentId)
             {
             if (studentId != Guid.Empty)
                 {
                 var studentManager = new StudentManager();
                 var selectedStudent = studentManager.GetById(studentId);
-                sName.Text = $"{selectedStudent.Name} {selectedStudent.Surname}";
+                sName.Text = $"{selectedStudent.FirstName} {selectedStudent.LastName}";
                 sFaculty.Text = selectedStudent.Faculty;
                 sStudies.Text = selectedStudent.Studies;
                 }
@@ -30,6 +30,7 @@ namespace RateMyP.Forms.UserControls
                 sStudies.Text = " ";
                 }
             }
+            */
 
         //TODO: Tags
         }

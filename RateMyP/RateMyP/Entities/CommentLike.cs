@@ -1,15 +1,23 @@
 ﻿using System;
-using System.Data.Linq.Mapping;
-using static RateMyP.Constants;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RateMyP.Entities
     {
-    [Table(Name = TABLE_COMMENT_LIKES)]
     public class CommentLike
         {
-        [Column(IsPrimaryKey = true, Name = "CommentId")]
+        public Comment Comment { get; set; }
+
+        public Student Student { get; set; }
+
+        [Key]
+        [Column(Order = 0)]
+        [ForeignKey("Comment")]
         public Guid CommentId { get; set; }
-        [Column(IsPrimaryKey = true, Name = "IdStudentId")]
+
+        [Key]
+        [Column(Order = 1)]
+        [ForeignKey("Student")]
         public Guid StudentId { get; set; }
         }
     }

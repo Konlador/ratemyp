@@ -9,8 +9,6 @@ namespace RateMyP.Tests
     [TestFixture]
     public class RatingManagerTests : RateMyPFixture
         {
-        private RatingManager m_manager;
-
         [SetUp]
         public void SetUp()
             {

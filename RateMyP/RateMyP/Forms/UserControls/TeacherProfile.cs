@@ -17,7 +17,7 @@ namespace RateMyP.Forms.UserControls
         //Updates labels with relevant info
         public void UpdateInfo(Teacher teacher)
             {
-            teacherNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
+            teacherNameLabel.Text = $"Name: {teacher.FirstName} {teacher.LastName}";
             teacherFacultyLabel.Text = $"Faculty: {teacher.Faculty}";
             teacherRankLabel.Text = $"Rank: {teacher.Rank}";
             teacherInfoLabel.Text = $"Description: {teacher.Description}";
@@ -29,7 +29,7 @@ namespace RateMyP.Forms.UserControls
             {
             if (m_teacher != null)
                 {
-                MainForm.self.ratePage.InitializeData(m_teacher);
+                //MainForm.self.ratePage.InitializeData(m_teacher);
                 Hide();
                 MainForm.self.ratePage.Show();
                 MainForm.self.ratePage.BringToFront();

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using static RateMyP.Constants;
+using CsvHelper;
+using RateMyP.Entities;
 
 namespace RateMyP.Forms
     {
@@ -17,21 +21,27 @@ namespace RateMyP.Forms
             Application.Run(new MainForm());
             }
 
-        private static void PrepareDb()
+        private static void LoadTeachersToDb()
             {
-            using (var dbConnection = SQLDbConnection.CreateToDb())
+            using (var context = new RateMyPDbContext())
                 {
-                dbConnection.ExecuteCommand(
-                    $"drop table if exists [{TABLE_TEACHERS}];" +
-                    $"drop table if exists [{TABLE_STUDENTS}];" +
-                    $"drop table if exists [{TABLE_TEACHER_ACTIVITIES}];" +
-                    $"drop table if exists [{TABLE_COURSES}];" +
-                    $"drop table if exists [{TABLE_COMMENTS}];" +
-                    $"drop table if exists [{TABLE_COMMENT_LIKES}];" +
-                    $"drop table if exists [{TABLE_RATINGS}]");
-
-                dbConnection.ExecuteScript("InitializeRateMyPCatalog.sql");
+                var teachers = ParseTeachersFromCsv();
+                context.Teachers.AddRange(teachers);
+                context.SaveChanges();
                 }
+            }
+
+        private static List<Teacher> ParseTeachersFromCsv()
+            {
+            const string teachersFile = "teachers.csv";
+            var assembly = typeof(Program).Assembly;
+            var teachersFileStream = assembly.GetManifestResourceStream($"RateMyP.Db.Data.{teachersFile}");
+
+            var reader = new StreamReader(teachersFileStream);
+            var csvReader = new CsvReader(reader);
+            csvReader.Configuration.HasHeaderRecord = true;
+
+            return csvReader.GetRecords<Teacher>().ToList();
             }
         }
     }

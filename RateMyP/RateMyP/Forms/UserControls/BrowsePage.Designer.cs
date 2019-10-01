@@ -33,18 +33,19 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.browseSearchBox = new System.Windows.Forms.TextBox();
+            this.SearchBox = new System.Windows.Forms.TextBox();
             this.browseSearchButton = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.browseFilterButton = new System.Windows.Forms.Button();
             this.filterBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.profListView = new System.Windows.Forms.ListView();
+            this.teacherListView = new System.Windows.Forms.ListView();
             this.tName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tRank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.courseListView = new System.Windows.Forms.ListView();
-            this.courseName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.courseFaculty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.faculty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.credits = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -131,7 +132,7 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel4.Controls.Add(this.browseSearchBox, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.SearchBox, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.browseSearchButton, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
@@ -141,14 +142,19 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(651, 49);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
-            // browseSearchBox
+            // SearchBox
             // 
-            this.browseSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.browseSearchBox.Location = new System.Drawing.Point(3, 26);
-            this.browseSearchBox.Name = "browseSearchBox";
-            this.browseSearchBox.Size = new System.Drawing.Size(547, 20);
-            this.browseSearchBox.TabIndex = 0;
-            this.browseSearchBox.Text = "Search";
+            this.SearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SearchBox.ForeColor = System.Drawing.Color.Silver;
+            this.SearchBox.Location = new System.Drawing.Point(3, 26);
+            this.SearchBox.MaxLength = 100;
+            this.SearchBox.Name = "SearchBox";
+            this.SearchBox.Size = new System.Drawing.Size(547, 20);
+            this.SearchBox.TabIndex = 0;
+            this.SearchBox.Text = "Search";
+            this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
+            this.SearchBox.Enter += new System.EventHandler(this.SearchBox_Enter);
+            this.SearchBox.Leave += new System.EventHandler(this.SearchBox_Leave);
             // 
             // browseSearchButton
             // 
@@ -205,7 +211,7 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.profListView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.teacherListView, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.courseListView, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -215,37 +221,39 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(657, 357);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // profListView
+            // teacherListView
             // 
-            this.profListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
-            this.profListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.teacherListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
+            this.teacherListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.tName,
             this.tRank});
-            this.profListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profListView.FullRowSelect = true;
-            this.profListView.HideSelection = false;
-            this.profListView.Location = new System.Drawing.Point(3, 3);
-            this.profListView.Name = "profListView";
-            this.profListView.Size = new System.Drawing.Size(322, 351);
-            this.profListView.TabIndex = 2;
-            this.profListView.UseCompatibleStateImageBehavior = false;
-            this.profListView.View = System.Windows.Forms.View.Details;
-            this.profListView.ItemActivate += new System.EventHandler(this.ProfListView_ItemActivate);
+            this.teacherListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.teacherListView.FullRowSelect = true;
+            this.teacherListView.HideSelection = false;
+            this.teacherListView.Location = new System.Drawing.Point(3, 3);
+            this.teacherListView.Name = "teacherListView";
+            this.teacherListView.Size = new System.Drawing.Size(322, 351);
+            this.teacherListView.TabIndex = 2;
+            this.teacherListView.UseCompatibleStateImageBehavior = false;
+            this.teacherListView.View = System.Windows.Forms.View.Details;
+            this.teacherListView.ItemActivate += new System.EventHandler(this.ProfListView_ItemActivate);
             // 
             // tName
             // 
-            this.tName.Text = "Full Name";
-            this.tName.Width = 258;
+            this.tName.Text = "Teacher";
+            this.tName.Width = 200;
             // 
             // tRank
             // 
             this.tRank.Text = "Rank";
+            this.tRank.Width = 89;
             // 
             // courseListView
             // 
             this.courseListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.courseName,
-            this.courseFaculty});
+            this.name,
+            this.faculty,
+            this.credits});
             this.courseListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.courseListView.HideSelection = false;
             this.courseListView.Location = new System.Drawing.Point(331, 3);
@@ -255,14 +263,20 @@
             this.courseListView.UseCompatibleStateImageBehavior = false;
             this.courseListView.View = System.Windows.Forms.View.Details;
             // 
-            // courseName
+            // name
             // 
-            this.courseName.Text = "Course";
-            this.courseName.Width = 259;
+            this.name.Text = "Course";
+            this.name.Width = 111;
             // 
-            // courseFaculty
+            // faculty
             // 
-            this.courseFaculty.Text = "Faculty";
+            this.faculty.Text = "Faculty";
+            this.faculty.Width = 72;
+            // 
+            // credits
+            // 
+            this.credits.Text = "Credits";
+            this.credits.Width = 113;
             // 
             // BrowsePage
             // 
@@ -301,15 +315,16 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ComboBox filterBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.ListView profListView;
+        private System.Windows.Forms.ListView teacherListView;
         private System.Windows.Forms.ListView courseListView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TextBox browseSearchBox;
+        private System.Windows.Forms.TextBox SearchBox;
         private System.Windows.Forms.Button browseSearchButton;
         private System.Windows.Forms.Button browseFilterButton;
         private System.Windows.Forms.ColumnHeader tName;
         private System.Windows.Forms.ColumnHeader tRank;
-        private System.Windows.Forms.ColumnHeader courseName;
-        private System.Windows.Forms.ColumnHeader courseFaculty;
-    }
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader faculty;
+        private System.Windows.Forms.ColumnHeader credits;
+        }
 }
