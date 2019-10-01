@@ -7,6 +7,19 @@ using System.Collections.Generic;
 
 namespace RateMyP.Forms.UserControls
     {
+    // Class to store Teacher/averageRating combination objects
+    public class RatedTeacher
+    {
+        public Teacher Teacher { get; set; }
+        public int Rating { get; set; }
+    }
+
+    // Class to store Course/averageRating combination objects
+    public class RatedCourse
+    {
+        public Course Course { get; set; }
+        public int Rating { get; set; }
+    }
     public partial class LeaderboardPage : UserControl
         {
         public LeaderboardPage()
@@ -16,48 +29,91 @@ namespace RateMyP.Forms.UserControls
             InitializeTopCourseView();
             }
 
-        // Gets all ratings and orders them max -> min
-        private List<Rating> GetOrderedRatings()
+        // Connects to course and rating data, creates a list of RatedCourse and populates it by cross-referencing the courseId in ratings and course objects
+        // Adds up all overallMarks of a course and divides it by the rating count. Creates ratedCourse object with a Course and average Rating parameters
+        // Adds these objects to the RatedCourses List.
+        private List<RatedCourse> RatedCourses()
         {
+            var courseManager = new CourseManager();
             var ratingManager = new RatingManager();
+            var courses = courseManager.GetAll();
             var ratings = ratingManager.GetAll();
-            ratings = ratings.OrderByDescending(o => o.OverallMark).ToList();
-            return ratings;
+            List<RatedCourse> ratedCourses = new List<RatedCourse>();
+            foreach (var course in courses)
+            {
+                int totalMark = 0, count = 0;
+                foreach (var rating in ratings)
+                {
+                    if (rating.CourseId == course.Id)
+                    {
+                        // Adds up data from all ratings
+                        totalMark += rating.OverallMark;
+                        count++;
+                    }
+                }
+                int averageMark = totalMark / count;
+                var ratedCourse = new RatedCourse { Course = course, Rating = averageMark };
+                ratedCourses.Add(ratedCourse);
+            }
+
+            return ratedCourses;
         }
 
-        // Connects to the data, gets ordered ratings, cross-references TeacherId to get extra teacher details and displays the results
+        // Connects to teacher and rating data, creates a list of RatedTeacher and populates it by cross-referencing the teacherId in ratings and teacher objects
+        // Adds up all overallMarks of a teacher and divides it by the rating count. Creates ratedTeacher object with a Teacher and average Rating parameters
+        // Adds these objects to the RatedTeachers List.
+        private List<RatedTeacher> RatedTeachers()
+        {
+            var teacherManager = new TeacherManager();
+            var ratingManager = new RatingManager();
+            var teachers = teacherManager.GetAll();
+            var ratings = ratingManager.GetAll();
+            List<RatedTeacher> ratedTeachers = new List<RatedTeacher>();
+            foreach (var teacher in teachers)
+            {
+                int totalMark = 0, count = 0;
+                foreach (var rating in ratings)
+                {
+                    if (rating.TeacherId == teacher.Id)
+                    {
+                        // Adds up data from all ratings
+                        totalMark += rating.OverallMark;
+                        count++;
+                    }
+                }
+                int averageMark = totalMark / count;
+                var ratedTeacher = new RatedTeacher { Teacher = teacher, Rating = averageMark };
+                ratedTeachers.Add(ratedTeacher);
+            }
+
+            return ratedTeachers;
+        }
+
+        // Gets RatedTeachers list, orders it by rating and displays the details in the ListView
         private void InitializeTopTeacherView()
             {
-            var teacherManager = new TeacherManager();
-            var ratings = GetOrderedRatings();
+            var ratedTeachers = RatedTeachers();
+            ratedTeachers = ratedTeachers.OrderByDescending(o => o.Rating).ToList();
             topProfView.Items.Clear();
-            ratings = ratings.OrderByDescending(o => o.OverallMark).ToList();
-            foreach (var rating in ratings)
+            foreach (var ratedTeacher in ratedTeachers)
                 {
-                var teacher = teacherManager.GetById(rating.TeacherId);
-                if (null == teacher)
-                    continue;
-
-                var row = new[] { $"{teacher.Name} {teacher.Surname}", rating.OverallMark.ToString() };
+                var row = new[] { $"{ratedTeacher.Teacher.Name} {ratedTeacher.Teacher.Surname}", ratedTeacher.Rating.ToString() };
                 var listViewItem = new ListViewItem(row);
                 topProfView.Items.Add(listViewItem);
                 }
-            }
+        }
 
-        // Connects to the data, gets ordered ratings, cross-references CourseId to get course details and displays the results
+        // Gets RatedCourses list, orders it by rating and displays the details in the ListView
         private void InitializeTopCourseView()
         {
-            var courseManager = new CourseManager();
-            var ratings = GetOrderedRatings();
+            var ratedCourses = RatedCourses();
+            ratedCourses = ratedCourses.OrderByDescending(o => o.Rating).ToList();
             topCourseView.Items.Clear();
-            foreach (var rating in ratings)
+            foreach (var ratedCourse in ratedCourses)
             {
-                var course = courseManager.GetById(rating.CourseId);
-                if (null == course)
-                    continue;
 
-                var listViewItem = new ListViewItem(course.Name);
-                topProfView.Items.Add(listViewItem);
+                var listViewItem = new ListViewItem(ratedCourse.Course.Name);
+                topCourseView.Items.Add(listViewItem);
             }
         }
     }
