@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Course1");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Course2");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -45,6 +43,8 @@
             this.tName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tRank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.courseListView = new System.Windows.Forms.ListView();
+            this.courseName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.courseFaculty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -217,6 +217,7 @@
             // 
             // profListView
             // 
+            this.profListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
             this.profListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.tName,
             this.tRank});
@@ -229,14 +230,12 @@
             this.profListView.TabIndex = 2;
             this.profListView.UseCompatibleStateImageBehavior = false;
             this.profListView.View = System.Windows.Forms.View.Details;
-            this.profListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
             this.profListView.ItemActivate += new System.EventHandler(this.ProfListView_ItemActivate);
-
             // 
             // tName
             // 
             this.tName.Text = "Full Name";
-            this.tName.Width = 259;
+            this.tName.Width = 258;
             // 
             // tRank
             // 
@@ -244,17 +243,26 @@
             // 
             // courseListView
             // 
+            this.courseListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.courseName,
+            this.courseFaculty});
             this.courseListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.courseListView.HideSelection = false;
-            this.courseListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
             this.courseListView.Location = new System.Drawing.Point(331, 3);
             this.courseListView.Name = "courseListView";
             this.courseListView.Size = new System.Drawing.Size(323, 351);
             this.courseListView.TabIndex = 3;
             this.courseListView.UseCompatibleStateImageBehavior = false;
-            this.courseListView.View = System.Windows.Forms.View.List;
+            this.courseListView.View = System.Windows.Forms.View.Details;
+            // 
+            // courseName
+            // 
+            this.courseName.Text = "Course";
+            this.courseName.Width = 259;
+            // 
+            // courseFaculty
+            // 
+            this.courseFaculty.Text = "Faculty";
             // 
             // BrowsePage
             // 
@@ -301,5 +309,7 @@
         private System.Windows.Forms.Button browseFilterButton;
         private System.Windows.Forms.ColumnHeader tName;
         private System.Windows.Forms.ColumnHeader tRank;
+        private System.Windows.Forms.ColumnHeader courseName;
+        private System.Windows.Forms.ColumnHeader courseFaculty;
     }
 }

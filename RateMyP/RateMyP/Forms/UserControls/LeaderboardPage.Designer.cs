@@ -28,18 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Top Course1");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Top Course2");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Historic Data1");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Historic Data2");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Historic Data1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Historic Data2");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.topProfView = new System.Windows.Forms.ListView();
-            this.topCourseView = new System.Windows.Forms.ListView();
-            this.historicDataView = new System.Windows.Forms.ListView();
             this.tName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tRating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.topCourseView = new System.Windows.Forms.ListView();
+            this.historicDataView = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -114,13 +112,20 @@
             this.topProfView.UseCompatibleStateImageBehavior = false;
             this.topProfView.View = System.Windows.Forms.View.Details;
             // 
+            // tName
+            // 
+            this.tName.Text = "Full Name";
+            this.tName.Width = 248;
+            // 
+            // tRating
+            // 
+            this.tRating.Text = "Rating";
+            this.tRating.Width = 76;
+            // 
             // topCourseView
             // 
             this.topCourseView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.topCourseView.HideSelection = false;
-            this.topCourseView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
             this.topCourseView.Location = new System.Drawing.Point(0, 0);
             this.topCourseView.Name = "topCourseView";
             this.topCourseView.Size = new System.Drawing.Size(325, 366);
@@ -133,24 +138,14 @@
             this.historicDataView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.historicDataView.HideSelection = false;
             this.historicDataView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem1,
+            listViewItem2});
             this.historicDataView.Location = new System.Drawing.Point(0, 0);
             this.historicDataView.Name = "historicDataView";
             this.historicDataView.Size = new System.Drawing.Size(657, 179);
             this.historicDataView.TabIndex = 0;
             this.historicDataView.UseCompatibleStateImageBehavior = false;
             this.historicDataView.View = System.Windows.Forms.View.List;
-            // 
-            // tName
-            // 
-            this.tName.Text = "Full Name";
-            this.tName.Width = 248;
-            // 
-            // tRating
-            // 
-            this.tRating.Text = "Rating";
-            this.tRating.Width = 76;
             // 
             // LeaderboardPage
             // 

@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("RecentComment1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("RecentComment2");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Prof1");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Prof2");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("NewsExample1");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("NewsExample2");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Prof1");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Prof2");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("NewsExample1");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("NewsExample2");
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.recentCommentsListView = new System.Windows.Forms.ListView();
             this.trendProfListView = new System.Windows.Forms.ListView();
@@ -70,9 +68,6 @@
             // 
             this.recentCommentsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.recentCommentsListView.HideSelection = false;
-            this.recentCommentsListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
             this.recentCommentsListView.Location = new System.Drawing.Point(3, 3);
             this.recentCommentsListView.Name = "recentCommentsListView";
             this.recentCommentsListView.Size = new System.Drawing.Size(322, 351);
@@ -85,8 +80,8 @@
             this.trendProfListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trendProfListView.HideSelection = false;
             this.trendProfListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.trendProfListView.Location = new System.Drawing.Point(331, 3);
             this.trendProfListView.Name = "trendProfListView";
             this.trendProfListView.Size = new System.Drawing.Size(323, 351);
@@ -163,10 +158,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsListView.AutoArrange = false;
             this.newsListView.HideSelection = false;
-            listViewItem6.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
             this.newsListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem3,
+            listViewItem4});
             this.newsListView.Location = new System.Drawing.Point(3, 36);
             this.newsListView.MultiSelect = false;
             this.newsListView.Name = "newsListView";

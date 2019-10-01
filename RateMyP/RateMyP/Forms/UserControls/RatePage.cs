@@ -18,25 +18,37 @@ namespace RateMyP.Forms.UserControls
 
             }
 
-        // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, displays teacher's rating data.
+        // Connects to the data, gets all ratings and compares the TeacherId with the argument, if it matches, it gets added to a total.
+        // The total gets divided by rating count and then teacher's rating data and labels are displayed.
         public void InitializeData(Teacher teacher)
             {
             if (teacher != null)
                 {
                 var ratingManager = new RatingManager();
-                ratePageNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
-                ratePageDegreeLabel.Text = $"Degree: {teacher.Rank.ToString()}";
                 var ratings = ratingManager.GetAll();
+                int totalDifficulty = 0, totalMark = 0, takeAgainTotal = 0, count = 0;
+                tagsLabelsView.Clear();
                 foreach (var rating in ratings)
                     {
                     if (rating.TeacherId == teacher.Id)
                         {
-                        ratePageDifficultyLabel.Text = $"Difficulty: {rating.LevelOfDifficulty.ToString()}";
-                        ratePageOverallMarkLabel.Text = $"Overall Mark: {rating.OverallMark.ToString()}";
-                        ratePageTakeAgainLabel.Text = $"Would take teacher again: {rating.WouldTakeTeacherAgain.ToString()}";
+                        // Adds up data from all ratings
+                        totalDifficulty += rating.LevelOfDifficulty;
+                        totalMark += rating.OverallMark;
+                        takeAgainTotal += rating.WouldTakeTeacherAgain ? 1 : 0;
+                        count++;
+
+                        var lvi = new ListViewItem(rating.Tags);
+                        tagsLabelsView.Items.Add(lvi);
                         }
                     }
-                }
+                ratePageNameLabel.Text = $"Name: {teacher.Name} {teacher.Surname}";
+                ratePageDegreeLabel.Text = $"Degree: {teacher.Rank.ToString()}";
+                // Divides the added-up data by the number of ratings to show average ratings
+                ratePageDifficultyLabel.Text = $"Difficulty: {(totalDifficulty/count).ToString()}";
+                ratePageOverallMarkLabel.Text = $"Overall Mark: {(totalMark/count).ToString()}";
+                ratePageTakeAgainLabel.Text = $"Would take teacher again: {(takeAgainTotal*100/count).ToString()}%";
+            }
             else
                 {
                 ratePageNameLabel.Text = " ";
@@ -44,6 +56,7 @@ namespace RateMyP.Forms.UserControls
                 ratePageDifficultyLabel.Text = " ";
                 ratePageOverallMarkLabel.Text = " ";
                 ratePageTakeAgainLabel.Text = " ";
+                tagsLabelsView.Clear();
                 }
             }
 
@@ -53,7 +66,7 @@ namespace RateMyP.Forms.UserControls
             }
 
         // Gets all teacher data, performs a search by comparing search box contents with the full names of the teachers by using 'Contains' string method.
-        // If teacher is found, initiates InitializeData method while passing along the teacher's Id, if not - passes along Guid.Empty
+        // If teacher is found, initiates InitializeData method while passing along the teacher object, if not - passes along null
         private void Search()
             {
             var teacherManager = new TeacherManager();
