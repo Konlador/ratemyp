@@ -20,6 +20,8 @@ namespace RateMyP.Entities
         public DateTime DateStarted { get; set; }
         [Column(Name = "CourseId")]
         public Guid CourseId { get; set; }
+        [Column(Name = "TeacherId")]
+        public Guid TeacherId { get; set; }
         [Column(Name = "Type")]
         public LectureType Type { get; set; }
         }
