@@ -21,24 +21,14 @@ namespace RateMyP.Forms.UserControls
             SearchTeachers();
             }
 
-        private void ProfListView_ItemActivate(object sender, EventArgs e)
+        private void TeacherListView_ItemActivate(object sender, EventArgs e)
             {
-            /*
-            ListViewItem selectedItem = profListView.SelectedItems[0];
-            if (selectedItem.Text == null) return;
-            var teacherManager = new TeacherManager();
-            var teachers = teacherManager.GetAll();
-            foreach (var teacher in teachers)
-                {
-                var fullName = $"{teacher.FirstName} {teacher.LastName}";
-                if (selectedItem.Text != fullName) continue;
-                Hide();
-                MainForm.self.teacherProfilePage.UpdateInfo(teacher);
-                MainForm.self.teacherProfilePage.Show();
-                MainForm.self.teacherProfilePage.BringToFront();
-                break;
-                }
-                */
+            var selectedTeacherItem = TeacherListView.SelectedItems[0];
+            var selectedTeacher = (Teacher)selectedTeacherItem.Tag;
+            Hide();
+            MainForm.self.teacherProfilePage.UpdateInfo(selectedTeacher);
+            MainForm.self.teacherProfilePage.Show();
+            MainForm.self.teacherProfilePage.BringToFront();
             }
 
         // Queries teachers and loads them into the teachers ListView.
@@ -53,12 +43,12 @@ namespace RateMyP.Forms.UserControls
 
         private void LoadTeachersListView(List<Teacher> teachers)
             {
-            teacherListView.Items.Clear();
+            TeacherListView.Items.Clear();
             foreach (var teacher in teachers)
                 {
                 var teacherInfo = new[] { $"{teacher.FirstName} {teacher.LastName}", teacher.Rank };
-                var teacherItem = new ListViewItem(teacherInfo);
-                teacherListView.Items.Add(teacherItem);
+                var teacherItem = new ListViewItem(teacherInfo) {Tag = teacher};
+                TeacherListView.Items.Add(teacherItem);
                 }
             }
 
@@ -127,5 +117,7 @@ namespace RateMyP.Forms.UserControls
                 }
             return courses.Distinct().ToList();
             }
+
+        
         }
     }

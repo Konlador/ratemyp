@@ -17,11 +17,11 @@ namespace RateMyP.Forms.UserControls
         //Updates labels with relevant info
         public void UpdateInfo(Teacher teacher)
             {
+            m_teacher = teacher;
             teacherNameLabel.Text = $"Name: {teacher.FirstName} {teacher.LastName}";
             teacherFacultyLabel.Text = $"Faculty: {teacher.Faculty}";
             teacherRankLabel.Text = $"Rank: {teacher.Rank}";
             teacherInfoLabel.Text = $"Description: {teacher.Description}";
-            m_teacher = teacher;
             }
 
         //Called when the button is clicked. Sends user to the RatePage
@@ -34,7 +34,8 @@ namespace RateMyP.Forms.UserControls
                 MainForm.self.ratePage.Show();
                 MainForm.self.ratePage.BringToFront();
                 }
-            else Console.WriteLine("Shits on fire yo");
+            else
+                Console.WriteLine("Shits on fire yo");
             }
         }
     }

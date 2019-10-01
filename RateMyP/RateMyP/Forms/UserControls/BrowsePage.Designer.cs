@@ -39,7 +39,7 @@
             this.browseFilterButton = new System.Windows.Forms.Button();
             this.filterBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.teacherListView = new System.Windows.Forms.ListView();
+            this.TeacherListView = new System.Windows.Forms.ListView();
             this.tName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tRank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.courseListView = new System.Windows.Forms.ListView();
@@ -211,7 +211,7 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.teacherListView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.TeacherListView, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.courseListView, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -221,22 +221,22 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(657, 357);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // teacherListView
+            // TeacherListView
             // 
-            this.teacherListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
-            this.teacherListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TeacherListView.Activation = System.Windows.Forms.ItemActivation.TwoClick;
+            this.TeacherListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.tName,
             this.tRank});
-            this.teacherListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.teacherListView.FullRowSelect = true;
-            this.teacherListView.HideSelection = false;
-            this.teacherListView.Location = new System.Drawing.Point(3, 3);
-            this.teacherListView.Name = "teacherListView";
-            this.teacherListView.Size = new System.Drawing.Size(322, 351);
-            this.teacherListView.TabIndex = 2;
-            this.teacherListView.UseCompatibleStateImageBehavior = false;
-            this.teacherListView.View = System.Windows.Forms.View.Details;
-            this.teacherListView.ItemActivate += new System.EventHandler(this.ProfListView_ItemActivate);
+            this.TeacherListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TeacherListView.FullRowSelect = true;
+            this.TeacherListView.HideSelection = false;
+            this.TeacherListView.Location = new System.Drawing.Point(3, 3);
+            this.TeacherListView.Name = "TeacherListView";
+            this.TeacherListView.Size = new System.Drawing.Size(322, 351);
+            this.TeacherListView.TabIndex = 2;
+            this.TeacherListView.UseCompatibleStateImageBehavior = false;
+            this.TeacherListView.View = System.Windows.Forms.View.Details;
+            this.TeacherListView.ItemActivate += new System.EventHandler(this.TeacherListView_ItemActivate);
             // 
             // tName
             // 
@@ -315,7 +315,7 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ComboBox filterBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.ListView teacherListView;
+        private System.Windows.Forms.ListView TeacherListView;
         private System.Windows.Forms.ListView courseListView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox SearchBox;
