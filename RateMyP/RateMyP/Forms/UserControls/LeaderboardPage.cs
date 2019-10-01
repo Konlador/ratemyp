@@ -7,19 +7,6 @@ using System.Collections.Generic;
 
 namespace RateMyP.Forms.UserControls
     {
-    // Class to store Teacher/averageRating combination objects
-    public class RatedTeacher
-    {
-        public Teacher Teacher { get; set; }
-        public int Rating { get; set; }
-    }
-
-    // Class to store Course/averageRating combination objects
-    public class RatedCourse
-    {
-        public Course Course { get; set; }
-        public int Rating { get; set; }
-    }
     public partial class LeaderboardPage : UserControl
         {
         public LeaderboardPage()
@@ -117,4 +104,17 @@ namespace RateMyP.Forms.UserControls
             }
         }
     }
+    // Class to store Teacher/averageRating combination objects
+    public class RatedTeacher
+    {
+        public Teacher Teacher { get; set; }
+        public int Rating { get; set; }
     }
+
+    // Class to store Course/averageRating combination objects
+    public class RatedCourse
+    {
+        public Course Course { get; set; }
+        public int Rating { get; set; }
+    }
+}
