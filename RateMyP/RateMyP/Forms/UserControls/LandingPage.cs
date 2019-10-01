@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RateMyP.Forms.UserControls
     {
     public partial class LandingPage : UserControl
         {
-        public int maxComments = 10;
+        public const int MaxComments = 10;
+
         public LandingPage()
             {
             InitializeComponent();
-            //InitializeNewComments();
+            LoadRecentComments();
             }
 
         private void TrendProfListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -17,21 +19,18 @@ namespace RateMyP.Forms.UserControls
 
             }
 
-        /*
-        //Connects to comment data and displays their content in the ListView. Displays up to maxComments most recent comments.
-        private void InitializeNewComments()
+        // Displays up to maxComments most recent comments.
+        private void LoadRecentComments()
             {
-            var commentManager = new CommentManager();
-            var comments = commentManager.GetAll();
-            recentCommentsListView.Items.Clear();
-            for (int i = comments.Count - 1; i > 0; i--)
+            using (var context = new RateMyPDbContext())
                 {
-                var lvi = new ListViewItem(comments[i].Content);
-                recentCommentsListView.Items.Add(lvi);
-                if (recentCommentsListView.Items.Count > maxComments)
-                    break;
+                var comments = (from c in context.Comments
+                                orderby c.DateCreated descending
+                                select c).Take(MaxComments).ToList();
+                RecentCommentsListView.Clear();
+                var items = comments.Select(c => new ListViewItem(c.Content)).ToArray();
+                RecentCommentsListView.Items.AddRange(items);
                 }
             }
-            */
         }
     }

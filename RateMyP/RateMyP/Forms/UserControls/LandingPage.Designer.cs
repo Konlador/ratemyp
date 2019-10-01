@@ -33,7 +33,7 @@
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("NewsExample1");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("NewsExample2");
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.recentCommentsListView = new System.Windows.Forms.ListView();
+            this.RecentCommentsListView = new System.Windows.Forms.ListView();
             this.trendProfListView = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
@@ -54,7 +54,7 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.recentCommentsListView, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.RecentCommentsListView, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.trendProfListView, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
@@ -64,16 +64,16 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(657, 357);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // recentCommentsListView
+            // RecentCommentsListView
             // 
-            this.recentCommentsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.recentCommentsListView.HideSelection = false;
-            this.recentCommentsListView.Location = new System.Drawing.Point(3, 3);
-            this.recentCommentsListView.Name = "recentCommentsListView";
-            this.recentCommentsListView.Size = new System.Drawing.Size(322, 351);
-            this.recentCommentsListView.TabIndex = 2;
-            this.recentCommentsListView.UseCompatibleStateImageBehavior = false;
-            this.recentCommentsListView.View = System.Windows.Forms.View.List;
+            this.RecentCommentsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RecentCommentsListView.HideSelection = false;
+            this.RecentCommentsListView.Location = new System.Drawing.Point(3, 3);
+            this.RecentCommentsListView.Name = "RecentCommentsListView";
+            this.RecentCommentsListView.Size = new System.Drawing.Size(322, 351);
+            this.RecentCommentsListView.TabIndex = 2;
+            this.RecentCommentsListView.UseCompatibleStateImageBehavior = false;
+            this.RecentCommentsListView.View = System.Windows.Forms.View.List;
             // 
             // trendProfListView
             // 
@@ -196,7 +196,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label landingNewsLabel;
         private System.Windows.Forms.ListView newsListView;
-        private System.Windows.Forms.ListView recentCommentsListView;
+        private System.Windows.Forms.ListView RecentCommentsListView;
         private System.Windows.Forms.ListView trendProfListView;
     }
 }
