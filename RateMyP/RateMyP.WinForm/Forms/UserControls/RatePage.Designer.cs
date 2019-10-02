@@ -162,7 +162,7 @@
             // 
             this.profPictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.profPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profPictureBox.Image = global::RateMyP.Properties.Resources.profile;
+            this.profPictureBox.Image = global::RateMyP.WinForm.Properties.Resources.profile;
             this.profPictureBox.Location = new System.Drawing.Point(0, 0);
             this.profPictureBox.Name = "profPictureBox";
             this.profPictureBox.Size = new System.Drawing.Size(192, 219);

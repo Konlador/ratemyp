@@ -1,12 +1,12 @@
-﻿using System;
+﻿using CsvHelper;
+using RateMyP.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using CsvHelper;
-using RateMyP.Entities;
 
-namespace RateMyP.Forms
+namespace RateMyP.WinForm
     {
     static class Program
         {

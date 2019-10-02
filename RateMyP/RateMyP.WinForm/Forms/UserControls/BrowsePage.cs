@@ -117,7 +117,5 @@ namespace RateMyP.Forms.UserControls
                 }
             return courses.Distinct().ToList();
             }
-
-        
         }
     }

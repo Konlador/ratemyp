@@ -43,7 +43,7 @@
             // 
             // teacherPicture
             // 
-            this.teacherPicture.Image = global::RateMyP.Properties.Resources.profile;
+            this.teacherPicture.Image = global::RateMyP.WinForm.Properties.Resources.profile;
             this.teacherPicture.ImageLocation = "";
             this.teacherPicture.InitialImage = null;
             this.teacherPicture.Location = new System.Drawing.Point(3, 3);

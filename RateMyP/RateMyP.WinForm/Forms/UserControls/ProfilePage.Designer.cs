@@ -96,7 +96,7 @@
             // profilePictureBox
             // 
             this.profilePictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.profilePictureBox.Image = global::RateMyP.Properties.Resources.profile;
+            this.profilePictureBox.Image = global::RateMyP.WinForm.Properties.Resources.profile;
             this.profilePictureBox.Location = new System.Drawing.Point(0, 0);
             this.profilePictureBox.Name = "profilePictureBox";
             this.profilePictureBox.Size = new System.Drawing.Size(225, 212);
