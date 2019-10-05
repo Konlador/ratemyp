@@ -64,7 +64,7 @@ namespace RateMyP.WinForm
         private static List<Course> ParseCoursesFromCsv()
         {
             var assembly = typeof(Program).Assembly;
-            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\..\.."), @"DbData\courses.csv");
+            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\.."), @"DbData\courses.csv");
 
             var reader = new StreamReader(path);
             var csvReader = new CsvReader(reader);
@@ -76,7 +76,7 @@ namespace RateMyP.WinForm
         private static List<TeacherActivity> ParseTeacherActivitiesFromCsv()
         {
             var assembly = typeof(Program).Assembly;
-            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\..\.."), @"DbData\Teacher_Activities.csv");
+            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\.."), @"DbData\Teacher_Activities.csv");
 
             var reader = new StreamReader(path);
             var csvReader = new CsvReader(reader);
