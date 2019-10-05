@@ -30,6 +30,24 @@ namespace RateMyP.WinForm
                 context.SaveChanges();
                 }
             }
+        private static void LoadCoursesToDb()
+        {
+            using (var context = new RateMyPDbContext())
+            {
+                var courses = ParseCoursesFromCsv();
+                context.Courses.AddRange(courses);
+                context.SaveChanges();
+            }
+        }
+        private static void LoadTeacherActivitiesToDb()
+        {
+            using (var context = new RateMyPDbContext())
+            {
+                var teacherActivities = ParseTeacherActivitiesFromCsv();
+                context.TeacherActivities.AddRange(teacherActivities);
+                context.SaveChanges();
+            }
+        }
 
         private static List<Teacher> ParseTeachersFromCsv()
             {
@@ -42,5 +60,29 @@ namespace RateMyP.WinForm
 
             return csvReader.GetRecords<Teacher>().ToList();
             }
+
+        private static List<Course> ParseCoursesFromCsv()
+        {
+            var assembly = typeof(Program).Assembly;
+            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\..\.."), @"DbData\courses.csv");
+
+            var reader = new StreamReader(path);
+            var csvReader = new CsvReader(reader);
+            csvReader.Configuration.HasHeaderRecord = true;
+
+            return csvReader.GetRecords<Course>().ToList();
         }
+
+        private static List<TeacherActivity> ParseTeacherActivitiesFromCsv()
+        {
+            var assembly = typeof(Program).Assembly;
+            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\..\.."), @"DbData\Teacher_Activities.csv");
+
+            var reader = new StreamReader(path);
+            var csvReader = new CsvReader(reader);
+            csvReader.Configuration.HasHeaderRecord = true;
+
+            return csvReader.GetRecords<TeacherActivity>().ToList();
+        }
+    }
     }
