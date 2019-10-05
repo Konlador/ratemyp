@@ -33,11 +33,10 @@ namespace RateMyP.WinForm
 
         private static List<Teacher> ParseTeachersFromCsv()
             {
-            const string teachersFile = "teachers.csv";
             var assembly = typeof(Program).Assembly;
-            var teachersFileStream = assembly.GetManifestResourceStream($"RateMyP.Db.Data.{teachersFile}");
+            var path = Path.Combine(Path.GetFullPath(assembly.Location + @"..\..\..\..\..\.."), @"DbData\teachers.csv");
 
-            var reader = new StreamReader(teachersFileStream);
+            var reader = new StreamReader(path);
             var csvReader = new CsvReader(reader);
             csvReader.Configuration.HasHeaderRecord = true;
 

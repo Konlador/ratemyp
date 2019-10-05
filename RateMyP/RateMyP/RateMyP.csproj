@@ -131,7 +131,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Db\Data\teachers.csv" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
