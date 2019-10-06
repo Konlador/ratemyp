@@ -1,652 +1,652 @@
 ﻿Id;Name;Type;Credits;Faculty
-b94562e3-ea7e-5759-bdf0-145675da2bee;.NET platforma informacinėms sistemoms; Pasirenkamasis;5;MIF
-e45385d1-3e62-5233-a6c5-e39a2d2addaa;Abstrakčioji algebra; Privalomasis;5;MIF
-0b304b88-100a-515b-a680-db44344b6531;AIX operacinės sistemos; Pasirenkamasis;5;MIF
-75cfc891-43c2-564c-a89d-619110c3b3b1;Akademinis rašymas; Privalomasis;5;MIF
-4b74c9ab-5505-526f-9583-f4e82d4b20ab;Aktuarinė matematika; Privalomasis;5;MIF
-ed3e0bf5-5faa-5200-9511-b44a5128bb9a;Aktuarinė matematika; Pasirenkamasis;5;MIF
-1068a112-bb3a-566c-aa9d-bd476cba2d22;Algebra; Privalomasis;5;MIF
-1c8923c5-a48b-51ac-bc93-8d4e12f92976;Algebra I/II d.; Privalomasis;5;MIF
-ce76bd0f-1051-5418-a3bd-9e603587bf7a;Algebra II/II d.; Privalomasis;5;MIF
-68557763-b35f-537c-bb53-37819ef26fbe;Algebra II/II d.; Pasirenkamasis;5;MIF
-ae798f68-bbba-52db-8f0d-07f689d62ed1;Algebra ir geometrija; Privalomasis;5;MIF
-f831e000-2f7b-5af8-bcb5-e84475e3cbc7;Algebra ir geometrija I/II d.; Privalomasis;5;MIF
-a32c0049-c3a9-5387-af09-c03592cb97ba;Algebra ir geometrija II/II d.; Privalomasis;5;MIF
-16ef61be-7d21-5bf8-b6e1-1a09d43f4369;Algebros ir matematinės analizės pradmenų didaktika; Privalomasis;5;MIF
-16aea226-8aa4-5d87-99c5-6747d876e96d;Algoritmai ir duomenų struktūros; Privalomasis;5;MIF
-bd1b717a-ab6f-5034-b8da-59756d68e73b;Algoritminė skaičių teorija; Pasirenkamasis;5;MIF
-5ea539de-dfa8-5aa2-8135-d5e090a32a26;Algoritminių uždavinių sprendimas; Pasirenkamasis;5;MIF
-65699c19-916c-5310-b3da-1aef3b7e5a7d;Algoritmų analizė; Privalomasis;5;MIF
-3c58d78b-8ed0-5d95-8123-aec952fac7dc;Algoritmų analizė; Pasirenkamasis;5;MIF
-6be4425f-643e-5a48-ac85-9946f297402b;Algoritmų konstravimas ir analizė; Privalomasis;5;MIF
-89a2b7d4-e617-583b-9cd2-f7c5640026ef;Algoritmų teorija; Privalomasis;5;MIF
-08ae37e5-f709-5617-8e99-86e07afa5cb2;Algoritmų teorija; Pasirenkamasis;5;MIF
-20a3c79a-0f49-5d9e-8c8b-c81e277eea96;Analizė I/III d.; Privalomasis;5;MIF
-1f4bf802-ab45-5a99-a6ea-c5f9d5b46b10;Analizė II/III d.; Privalomasis;5;MIF
-5d737262-c228-578c-acb6-1c143ad561ca;Analizė III/III d.; Privalomasis;5;MIF
-0a1813f6-1784-5276-b4a0-2a680fcca710;Analizinė skaičių teorija; Pasirenkamasis;5;MIF
-275e77fc-6a6c-5106-bf5d-264adafcf9ea;Anglų kalba (specialybės) I/II d.; Privalomasis;5;MIF
-f69a3f9f-2955-50bc-abfc-3a7328d75773;Anglų kalba I/II d. (specialybės); Privalomasis;5;MIF
-ae21979f-4d13-5970-9a8d-32abe583c8b9;Anglų kalba II/II d. (specialybės); Privalomasis;5;MIF
-c90f1bfd-2c19-5239-aaa0-cde1755d1b54;Apibendrintieji tiesiniai modeliai; Privalomasis;5;MIF
-3f54ac44-2e2a-5e5a-9928-0ce0b1643347;Architektūra grindžiamas projektavimas; Pasirenkamasis;5;MIF
-e114ecf5-68ca-595a-9171-f7212977c484;Architektūriniai programų sistemų stiliai; Pasirenkamasis;5;MIF
-1e2abe79-2808-5139-87a3-589a9ac9532d;Asimptotinė statistika; Privalomasis;5;MIF
-191ffe53-4887-5695-bff5-23276ddb6830;Atsitiktiniai procesai; Privalomasis;5;MIF
-9d9655f7-8540-5ecb-9363-2b308002dc45;Atsitiktiniai procesai I/II d.; Privalomasis;5;MIF
-55807a0f-2c35-5892-84fd-0c4ba9fb35f3;Atsitiktiniai procesai II/II d.; Privalomasis;5;MIF
-2260b01e-66e9-593d-9a4b-33de73e7781f;Atsitiktinių procesų teorija; Pasirenkamasis;5;MIF
-70f13d77-46e7-564a-8049-af2ad6af1c16;Aukštesnio lygio matematinis raštingumas; Privalomasis;5;MIF
-1eb49fb3-84df-5738-ad12-2a08b0dd2bfd;Aukštesnio lygio matematinis raštingumas; Pasirenkamasis;5;MIF
-91dc21f4-11d2-5bb6-9fdd-e50c33acfed1;Aukšto dažnio ir funkcinių duomenų analizė; Pasirenkamasis;5;MIF
-aae64f3a-f4df-591e-8aec-aa936c6aca09;Automatai ir formaliosios kalbos; Privalomasis;5;MIF
-2aa4f184-f2ae-5d52-9411-c156f09cfdb1;Automatai ir formaliosios kalbos; Pasirenkamasis;5;MIF
-d2e8aa49-8317-5752-913a-40b5f6a9c3c7;Baigiamasis darbas; Privalomasis;5;MIF
-678520cc-5025-5c45-8a14-4a53cb8396f7;Baigtinių populiacijų statistika; Privalomasis;5;MIF
-88f798ad-2d60-5c7e-b2f3-fb2c3356f33b;Bajeso metodas ekonometrijoje; Pasirenkamasis;5;MIF
-674328b4-07ef-58e2-a0f6-d9cc9d1712fe;Bajeso statistika; Privalomasis;5;MIF
-1a73197a-557c-50be-ba2d-d584e3f39672;Bajeso statistika; Pasirenkamasis;5;MIF
-50fb8cfd-4109-5e2d-bd0f-37c62ccedb2b;Bankininkystė; Pasirenkamasis;5;MIF
-865e3fe4-2bc2-5e5d-8785-c8ca269a4e8d;Bendrasis diferencialinių lygčių kursas; Pasirenkamasis;5;MIF
-89addd0d-c600-5fc1-846e-bfc3f4671836;Bendroji biologija; Privalomasis;5;MIF
-24185e30-d292-52c7-8e98-d0576a1dab68;Bendroji matematikos didaktika; Privalomasis;5;MIF
-4b3dc844-b1c6-5e48-908c-dc76920f37ee;Bendroji pedagogika; Privalomasis;5;MIF
-27f799f5-616f-5a35-9099-48f87f8af6f3;Biochemija; Privalomasis;5;MIF
-5e27da77-7eb4-5e5b-ba6b-df3ff8a66a1c;Bioinformatika; Privalomasis;5;MIF
-04cee19d-c6f6-514b-9965-968c8e4eec47;Bioinformatika; Pasirenkamasis;5;MIF
-accf4c97-217f-559b-a827-ac6c61f3520e;Bioinformatika I/IV d.; Privalomasis;5;MIF
-6d9532d2-250b-53fc-b7df-92c1a952c93f;Bioinformatika II/IV d.; Privalomasis;5;MIF
-c2d4229e-8294-58ca-90ad-c831951e015f;Bioinformatika III/IV d.; Privalomasis;5;MIF
-6cd60d31-8996-5f3e-9adb-ed45245ecb73;Bioinformatika IV/IV d.; Privalomasis;5;MIF
-cb5332f2-1538-5159-8477-63a2aeff9e13;Bioinformatikos programų kūrimo metodikos; Privalomasis;5;MIF
-d781b5ba-2379-57ba-b5dd-5d136c00554c;Biologinių sistemų teorija; Privalomasis;5;MIF
-176e2aad-6d52-5de6-b974-c665f1b54a91;Biomedicinos duomenų analizė; Privalomasis;5;MIF
-615ca456-1012-5dbd-a237-f3244331d201;Biometrija; Privalomasis;5;MIF
-252aa14f-072d-57d2-90c6-d27215ebfd55;Biomolekulių geometrija; Pasirenkamasis;5;MIF
-ecba1a68-931c-5ee8-828e-ac8259c9ab45;Blokų grandinių programavimas; Pasirenkamasis;5;MIF
-a686ae00-64ac-53da-8987-505bebf4bd3e;Blokų grandinių technologijos; Pasirenkamasis;5;MIF
-5443978c-83d3-5764-814f-3b55242293eb;Buhalterinė apskaita; Pasirenkamasis;5;MIF
+b94562e3-ea7e-5759-bdf0-145675da2bee;.NET platforma informacinėms sistemoms; Optional;5;MIF
+e45385d1-3e62-5233-a6c5-e39a2d2addaa;Abstrakčioji algebra; Compulsory;5;MIF
+0b304b88-100a-515b-a680-db44344b6531;AIX operacinės sistemos; Optional;5;MIF
+75cfc891-43c2-564c-a89d-619110c3b3b1;Akademinis rašymas; Compulsory;5;MIF
+4b74c9ab-5505-526f-9583-f4e82d4b20ab;Aktuarinė matematika; Compulsory;5;MIF
+ed3e0bf5-5faa-5200-9511-b44a5128bb9a;Aktuarinė matematika; Optional;5;MIF
+1068a112-bb3a-566c-aa9d-bd476cba2d22;Algebra; Compulsory;5;MIF
+1c8923c5-a48b-51ac-bc93-8d4e12f92976;Algebra I/II d.; Compulsory;5;MIF
+ce76bd0f-1051-5418-a3bd-9e603587bf7a;Algebra II/II d.; Compulsory;5;MIF
+68557763-b35f-537c-bb53-37819ef26fbe;Algebra II/II d.; Optional;5;MIF
+ae798f68-bbba-52db-8f0d-07f689d62ed1;Algebra ir geometrija; Compulsory;5;MIF
+f831e000-2f7b-5af8-bcb5-e84475e3cbc7;Algebra ir geometrija I/II d.; Compulsory;5;MIF
+a32c0049-c3a9-5387-af09-c03592cb97ba;Algebra ir geometrija II/II d.; Compulsory;5;MIF
+16ef61be-7d21-5bf8-b6e1-1a09d43f4369;Algebros ir matematinės analizės pradmenų didaktika; Compulsory;5;MIF
+16aea226-8aa4-5d87-99c5-6747d876e96d;Algoritmai ir duomenų struktūros; Compulsory;5;MIF
+bd1b717a-ab6f-5034-b8da-59756d68e73b;Algoritminė skaičių teorija; Optional;5;MIF
+5ea539de-dfa8-5aa2-8135-d5e090a32a26;Algoritminių uždavinių sprendimas; Optional;5;MIF
+65699c19-916c-5310-b3da-1aef3b7e5a7d;Algoritmų analizė; Compulsory;5;MIF
+3c58d78b-8ed0-5d95-8123-aec952fac7dc;Algoritmų analizė; Optional;5;MIF
+6be4425f-643e-5a48-ac85-9946f297402b;Algoritmų konstravimas ir analizė; Compulsory;5;MIF
+89a2b7d4-e617-583b-9cd2-f7c5640026ef;Algoritmų teorija; Compulsory;5;MIF
+08ae37e5-f709-5617-8e99-86e07afa5cb2;Algoritmų teorija; Optional;5;MIF
+20a3c79a-0f49-5d9e-8c8b-c81e277eea96;Analizė I/III d.; Compulsory;5;MIF
+1f4bf802-ab45-5a99-a6ea-c5f9d5b46b10;Analizė II/III d.; Compulsory;5;MIF
+5d737262-c228-578c-acb6-1c143ad561ca;Analizė III/III d.; Compulsory;5;MIF
+0a1813f6-1784-5276-b4a0-2a680fcca710;Analizinė skaičių teorija; Optional;5;MIF
+275e77fc-6a6c-5106-bf5d-264adafcf9ea;Anglų kalba (specialybės) I/II d.; Compulsory;5;MIF
+f69a3f9f-2955-50bc-abfc-3a7328d75773;Anglų kalba I/II d. (specialybės); Compulsory;5;MIF
+ae21979f-4d13-5970-9a8d-32abe583c8b9;Anglų kalba II/II d. (specialybės); Compulsory;5;MIF
+c90f1bfd-2c19-5239-aaa0-cde1755d1b54;Apibendrintieji tiesiniai modeliai; Compulsory;5;MIF
+3f54ac44-2e2a-5e5a-9928-0ce0b1643347;Architektūra grindžiamas projektavimas; Optional;5;MIF
+e114ecf5-68ca-595a-9171-f7212977c484;Architektūriniai programų sistemų stiliai; Optional;5;MIF
+1e2abe79-2808-5139-87a3-589a9ac9532d;Asimptotinė statistika; Compulsory;5;MIF
+191ffe53-4887-5695-bff5-23276ddb6830;Atsitiktiniai procesai; Compulsory;5;MIF
+9d9655f7-8540-5ecb-9363-2b308002dc45;Atsitiktiniai procesai I/II d.; Compulsory;5;MIF
+55807a0f-2c35-5892-84fd-0c4ba9fb35f3;Atsitiktiniai procesai II/II d.; Compulsory;5;MIF
+2260b01e-66e9-593d-9a4b-33de73e7781f;Atsitiktinių procesų teorija; Optional;5;MIF
+70f13d77-46e7-564a-8049-af2ad6af1c16;Aukštesnio lygio matematinis raštingumas; Compulsory;5;MIF
+1eb49fb3-84df-5738-ad12-2a08b0dd2bfd;Aukštesnio lygio matematinis raštingumas; Optional;5;MIF
+91dc21f4-11d2-5bb6-9fdd-e50c33acfed1;Aukšto dažnio ir funkcinių duomenų analizė; Optional;5;MIF
+aae64f3a-f4df-591e-8aec-aa936c6aca09;Automatai ir formaliosios kalbos; Compulsory;5;MIF
+2aa4f184-f2ae-5d52-9411-c156f09cfdb1;Automatai ir formaliosios kalbos; Optional;5;MIF
+d2e8aa49-8317-5752-913a-40b5f6a9c3c7;Baigiamasis darbas; Compulsory;5;MIF
+678520cc-5025-5c45-8a14-4a53cb8396f7;Baigtinių populiacijų statistika; Compulsory;5;MIF
+88f798ad-2d60-5c7e-b2f3-fb2c3356f33b;Bajeso metodas ekonometrijoje; Optional;5;MIF
+674328b4-07ef-58e2-a0f6-d9cc9d1712fe;Bajeso statistika; Compulsory;5;MIF
+1a73197a-557c-50be-ba2d-d584e3f39672;Bajeso statistika; Optional;5;MIF
+50fb8cfd-4109-5e2d-bd0f-37c62ccedb2b;Bankininkystė; Optional;5;MIF
+865e3fe4-2bc2-5e5d-8785-c8ca269a4e8d;Bendrasis diferencialinių lygčių kursas; Optional;5;MIF
+89addd0d-c600-5fc1-846e-bfc3f4671836;Bendroji biologija; Compulsory;5;MIF
+24185e30-d292-52c7-8e98-d0576a1dab68;Bendroji matematikos didaktika; Compulsory;5;MIF
+4b3dc844-b1c6-5e48-908c-dc76920f37ee;Bendroji pedagogika; Compulsory;5;MIF
+27f799f5-616f-5a35-9099-48f87f8af6f3;Biochemija; Compulsory;5;MIF
+5e27da77-7eb4-5e5b-ba6b-df3ff8a66a1c;Bioinformatika; Compulsory;5;MIF
+04cee19d-c6f6-514b-9965-968c8e4eec47;Bioinformatika; Optional;5;MIF
+accf4c97-217f-559b-a827-ac6c61f3520e;Bioinformatika I/IV d.; Compulsory;5;MIF
+6d9532d2-250b-53fc-b7df-92c1a952c93f;Bioinformatika II/IV d.; Compulsory;5;MIF
+c2d4229e-8294-58ca-90ad-c831951e015f;Bioinformatika III/IV d.; Compulsory;5;MIF
+6cd60d31-8996-5f3e-9adb-ed45245ecb73;Bioinformatika IV/IV d.; Compulsory;5;MIF
+cb5332f2-1538-5159-8477-63a2aeff9e13;Bioinformatikos programų kūrimo metodikos; Compulsory;5;MIF
+d781b5ba-2379-57ba-b5dd-5d136c00554c;Biologinių sistemų teorija; Compulsory;5;MIF
+176e2aad-6d52-5de6-b974-c665f1b54a91;Biomedicinos duomenų analizė; Compulsory;5;MIF
+615ca456-1012-5dbd-a237-f3244331d201;Biometrija; Compulsory;5;MIF
+252aa14f-072d-57d2-90c6-d27215ebfd55;Biomolekulių geometrija; Optional;5;MIF
+ecba1a68-931c-5ee8-828e-ac8259c9ab45;Blokų grandinių programavimas; Optional;5;MIF
+a686ae00-64ac-53da-8987-505bebf4bd3e;Blokų grandinių technologijos; Optional;5;MIF
+5443978c-83d3-5764-814f-3b55242293eb;Buhalterinė apskaita; Optional;5;MIF
 2c6f66b1-c92b-5fca-8afb-112f28b41218;BUS dalykas (modulis); None;5;MIF
 99966bc3-8d32-52a5-851d-d67025ff3216;BUS dalykas (modulis); BUS;5;MIF
-e9271a2a-1ece-53f1-8ba3-36d9ca983082;CASE metodas; Pasirenkamasis;5;MIF
-2c147efc-2f8b-534c-8cd7-c0711dc6618f;Cenzūruotų imčių analizė; Privalomasis;5;MIF
-96f78049-3c9f-5243-937a-5472b49c4736;Cenzūruotų imčių analizė; Pasirenkamasis;5;MIF
-24baf076-e89b-59d4-8d41-9eaa361f3921;Chaoso teorija ir fraktalai; Pasirenkamasis;5;MIF
-049c82f0-aa55-58cd-bea5-e489ce1bfc94;Dalinių išvestinių diferencialinės lygtys; Privalomasis;5;MIF
-6dc1f272-2969-5d5f-84b5-8f63fa360e62;Dalinių išvestinių diferencialinės lygtys; Pasirenkamasis;5;MIF
-91563c24-6a15-5a0c-aff2-ea4a1571fe29;Daugiamačių duomenų vizualizacija; Pasirenkamasis;5;MIF
-7ae2f896-4401-57af-8fc7-77abc7a07359;Daugiamatė statistika; Privalomasis;5;MIF
-564eca7b-1fa5-5754-ab81-db9ed1248ae1;Daugiamatė statistika; Pasirenkamasis;5;MIF
-36315a1a-136d-54f5-bcd9-5f7eb9f14c06;Daugiamatės duomenų struktūros; Pasirenkamasis;5;MIF
-50ab36ef-24eb-5392-aa4d-fee3996afd32;Daugiamatės laiko eilutės ir finansų ekonometrija; Privalomasis;5;MIF
-7dd28397-58df-5eb4-90e3-2befb7c76e16;Daugiaparametrinė statistika; Privalomasis;5;MIF
-773c56d5-2de4-58ab-9da9-e40397f9f7a0;Demografinė ekonomika; Pasirenkamasis;5;MIF
-bd0b5628-08e1-5bb6-b6ae-1ec9a63d55f1;Deterministiniai matematiniai modeliai; Pasirenkamasis;5;MIF
-31f4674e-cfc3-5754-a948-c6d32efccc49;Didžiųjų duomenų analitika; Pasirenkamasis;5;MIF
-e12155a0-df55-5e96-ae9c-5acec9702f4f;Didžiųjų duomenų analizė; Privalomasis;5;MIF
-09fe7b1d-6471-593b-8bbe-7c41dd128939;Diferencialinės ir integralinės lygtys; Privalomasis;5;MIF
-eb87a363-892d-5402-bd4f-67a15b72999b;Diferencialinės lygtys; Privalomasis;5;MIF
-4a624d97-d10a-5041-a12f-89f9b3b54da9;Diferencialinės lygtys; Pasirenkamasis;5;MIF
-7c17df47-2a31-5b59-95d0-b901130a8667;Diferencialinės lygtys gyvybės moksluose; Pasirenkamasis;5;MIF
-c3fe241f-0119-5f3e-9946-721417b9d753;Diferencialinės lygtys I/II d.; Privalomasis;5;MIF
-d36493cb-8a19-55c1-b84a-a296c9a17886;Diferencialinės lygtys I/II d.; Pasirenkamasis;5;MIF
-405e366a-a533-51bb-851e-95b8465e30ca;Diferencialinės lygtys II/II d.; Privalomasis;5;MIF
-98ec7c95-8bd5-56a5-8742-8d470c703405;Diferencialinės lygtys II/II d.; Pasirenkamasis;5;MIF
-636d0411-d458-5c37-9e5f-4951e898d8e7;Diferencialinių lygčių asimptotiniai metodai; Pasirenkamasis;5;MIF
-df26c1f5-b5f8-5617-b871-edec1f61aebf;Diferencialinių lygčių kraštinių uždavinių asimptotiniai metodai; Pasirenkamasis;5;MIF
-8ddb1a81-de14-55f4-9a6f-81507c5fd3ab;Diferencialinių lygčių skaitiniai sprendimo metodai; Pasirenkamasis;5;MIF
-38462ee5-76b4-59b6-912c-ecba49c2a6a1;Dinaminės sistemos; Pasirenkamasis;5;MIF
-a6c06ad6-847a-5e53-bdde-d1be3a9e251c;Dinaminiai išgyvenamumo teorijos aspektai; Pasirenkamasis;5;MIF
-9d0900f3-2926-598e-90d0-87fb08004e0d;Dirbtiniai neuroniniai tinklai; Privalomasis;5;MIF
-13c59994-3500-5f2e-8472-8673627a25ef;Dirbtinio intelekto pagrindai; Pasirenkamasis;5;MIF
-9ea9e790-443e-592a-afd4-6ffee2a7c912;Dirbtinis intelektas; Privalomasis;5;MIF
-c18d642d-fd96-5944-b367-bc2cf18d9799;Dirbtinis intelektas; Pasirenkamasis;5;MIF
-af8d7b15-ab0a-5bc2-92ba-0a44a4710861;Diskrečioji matematika; Privalomasis;5;MIF
-d556a2cd-e971-53bb-b705-0cbdddbe46be;Diskrečioji matematika; Pasirenkamasis;5;MIF
-485946d9-5db7-5436-8281-9a0de58df222;Diskrečioji matematika ir algoritmai; Privalomasis;5;MIF
-bfb09496-e7ed-5377-9109-d25b2a0256cf;Diskrečioji matematika ir skaičiavimo modeliai; Privalomasis;5;MIF
-e1d7c317-8d4f-55a5-a93a-ce251ad8e60c;Diskrečiosios matematikos pagrindai; Privalomasis;5;MIF
-843e3804-3f1c-5dd7-b862-b75fbc04ffc6;Diskrečiosios matematikos pagrindai; Pasirenkamasis;5;MIF
-c7065ff3-e584-5ac7-b1d9-fb1f80518e96;Diskrečiosios struktūros; Privalomasis;5;MIF
-9d700ee1-cd4d-5860-88fc-267d85b5b233;Diskretaus laiko finansų modeliai; Privalomasis;5;MIF
-515e92d5-f48e-5539-8f35-8573691540cd;Diskretaus pasirinkimo modeliai; Privalomasis;5;MIF
-910b73d7-0a12-5d77-87d9-8afe3a6d6a14;Diskretus optimizavimas; Privalomasis;5;MIF
-56ff0178-257e-5c57-ab7e-9ff68f992b1f;Dokumentų valdymo sistemos; Pasirenkamasis;5;MIF
-891b3d9b-76ba-514a-8387-2d069b6ff6fc;Draudimo teisė; Privalomasis;5;MIF
-37681bc3-5f60-5f9c-b55f-05aa76b3d1d9;Draudos tikimybiniai rizikos modeliai; Pasirenkamasis;5;MIF
-8ab9cf69-213d-5773-bc40-cad20b31ffc5;Duomenų analizė; Privalomasis;5;MIF
-1b4e7e05-f6b2-55a2-9bab-e7becdb740df;Duomenų analizė; Pasirenkamasis;5;MIF
-5649246b-c39d-578d-aea4-ac02be2caf84;Duomenų bazių projektavimas; Pasirenkamasis;5;MIF
-fe35cbe8-8f51-5126-acc9-eab93d00ea81;Duomenų bazių užklausų kalbos; Pasirenkamasis;5;MIF
-b0960e26-a582-5477-9dce-bd71f0fcc802;Duomenų bazių valdymo sistemos; Privalomasis;5;MIF
-16468326-7f4e-5930-8f16-df9db956263c;Duomenų bazių valdymo sistemos; Pasirenkamasis;5;MIF
-a15d90d4-3abf-5140-8b3d-10da5338f38f;Duomenų bazių valdymo sistemų papildomi skyriai; Pasirenkamasis;5;MIF
-e46631ad-294b-5008-8a4b-260a31911b3a;Duomenų gavyba; Privalomasis;5;MIF
-5a810ef9-ab5b-5291-a8d7-5f93d6a5b6f0;Duomenų saugyklų technologijos; Pasirenkamasis;5;MIF
-4ebf13ad-2074-5508-91ab-b2fdcb529f27;Duomenų struktūros; Privalomasis;5;MIF
-a4452ffc-0444-5dbc-ac8d-f7bc22f488ba;Duomenų struktūros ir algoritmai; Privalomasis;5;MIF
-bdecee17-f28e-5327-b6ab-ffb7df8ce9cc;Duomenų tyrimas; Privalomasis;5;MIF
-74465a69-7863-5514-b5b9-6ad48839483d;Duomenų tvarkyba ir transformavimas R aplinkoje; Pasirenkamasis;5;MIF
-9c39c58f-998b-584b-82e3-9fdd039b95db;Duomenų vizualizavimas; Privalomasis;5;MIF
-5a26afda-0796-546f-85a6-369500ccbdb8;Duomenų vizualizavimas; Pasirenkamasis;5;MIF
-58466d83-137a-5fc8-87ae-a8ad200cba45;Eilių teorija; Pasirenkamasis;5;MIF
-7b025da6-ad2a-5632-b73b-a5e1421e1b28;Ekonometrija; Privalomasis;5;MIF
-34a78f39-d0d9-51e9-bcf7-2d7b71d9bb90;Ekonometrija I/II d.; Privalomasis;5;MIF
-fa90b476-5e8b-5194-9e30-0eb24d86e78b;Ekonometrija II/II d.; Privalomasis;5;MIF
-f1727bea-c537-530b-994c-138cf5fa4c02;Ekonometrinė rinkos struktūrų analizė; Privalomasis;5;MIF
-6ad44972-270b-576d-8e41-b57ead830a4b;Ekonometrinė rinkos struktūrų analizė; Pasirenkamasis;5;MIF
-41ad415a-ce71-5105-8803-1dcd365ddeb6;Ekonometrinis projektas-kursinis darbas; Privalomasis;5;MIF
-e553ab4e-be4d-5a51-bd75-826f4deb2998;Ekonomikos pradmenys; Privalomasis;5;MIF
-967a0345-f7a2-5645-9cd8-85e72ec1811c;Ekonomikos teorija (mikroekonomika); Privalomasis;5;MIF
-025523e3-0a07-5ec6-956d-94b21403502f;Ekonomikos teorija I/II d.; Privalomasis;5;MIF
-e95026a6-cd78-5802-aeb2-b47086905127;Ekonomikos teorija II/II d.; Privalomasis;5;MIF
-d790a0de-f8c9-53ee-9a0f-4d2c5ffe65a7;Ekonominių duomenų šaltiniai ir jų apdorojimas; Pasirenkamasis;5;MIF
-edc797c2-71a2-5be1-9d7f-09b8bd961e53;Eksperimentinė ekonomika; Privalomasis;5;MIF
-33c4f371-dad6-575e-a68f-cf17d4f6d25c;Eksperimento planavimas; Pasirenkamasis;5;MIF
-bbd199f2-41b7-53a4-af0d-c510ed31a652;Elektronikos fizikiniai pagrindai; Pasirenkamasis;5;MIF
-62d02273-2b65-53a2-9e85-ba409ca13f1e;Elektroninės komercijos technologijų pagrindai; Pasirenkamasis;5;MIF
-dbd77dd5-e1b5-5c9d-b0fb-c884737feed2;Elektroniniai duomenų tinklai ir duomenų vizualizacija; Privalomasis;5;MIF
-4da842c1-63ab-5187-b6a3-8f3e2f4538fa;Elektroninio parašo infrastruktūra ir elektroninė komercija; Pasirenkamasis;5;MIF
-94649e8f-136d-5ea1-9f02-69e16e4c8c35;Elektroninio parašo infrastruktūra ir elektroniniai dokumentai; Pasirenkamasis;5;MIF
-66cbb36d-76f0-5c3d-9b85-2cbfa1eb4023;Elgsenos ekonomika; Privalomasis;5;MIF
-462c3410-2d29-58dd-8113-7109e84ac75b;Elgsenos ekonomika; Pasirenkamasis;5;MIF
-a2d06b94-4f21-50f5-979c-a6c90b9616f9;Empirinių procesų teorijos įvadas; Pasirenkamasis;5;MIF
-a6f348c1-bcde-5990-9619-ca3c4dbadd26;Erdvinės duomenų bazės; Privalomasis;5;MIF
-1224f42a-8d5c-5855-94f5-111b2a0c6726;Erdvinės duomenų bazės; Pasirenkamasis;5;MIF
-63ad73af-d773-5e47-b376-a5d32f82a91b;Euristiniai algoritmai NP-pilniems uždaviniams; Pasirenkamasis;5;MIF
-b0de6536-9cd8-564f-816e-95c2e646805e;Evoliucinių diferencialinių lygčių skaitiniai sprendimo metodai; Pasirenkamasis;5;MIF
-8892b311-421b-5452-9293-7adf98727537;Filosofijos įvadas; Privalomasis;5;MIF
-26922aa0-d41b-57c9-895b-a510436e4a5f;Finansinė analizė; Pasirenkamasis;5;MIF
-cf02e8ef-7bb6-5768-9a78-5e14c76a36aa;Finansiniai burbulai ir ekonominės krizės; Pasirenkamasis;5;MIF
-c8bd94f8-7b79-5d2d-a7d1-2a4c5789249e;Finansiniai išvestiniai instrumentai; Pasirenkamasis;5;MIF
-452de5bc-79d9-5f7b-af6f-1d822d612f0d;Finansiniai skaičiavimai; Privalomasis;5;MIF
-d5af72ae-4a11-5d2e-b255-2458d5d4dd9d;Finansiniai skaičiavimai; Pasirenkamasis;5;MIF
-59390b80-ee89-58c9-bdea-58c8327bf98d;Finansinis intelektas; Pasirenkamasis;5;MIF
-3f09bfb2-12da-5bd3-bc9e-a0a95dbc3f79;Finansinių rizikų valdymas; Privalomasis;5;MIF
-16e0dddd-176d-5dd4-9338-78aa4315d5fa;Finansų ekonometrija; Privalomasis;5;MIF
-bca11d46-41cc-5c4c-9bd9-e78459ddf2de;Finansų ekonometrijos modeliai; Privalomasis;5;MIF
-0ba47b55-0b9a-599a-b066-d5792a55d19f;Finansų ekonomika; Privalomasis;5;MIF
-9e54c82a-d47a-5668-ba8a-983c2a0c518a;Finansų ekonomika; Pasirenkamasis;5;MIF
-e49bdcdb-7551-5d08-b10f-e6d63a6d37d0;Finansų ekonomikos modeliai; Pasirenkamasis;5;MIF
-c80a2cc3-4d37-5434-9853-54c6f8fb2e75;Finansų matematika; Privalomasis;5;MIF
-15585465-7e9a-57ad-b8e8-10cbf7a9d4f9;Finansų matematika; Pasirenkamasis;5;MIF
-83e05e1a-20e8-5ba6-8159-34de9517ed6f;Finansų rinkų matematika; Pasirenkamasis;5;MIF
-627f201a-0630-540b-8b32-24501c3529e0;Fizika; Privalomasis;5;MIF
-8d0e4228-62f1-5b2c-a05b-1f9e80552339;Fizika; Pasirenkamasis;5;MIF
-c2f2a5a1-6c17-5479-b22f-688466abfade;Fizika informatikams; Pasirenkamasis;5;MIF
-0252843a-9963-5144-b419-9a72a5d1eaf9;Fizikinė chemija; Privalomasis;5;MIF
-ae5ce52f-8b09-51f7-8693-8e5736802501;Funkcijų erdvės; Privalomasis;5;MIF
-ea2351c4-b5e8-5b6c-a86a-0f6a73da024f;Funkcijų erdvės; Pasirenkamasis;5;MIF
-70cb244c-5264-526a-8ec9-92e04f950cd4;Funkcinė analizė; Privalomasis;5;MIF
-76ab4e92-a2a7-5547-8423-7b074bf828e7;Funkcinis programavimas; Privalomasis;5;MIF
-b298cb76-fa2e-583d-9bc0-47ca98191497;Funkcinis programavimas; Pasirenkamasis;5;MIF
-6e07162c-4801-551d-a393-c492ca040cee;Funkcinių duomenų analizė; Privalomasis;5;MIF
-b74c4274-c379-5d54-a1eb-16f1ff8b5d29;Funkcinių duomenų statistika; Pasirenkamasis;5;MIF
-ea2cbeba-a6ae-5e59-98d1-426bd6948bac;Gamtos ir socialinių reiškinių modeliavimas; Pasirenkamasis;5;MIF
-dbf67398-4baa-5c01-b979-25370e312429;Genetika; Privalomasis;5;MIF
-4b6a8295-9131-577e-b595-4622c95a24a2;Geografinės informacinės sistemos; Pasirenkamasis;5;MIF
-75a84e45-ade7-51e7-8c6d-c74ab008587f;Geometrija; Privalomasis;5;MIF
-60be6371-486a-5b13-879c-39ec24a4dc65;Geometrija ir vizualizavimas; Privalomasis;5;MIF
-33ffba45-7fa9-5c6e-8afa-054110bb2756;Geometrijos aksiominiai pagrindai; Privalomasis;5;MIF
-07cc1ca7-d961-5e77-b5b6-e770a48014e8;Geometrijos didaktika; Privalomasis;5;MIF
-cb961ffb-f649-508f-9476-2062487bac5c;Giliojo mokymosi metodai; Pasirenkamasis;5;MIF
-7daadb63-6ba9-54c0-b8a2-712c5ddaf84d;Gyvybės draudimas. Sveikatos draudimas; Privalomasis;5;MIF
-84177809-ae29-5682-a82b-545a0a2d16a7;Gyvybės ir sveikatos draudimo modeliai; Pasirenkamasis;5;MIF
-ef0fff3f-e489-5f11-b54b-fdf3abc6eb60;Grafai ir algoritmai; Privalomasis;5;MIF
-d221825f-26e2-5a65-a744-eacb2ea92037;Grafai ir algoritmai; Pasirenkamasis;5;MIF
-e9bd8f9e-2718-55ff-97ab-e358c807ed51;Grafika ir vizualizacijos metodai; Pasirenkamasis;5;MIF
-6de2a550-b23b-583e-b04e-f7512d046d5b;Grafų teorija; Privalomasis;5;MIF
-f44b229a-4da0-5502-aa05-0caf89debcb5;Grafų teorija; Pasirenkamasis;5;MIF
-17c25ab4-2f43-5a01-86e8-c0d4a834f3e9;Grafų teorijos algoritmai; Pasirenkamasis;5;MIF
-44006e36-1769-57b2-a441-f659ed657eb0;Grid skaičiavimų taikymai; Pasirenkamasis;5;MIF
-c8a2b4ea-3755-5d66-abfc-0d5b6022d9b9;Harmoninė analizė; Pasirenkamasis;5;MIF
-c06e7a86-f758-50fd-ab53-d067951e596b;Imčių metodai; Privalomasis;5;MIF
-58adb900-289e-56dc-9664-dc8ad878e26a;Imčių metodai; Pasirenkamasis;5;MIF
-c4b83b4d-496d-5b92-94d8-8385e7045108;Imitaciniai metodai ekonometrijoje; Pasirenkamasis;5;MIF
-ef690b5b-1645-5945-8952-ff3a9798a039;Įmonių finansai; Pasirenkamasis;5;MIF
-ab754f91-5162-5fee-aa90-77396c296987;Įmonių informacinių technologijų valdymas; Pasirenkamasis;5;MIF
-2a285fbd-0f03-549a-9fc9-9ae4567ecd91;Informacija ir kodavimas; Privalomasis;5;MIF
-deb1850f-fbc2-5a92-b54b-5d54bcfad550;Informacijos apdorojimas kompiuteriu; Pasirenkamasis;5;MIF
-55560166-6acc-58a3-a6b2-64af0952bed2;Informacijos saugos valdymas; Privalomasis;5;MIF
-3e076e2c-b95d-5aa1-b65e-fc0276e14bae;Informacijos saugos valdymas; Pasirenkamasis;5;MIF
-ba340079-ecbd-57ad-b044-bfbb66876548;Informacijos saugumas; Pasirenkamasis;5;MIF
-d2a54a6d-5149-56ea-90f0-11cb4698708c;Informacijos teorija; Privalomasis;5;MIF
-7221b075-2f68-5717-b104-9ae8d877deda;Informacijos teorija; Pasirenkamasis;5;MIF
-56bb2b27-dc3c-5547-a44f-b3d4aa9e300b;Informacijos teorija ir duomenų struktūra; Pasirenkamasis;5;MIF
-53ccd38d-88d2-5507-8666-2a70233f2ff3;Informacinės ir grupinio darbo sistemos; Privalomasis;5;MIF
-c9d44462-19cc-5868-95d7-057e119a543c;Informacinės mokymo technologijos; Privalomasis;5;MIF
-7bdf782f-8447-5e7d-8514-74ed4b02c5f3;Informacinės sistemos; Pasirenkamasis;5;MIF
-df2d10e4-d42b-5468-b40d-bd7daa1572c4;Informacinių sistemų auditas; Pasirenkamasis;5;MIF
-7e0ed595-53c2-509c-9e07-7f5119c625ac;Informacinių sistemų kūrimo projektų valdymo metodikos; Privalomasis;5;MIF
-cd7dfd30-665a-5f9c-8a88-47afaf3d0e4d;Informacinių technologijų veiklos valdymas organizacijoje; Pasirenkamasis;5;MIF
-0deadcbd-278d-5085-a5ae-6b5486b0dabd;Informatika; Privalomasis;5;MIF
-38f8d981-35f4-5389-b09e-6059a3a7ed83;Informatika I/II d.; Privalomasis;5;MIF
-53a1c16b-5d82-5ffb-884e-b9681130a6a8;Informatika II/II d.; Privalomasis;5;MIF
-001a511c-4885-5e8e-828b-55e68bc4a711;Informatikos didaktika; Privalomasis;5;MIF
-a2d25be6-f25d-5d3a-a58c-4bad56469719;Informatikos pagrindai; Privalomasis;5;MIF
-5117fcca-263a-5b01-9137-8eb452a53dc2;Informatikos teisė; Privalomasis;5;MIF
-bbe9b1da-2a6a-570e-b81d-eb4b80b5ec0c;Informatikos teisė; Pasirenkamasis;5;MIF
-c3716c40-1178-5cd7-b0c7-3f83e74fc043;Integralinės lygtys; Pasirenkamasis;5;MIF
-533db975-8f74-593f-ba34-73c28d080d1f;Intelektualios sistemos; Privalomasis;5;MIF
-4cad411a-1b7a-593d-94a7-b55e7623c1a1;Intelektualios sistemos; Pasirenkamasis;5;MIF
-e0e50e76-cbef-5c6b-8583-18ceb3879397;Interaktyvios sistemos; Pasirenkamasis;5;MIF
-5fe0fc9e-19d5-5605-89e0-07b81b5e1cc3;Interneto ir multimedijos technologijos; Privalomasis;5;MIF
-afc9de4a-20c5-556e-870b-6243642f80ef;Interneto technologijos; Privalomasis;5;MIF
-a3bdcfde-5803-5afd-b975-dd8d34a6d69b;Interneto technologijos; Pasirenkamasis;5;MIF
-e168cbe6-e731-5f57-b074-8a46dd32bf2c;Investicijų planavimas; Pasirenkamasis;5;MIF
-9985a7d6-3753-5285-95d3-a27112a98371;Investicijų teorija; Privalomasis;5;MIF
-896c852b-c72c-5d9b-90fb-a96dfb14a1f5;Išgyvenamumo analizė; Privalomasis;5;MIF
-49806726-249c-5e4f-8abf-4f5cb6b64570;Išgyvenamumo demografiniai modeliai; Privalomasis;5;MIF
-2cfedc74-dfe2-5071-b34c-1a639ab5afa9;Išgyvenamumo demografiniai modeliai; Pasirenkamasis;5;MIF
-5569b68f-4a42-5af5-a458-23ef4a5ea31c;IT ir komunikacijos įgūdžiai; Privalomasis;5;MIF
-ccdef33d-1c18-53a7-b6d7-cca2e931e2e6;IT projektų valdymas; Pasirenkamasis;5;MIF
-359424b2-e2ac-506f-8f10-7a065a62a5a1;Įvadas į algebrinę skaičių teoriją; Pasirenkamasis;5;MIF
-d9e5b158-5441-5dde-b331-00022e72ce6e;Įvadas į ekonometrijos studijas; Privalomasis;5;MIF
-a5355d43-0b7e-5d03-b19b-94dea1cdfe98;Įvadas į finansų ir draudimo matematiką; Privalomasis;5;MIF
-a5fd814a-102f-5aa3-9c33-f652149a9b2d;Įvadas i Galua teoriją; Pasirenkamasis;5;MIF
-2f88aca3-f067-5d6f-97fd-a2aebce56764;Įvadas į kompiuterių architektūrą; Privalomasis;5;MIF
-950135f5-fc24-5aad-aefa-71131cfbf74c;Įvadas į robotiką; Pasirenkamasis;5;MIF
-e372a586-7d7f-556d-93ec-74a93102310a;Įvadas į specialybę; Privalomasis;5;MIF
-ccb4e31a-ac5d-5247-8999-e32c4bc558c8;Įvadas į verslo procesų vadybą; Pasirenkamasis;5;MIF
-8e76f2a6-6a1f-5a86-9c34-059c32f6dad3;JAVA technologijos; Privalomasis;5;MIF
-6bb61a6e-b155-5951-a588-376c383fd9f2;JAVA technologijos; Pasirenkamasis;5;MIF
-8c08ca4e-7955-5413-bc8f-194543160d1f;Judrusis programavimas Ruby; Pasirenkamasis;5;MIF
-9ef25272-f367-5433-a5b8-8c0f08c6e404;Kategorinių duomenų analizė; Pasirenkamasis;5;MIF
-c3c2e88b-04ef-5cfb-ab3c-aa9a2b34445f;Klaidas taisantys kodai; Privalomasis;5;MIF
-f6c85fdd-7d8c-5885-9d22-d8e8eefd2e69;Klaidas taisantys kodai; Pasirenkamasis;5;MIF
-06a215a2-3f80-5789-bf54-ea98d6cfa03c;Kodavimas ir kriptografija; Pasirenkamasis;5;MIF
-ec4cb5e0-4d5b-58db-934d-c4f4916712aa;Kodavimo teorija; Privalomasis;5;MIF
-c2580009-0635-5c23-9a6f-76cff59d5eae;Kodavimo teorija; Pasirenkamasis;5;MIF
-403766ab-1bd6-5d64-93a4-50c0d5741938;Kokybės kontrolės sistemos; Privalomasis;5;MIF
-1ffbafc0-33e0-510b-9933-6729069ae3ca;Kombinatorika ir grafų teorija; Privalomasis;5;MIF
-f0f27ecc-1861-5f11-a272-a1bb1f5c7a50;Kombinatorika ir grafų teorija; Pasirenkamasis;5;MIF
-7769623b-b8e8-5c1a-b0b4-89cef08337b9;Kombinatorika ir tikimybių teorija; Pasirenkamasis;5;MIF
-11411310-68d4-5072-a5ad-4cd90ea68103;Kompiuterinė grafika; Pasirenkamasis;5;MIF
-9c539afc-4932-5497-9fd1-81862b154d05;Kompiuterinė technika; Pasirenkamasis;5;MIF
-3422699d-8af2-5e03-80ca-60ab59799b9e;Kompiuterinės grafikos algoritmai ir technologijos; Pasirenkamasis;5;MIF
-13a3ef2c-a99f-5329-acce-8de395a75302;Kompiuteriniai tinklai; Privalomasis;5;MIF
-03dae33e-fc9d-5852-8b45-2d3eba360523;Kompiuterinis kreivių ir paviršių modeliavimas; Pasirenkamasis;5;MIF
-0ace3da8-7b86-5955-9f5a-7351c35f53c6;Kompiuterinis mokymo projektavimas; Privalomasis;5;MIF
-c6d64967-2458-58dd-9513-4e4031e39c3d;Kompiuterinių žaidimų algoritmai; Pasirenkamasis;5;MIF
-c2221a76-2961-5ef7-bfa6-abc503498409;Kompiuterinių žaidimų projektavimas ir kūrimas; Pasirenkamasis;5;MIF
-75f8d852-a864-5b7a-91f8-f70b7526fa99;Kompiuterių architektūra; Privalomasis;5;MIF
-ecaee610-794f-5a9d-bb65-b73c91c91bc2;Kompiuterių architektūra; Pasirenkamasis;5;MIF
-d1363f59-877b-5f65-b68a-2ec90483ef8c;Kompiuterių tinklai; Privalomasis;5;MIF
-6114f992-c855-55bb-a373-831a5732a57e;Kompiuterių tinklai; Pasirenkamasis;5;MIF
-c5954e3b-2f39-50f4-a464-f16eb91a1ffb;Kompiuterių tinklai II; Pasirenkamasis;5;MIF
-b9627b13-99f3-555a-b540-6922e1c693aa;Kompiuterių tinklai ir našieji skaičiavimai; Privalomasis;5;MIF
-df7e7eaa-1174-5cd8-a36c-7d5047d2100e;Kompiuterių tinklai profesionalams I; Pasirenkamasis;5;MIF
-bb547344-9fb7-5bc3-acd7-d65f674fd433;Kompiuterių tinklai profesionalams I. Maršrutizavimas; Pasirenkamasis;5;MIF
-b7479c9d-79f3-5e8e-bb7b-049e1f8fb62b;Kompiuterių tinklai profesionalams II; Pasirenkamasis;5;MIF
-05545516-8803-5896-abc8-26188e8392a0;Kompleksinė analizė; Pasirenkamasis;5;MIF
-6397acd6-63c4-5670-8908-24141378f118;Kompleksinio kintamojo funkcijų teorija; Privalomasis;5;MIF
-08815fd2-717e-512c-aae8-410276aa2f13;Kompleksinio kintamojo funkcijų teorija; Pasirenkamasis;5;MIF
-85b35e39-bf13-5105-827d-2091e088b7c4;Kompleksinio kintamojo funkcijų teorijos papildomi skyriai; Pasirenkamasis;5;MIF
-4c2e737c-8969-5659-bf45-e39bee4e9592;Komunikacijos ir informaciniai įgūdžiai; Privalomasis;5;MIF
-143b7909-df26-5a2d-bac6-9dc0610ed6aa;Kriptografija ir informacijos sauga; Privalomasis;5;MIF
-f408424e-4a73-565d-ac53-f7c0efb0cd7f;Kriptografija ir informacijos sauga; Pasirenkamasis;5;MIF
-9afeb228-a495-5535-b63b-6732b8d6e8a0;Kriptografijos metodai; Privalomasis;5;MIF
-3f19036a-652f-5654-ac1e-f9f7e45d8510;Kriptografijos metodai; Pasirenkamasis;5;MIF
-c2854176-2b85-5301-8129-e2d4118544af;Kriptografiniai protokolai; Pasirenkamasis;5;MIF
-acd82eb9-77b9-5993-aab0-411fd385f819;Kriptologija; Pasirenkamasis;5;MIF
-f2f5ab8e-cb8c-5c75-b61f-842eb8a77220;Kursinio darbo projektas; Privalomasis;5;MIF
-c8623ec6-664d-5365-8b7d-fc260ceb37b0;Kursinis darbas; Privalomasis;5;MIF
-f6424809-e41e-526b-84f2-e36f723f9de7;Kursinis darbas (IV semestro projektinis darbas); Pasirenkamasis;5;MIF
-8d06e50c-0643-51f6-9067-780227a0a6b5;Kursinis darbas (V semestro projektinis darbas); Pasirenkamasis;5;MIF
-548ada89-20fc-5ab4-81e3-03d91e104a3b;Kursinis darbas (VI semestro projektinis darbas); Pasirenkamasis;5;MIF
-11bba2b3-5f08-5d74-bb95-1d47d8492eca;Laikinės sekos; Privalomasis;5;MIF
-a02e63d0-4343-5181-b54b-a1974a8b411d;Laiko eilučių analizė; Privalomasis;5;MIF
-e72bdcdd-b34a-5650-a91e-ba9c3da011f2;Laiko eilučių analizė; Pasirenkamasis;5;MIF
-769fe589-a04b-5746-8653-5fbf90337475;Laiko eilutės; Privalomasis;5;MIF
-ddc41f63-6a52-589b-a895-3fb9705518d8;Laiko eilutės; Pasirenkamasis;5;MIF
-6cf95f1c-8b82-5e5a-86db-718267f858f0;Laisvasis dalykas; Laisvasis;5;MIF
-08db7730-b1ac-5b8f-8d0d-b3c4d9f7ab17;Ląstelės biologija; Privalomasis;5;MIF
-2ca316c2-d374-50e9-b0d8-8ada76569770;Lygiagretieji skaičiavimai; Privalomasis;5;MIF
-1d40f2a3-abd9-56e4-9997-80d382bb72ce;Lygiagretieji skaičiavimai; Pasirenkamasis;5;MIF
-f2ef8953-db3c-5e81-9b38-a12c3ef2c173;Lygiagretūs ir išskirstyti skaičiavimai; Privalomasis;5;MIF
-763c5df4-4b96-581c-a62b-188f6e91907c;Lygiagretūs ir išskirstyti skaičiavimai; Pasirenkamasis;5;MIF
-8ff3e6c0-1daa-5031-a6e8-eaec691564b8;Lygiagretusis programavimas; Pasirenkamasis;5;MIF
+e9271a2a-1ece-53f1-8ba3-36d9ca983082;CASE metodas; Optional;5;MIF
+2c147efc-2f8b-534c-8cd7-c0711dc6618f;Cenzūruotų imčių analizė; Compulsory;5;MIF
+96f78049-3c9f-5243-937a-5472b49c4736;Cenzūruotų imčių analizė; Optional;5;MIF
+24baf076-e89b-59d4-8d41-9eaa361f3921;Chaoso teorija ir fraktalai; Optional;5;MIF
+049c82f0-aa55-58cd-bea5-e489ce1bfc94;Dalinių išvestinių diferencialinės lygtys; Compulsory;5;MIF
+6dc1f272-2969-5d5f-84b5-8f63fa360e62;Dalinių išvestinių diferencialinės lygtys; Optional;5;MIF
+91563c24-6a15-5a0c-aff2-ea4a1571fe29;Daugiamačių duomenų vizualizacija; Optional;5;MIF
+7ae2f896-4401-57af-8fc7-77abc7a07359;Daugiamatė statistika; Compulsory;5;MIF
+564eca7b-1fa5-5754-ab81-db9ed1248ae1;Daugiamatė statistika; Optional;5;MIF
+36315a1a-136d-54f5-bcd9-5f7eb9f14c06;Daugiamatės duomenų struktūros; Optional;5;MIF
+50ab36ef-24eb-5392-aa4d-fee3996afd32;Daugiamatės laiko eilutės ir finansų ekonometrija; Compulsory;5;MIF
+7dd28397-58df-5eb4-90e3-2befb7c76e16;Daugiaparametrinė statistika; Compulsory;5;MIF
+773c56d5-2de4-58ab-9da9-e40397f9f7a0;Demografinė ekonomika; Optional;5;MIF
+bd0b5628-08e1-5bb6-b6ae-1ec9a63d55f1;Deterministiniai matematiniai modeliai; Optional;5;MIF
+31f4674e-cfc3-5754-a948-c6d32efccc49;Didžiųjų duomenų analitika; Optional;5;MIF
+e12155a0-df55-5e96-ae9c-5acec9702f4f;Didžiųjų duomenų analizė; Compulsory;5;MIF
+09fe7b1d-6471-593b-8bbe-7c41dd128939;Diferencialinės ir integralinės lygtys; Compulsory;5;MIF
+eb87a363-892d-5402-bd4f-67a15b72999b;Diferencialinės lygtys; Compulsory;5;MIF
+4a624d97-d10a-5041-a12f-89f9b3b54da9;Diferencialinės lygtys; Optional;5;MIF
+7c17df47-2a31-5b59-95d0-b901130a8667;Diferencialinės lygtys gyvybės moksluose; Optional;5;MIF
+c3fe241f-0119-5f3e-9946-721417b9d753;Diferencialinės lygtys I/II d.; Compulsory;5;MIF
+d36493cb-8a19-55c1-b84a-a296c9a17886;Diferencialinės lygtys I/II d.; Optional;5;MIF
+405e366a-a533-51bb-851e-95b8465e30ca;Diferencialinės lygtys II/II d.; Compulsory;5;MIF
+98ec7c95-8bd5-56a5-8742-8d470c703405;Diferencialinės lygtys II/II d.; Optional;5;MIF
+636d0411-d458-5c37-9e5f-4951e898d8e7;Diferencialinių lygčių asimptotiniai metodai; Optional;5;MIF
+df26c1f5-b5f8-5617-b871-edec1f61aebf;Diferencialinių lygčių kraštinių uždavinių asimptotiniai metodai; Optional;5;MIF
+8ddb1a81-de14-55f4-9a6f-81507c5fd3ab;Diferencialinių lygčių skaitiniai sprendimo metodai; Optional;5;MIF
+38462ee5-76b4-59b6-912c-ecba49c2a6a1;Dinaminės sistemos; Optional;5;MIF
+a6c06ad6-847a-5e53-bdde-d1be3a9e251c;Dinaminiai išgyvenamumo teorijos aspektai; Optional;5;MIF
+9d0900f3-2926-598e-90d0-87fb08004e0d;Dirbtiniai neuroniniai tinklai; Compulsory;5;MIF
+13c59994-3500-5f2e-8472-8673627a25ef;Dirbtinio intelekto pagrindai; Optional;5;MIF
+9ea9e790-443e-592a-afd4-6ffee2a7c912;Dirbtinis intelektas; Compulsory;5;MIF
+c18d642d-fd96-5944-b367-bc2cf18d9799;Dirbtinis intelektas; Optional;5;MIF
+af8d7b15-ab0a-5bc2-92ba-0a44a4710861;Diskrečioji matematika; Compulsory;5;MIF
+d556a2cd-e971-53bb-b705-0cbdddbe46be;Diskrečioji matematika; Optional;5;MIF
+485946d9-5db7-5436-8281-9a0de58df222;Diskrečioji matematika ir algoritmai; Compulsory;5;MIF
+bfb09496-e7ed-5377-9109-d25b2a0256cf;Diskrečioji matematika ir skaičiavimo modeliai; Compulsory;5;MIF
+e1d7c317-8d4f-55a5-a93a-ce251ad8e60c;Diskrečiosios matematikos pagrindai; Compulsory;5;MIF
+843e3804-3f1c-5dd7-b862-b75fbc04ffc6;Diskrečiosios matematikos pagrindai; Optional;5;MIF
+c7065ff3-e584-5ac7-b1d9-fb1f80518e96;Diskrečiosios struktūros; Compulsory;5;MIF
+9d700ee1-cd4d-5860-88fc-267d85b5b233;Diskretaus laiko finansų modeliai; Compulsory;5;MIF
+515e92d5-f48e-5539-8f35-8573691540cd;Diskretaus pasirinkimo modeliai; Compulsory;5;MIF
+910b73d7-0a12-5d77-87d9-8afe3a6d6a14;Diskretus optimizavimas; Compulsory;5;MIF
+56ff0178-257e-5c57-ab7e-9ff68f992b1f;Dokumentų valdymo sistemos; Optional;5;MIF
+891b3d9b-76ba-514a-8387-2d069b6ff6fc;Draudimo teisė; Compulsory;5;MIF
+37681bc3-5f60-5f9c-b55f-05aa76b3d1d9;Draudos tikimybiniai rizikos modeliai; Optional;5;MIF
+8ab9cf69-213d-5773-bc40-cad20b31ffc5;Duomenų analizė; Compulsory;5;MIF
+1b4e7e05-f6b2-55a2-9bab-e7becdb740df;Duomenų analizė; Optional;5;MIF
+5649246b-c39d-578d-aea4-ac02be2caf84;Duomenų bazių projektavimas; Optional;5;MIF
+fe35cbe8-8f51-5126-acc9-eab93d00ea81;Duomenų bazių užklausų kalbos; Optional;5;MIF
+b0960e26-a582-5477-9dce-bd71f0fcc802;Duomenų bazių valdymo sistemos; Compulsory;5;MIF
+16468326-7f4e-5930-8f16-df9db956263c;Duomenų bazių valdymo sistemos; Optional;5;MIF
+a15d90d4-3abf-5140-8b3d-10da5338f38f;Duomenų bazių valdymo sistemų papildomi skyriai; Optional;5;MIF
+e46631ad-294b-5008-8a4b-260a31911b3a;Duomenų gavyba; Compulsory;5;MIF
+5a810ef9-ab5b-5291-a8d7-5f93d6a5b6f0;Duomenų saugyklų technologijos; Optional;5;MIF
+4ebf13ad-2074-5508-91ab-b2fdcb529f27;Duomenų struktūros; Compulsory;5;MIF
+a4452ffc-0444-5dbc-ac8d-f7bc22f488ba;Duomenų struktūros ir algoritmai; Compulsory;5;MIF
+bdecee17-f28e-5327-b6ab-ffb7df8ce9cc;Duomenų tyrimas; Compulsory;5;MIF
+74465a69-7863-5514-b5b9-6ad48839483d;Duomenų tvarkyba ir transformavimas R aplinkoje; Optional;5;MIF
+9c39c58f-998b-584b-82e3-9fdd039b95db;Duomenų vizualizavimas; Compulsory;5;MIF
+5a26afda-0796-546f-85a6-369500ccbdb8;Duomenų vizualizavimas; Optional;5;MIF
+58466d83-137a-5fc8-87ae-a8ad200cba45;Eilių teorija; Optional;5;MIF
+7b025da6-ad2a-5632-b73b-a5e1421e1b28;Ekonometrija; Compulsory;5;MIF
+34a78f39-d0d9-51e9-bcf7-2d7b71d9bb90;Ekonometrija I/II d.; Compulsory;5;MIF
+fa90b476-5e8b-5194-9e30-0eb24d86e78b;Ekonometrija II/II d.; Compulsory;5;MIF
+f1727bea-c537-530b-994c-138cf5fa4c02;Ekonometrinė rinkos struktūrų analizė; Compulsory;5;MIF
+6ad44972-270b-576d-8e41-b57ead830a4b;Ekonometrinė rinkos struktūrų analizė; Optional;5;MIF
+41ad415a-ce71-5105-8803-1dcd365ddeb6;Ekonometrinis projektas-kursinis darbas; Compulsory;5;MIF
+e553ab4e-be4d-5a51-bd75-826f4deb2998;Ekonomikos pradmenys; Compulsory;5;MIF
+967a0345-f7a2-5645-9cd8-85e72ec1811c;Ekonomikos teorija (mikroekonomika); Compulsory;5;MIF
+025523e3-0a07-5ec6-956d-94b21403502f;Ekonomikos teorija I/II d.; Compulsory;5;MIF
+e95026a6-cd78-5802-aeb2-b47086905127;Ekonomikos teorija II/II d.; Compulsory;5;MIF
+d790a0de-f8c9-53ee-9a0f-4d2c5ffe65a7;Ekonominių duomenų šaltiniai ir jų apdorojimas; Optional;5;MIF
+edc797c2-71a2-5be1-9d7f-09b8bd961e53;Eksperimentinė ekonomika; Compulsory;5;MIF
+33c4f371-dad6-575e-a68f-cf17d4f6d25c;Eksperimento planavimas; Optional;5;MIF
+bbd199f2-41b7-53a4-af0d-c510ed31a652;Elektronikos fizikiniai pagrindai; Optional;5;MIF
+62d02273-2b65-53a2-9e85-ba409ca13f1e;Elektroninės komercijos technologijų pagrindai; Optional;5;MIF
+dbd77dd5-e1b5-5c9d-b0fb-c884737feed2;Elektroniniai duomenų tinklai ir duomenų vizualizacija; Compulsory;5;MIF
+4da842c1-63ab-5187-b6a3-8f3e2f4538fa;Elektroninio parašo infrastruktūra ir elektroninė komercija; Optional;5;MIF
+94649e8f-136d-5ea1-9f02-69e16e4c8c35;Elektroninio parašo infrastruktūra ir elektroniniai dokumentai; Optional;5;MIF
+66cbb36d-76f0-5c3d-9b85-2cbfa1eb4023;Elgsenos ekonomika; Compulsory;5;MIF
+462c3410-2d29-58dd-8113-7109e84ac75b;Elgsenos ekonomika; Optional;5;MIF
+a2d06b94-4f21-50f5-979c-a6c90b9616f9;Empirinių procesų teorijos įvadas; Optional;5;MIF
+a6f348c1-bcde-5990-9619-ca3c4dbadd26;Erdvinės duomenų bazės; Compulsory;5;MIF
+1224f42a-8d5c-5855-94f5-111b2a0c6726;Erdvinės duomenų bazės; Optional;5;MIF
+63ad73af-d773-5e47-b376-a5d32f82a91b;Euristiniai algoritmai NP-pilniems uždaviniams; Optional;5;MIF
+b0de6536-9cd8-564f-816e-95c2e646805e;Evoliucinių diferencialinių lygčių skaitiniai sprendimo metodai; Optional;5;MIF
+8892b311-421b-5452-9293-7adf98727537;Filosofijos įvadas; Compulsory;5;MIF
+26922aa0-d41b-57c9-895b-a510436e4a5f;Finansinė analizė; Optional;5;MIF
+cf02e8ef-7bb6-5768-9a78-5e14c76a36aa;Finansiniai burbulai ir ekonominės krizės; Optional;5;MIF
+c8bd94f8-7b79-5d2d-a7d1-2a4c5789249e;Finansiniai išvestiniai instrumentai; Optional;5;MIF
+452de5bc-79d9-5f7b-af6f-1d822d612f0d;Finansiniai skaičiavimai; Compulsory;5;MIF
+d5af72ae-4a11-5d2e-b255-2458d5d4dd9d;Finansiniai skaičiavimai; Optional;5;MIF
+59390b80-ee89-58c9-bdea-58c8327bf98d;Finansinis intelektas; Optional;5;MIF
+3f09bfb2-12da-5bd3-bc9e-a0a95dbc3f79;Finansinių rizikų valdymas; Compulsory;5;MIF
+16e0dddd-176d-5dd4-9338-78aa4315d5fa;Finansų ekonometrija; Compulsory;5;MIF
+bca11d46-41cc-5c4c-9bd9-e78459ddf2de;Finansų ekonometrijos modeliai; Compulsory;5;MIF
+0ba47b55-0b9a-599a-b066-d5792a55d19f;Finansų ekonomika; Compulsory;5;MIF
+9e54c82a-d47a-5668-ba8a-983c2a0c518a;Finansų ekonomika; Optional;5;MIF
+e49bdcdb-7551-5d08-b10f-e6d63a6d37d0;Finansų ekonomikos modeliai; Optional;5;MIF
+c80a2cc3-4d37-5434-9853-54c6f8fb2e75;Finansų matematika; Compulsory;5;MIF
+15585465-7e9a-57ad-b8e8-10cbf7a9d4f9;Finansų matematika; Optional;5;MIF
+83e05e1a-20e8-5ba6-8159-34de9517ed6f;Finansų rinkų matematika; Optional;5;MIF
+627f201a-0630-540b-8b32-24501c3529e0;Fizika; Compulsory;5;MIF
+8d0e4228-62f1-5b2c-a05b-1f9e80552339;Fizika; Optional;5;MIF
+c2f2a5a1-6c17-5479-b22f-688466abfade;Fizika informatikams; Optional;5;MIF
+0252843a-9963-5144-b419-9a72a5d1eaf9;Fizikinė chemija; Compulsory;5;MIF
+ae5ce52f-8b09-51f7-8693-8e5736802501;Funkcijų erdvės; Compulsory;5;MIF
+ea2351c4-b5e8-5b6c-a86a-0f6a73da024f;Funkcijų erdvės; Optional;5;MIF
+70cb244c-5264-526a-8ec9-92e04f950cd4;Funkcinė analizė; Compulsory;5;MIF
+76ab4e92-a2a7-5547-8423-7b074bf828e7;Funkcinis programavimas; Compulsory;5;MIF
+b298cb76-fa2e-583d-9bc0-47ca98191497;Funkcinis programavimas; Optional;5;MIF
+6e07162c-4801-551d-a393-c492ca040cee;Funkcinių duomenų analizė; Compulsory;5;MIF
+b74c4274-c379-5d54-a1eb-16f1ff8b5d29;Funkcinių duomenų statistika; Optional;5;MIF
+ea2cbeba-a6ae-5e59-98d1-426bd6948bac;Gamtos ir socialinių reiškinių modeliavimas; Optional;5;MIF
+dbf67398-4baa-5c01-b979-25370e312429;Genetika; Compulsory;5;MIF
+4b6a8295-9131-577e-b595-4622c95a24a2;Geografinės informacinės sistemos; Optional;5;MIF
+75a84e45-ade7-51e7-8c6d-c74ab008587f;Geometrija; Compulsory;5;MIF
+60be6371-486a-5b13-879c-39ec24a4dc65;Geometrija ir vizualizavimas; Compulsory;5;MIF
+33ffba45-7fa9-5c6e-8afa-054110bb2756;Geometrijos aksiominiai pagrindai; Compulsory;5;MIF
+07cc1ca7-d961-5e77-b5b6-e770a48014e8;Geometrijos didaktika; Compulsory;5;MIF
+cb961ffb-f649-508f-9476-2062487bac5c;Giliojo mokymosi metodai; Optional;5;MIF
+7daadb63-6ba9-54c0-b8a2-712c5ddaf84d;Gyvybės draudimas. Sveikatos draudimas; Compulsory;5;MIF
+84177809-ae29-5682-a82b-545a0a2d16a7;Gyvybės ir sveikatos draudimo modeliai; Optional;5;MIF
+ef0fff3f-e489-5f11-b54b-fdf3abc6eb60;Grafai ir algoritmai; Compulsory;5;MIF
+d221825f-26e2-5a65-a744-eacb2ea92037;Grafai ir algoritmai; Optional;5;MIF
+e9bd8f9e-2718-55ff-97ab-e358c807ed51;Grafika ir vizualizacijos metodai; Optional;5;MIF
+6de2a550-b23b-583e-b04e-f7512d046d5b;Grafų teorija; Compulsory;5;MIF
+f44b229a-4da0-5502-aa05-0caf89debcb5;Grafų teorija; Optional;5;MIF
+17c25ab4-2f43-5a01-86e8-c0d4a834f3e9;Grafų teorijos algoritmai; Optional;5;MIF
+44006e36-1769-57b2-a441-f659ed657eb0;Grid skaičiavimų taikymai; Optional;5;MIF
+c8a2b4ea-3755-5d66-abfc-0d5b6022d9b9;Harmoninė analizė; Optional;5;MIF
+c06e7a86-f758-50fd-ab53-d067951e596b;Imčių metodai; Compulsory;5;MIF
+58adb900-289e-56dc-9664-dc8ad878e26a;Imčių metodai; Optional;5;MIF
+c4b83b4d-496d-5b92-94d8-8385e7045108;Imitaciniai metodai ekonometrijoje; Optional;5;MIF
+ef690b5b-1645-5945-8952-ff3a9798a039;Įmonių finansai; Optional;5;MIF
+ab754f91-5162-5fee-aa90-77396c296987;Įmonių informacinių technologijų valdymas; Optional;5;MIF
+2a285fbd-0f03-549a-9fc9-9ae4567ecd91;Informacija ir kodavimas; Compulsory;5;MIF
+deb1850f-fbc2-5a92-b54b-5d54bcfad550;Informacijos apdorojimas kompiuteriu; Optional;5;MIF
+55560166-6acc-58a3-a6b2-64af0952bed2;Informacijos saugos valdymas; Compulsory;5;MIF
+3e076e2c-b95d-5aa1-b65e-fc0276e14bae;Informacijos saugos valdymas; Optional;5;MIF
+ba340079-ecbd-57ad-b044-bfbb66876548;Informacijos saugumas; Optional;5;MIF
+d2a54a6d-5149-56ea-90f0-11cb4698708c;Informacijos teorija; Compulsory;5;MIF
+7221b075-2f68-5717-b104-9ae8d877deda;Informacijos teorija; Optional;5;MIF
+56bb2b27-dc3c-5547-a44f-b3d4aa9e300b;Informacijos teorija ir duomenų struktūra; Optional;5;MIF
+53ccd38d-88d2-5507-8666-2a70233f2ff3;Informacinės ir grupinio darbo sistemos; Compulsory;5;MIF
+c9d44462-19cc-5868-95d7-057e119a543c;Informacinės mokymo technologijos; Compulsory;5;MIF
+7bdf782f-8447-5e7d-8514-74ed4b02c5f3;Informacinės sistemos; Optional;5;MIF
+df2d10e4-d42b-5468-b40d-bd7daa1572c4;Informacinių sistemų auditas; Optional;5;MIF
+7e0ed595-53c2-509c-9e07-7f5119c625ac;Informacinių sistemų kūrimo projektų valdymo metodikos; Compulsory;5;MIF
+cd7dfd30-665a-5f9c-8a88-47afaf3d0e4d;Informacinių technologijų veiklos valdymas organizacijoje; Optional;5;MIF
+0deadcbd-278d-5085-a5ae-6b5486b0dabd;Informatika; Compulsory;5;MIF
+38f8d981-35f4-5389-b09e-6059a3a7ed83;Informatika I/II d.; Compulsory;5;MIF
+53a1c16b-5d82-5ffb-884e-b9681130a6a8;Informatika II/II d.; Compulsory;5;MIF
+001a511c-4885-5e8e-828b-55e68bc4a711;Informatikos didaktika; Compulsory;5;MIF
+a2d25be6-f25d-5d3a-a58c-4bad56469719;Informatikos pagrindai; Compulsory;5;MIF
+5117fcca-263a-5b01-9137-8eb452a53dc2;Informatikos teisė; Compulsory;5;MIF
+bbe9b1da-2a6a-570e-b81d-eb4b80b5ec0c;Informatikos teisė; Optional;5;MIF
+c3716c40-1178-5cd7-b0c7-3f83e74fc043;Integralinės lygtys; Optional;5;MIF
+533db975-8f74-593f-ba34-73c28d080d1f;Intelektualios sistemos; Compulsory;5;MIF
+4cad411a-1b7a-593d-94a7-b55e7623c1a1;Intelektualios sistemos; Optional;5;MIF
+e0e50e76-cbef-5c6b-8583-18ceb3879397;Interaktyvios sistemos; Optional;5;MIF
+5fe0fc9e-19d5-5605-89e0-07b81b5e1cc3;Interneto ir multimedijos technologijos; Compulsory;5;MIF
+afc9de4a-20c5-556e-870b-6243642f80ef;Interneto technologijos; Compulsory;5;MIF
+a3bdcfde-5803-5afd-b975-dd8d34a6d69b;Interneto technologijos; Optional;5;MIF
+e168cbe6-e731-5f57-b074-8a46dd32bf2c;Investicijų planavimas; Optional;5;MIF
+9985a7d6-3753-5285-95d3-a27112a98371;Investicijų teorija; Compulsory;5;MIF
+896c852b-c72c-5d9b-90fb-a96dfb14a1f5;Išgyvenamumo analizė; Compulsory;5;MIF
+49806726-249c-5e4f-8abf-4f5cb6b64570;Išgyvenamumo demografiniai modeliai; Compulsory;5;MIF
+2cfedc74-dfe2-5071-b34c-1a639ab5afa9;Išgyvenamumo demografiniai modeliai; Optional;5;MIF
+5569b68f-4a42-5af5-a458-23ef4a5ea31c;IT ir komunikacijos įgūdžiai; Compulsory;5;MIF
+ccdef33d-1c18-53a7-b6d7-cca2e931e2e6;IT projektų valdymas; Optional;5;MIF
+359424b2-e2ac-506f-8f10-7a065a62a5a1;Įvadas į algebrinę skaičių teoriją; Optional;5;MIF
+d9e5b158-5441-5dde-b331-00022e72ce6e;Įvadas į ekonometrijos studijas; Compulsory;5;MIF
+a5355d43-0b7e-5d03-b19b-94dea1cdfe98;Įvadas į finansų ir draudimo matematiką; Compulsory;5;MIF
+a5fd814a-102f-5aa3-9c33-f652149a9b2d;Įvadas i Galua teoriją; Optional;5;MIF
+2f88aca3-f067-5d6f-97fd-a2aebce56764;Įvadas į kompiuterių architektūrą; Compulsory;5;MIF
+950135f5-fc24-5aad-aefa-71131cfbf74c;Įvadas į robotiką; Optional;5;MIF
+e372a586-7d7f-556d-93ec-74a93102310a;Įvadas į specialybę; Compulsory;5;MIF
+ccb4e31a-ac5d-5247-8999-e32c4bc558c8;Įvadas į verslo procesų vadybą; Optional;5;MIF
+8e76f2a6-6a1f-5a86-9c34-059c32f6dad3;JAVA technologijos; Compulsory;5;MIF
+6bb61a6e-b155-5951-a588-376c383fd9f2;JAVA technologijos; Optional;5;MIF
+8c08ca4e-7955-5413-bc8f-194543160d1f;Judrusis programavimas Ruby; Optional;5;MIF
+9ef25272-f367-5433-a5b8-8c0f08c6e404;Kategorinių duomenų analizė; Optional;5;MIF
+c3c2e88b-04ef-5cfb-ab3c-aa9a2b34445f;Klaidas taisantys kodai; Compulsory;5;MIF
+f6c85fdd-7d8c-5885-9d22-d8e8eefd2e69;Klaidas taisantys kodai; Optional;5;MIF
+06a215a2-3f80-5789-bf54-ea98d6cfa03c;Kodavimas ir kriptografija; Optional;5;MIF
+ec4cb5e0-4d5b-58db-934d-c4f4916712aa;Kodavimo teorija; Compulsory;5;MIF
+c2580009-0635-5c23-9a6f-76cff59d5eae;Kodavimo teorija; Optional;5;MIF
+403766ab-1bd6-5d64-93a4-50c0d5741938;Kokybės kontrolės sistemos; Compulsory;5;MIF
+1ffbafc0-33e0-510b-9933-6729069ae3ca;Kombinatorika ir grafų teorija; Compulsory;5;MIF
+f0f27ecc-1861-5f11-a272-a1bb1f5c7a50;Kombinatorika ir grafų teorija; Optional;5;MIF
+7769623b-b8e8-5c1a-b0b4-89cef08337b9;Kombinatorika ir tikimybių teorija; Optional;5;MIF
+11411310-68d4-5072-a5ad-4cd90ea68103;Kompiuterinė grafika; Optional;5;MIF
+9c539afc-4932-5497-9fd1-81862b154d05;Kompiuterinė technika; Optional;5;MIF
+3422699d-8af2-5e03-80ca-60ab59799b9e;Kompiuterinės grafikos algoritmai ir technologijos; Optional;5;MIF
+13a3ef2c-a99f-5329-acce-8de395a75302;Kompiuteriniai tinklai; Compulsory;5;MIF
+03dae33e-fc9d-5852-8b45-2d3eba360523;Kompiuterinis kreivių ir paviršių modeliavimas; Optional;5;MIF
+0ace3da8-7b86-5955-9f5a-7351c35f53c6;Kompiuterinis mokymo projektavimas; Compulsory;5;MIF
+c6d64967-2458-58dd-9513-4e4031e39c3d;Kompiuterinių žaidimų algoritmai; Optional;5;MIF
+c2221a76-2961-5ef7-bfa6-abc503498409;Kompiuterinių žaidimų projektavimas ir kūrimas; Optional;5;MIF
+75f8d852-a864-5b7a-91f8-f70b7526fa99;Kompiuterių architektūra; Compulsory;5;MIF
+ecaee610-794f-5a9d-bb65-b73c91c91bc2;Kompiuterių architektūra; Optional;5;MIF
+d1363f59-877b-5f65-b68a-2ec90483ef8c;Kompiuterių tinklai; Compulsory;5;MIF
+6114f992-c855-55bb-a373-831a5732a57e;Kompiuterių tinklai; Optional;5;MIF
+c5954e3b-2f39-50f4-a464-f16eb91a1ffb;Kompiuterių tinklai II; Optional;5;MIF
+b9627b13-99f3-555a-b540-6922e1c693aa;Kompiuterių tinklai ir našieji skaičiavimai; Compulsory;5;MIF
+df7e7eaa-1174-5cd8-a36c-7d5047d2100e;Kompiuterių tinklai profesionalams I; Optional;5;MIF
+bb547344-9fb7-5bc3-acd7-d65f674fd433;Kompiuterių tinklai profesionalams I. Maršrutizavimas; Optional;5;MIF
+b7479c9d-79f3-5e8e-bb7b-049e1f8fb62b;Kompiuterių tinklai profesionalams II; Optional;5;MIF
+05545516-8803-5896-abc8-26188e8392a0;Kompleksinė analizė; Optional;5;MIF
+6397acd6-63c4-5670-8908-24141378f118;Kompleksinio kintamojo funkcijų teorija; Compulsory;5;MIF
+08815fd2-717e-512c-aae8-410276aa2f13;Kompleksinio kintamojo funkcijų teorija; Optional;5;MIF
+85b35e39-bf13-5105-827d-2091e088b7c4;Kompleksinio kintamojo funkcijų teorijos papildomi skyriai; Optional;5;MIF
+4c2e737c-8969-5659-bf45-e39bee4e9592;Komunikacijos ir informaciniai įgūdžiai; Compulsory;5;MIF
+143b7909-df26-5a2d-bac6-9dc0610ed6aa;Kriptografija ir informacijos sauga; Compulsory;5;MIF
+f408424e-4a73-565d-ac53-f7c0efb0cd7f;Kriptografija ir informacijos sauga; Optional;5;MIF
+9afeb228-a495-5535-b63b-6732b8d6e8a0;Kriptografijos metodai; Compulsory;5;MIF
+3f19036a-652f-5654-ac1e-f9f7e45d8510;Kriptografijos metodai; Optional;5;MIF
+c2854176-2b85-5301-8129-e2d4118544af;Kriptografiniai protokolai; Optional;5;MIF
+acd82eb9-77b9-5993-aab0-411fd385f819;Kriptologija; Optional;5;MIF
+f2f5ab8e-cb8c-5c75-b61f-842eb8a77220;Kursinio darbo projektas; Compulsory;5;MIF
+c8623ec6-664d-5365-8b7d-fc260ceb37b0;Kursinis darbas; Compulsory;5;MIF
+f6424809-e41e-526b-84f2-e36f723f9de7;Kursinis darbas (IV semestro projektinis darbas); Optional;5;MIF
+8d06e50c-0643-51f6-9067-780227a0a6b5;Kursinis darbas (V semestro projektinis darbas); Optional;5;MIF
+548ada89-20fc-5ab4-81e3-03d91e104a3b;Kursinis darbas (VI semestro projektinis darbas); Optional;5;MIF
+11bba2b3-5f08-5d74-bb95-1d47d8492eca;Laikinės sekos; Compulsory;5;MIF
+a02e63d0-4343-5181-b54b-a1974a8b411d;Laiko eilučių analizė; Compulsory;5;MIF
+e72bdcdd-b34a-5650-a91e-ba9c3da011f2;Laiko eilučių analizė; Optional;5;MIF
+769fe589-a04b-5746-8653-5fbf90337475;Laiko eilutės; Compulsory;5;MIF
+ddc41f63-6a52-589b-a895-3fb9705518d8;Laiko eilutės; Optional;5;MIF
+6cf95f1c-8b82-5e5a-86db-718267f858f0;Complimentary dalykas; Complimentary;5;MIF
+08db7730-b1ac-5b8f-8d0d-b3c4d9f7ab17;Ląstelės biologija; Compulsory;5;MIF
+2ca316c2-d374-50e9-b0d8-8ada76569770;Lygiagretieji skaičiavimai; Compulsory;5;MIF
+1d40f2a3-abd9-56e4-9997-80d382bb72ce;Lygiagretieji skaičiavimai; Optional;5;MIF
+f2ef8953-db3c-5e81-9b38-a12c3ef2c173;Lygiagretūs ir išskirstyti skaičiavimai; Compulsory;5;MIF
+763c5df4-4b96-581c-a62b-188f6e91907c;Lygiagretūs ir išskirstyti skaičiavimai; Optional;5;MIF
+8ff3e6c0-1daa-5031-a6e8-eaec691564b8;Lygiagretusis programavimas; Optional;5;MIF
 54334789-01fa-554b-ac4b-c4f62e94a1a6;Loginio mąstymo ir kūrybingumo strategijos ne matematikams; BUS;5;MIF
-3d5e077c-a7de-571a-83a4-70896775ccb8;Loginis programavimas; Pasirenkamasis;5;MIF
-81cd63d5-90b7-5834-8e0d-81c4a9805153;LOGO programavimas; Pasirenkamasis;5;MIF
-1666ebb8-2f4e-50f2-a01b-aa7695ee1856;Lošimų teorija; Pasirenkamasis;5;MIF
-70f93a51-3751-55c2-a487-1db88e1262aa;Magistrinio darbo įvadas; Privalomasis;5;MIF
-3a62dbee-eaba-5d80-ae2c-36c53a77c352;Magistro baigiamasis darbas; Privalomasis;5;MIF
-72987135-c047-5649-b8da-d237fb9e685f;Magistro baigiamojo darbo rengimas I/II d.; Privalomasis;5;MIF
-6cac5dac-6d68-50e7-a153-679c1539ec08;Magistro baigiamojo darbo rengimas II/II d.; Privalomasis;5;MIF
-ce6bd485-1654-51b9-969c-88abbbf3e565;Magistro baigiamojo darbo seminaras; Privalomasis;5;MIF
-1a24a622-e1ad-5568-bd7c-e024afeb6a60;Magistro darbo tyrimo seminaras; Privalomasis;5;MIF
-f29b4436-49ce-5b2a-bc8a-98190cc5fdc2;Mainframe technologijos; Pasirenkamasis;5;MIF
-48652a01-50b9-59d7-af57-0f00d09cdc05;Makroekonometrija; Privalomasis;5;MIF
-33d1a81a-6b10-5dbc-920f-1686069f901f;Makroekonomika; Privalomasis;5;MIF
-8d52c6a6-fa70-51e9-a4b5-7bb27622fc7b;Makroekonomikos teorija; Pasirenkamasis;5;MIF
-1082b86b-856e-5c32-afd8-66ce02cd5187;Markovo grandinės; Privalomasis;5;MIF
-f9ddf706-07da-5775-86b6-e0b8b8d99e86;Masyvių duomenų ekonometrija; Pasirenkamasis;5;MIF
-327ccbcb-0362-5fdd-b65b-b7721019fc8d;Matematika informacinėms sistemoms; Privalomasis;5;MIF
-87575bb2-d188-5e7e-bb28-3567205c65e8;Matematika informatikams; Privalomasis;5;MIF
-43f39bcb-2a2d-5d38-81a7-ae2703b7e9a2;Matematika informatikams I/III d.; Privalomasis;5;MIF
-8abdab35-54c1-5bbe-9334-7cda5e36be6a;Matematika informatikams II/III d.; Privalomasis;5;MIF
-ef42c973-864b-53f8-b008-9094e9eec8d7;Matematika informatikams III/III d.; Privalomasis;5;MIF
-a90f8c12-d37e-5c45-89e1-b60ff970891d;Matematika programų sistemoms I/III d.; Privalomasis;5;MIF
-b82d2ecd-ca4b-54cc-a748-1804c4e90c49;Matematika programų sistemoms II/III d.; Privalomasis;5;MIF
-5b4f7cde-e975-52fb-95fe-096447ef05f3;Matematika programų sistemoms III/III d.; Privalomasis;5;MIF
-96ef6982-78bc-51ed-948a-9142b430ec4c;Matematikos didaktika; Privalomasis;5;MIF
+3d5e077c-a7de-571a-83a4-70896775ccb8;Loginis programavimas; Optional;5;MIF
+81cd63d5-90b7-5834-8e0d-81c4a9805153;LOGO programavimas; Optional;5;MIF
+1666ebb8-2f4e-50f2-a01b-aa7695ee1856;Lošimų teorija; Optional;5;MIF
+70f93a51-3751-55c2-a487-1db88e1262aa;Magistrinio darbo įvadas; Compulsory;5;MIF
+3a62dbee-eaba-5d80-ae2c-36c53a77c352;Magistro baigiamasis darbas; Compulsory;5;MIF
+72987135-c047-5649-b8da-d237fb9e685f;Magistro baigiamojo darbo rengimas I/II d.; Compulsory;5;MIF
+6cac5dac-6d68-50e7-a153-679c1539ec08;Magistro baigiamojo darbo rengimas II/II d.; Compulsory;5;MIF
+ce6bd485-1654-51b9-969c-88abbbf3e565;Magistro baigiamojo darbo seminaras; Compulsory;5;MIF
+1a24a622-e1ad-5568-bd7c-e024afeb6a60;Magistro darbo tyrimo seminaras; Compulsory;5;MIF
+f29b4436-49ce-5b2a-bc8a-98190cc5fdc2;Mainframe technologijos; Optional;5;MIF
+48652a01-50b9-59d7-af57-0f00d09cdc05;Makroekonometrija; Compulsory;5;MIF
+33d1a81a-6b10-5dbc-920f-1686069f901f;Makroekonomika; Compulsory;5;MIF
+8d52c6a6-fa70-51e9-a4b5-7bb27622fc7b;Makroekonomikos teorija; Optional;5;MIF
+1082b86b-856e-5c32-afd8-66ce02cd5187;Markovo grandinės; Compulsory;5;MIF
+f9ddf706-07da-5775-86b6-e0b8b8d99e86;Masyvių duomenų ekonometrija; Optional;5;MIF
+327ccbcb-0362-5fdd-b65b-b7721019fc8d;Matematika informacinėms sistemoms; Compulsory;5;MIF
+87575bb2-d188-5e7e-bb28-3567205c65e8;Matematika informatikams; Compulsory;5;MIF
+43f39bcb-2a2d-5d38-81a7-ae2703b7e9a2;Matematika informatikams I/III d.; Compulsory;5;MIF
+8abdab35-54c1-5bbe-9334-7cda5e36be6a;Matematika informatikams II/III d.; Compulsory;5;MIF
+ef42c973-864b-53f8-b008-9094e9eec8d7;Matematika informatikams III/III d.; Compulsory;5;MIF
+a90f8c12-d37e-5c45-89e1-b60ff970891d;Matematika programų sistemoms I/III d.; Compulsory;5;MIF
+b82d2ecd-ca4b-54cc-a748-1804c4e90c49;Matematika programų sistemoms II/III d.; Compulsory;5;MIF
+5b4f7cde-e975-52fb-95fe-096447ef05f3;Matematika programų sistemoms III/III d.; Compulsory;5;MIF
+96ef6982-78bc-51ed-948a-9142b430ec4c;Matematikos didaktika; Compulsory;5;MIF
 1ecee185-26b1-5f58-ba0a-6641895261ed;Matematikos ir informatikos studentams; None;5;MIF
-6a06d9e4-992d-5e15-9580-d2fe0be54b93;Matematikos istorija; Privalomasis;5;MIF
-6cf3fa6e-c934-5f64-b6d5-e7298ceede78;Matematikos istorija ir filosofija; Pasirenkamasis;5;MIF
-f03eb97a-1985-5f14-93f9-0d89aefac62c;Matematikos metodikos ir mokslinio darbo seminaras; Privalomasis;5;MIF
-9a850536-6908-5800-bbac-a112d16fecc4;Matematikos pagrindai; Privalomasis;5;MIF
-9c9f6ceb-c30f-5961-bc89-ecb134d2392c;Matematinė analizė; Privalomasis;5;MIF
-6788decb-e3ea-5d0e-975a-0ec1ca8f1c1f;Matematinė analizė; Pasirenkamasis;5;MIF
-b7df462d-603c-5e63-9ef6-bfbf9adf8ce6;Matematinė analizė I/II d.; Privalomasis;5;MIF
-b40d3ac9-9461-5bc6-b6ec-6f9bb4cfdb6d;Matematinė analizė I/III d.; Privalomasis;5;MIF
-2dcd60fb-186e-5645-b2f2-da08688c84cb;Matematinė analizė I/IV d.; Privalomasis;5;MIF
-1c6198ba-592d-5a79-a13b-61f1d9edf006;Matematinė analizė II/II d.; Privalomasis;5;MIF
-10c790cd-4384-5194-bfe7-15828f0f8555;Matematinė analizė II/III d.; Privalomasis;5;MIF
-f1cd80a6-c859-5234-9f3f-13d242c43fb1;Matematinė analizė II/IV d.; Privalomasis;5;MIF
-1980b15b-7dbd-5e30-abff-f1e1a0d6d93b;Matematinė analizė III/III d.; Privalomasis;5;MIF
-ca295f6e-59d2-5394-acf4-fb4859901a9f;Matematinė analizė III/III d.; Pasirenkamasis;5;MIF
-dbe35cf2-e014-543b-8418-d6af25639cdd;Matematinė analizė III/IV d.; Privalomasis;5;MIF
-f65b47b4-853f-5dde-8f12-1479037cc83d;Matematinė analizė IV/IV d.; Privalomasis;5;MIF
-3f2297d1-7dd5-56ad-8170-d53b908e0e41;Matematinė analizė V/V d.; Privalomasis;5;MIF
-a6a810c5-1aa4-5082-9a63-810e1c6d6d92;Matematinė ekonomika; Pasirenkamasis;5;MIF
-5dd4e128-842b-5a4b-b08a-47ffca0414e2;Matematinė logika; Privalomasis;5;MIF
-9a271b07-8e9e-52ca-ae10-c429e3209690;Matematinė Navjė-Stokso lygčių teorija; Pasirenkamasis;5;MIF
-db1c66c9-32ac-5bbf-9e91-96a01afb31a3;Matematinė statistika; Privalomasis;5;MIF
-355ea7eb-a1de-51ed-8382-474856bc7d70;Matematinė statistika; Pasirenkamasis;5;MIF
-50481e7e-b77d-535a-8bca-fbf08eb92873;Matematinė statistika I/III d.; Privalomasis;5;MIF
-ecf16a57-b165-52db-b4fd-337b64fae055;Matematinė statistika II/III d.; Privalomasis;5;MIF
-f09ded7d-8f83-5cd1-9ce7-815f584c09c7;Matematinė statistika II/IV d.; Privalomasis;5;MIF
-c07d76ca-d78b-52c3-bbac-6937ecec1fe2;Matematinė statistika III/III d.; Privalomasis;5;MIF
-1cbe4520-b21c-5423-985e-9b16d3dd898b;Matematinė statistika III/IV d.; Privalomasis;5;MIF
-e53c56c4-51f1-5286-b2bd-2b475c33ce96;Matematinė statistika IV/IV d.; Privalomasis;5;MIF
-008873af-0cbc-5a63-9c7b-3211549c7c53;Matematinės fizikos lygtys; Privalomasis;5;MIF
-749ce4f9-a9f0-5bd1-acf2-cdfbc0ba1c97;Matematiniai modeliai ir jų sprendimas skaitiniais metodais; Pasirenkamasis;5;MIF
-0aa09737-e019-5753-879c-0d846fa7b46c;Matematinio modeliavimo pagrindai; Privalomasis;5;MIF
-8912aae8-14ff-522b-94e7-6e6bc5d268db;Matematinio modeliavimo pagrindai; Pasirenkamasis;5;MIF
-9cc65839-06f9-5092-b116-e55496cdcadc;Matematinis modeliavimas; Privalomasis;5;MIF
-635b0020-24d2-5916-a96b-75b95204ac09;Matematinis modeliavimas; Pasirenkamasis;5;MIF
-f46fcd26-8c58-55a4-a2c3-f2df6b8f82a0;Matematinis modeliavimas ekologijoje; Privalomasis;5;MIF
-f55e96e8-8275-5868-9dc3-1a2b1a780e1f;Mato ir integralo teorija; Privalomasis;5;MIF
-5dd339cc-c99c-564b-bed8-02d6b756c813;Mato teorija; Pasirenkamasis;5;MIF
-63b7156c-6a89-5682-a574-1ec304bf556b;Mato teorija I/II d.; Pasirenkamasis;5;MIF
-c7432c4c-5bd4-51db-83c1-09355ae3b0de;Mato teorija II/II d.; Pasirenkamasis;5;MIF
-e19a6cb8-95a0-57c5-8f63-afaaa328f987;Mechanika; Privalomasis;5;MIF
-267640a4-526e-5467-9abb-446c47b8f8d7;Mikroekonomika; Privalomasis;5;MIF
-adf4060a-222a-527b-abe0-7501ab81389d;Mikroekonominė analizė; Privalomasis;5;MIF
-3a5c00ab-14b1-5c87-bb5d-125cd4f7bf3e;Mikroekonominė analizė; Pasirenkamasis;5;MIF
-add34c9d-71b9-5095-8c93-b02685ede58b;Modernių finansų matematika; Pasirenkamasis;5;MIF
-64df687f-2ebc-5eea-a8d3-d302817b847d;Mokslinio darbo pagrindai; Privalomasis;5;MIF
-77d0debc-a453-5b73-97e1-538b603ba700;Mokslinio tyrimo pagrindai. Matematinės fizikos modeliai; Pasirenkamasis;5;MIF
-0f08ec64-3968-5399-8f97-8fa87d297a42;Mokslinio tyrimo pagrindai. Skaičių teorijos ir tikimybių teorijos problemos; Pasirenkamasis;5;MIF
-91d93c70-144a-5e3e-bf8f-75e2dcbe996d;Mokslinis seminaras I/II d.; Pasirenkamasis;5;MIF
-c08aa8f3-0c1b-55b4-a348-8f123f7e8781;Mokslo tiriamasis darbas; Privalomasis;5;MIF
-51bc64df-bac9-55f8-98ad-c308a565dafa;Mokslo tiriamasis darbas (Mokslo tiriamojo darbo projektas); Privalomasis;5;MIF
-67d9bd88-789d-58be-af15-1178c430d307;Mokslo tiriamasis darbas I/III d.; Privalomasis;5;MIF
-1d56f5b2-3477-55d9-b035-fd759a4427f5;Mokslo tiriamasis darbas II/II d.; Privalomasis;5;MIF
-ca88bde5-18fc-51eb-9c43-d77cddfac665;Mokslo tiriamasis darbas II/III d.; Privalomasis;5;MIF
-8b03dbb0-3e3e-5c67-9fa7-4f1616b88ab2;Mokslo tiriamasis darbas III/III d.; Privalomasis;5;MIF
-a2b77747-6b17-56e5-b0b5-4eb3f7b068ff;Mokslo tiriamojo darbo projektas; Privalomasis;5;MIF
-526c44dd-189f-57d7-81d0-0f12197e3998;Molekulinė biologija; Privalomasis;5;MIF
-8b55eeca-fdf4-50c6-bba7-f04dde8a4a91;Monte Karlo metodas; Pasirenkamasis;5;MIF
+6a06d9e4-992d-5e15-9580-d2fe0be54b93;Matematikos istorija; Compulsory;5;MIF
+6cf3fa6e-c934-5f64-b6d5-e7298ceede78;Matematikos istorija ir filosofija; Optional;5;MIF
+f03eb97a-1985-5f14-93f9-0d89aefac62c;Matematikos metodikos ir mokslinio darbo seminaras; Compulsory;5;MIF
+9a850536-6908-5800-bbac-a112d16fecc4;Matematikos pagrindai; Compulsory;5;MIF
+9c9f6ceb-c30f-5961-bc89-ecb134d2392c;Matematinė analizė; Compulsory;5;MIF
+6788decb-e3ea-5d0e-975a-0ec1ca8f1c1f;Matematinė analizė; Optional;5;MIF
+b7df462d-603c-5e63-9ef6-bfbf9adf8ce6;Matematinė analizė I/II d.; Compulsory;5;MIF
+b40d3ac9-9461-5bc6-b6ec-6f9bb4cfdb6d;Matematinė analizė I/III d.; Compulsory;5;MIF
+2dcd60fb-186e-5645-b2f2-da08688c84cb;Matematinė analizė I/IV d.; Compulsory;5;MIF
+1c6198ba-592d-5a79-a13b-61f1d9edf006;Matematinė analizė II/II d.; Compulsory;5;MIF
+10c790cd-4384-5194-bfe7-15828f0f8555;Matematinė analizė II/III d.; Compulsory;5;MIF
+f1cd80a6-c859-5234-9f3f-13d242c43fb1;Matematinė analizė II/IV d.; Compulsory;5;MIF
+1980b15b-7dbd-5e30-abff-f1e1a0d6d93b;Matematinė analizė III/III d.; Compulsory;5;MIF
+ca295f6e-59d2-5394-acf4-fb4859901a9f;Matematinė analizė III/III d.; Optional;5;MIF
+dbe35cf2-e014-543b-8418-d6af25639cdd;Matematinė analizė III/IV d.; Compulsory;5;MIF
+f65b47b4-853f-5dde-8f12-1479037cc83d;Matematinė analizė IV/IV d.; Compulsory;5;MIF
+3f2297d1-7dd5-56ad-8170-d53b908e0e41;Matematinė analizė V/V d.; Compulsory;5;MIF
+a6a810c5-1aa4-5082-9a63-810e1c6d6d92;Matematinė ekonomika; Optional;5;MIF
+5dd4e128-842b-5a4b-b08a-47ffca0414e2;Matematinė logika; Compulsory;5;MIF
+9a271b07-8e9e-52ca-ae10-c429e3209690;Matematinė Navjė-Stokso lygčių teorija; Optional;5;MIF
+db1c66c9-32ac-5bbf-9e91-96a01afb31a3;Matematinė statistika; Compulsory;5;MIF
+355ea7eb-a1de-51ed-8382-474856bc7d70;Matematinė statistika; Optional;5;MIF
+50481e7e-b77d-535a-8bca-fbf08eb92873;Matematinė statistika I/III d.; Compulsory;5;MIF
+ecf16a57-b165-52db-b4fd-337b64fae055;Matematinė statistika II/III d.; Compulsory;5;MIF
+f09ded7d-8f83-5cd1-9ce7-815f584c09c7;Matematinė statistika II/IV d.; Compulsory;5;MIF
+c07d76ca-d78b-52c3-bbac-6937ecec1fe2;Matematinė statistika III/III d.; Compulsory;5;MIF
+1cbe4520-b21c-5423-985e-9b16d3dd898b;Matematinė statistika III/IV d.; Compulsory;5;MIF
+e53c56c4-51f1-5286-b2bd-2b475c33ce96;Matematinė statistika IV/IV d.; Compulsory;5;MIF
+008873af-0cbc-5a63-9c7b-3211549c7c53;Matematinės fizikos lygtys; Compulsory;5;MIF
+749ce4f9-a9f0-5bd1-acf2-cdfbc0ba1c97;Matematiniai modeliai ir jų sprendimas skaitiniais metodais; Optional;5;MIF
+0aa09737-e019-5753-879c-0d846fa7b46c;Matematinio modeliavimo pagrindai; Compulsory;5;MIF
+8912aae8-14ff-522b-94e7-6e6bc5d268db;Matematinio modeliavimo pagrindai; Optional;5;MIF
+9cc65839-06f9-5092-b116-e55496cdcadc;Matematinis modeliavimas; Compulsory;5;MIF
+635b0020-24d2-5916-a96b-75b95204ac09;Matematinis modeliavimas; Optional;5;MIF
+f46fcd26-8c58-55a4-a2c3-f2df6b8f82a0;Matematinis modeliavimas ekologijoje; Compulsory;5;MIF
+f55e96e8-8275-5868-9dc3-1a2b1a780e1f;Mato ir integralo teorija; Compulsory;5;MIF
+5dd339cc-c99c-564b-bed8-02d6b756c813;Mato teorija; Optional;5;MIF
+63b7156c-6a89-5682-a574-1ec304bf556b;Mato teorija I/II d.; Optional;5;MIF
+c7432c4c-5bd4-51db-83c1-09355ae3b0de;Mato teorija II/II d.; Optional;5;MIF
+e19a6cb8-95a0-57c5-8f63-afaaa328f987;Mechanika; Compulsory;5;MIF
+267640a4-526e-5467-9abb-446c47b8f8d7;Mikroekonomika; Compulsory;5;MIF
+adf4060a-222a-527b-abe0-7501ab81389d;Mikroekonominė analizė; Compulsory;5;MIF
+3a5c00ab-14b1-5c87-bb5d-125cd4f7bf3e;Mikroekonominė analizė; Optional;5;MIF
+add34c9d-71b9-5095-8c93-b02685ede58b;Modernių finansų matematika; Optional;5;MIF
+64df687f-2ebc-5eea-a8d3-d302817b847d;Mokslinio darbo pagrindai; Compulsory;5;MIF
+77d0debc-a453-5b73-97e1-538b603ba700;Mokslinio tyrimo pagrindai. Matematinės fizikos modeliai; Optional;5;MIF
+0f08ec64-3968-5399-8f97-8fa87d297a42;Mokslinio tyrimo pagrindai. Skaičių teorijos ir tikimybių teorijos problemos; Optional;5;MIF
+91d93c70-144a-5e3e-bf8f-75e2dcbe996d;Mokslinis seminaras I/II d.; Optional;5;MIF
+c08aa8f3-0c1b-55b4-a348-8f123f7e8781;Mokslo tiriamasis darbas; Compulsory;5;MIF
+51bc64df-bac9-55f8-98ad-c308a565dafa;Mokslo tiriamasis darbas (Mokslo tiriamojo darbo projektas); Compulsory;5;MIF
+67d9bd88-789d-58be-af15-1178c430d307;Mokslo tiriamasis darbas I/III d.; Compulsory;5;MIF
+1d56f5b2-3477-55d9-b035-fd759a4427f5;Mokslo tiriamasis darbas II/II d.; Compulsory;5;MIF
+ca88bde5-18fc-51eb-9c43-d77cddfac665;Mokslo tiriamasis darbas II/III d.; Compulsory;5;MIF
+8b03dbb0-3e3e-5c67-9fa7-4f1616b88ab2;Mokslo tiriamasis darbas III/III d.; Compulsory;5;MIF
+a2b77747-6b17-56e5-b0b5-4eb3f7b068ff;Mokslo tiriamojo darbo projektas; Compulsory;5;MIF
+526c44dd-189f-57d7-81d0-0f12197e3998;Molekulinė biologija; Compulsory;5;MIF
+8b55eeca-fdf4-50c6-bba7-f04dde8a4a91;Monte Karlo metodas; Optional;5;MIF
 d4a51522-e3e8-504d-b607-bbbacad3b4ac;Muzika ir matematika; BUS;5;MIF
-355206a8-8c34-5444-b49e-b09b580fa351;Naudotojo sąsajos kūrimas; Privalomasis;5;MIF
-859f8d95-f67d-5b5b-9f21-183f4f85b2e9;Ne gyvybės draudimas; Privalomasis;5;MIF
-2d29519d-be7c-56ee-b536-bfd1098c915d;Ne gyvybės draudimas; Pasirenkamasis;5;MIF
-15a44c41-f88c-560b-b197-40a5657c383b;Ne gyvybės draudimo modeliai; Privalomasis;5;MIF
-8aaaf8eb-2896-5c9a-8e91-21f283d35c93;Nereliacinės duomenų bazės; Pasirenkamasis;5;MIF
-15f7a039-93d2-57a5-917f-c0778fda8864;Nestandartinių matematikos uždavinių sprendimo metodika; Pasirenkamasis;5;MIF
-4a201a4e-2bd1-5924-903f-849a100f178e;Netiesinio modeliavimo metodai; Privalomasis;5;MIF
-757624a8-c781-59ab-b645-9cd3fdcd3591;Netiesinių sistemų dinamika; Pasirenkamasis;5;MIF
-fb3f495b-6019-58b4-af9d-dc71f7730a1b;Neuroinformatika; Privalomasis;5;MIF
-e401a421-02ef-5e5e-8ff7-075e0c2a1321;Objektinės duomenų bazės; Pasirenkamasis;5;MIF
-814ed328-c979-5fe8-966f-80a47716eb5a;Objektinės technologijos; Pasirenkamasis;5;MIF
-a8022838-cc5e-55d1-bf48-c9819861ba6a;Objektinis programavimas; Privalomasis;5;MIF
-4a4cdd79-f2a4-5ae1-a23f-304d902c2937;Objektinis programavimas; Pasirenkamasis;5;MIF
-ddaf315a-3d13-5895-a7ae-b2c846a1aa0a;Objektinis programavimas C++; Privalomasis;5;MIF
-21944d10-101a-5d2c-a8fc-a25d8bc3d877;Objektinis programavimas C++; Pasirenkamasis;5;MIF
-2364b273-614d-5156-b0e8-6956995dfed3;Objektinis programavimas JAVA; Privalomasis;5;MIF
-bc060ebb-b6f4-53b2-9f95-5932db4eee8f;Objektinis programavimas JAVA; Pasirenkamasis;5;MIF
-9884742f-9944-555d-9ce5-7a74201d1ceb;Objektinis programavimas su Python; Pasirenkamasis;5;MIF
-46c64ebb-d521-5684-9046-f7b4d9881463;Operacijų tyrimas; Privalomasis;5;MIF
-a08f0c71-46ea-5689-8d21-e490d12e2f5e;Operacijų tyrimas; Pasirenkamasis;5;MIF
-8db332e0-0760-5a54-acd2-a27e26aab0f9;Operacinės sistemos; Privalomasis;5;MIF
-61026b3d-6491-5bef-88ec-eb907126a85e;Operacinės sistemos; Pasirenkamasis;5;MIF
-50d88438-62d2-55ad-9cbd-a8eefa827c28;Operatorių teorijos pagrindai; Pasirenkamasis;5;MIF
-d9990ebc-b93f-5c9f-991a-e92a166d1c67;Optimizavimo algoritmai lygiagrečių skaičiavimų aplinkoje; Pasirenkamasis;5;MIF
-3fe16776-a470-54b8-ab5e-826243505304;Optimizavimo metodai; Privalomasis;5;MIF
-7b3545cb-1e76-5ca7-8533-3677738834f7;Optimizavimo metodai; Pasirenkamasis;5;MIF
-3c4acbc0-9be2-5329-98c5-7113b35298c3;Oracle PL/SQL programavimas; Pasirenkamasis;5;MIF
-3da9059c-b4ff-5f60-b1f0-d2b16e53c5b9;Paauglių ir jaunuolių psichologija; Privalomasis;5;MIF
-be6a36c5-979b-581f-9fe8-ec1a31de6051;Panelinių duomenų ekonometrija; Pasirenkamasis;5;MIF
-b650b175-72af-5584-9f89-f9c7f67d6c04;Papildomas matematikos kursas; Laisvasis;5;MIF
-b2052633-a075-52e1-a093-3f53262d455d;Papildomi funkcinės analizės skyriai; Privalomasis;5;MIF
-52d0b733-9447-5299-94c8-f2eb7fbd1bad;Papildomi kombinatorikos skyriai; Pasirenkamasis;5;MIF
-69e509cf-65a6-5869-a9c1-a28d30d8f077;Papildomi matematinės analizės skyriai; Pasirenkamasis;5;MIF
-0fe00a6f-b78b-5ae1-a812-fcd01d28ae4d;Parametrinė ir neparametrinė ekonometrija; Privalomasis;5;MIF
-7c3b9dbe-c02f-5aec-9820-f69def488e58;Parametrinė ir neparametrinė ekonometrija; Pasirenkamasis;5;MIF
-5b08cbfc-1273-5073-9266-7ad958c4fb6d;Parametrinė ir neparametrinė statistika; Privalomasis;5;MIF
-3410a42d-f95d-517c-abbe-e8e13483db5c;Parametrinė ir neparametrinė statistika; Pasirenkamasis;5;MIF
-949c7f9d-a15a-5eea-9d56-b5b683dd6a4c;Paskirstytos sistemos; Pasirenkamasis;5;MIF
-cdd52afb-ea0b-59d2-b22f-aba35f1cd0a6;Paslaugų ekonomika; Pasirenkamasis;5;MIF
-c969feb5-eac6-5975-8856-bf2933f8e605;Paslaugų vadyba; Privalomasis;5;MIF
-6a04567f-7849-52a3-a33e-44769dbab424;Patikimumo teorija; Privalomasis;5;MIF
-6efcf417-8182-5c3e-9a97-e1de3545b451;Patikimumo teorija; Pasirenkamasis;5;MIF
-7952367e-c65c-51aa-8ab5-d8c6de4e9d78;Pedagoginė ir raidos psichologija; Privalomasis;5;MIF
-1b73a7c4-cc0a-54c5-bf3b-f41e0c52e500;Pedagoginė praktika; Privalomasis;5;MIF
-2b3072fa-4986-5800-83ae-b89102fa0819;Pedagoginė praktika I/III d.; Privalomasis;5;MIF
-e6282655-4781-5bb3-af93-5779ae3f464a;Pedagoginė praktika II/III d.; Privalomasis;5;MIF
-a3da4972-2189-5958-a7b9-5db101dc6f35;Pedagoginė praktika III/III d.; Privalomasis;5;MIF
-264aa515-a33d-5497-bdd5-214988c7ae0a;Pedagoginės veiklos tyrimo metodologija; Pasirenkamasis;5;MIF
-5da810b9-bc95-570e-8f79-2cec0ade70ec;Pensijų fondai; Pasirenkamasis;5;MIF
-629c0365-a1fc-5983-9358-7e0e3b26990f;Praktinė ekonometrija I/II d.; Privalomasis;5;MIF
-da24e6f9-b744-5695-be10-80ddb5c85e06;Praktinė ekonometrija II/II d.; Privalomasis;5;MIF
-2205e720-7f8c-5907-b4b8-cdd730be7857;Praktinė ekonometrija su R ir Python; Privalomasis;5;MIF
-5a93da01-b76f-5845-b5b1-1949f7e764d3;Praktinė informatika; Privalomasis;5;MIF
-22bd2996-9b81-5008-a875-2c2b5c583cc9;Praktinė informatika I/II d.; Privalomasis;5;MIF
-4c89ed38-e148-5b5c-9c96-57d8e6c5a45d;Praktinė informatika II/II d.; Privalomasis;5;MIF
-7ceb87e4-4ae9-5a64-84ea-12f64a3f8e59;Praktiniai DBVS aspektai; Pasirenkamasis;5;MIF
-c51bbbe9-4e30-5c5d-b825-d81d34661bfe;Praktiniai investavimo pagrindai; Privalomasis;5;MIF
-942e9cc7-ac27-5f47-aa89-336f86a34cfc;Problemų sprendimu grįstas projektas; Privalomasis;5;MIF
-f8833d5e-0465-5ac7-9c0d-8d989c344fcb;Problemų sprendimu grįstas projektas; Pasirenkamasis;5;MIF
-cb3a12e0-09e2-542b-b9d7-46e74db024c8;Procedūrinis programavimas; Privalomasis;5;MIF
-1fd85cfa-eb42-5c2e-b3d5-d3b884124c71;Procesų teorija I/II d.; Privalomasis;5;MIF
-d9d6a57d-c784-583e-914d-0d435f4a99b5;Procesų teorija II/II d.; Privalomasis;5;MIF
-e6735580-f186-574d-9916-861afe3ecc8f;Profesinė praktika; Privalomasis;5;MIF
-b561f363-984d-5f68-aa1f-42663f08aa2a;Profesionalumas ir etika; Privalomasis;5;MIF
-267facf3-9ddf-59fb-8f74-e106b4c58060;Prognostinė analizė; Pasirenkamasis;5;MIF
-21d8e2bd-a628-508c-bb54-36d8b9b79d8a;"Programavimas ""Windows.NET"""; Pasirenkamasis;5;MIF
-e0c1d9e2-28b3-5a86-b6f0-4e68a42cde4d;Programavimas C; Privalomasis;5;MIF
-e8e6b74d-7aa0-5568-a899-d01d7bbbd1f1;Programavimas debesijos aplinkoje; Pasirenkamasis;5;MIF
-9ff03551-1e04-550f-ba6f-031886e0be3b;Programavimas debesų kompiuterijoje; Privalomasis;5;MIF
-93bd5dc6-6776-549e-83ca-1264dd2d14d1;Programavimas debesų kompiuterijoje; Pasirenkamasis;5;MIF
-97228641-ee09-597b-bd60-742cd7595f1a;Programavimas MATLAB; Pasirenkamasis;5;MIF
-24d832db-41dc-5458-8489-b1e5af87d845;Programavimas OS UNIX; Pasirenkamasis;5;MIF
-2e45a237-a66b-5f74-97fe-9fc6b44abd09;Programavimas PYTHON kalba; Pasirenkamasis;5;MIF
-a3c640c1-b1dd-5d25-8392-804c9c7017d2;Programavimas Windows API; Pasirenkamasis;5;MIF
-5aa3a675-b9a2-5a75-b623-c96bc0e2e09b;Programavimo ir IT pagrindai; Privalomasis;5;MIF
-2141f4bf-a0a4-5510-8b64-794df096a0af;Programavimo ir IT pagrindai; Pasirenkamasis;5;MIF
-dfb8d4b5-7e1a-5fdf-b37e-a373e8d3dc68;Programavimo kalbos; Privalomasis;5;MIF
-3e4a1b86-62f0-5984-a6f1-21d40ad07109;Programavimo kalbos; Pasirenkamasis;5;MIF
-c2635c5f-35ed-552e-9ca5-dde591e7a4b8;Programavimo metodikos pagrindai; Privalomasis;5;MIF
-6983e2c5-5d4a-58bf-a2d5-aa7e60da6ea2;Programavimo pagrindai; Privalomasis;5;MIF
-6fb1f8c1-ed55-59f1-877b-decd039931f7;Programinės įrangos lokalizavimas; Pasirenkamasis;5;MIF
-1fc0cde7-a249-5e67-9790-a8ac7c559a8f;Programų kūrimo procesas; Privalomasis;5;MIF
-ff35c0a3-c750-5749-9030-d1b9ccd41518;Programų kūrimo proceso vertinimas ir gerinimas; Privalomasis;5;MIF
-c6aa4abb-3ffe-5c2d-8169-d5c2b6066785;Programų sistemų architektūra; Privalomasis;5;MIF
-41c1cb08-338a-5eb2-9516-0be75bcfb8d7;Programų sistemų architektūra; Pasirenkamasis;5;MIF
-fcbdc906-30b8-5523-b2aa-7fcd28bd333d;Programų sistemų architektūra ir projektavimas; Privalomasis;5;MIF
-e622cd99-c88b-5f55-954e-23e9f44a4bcd;Programų sistemų architektūra ir projektavimas; Pasirenkamasis;5;MIF
-283f34cd-deac-5889-85e8-05aad0fd6b8a;Programų sistemų inžinerija; Privalomasis;5;MIF
-1da14ac8-5ef3-5668-ac91-54463973ddb8;Programų sistemų inžinerija; Pasirenkamasis;5;MIF
-da5f61cc-62a7-566d-9f8d-7e00733019e7;Programų sistemų inžinerija I/II d.; Privalomasis;5;MIF
-099d4455-0ef5-5d9f-939a-2523d01eec84;Programų sistemų inžinerija II/II d.; Privalomasis;5;MIF
-e89f6bda-02a0-5a10-b4fd-ada6f53027cd;Programų sistemų įsigijimas ir priežiūra; Pasirenkamasis;5;MIF
-ff173495-7fdd-5ace-bd65-325b1ac1fc5f;Programų sistemų kokybė; Pasirenkamasis;5;MIF
-7bfd83da-0877-58f4-9b1c-4a7c251e3c16;Programų sistemų kūrimas; Privalomasis;5;MIF
-4fcd7a2d-edbf-5962-8f10-f802daa9881f;Programų sistemų kūrimo metodai ir įrankiai; Privalomasis;5;MIF
-7593249e-a7f3-5ba6-a397-569536491aab;Programų sistemų kūrimo metodai ir įrankiai; Pasirenkamasis;5;MIF
-5db79238-1f2c-5104-b2f5-2aa77f1adede;Programų sistemų modeliavimas ir verifikavimas; Privalomasis;5;MIF
-2e1e08e3-bd9c-5875-aed5-acf53a60049d;Programų sistemų modeliavimas ir verifikavimas; Pasirenkamasis;5;MIF
-f8240478-1721-5db7-a5b9-596ff2aa5fdf;Programų sistemų projektavimas; Privalomasis;5;MIF
-7a991d73-73d6-5fa7-b373-391bb6539e33;Programų sistemų projektų ir kokybės valdymas; Privalomasis;5;MIF
-c3508298-f92e-566e-b345-4af560377a2e;Programų sistemų statistinė analizė; Pasirenkamasis;5;MIF
-e9b90c83-a9e8-5525-b8e7-326ed7c144b0;Programų sistemų testavimas; Privalomasis;5;MIF
-2fc97a74-bd65-5ddd-980a-3d01f6026423;Programų sistemų testavimas ir konfigūracijos valdymas; Pasirenkamasis;5;MIF
-425cc3c1-d849-565b-94d3-681d0760f095;Projektinis darbas; Pasirenkamasis;5;MIF
-2691fb1f-a8d6-5614-8fd7-181795603858;Projektų vadyba; Privalomasis;5;MIF
-37a3dbda-5719-5ff8-a7eb-9ee9018e1354;Projektų valdymas; Privalomasis;5;MIF
-52caadef-76de-5526-b02b-96bc308e2c6c;Projektų valdymas; Pasirenkamasis;5;MIF
-dc4df383-9dc4-5de3-81be-6b10c1756194;Psichologijos įvadas; Privalomasis;5;MIF
-2443a71f-bd04-5d33-bbf2-b745eee76bae;Randomizuoti algoritmai; Pasirenkamasis;5;MIF
-09621bd5-bc20-522c-b553-ec6b79632e69;Realaus laiko sistemų projektavimo pagrindai; Pasirenkamasis;5;MIF
-3304b6e4-c1d2-5672-ae0f-ad9dc91d32ad;Regioninė ekonomika ir politika; Pasirenkamasis;5;MIF
-851b53c1-437f-5669-9abb-f1a2e467474e;Regresiniai modeliai; Privalomasis;5;MIF
-6e679059-e427-5cf3-99fb-7e711d79339c;Reikalavimų inžinerija; Privalomasis;5;MIF
-c650e70c-d723-5703-a6c8-8c3e5b28cd0a;Reikalavimų inžinerija; Pasirenkamasis;5;MIF
-36aeb041-7c72-518f-9eca-102a380f5efe;Reikalavimų inžinerijos pagrindai; Privalomasis;5;MIF
-068f334e-5208-5b2f-87e0-e6b03f9508f4;Rinkodara; Pasirenkamasis;5;MIF
-b760c876-3a14-55d0-b2f8-c5ef30ec4fc7;Rinktiniai algebros skyriai; Privalomasis;5;MIF
-8dc2b785-31de-54fc-802d-01eea5edfb41;Rinktiniai analizės skyriai; Privalomasis;5;MIF
-80d59c81-65d3-590e-b31c-7fec0257aa87;Rinktiniai analizės skyriai; Pasirenkamasis;5;MIF
-a37d9948-e50a-5479-a8b4-f93fe15ece20;Rinktiniai analizės skyriai I/II d.; Privalomasis;5;MIF
-969b485f-303d-58a0-8a1a-d3cd9b98e9e0;Rinktiniai analizės skyriai II/II d.; Privalomasis;5;MIF
-0530feea-5fa1-5d41-b9c3-d44159b21854;Rinktiniai diskrečių struktūrų skyriai; Privalomasis;5;MIF
-8e90492b-2393-5fa6-88a6-123fbac3e99b;Rinktiniai duomenų bazių valdymo sistemų skyriai; Pasirenkamasis;5;MIF
-44841867-0598-51cd-b82a-24e20ea32c93;Rinktiniai informacijos saugos skyriai; Privalomasis;5;MIF
-cdd669d0-5d5e-5427-8700-be4f17609afc;Rinktiniai kodavimo teorijos skyriai; Pasirenkamasis;5;MIF
-0b6c65f0-23f8-5ee7-b688-462dc86198cf;Rinktiniai skaičių teorijos skyriai; Privalomasis;5;MIF
-769f0827-64fb-5858-9f6f-f3d424347da7;Rizikos teorija; Privalomasis;5;MIF
-86d9185d-fc7e-53b5-9c71-8ca3ea4309a6;Rizikos teorija; Pasirenkamasis;5;MIF
-f1ac8b4a-2a9a-559a-9ece-b4a282ceb92c;Rizikos valdymas; Privalomasis;5;MIF
-71f1737c-6a96-5c2b-b76f-8757d42cc07c;Rizikos valdymas; Pasirenkamasis;5;MIF
-5b55a219-d60b-5cc4-9667-6dde8093957f;Saugios interneto technologijos; Privalomasis;5;MIF
-778a0a47-cb46-59b8-8863-473338556895;Saugios operacinės sistemos; Pasirenkamasis;5;MIF
-c910dbfc-2eb1-5112-8201-27531622422e;Saugus dinaminis internetas; Pasirenkamasis;5;MIF
-f0ca8d55-8969-5400-81dd-ef7e64a21df3;Saugūs tinklai; Pasirenkamasis;5;MIF
-24fb2094-98c3-51d6-85cc-349bc1856ebc;Silpnasis mato konvergavimas; Pasirenkamasis;5;MIF
-de6752f3-6441-5013-ad9e-c65e3e3c55dd;Sistemų saugumo auditas; Pasirenkamasis;5;MIF
-52977488-e8f0-5fb2-bd61-c3766fd3a092;Skaičių teorija; Privalomasis;5;MIF
-e5466482-146c-53b9-b68f-eca4c414a304;Skaičių teorija; Pasirenkamasis;5;MIF
-e81beaa0-c108-5813-bf03-4461316cbae7;Skaičiuojamosios geometrijos algoritmai; Pasirenkamasis;5;MIF
-8008f49a-95ef-5cea-90d4-b7c75994212b;Skaitiniai metodai; Privalomasis;5;MIF
-3bfa735d-8665-5d4a-9994-b4e1ce5cec10;Skaitiniai metodai; Pasirenkamasis;5;MIF
-14029658-efe1-5c44-a723-135386ba5f2e;Skaitiniai metodai I/II d.; Privalomasis;5;MIF
-01d3c90a-0108-553e-92a7-fd902a343502;Skaitiniai metodai I/II d.; Pasirenkamasis;5;MIF
-a152f960-a4b2-52d3-b3a3-8c3c47e0addc;Skaitiniai metodai II/II d.; Pasirenkamasis;5;MIF
-ff4f9a2d-8ff3-5dff-935b-6d1265fb7788;Skaitmeninis intelektas ir sprendimų priėmimas; Pasirenkamasis;5;MIF
-4c534cf2-0bd4-558d-ae44-237e62cd949e;Skaitmeninis vaizdų apdorojimas; Pasirenkamasis;5;MIF
-f74adaab-7e0f-5539-a05a-81b165230184;Sociologijos pagrindai; Privalomasis;5;MIF
-43e5a848-f263-541c-b7e6-cad9777abb5c;Specialybės anglų kalba; Privalomasis;5;MIF
-852296bb-23ef-5875-8401-cff14e20d7d5;Specialybės kalba; Privalomasis;5;MIF
-8376b39a-4c11-5210-9aad-7243654e5af6;Specialybės kalba; Pasirenkamasis;5;MIF
-7d693158-622d-5c19-843d-ced98f563b58;Stabilumo teorija; Pasirenkamasis;5;MIF
-86791661-91e5-5eea-b354-7d3566ee8bec;Statistika; Privalomasis;5;MIF
-649741ce-4e1c-5b7b-8e91-60b262399aff;Statistika I/II d.; Privalomasis;5;MIF
-5f0fc18b-f4a1-59ca-8d2e-b55e9a6d26c2;Statistika I/II d.; Pasirenkamasis;5;MIF
-f9203030-fc6b-5561-9900-01aa4b839016;Statistika II/II d.; Privalomasis;5;MIF
-a8651990-e47c-5470-bd3f-a3cbdbe4e668;Statistika švietimo tyrimuose; Pasirenkamasis;5;MIF
-8ca1ddd2-97bd-5ac7-aa91-5a3bd220a75b;Statistikos įvadas; Privalomasis;5;MIF
-e9128863-2658-59b4-ace0-d1484ffc08ed;Statistikos paketai; Privalomasis;5;MIF
-513b4d7b-1b7f-5560-ab70-404a933482ab;Statistinė duomenų analizė; Pasirenkamasis;5;MIF
-cd0593e7-3ac4-54ea-8448-b4c91d747d8e;Statistiniai duomenų analizės metodai; Privalomasis;5;MIF
-72e1003c-8f3d-5dde-b2b6-6cde76fc4a83;Statistiniai modeliai; Pasirenkamasis;5;MIF
-1ed9b5f0-cbc1-536f-97af-e5f490cf0626;Statistiniai modeliai medicinoje; Pasirenkamasis;5;MIF
-7704a62f-e862-5f90-bbb6-49abe4a1c2ea;Statistiniai mokymo algoritmai; Privalomasis;5;MIF
-a53f3406-17b8-5b30-8ab0-9cac9ba7ed52;Statistiniai programų paketai; Privalomasis;5;MIF
-a5896a37-057c-5e2b-a5fb-88165083d6b6;Statistinis modeliavimas; Pasirenkamasis;5;MIF
-08651704-6a42-5a4a-9325-0f6f3b94de13;Statistinių duomenų analizė; Privalomasis;5;MIF
-d858060b-083e-5118-8805-8af6304b8d4b;Statistinių duomenų tyryba; Privalomasis;5;MIF
-42b5a7bd-99b6-5491-b6b0-bccb0dc11a6f;Statistinių sprendimų teorija; Privalomasis;5;MIF
-8266a1ee-1972-56be-aafe-9286939ee078;Statistinių sprendimų teorija; Pasirenkamasis;5;MIF
-d43c0f0c-eb3a-597c-9c0d-829b54ad2868;Stochastika ir skaičių teorija mokyklinėje matematikoje; Pasirenkamasis;5;MIF
-d3815f49-6d61-5d04-b77b-5a2b83931a0c;Stochastinė analizė; Privalomasis;5;MIF
-f50d647e-a03c-5a91-a903-35061623be57;Stochastinė analizė; Pasirenkamasis;5;MIF
-433f3342-e101-5e1c-a401-cb37f7397f9d;Stochastinės diferencialinės lygtys; Pasirenkamasis;5;MIF
-bc42abe1-4efc-5178-9ecd-69afc2679b62;Stochastiniai finansų matematikos modeliai; Pasirenkamasis;5;MIF
-99392170-eac4-5974-b7b7-4e3b4fe1c739;Stochastiniai patikimumo modeliai; Privalomasis;5;MIF
-3f82e036-c8d4-58f3-9239-38561cbf789d;Sveikatos draudimas; Privalomasis;5;MIF
-71275124-856c-5b21-9ea7-2936e45674d4;Šiuolaikinė ekonominė mintis; Privalomasis;5;MIF
-ea50e8a9-349a-51fb-a4da-807f7d4127bd;Šiuolaikinė ekonominė mintis; Pasirenkamasis;5;MIF
-eb26a7df-d15c-51cb-aadd-3260aa872b13;Šiuolaikinė matematinė ekonomika; Pasirenkamasis;5;MIF
-e4245a96-ea70-5523-bccf-98e7653bd6c8;Taikomasis objektinis programavimas; Privalomasis;5;MIF
-0c5dc947-3898-5517-bfa4-8833151e6a9b;Taikomasis objektinis programavimas; Pasirenkamasis;5;MIF
-7abfc584-ade1-5a8d-9507-06583fe983b9;Taikomoji fizika; Privalomasis;5;MIF
-0303491b-dd2a-5b8c-8a12-5ab90672686f;Taikomoji statistika; Privalomasis;5;MIF
-f3fbe28e-1e20-5686-a900-ee5b49c61b9c;Taikomųjų programų kūrimas mobiliesiems įrenginiams; Pasirenkamasis;5;MIF
-712a4557-349c-5e67-a5f6-242c5fdc06a3;Tarptautiniai finansai; Pasirenkamasis;5;MIF
-0144633c-bbbb-5fa9-b984-722c01b31cfe;TESTAS; Laisvasis;5;MIF
-a53a3eed-5c32-52d6-9dfc-d308625cbb2d;Testų teorija statistiniuose tyrimuose; Privalomasis;5;MIF
-4cd162f8-8d3a-56f2-9806-8f7c7383e5db;Tiesinė algebra ir geometrija; Privalomasis;5;MIF
-e7baab24-2063-5310-90f4-edb69f28b108;Tikimybinė kombinatorika; Pasirenkamasis;5;MIF
-f1b399c2-f23f-557e-b0b0-8dc8bfd3d7fd;Tikimybių teorija; Privalomasis;5;MIF
-53ad3c08-3cad-58e5-80ac-eb7ed8f19286;Tikimybių teorija; Pasirenkamasis;5;MIF
-eced8290-ee9a-54cf-a71f-594ba63e6afe;Tikimybių teorija I/II d.; Privalomasis;5;MIF
-4e7614c6-8c9f-58fb-a223-0794b145a928;Tikimybių teorija II/II d.; Privalomasis;5;MIF
-5b4b7c12-f587-5657-bfa2-00df61dd4663;Tikimybių teorija ir matematinė statistika; Privalomasis;5;MIF
-57c1f6f5-fb54-5607-aacb-1288fe34247d;Tikimybių teorija ir matematinė statistika; Pasirenkamasis;5;MIF
-94fac502-8cd1-5096-8167-99cd157e8e64;Tikimybių teorija ir matematinė statistika I/II d.; Privalomasis;5;MIF
-143bc9e0-1550-5bc8-91cc-38129c7484b2;Tikimybių teorija ir matematinė statistika II/II d.; Privalomasis;5;MIF
-0f5a8c7d-02c5-595e-a29c-9631de2c8f08;Tinklų saugumas; Privalomasis;5;MIF
-7ece1864-e1b2-5600-b31d-40b643351b2f;Tinklų saugumas; Pasirenkamasis;5;MIF
-31bbc308-204f-5ef6-a71c-cc2ec27f2b30;Tiriamasis seminaras; Privalomasis;5;MIF
-9f615255-478d-5005-adbd-66146cb522d4;Transliavimo metodai; Privalomasis;5;MIF
-0438037c-1748-5368-8d40-8e4ab58fd855;Transliavimo metodai; Pasirenkamasis;5;MIF
-7a9c9c34-1859-57c1-94cf-ec04c6f59856;Ugdymo filosofija; Privalomasis;5;MIF
-7d865835-0ea5-574d-a004-5fee9d288423;UML ir MDA įvadas; Pasirenkamasis;5;MIF
-458b77fc-9906-5c88-a1c7-8d5c701659c5;UNIX operacinės sistemos; Privalomasis;5;MIF
-cae62075-031f-58b2-9e4c-9af37132d264;UNIX operacinės sistemos; Pasirenkamasis;5;MIF
-34d7d859-2647-5a19-b348-361b1b3bc516;Užsienio kalba (anglų); Privalomasis;5;MIF
-21a0beb2-aa49-5fc2-8b0e-fd585fe3a578;Užsienio kalba (anglų) I/II d.; Privalomasis;5;MIF
-ee4405ed-fa51-55d9-901c-a4afa5417d8b;Užsienio kalba (anglų) I/II d. (dalykinė); Privalomasis;5;MIF
-8e3b2a4f-460b-5621-b876-99e12cd925d1;Užsienio kalba (anglų) II/II d.; Privalomasis;5;MIF
-0362c228-ece4-5a13-a4ab-5e504a5f368c;Užsienio kalba (anglų) II/II d. (dalykinė); Privalomasis;5;MIF
-30ec0562-2b01-5ebb-9001-ceda2e795b25;Užsienio kalba (anglų) III/III d.; Privalomasis;5;MIF
-09dc5127-49fe-593a-bb8c-eecf547f7439;Užsienio kalba (lietuvių) I/II d.; Privalomasis;5;MIF
-a53667e0-176c-54fc-a10f-a0333f4ff8fe;Užsienio kalba (lietuvių) I/II d. (dalykinė); Privalomasis;5;MIF
-59a0490c-f571-5877-b8af-1efea9e99d7c;Užsienio kalba (lietuvių) II/II d.; Privalomasis;5;MIF
-a733ddc8-58ae-5f67-baf4-31b14ccc6ced;Užsienio kalba (lietuvių) II/II d. (dalykinė); Privalomasis;5;MIF
-c46d6499-8c26-5205-aef4-80701bca5a2f;Užsienio kalba (lietuvių) III/III d.; Privalomasis;5;MIF
-27ef9245-8fad-52a9-9ab9-de7520b58bd5;Užsienio kalba (prancūzų) I/II d.; Privalomasis;5;MIF
-1973cb17-9315-53d2-bbe6-698a0809a845;Užsienio kalba (prancūzų) I/II d. (dalykinė); Privalomasis;5;MIF
-62243785-b0ad-5f5b-a29b-ad41e70f1295;Užsienio kalba (prancūzų) II/II d.; Privalomasis;5;MIF
-50cbe52a-acc7-5001-92ce-37b45a44e079;Užsienio kalba (prancūzų) II/II d. (dalykinė); Privalomasis;5;MIF
-1344c5ab-f58d-5275-ba6d-9c98c979878a;Užsienio kalba (prancūzų) III/III d.; Privalomasis;5;MIF
-897416bc-089f-5e3b-a9b0-4e364e1529f4;Užsienio kalba (rusų) I/II d.; Privalomasis;5;MIF
-79f88282-587f-553a-86f7-8b98b48bd910;Užsienio kalba (rusų) I/II d. (dalykinė); Privalomasis;5;MIF
-ab8bd521-3e9d-5086-8231-691d4d8908fb;Užsienio kalba (rusų) II/II d.; Privalomasis;5;MIF
-b11e7d21-8cec-5a8b-aa47-d6f7ea0f322b;Užsienio kalba (rusų) II/II d. (dalykinė); Privalomasis;5;MIF
-7a6eed7b-5ce9-5cb5-b8ff-c6f974f1fab3;Užsienio kalba (rusų) III/III d.; Privalomasis;5;MIF
-01dab11c-428f-5900-a252-ffd069eda348;Užsienio kalba (vokiečių) I/II d.; Privalomasis;5;MIF
-2ef1f825-62a0-5758-a364-9ec8cb653f36;Užsienio kalba (vokiečių) I/II d. (dalykinė); Privalomasis;5;MIF
-feb28f5b-d768-539c-a23c-c9eeda6f0c57;Užsienio kalba (vokiečių) II/II d.; Privalomasis;5;MIF
-33269865-ec3b-5280-8a1b-126377c3ef0f;Užsienio kalba (vokiečių) II/II d. (dalykinė); Privalomasis;5;MIF
-47a31607-7719-535e-bd81-33b02a25eba8;Užsienio kalba (vokiečių) III/III d.; Privalomasis;5;MIF
-3dbc585d-8c43-5d3a-89f0-b70bc1047e15;Vadybos pagrindai; Privalomasis;5;MIF
-83014cb0-eb46-5281-8402-085475f64ef0;Vadybos pagrindai; Pasirenkamasis;5;MIF
-1f7a32f0-9594-56d7-b9bd-a2575db9e648;Vaizdų ir signalų analizė ir apdorojimas; Privalomasis;5;MIF
-1277ecf4-7aad-565e-98f4-f659d3134938;Vaizdų ir signalų analizė ir apdorojimas; Pasirenkamasis;5;MIF
-d883742b-7917-56d9-af78-717934def595;Valstybinė statistika; Privalomasis;5;MIF
-bc8f8b0f-9f06-55be-a054-87650149e5e0;Valstybinė statistika; Pasirenkamasis;5;MIF
-032a79fe-b57e-5acf-ad59-d4b500d23f80;Variaciniai metodai netiesiniams reiškiniams; Pasirenkamasis;5;MIF
-6d174dbe-3979-556b-bca1-4267a963ae82;Variacinis skaičiavimas; Pasirenkamasis;5;MIF
-e52521b3-9435-5440-9904-3a17771b6019;Variacinis skaičiavimas ir optimalus valdymas; Pasirenkamasis;5;MIF
-76f4afb3-5ece-5e34-add0-f7d48cd643dc;Verslo analitika; Pasirenkamasis;5;MIF
-057b1807-b07b-54ee-aaa2-e69a13d17c5d;Verslo pagrindai I/II d.; Privalomasis;5;MIF
-8ffea7fd-75eb-560b-8987-b65683f39084;Verslo pagrindai II/II d.; Privalomasis;5;MIF
-632ec6b8-ebaf-5d67-9829-70d4c65f67d4;Verslo procesų automatizavimas; Pasirenkamasis;5;MIF
-c676fced-07c3-542d-8c0b-1383448fb76b;Verslo procesų modeliavimas; Privalomasis;5;MIF
-b7bb3892-ecee-5f90-826e-e7a139e2c64f;Viešieji finansai; Pasirenkamasis;5;MIF
-39a5e11d-ec8b-5a04-8014-c57381eb3674;Viešojo sektoriaus ekonomika; Pasirenkamasis;5;MIF
+355206a8-8c34-5444-b49e-b09b580fa351;Naudotojo sąsajos kūrimas; Compulsory;5;MIF
+859f8d95-f67d-5b5b-9f21-183f4f85b2e9;Ne gyvybės draudimas; Compulsory;5;MIF
+2d29519d-be7c-56ee-b536-bfd1098c915d;Ne gyvybės draudimas; Optional;5;MIF
+15a44c41-f88c-560b-b197-40a5657c383b;Ne gyvybės draudimo modeliai; Compulsory;5;MIF
+8aaaf8eb-2896-5c9a-8e91-21f283d35c93;Nereliacinės duomenų bazės; Optional;5;MIF
+15f7a039-93d2-57a5-917f-c0778fda8864;Nestandartinių matematikos uždavinių sprendimo metodika; Optional;5;MIF
+4a201a4e-2bd1-5924-903f-849a100f178e;Netiesinio modeliavimo metodai; Compulsory;5;MIF
+757624a8-c781-59ab-b645-9cd3fdcd3591;Netiesinių sistemų dinamika; Optional;5;MIF
+fb3f495b-6019-58b4-af9d-dc71f7730a1b;Neuroinformatika; Compulsory;5;MIF
+e401a421-02ef-5e5e-8ff7-075e0c2a1321;Objektinės duomenų bazės; Optional;5;MIF
+814ed328-c979-5fe8-966f-80a47716eb5a;Objektinės technologijos; Optional;5;MIF
+a8022838-cc5e-55d1-bf48-c9819861ba6a;Objektinis programavimas; Compulsory;5;MIF
+4a4cdd79-f2a4-5ae1-a23f-304d902c2937;Objektinis programavimas; Optional;5;MIF
+ddaf315a-3d13-5895-a7ae-b2c846a1aa0a;Objektinis programavimas C++; Compulsory;5;MIF
+21944d10-101a-5d2c-a8fc-a25d8bc3d877;Objektinis programavimas C++; Optional;5;MIF
+2364b273-614d-5156-b0e8-6956995dfed3;Objektinis programavimas JAVA; Compulsory;5;MIF
+bc060ebb-b6f4-53b2-9f95-5932db4eee8f;Objektinis programavimas JAVA; Optional;5;MIF
+9884742f-9944-555d-9ce5-7a74201d1ceb;Objektinis programavimas su Python; Optional;5;MIF
+46c64ebb-d521-5684-9046-f7b4d9881463;Operacijų tyrimas; Compulsory;5;MIF
+a08f0c71-46ea-5689-8d21-e490d12e2f5e;Operacijų tyrimas; Optional;5;MIF
+8db332e0-0760-5a54-acd2-a27e26aab0f9;Operacinės sistemos; Compulsory;5;MIF
+61026b3d-6491-5bef-88ec-eb907126a85e;Operacinės sistemos; Optional;5;MIF
+50d88438-62d2-55ad-9cbd-a8eefa827c28;Operatorių teorijos pagrindai; Optional;5;MIF
+d9990ebc-b93f-5c9f-991a-e92a166d1c67;Optimizavimo algoritmai lygiagrečių skaičiavimų aplinkoje; Optional;5;MIF
+3fe16776-a470-54b8-ab5e-826243505304;Optimizavimo metodai; Compulsory;5;MIF
+7b3545cb-1e76-5ca7-8533-3677738834f7;Optimizavimo metodai; Optional;5;MIF
+3c4acbc0-9be2-5329-98c5-7113b35298c3;Oracle PL/SQL programavimas; Optional;5;MIF
+3da9059c-b4ff-5f60-b1f0-d2b16e53c5b9;Paauglių ir jaunuolių psichologija; Compulsory;5;MIF
+be6a36c5-979b-581f-9fe8-ec1a31de6051;Panelinių duomenų ekonometrija; Optional;5;MIF
+b650b175-72af-5584-9f89-f9c7f67d6c04;Papildomas matematikos kursas; Complimentary;5;MIF
+b2052633-a075-52e1-a093-3f53262d455d;Papildomi funkcinės analizės skyriai; Compulsory;5;MIF
+52d0b733-9447-5299-94c8-f2eb7fbd1bad;Papildomi kombinatorikos skyriai; Optional;5;MIF
+69e509cf-65a6-5869-a9c1-a28d30d8f077;Papildomi matematinės analizės skyriai; Optional;5;MIF
+0fe00a6f-b78b-5ae1-a812-fcd01d28ae4d;Parametrinė ir neparametrinė ekonometrija; Compulsory;5;MIF
+7c3b9dbe-c02f-5aec-9820-f69def488e58;Parametrinė ir neparametrinė ekonometrija; Optional;5;MIF
+5b08cbfc-1273-5073-9266-7ad958c4fb6d;Parametrinė ir neparametrinė statistika; Compulsory;5;MIF
+3410a42d-f95d-517c-abbe-e8e13483db5c;Parametrinė ir neparametrinė statistika; Optional;5;MIF
+949c7f9d-a15a-5eea-9d56-b5b683dd6a4c;Paskirstytos sistemos; Optional;5;MIF
+cdd52afb-ea0b-59d2-b22f-aba35f1cd0a6;Paslaugų ekonomika; Optional;5;MIF
+c969feb5-eac6-5975-8856-bf2933f8e605;Paslaugų vadyba; Compulsory;5;MIF
+6a04567f-7849-52a3-a33e-44769dbab424;Patikimumo teorija; Compulsory;5;MIF
+6efcf417-8182-5c3e-9a97-e1de3545b451;Patikimumo teorija; Optional;5;MIF
+7952367e-c65c-51aa-8ab5-d8c6de4e9d78;Pedagoginė ir raidos psichologija; Compulsory;5;MIF
+1b73a7c4-cc0a-54c5-bf3b-f41e0c52e500;Pedagoginė praktika; Compulsory;5;MIF
+2b3072fa-4986-5800-83ae-b89102fa0819;Pedagoginė praktika I/III d.; Compulsory;5;MIF
+e6282655-4781-5bb3-af93-5779ae3f464a;Pedagoginė praktika II/III d.; Compulsory;5;MIF
+a3da4972-2189-5958-a7b9-5db101dc6f35;Pedagoginė praktika III/III d.; Compulsory;5;MIF
+264aa515-a33d-5497-bdd5-214988c7ae0a;Pedagoginės veiklos tyrimo metodologija; Optional;5;MIF
+5da810b9-bc95-570e-8f79-2cec0ade70ec;Pensijų fondai; Optional;5;MIF
+629c0365-a1fc-5983-9358-7e0e3b26990f;Praktinė ekonometrija I/II d.; Compulsory;5;MIF
+da24e6f9-b744-5695-be10-80ddb5c85e06;Praktinė ekonometrija II/II d.; Compulsory;5;MIF
+2205e720-7f8c-5907-b4b8-cdd730be7857;Praktinė ekonometrija su R ir Python; Compulsory;5;MIF
+5a93da01-b76f-5845-b5b1-1949f7e764d3;Praktinė informatika; Compulsory;5;MIF
+22bd2996-9b81-5008-a875-2c2b5c583cc9;Praktinė informatika I/II d.; Compulsory;5;MIF
+4c89ed38-e148-5b5c-9c96-57d8e6c5a45d;Praktinė informatika II/II d.; Compulsory;5;MIF
+7ceb87e4-4ae9-5a64-84ea-12f64a3f8e59;Praktiniai DBVS aspektai; Optional;5;MIF
+c51bbbe9-4e30-5c5d-b825-d81d34661bfe;Praktiniai investavimo pagrindai; Compulsory;5;MIF
+942e9cc7-ac27-5f47-aa89-336f86a34cfc;Problemų sprendimu grįstas projektas; Compulsory;5;MIF
+f8833d5e-0465-5ac7-9c0d-8d989c344fcb;Problemų sprendimu grįstas projektas; Optional;5;MIF
+cb3a12e0-09e2-542b-b9d7-46e74db024c8;Procedūrinis programavimas; Compulsory;5;MIF
+1fd85cfa-eb42-5c2e-b3d5-d3b884124c71;Procesų teorija I/II d.; Compulsory;5;MIF
+d9d6a57d-c784-583e-914d-0d435f4a99b5;Procesų teorija II/II d.; Compulsory;5;MIF
+e6735580-f186-574d-9916-861afe3ecc8f;Profesinė praktika; Compulsory;5;MIF
+b561f363-984d-5f68-aa1f-42663f08aa2a;Profesionalumas ir etika; Compulsory;5;MIF
+267facf3-9ddf-59fb-8f74-e106b4c58060;Prognostinė analizė; Optional;5;MIF
+21d8e2bd-a628-508c-bb54-36d8b9b79d8a;"Programavimas ""Windows.NET"""; Optional;5;MIF
+e0c1d9e2-28b3-5a86-b6f0-4e68a42cde4d;Programavimas C; Compulsory;5;MIF
+e8e6b74d-7aa0-5568-a899-d01d7bbbd1f1;Programavimas debesijos aplinkoje; Optional;5;MIF
+9ff03551-1e04-550f-ba6f-031886e0be3b;Programavimas debesų kompiuterijoje; Compulsory;5;MIF
+93bd5dc6-6776-549e-83ca-1264dd2d14d1;Programavimas debesų kompiuterijoje; Optional;5;MIF
+97228641-ee09-597b-bd60-742cd7595f1a;Programavimas MATLAB; Optional;5;MIF
+24d832db-41dc-5458-8489-b1e5af87d845;Programavimas OS UNIX; Optional;5;MIF
+2e45a237-a66b-5f74-97fe-9fc6b44abd09;Programavimas PYTHON kalba; Optional;5;MIF
+a3c640c1-b1dd-5d25-8392-804c9c7017d2;Programavimas Windows API; Optional;5;MIF
+5aa3a675-b9a2-5a75-b623-c96bc0e2e09b;Programavimo ir IT pagrindai; Compulsory;5;MIF
+2141f4bf-a0a4-5510-8b64-794df096a0af;Programavimo ir IT pagrindai; Optional;5;MIF
+dfb8d4b5-7e1a-5fdf-b37e-a373e8d3dc68;Programavimo kalbos; Compulsory;5;MIF
+3e4a1b86-62f0-5984-a6f1-21d40ad07109;Programavimo kalbos; Optional;5;MIF
+c2635c5f-35ed-552e-9ca5-dde591e7a4b8;Programavimo metodikos pagrindai; Compulsory;5;MIF
+6983e2c5-5d4a-58bf-a2d5-aa7e60da6ea2;Programavimo pagrindai; Compulsory;5;MIF
+6fb1f8c1-ed55-59f1-877b-decd039931f7;Programinės įrangos lokalizavimas; Optional;5;MIF
+1fc0cde7-a249-5e67-9790-a8ac7c559a8f;Programų kūrimo procesas; Compulsory;5;MIF
+ff35c0a3-c750-5749-9030-d1b9ccd41518;Programų kūrimo proceso vertinimas ir gerinimas; Compulsory;5;MIF
+c6aa4abb-3ffe-5c2d-8169-d5c2b6066785;Programų sistemų architektūra; Compulsory;5;MIF
+41c1cb08-338a-5eb2-9516-0be75bcfb8d7;Programų sistemų architektūra; Optional;5;MIF
+fcbdc906-30b8-5523-b2aa-7fcd28bd333d;Programų sistemų architektūra ir projektavimas; Compulsory;5;MIF
+e622cd99-c88b-5f55-954e-23e9f44a4bcd;Programų sistemų architektūra ir projektavimas; Optional;5;MIF
+283f34cd-deac-5889-85e8-05aad0fd6b8a;Programų sistemų inžinerija; Compulsory;5;MIF
+1da14ac8-5ef3-5668-ac91-54463973ddb8;Programų sistemų inžinerija; Optional;5;MIF
+da5f61cc-62a7-566d-9f8d-7e00733019e7;Programų sistemų inžinerija I/II d.; Compulsory;5;MIF
+099d4455-0ef5-5d9f-939a-2523d01eec84;Programų sistemų inžinerija II/II d.; Compulsory;5;MIF
+e89f6bda-02a0-5a10-b4fd-ada6f53027cd;Programų sistemų įsigijimas ir priežiūra; Optional;5;MIF
+ff173495-7fdd-5ace-bd65-325b1ac1fc5f;Programų sistemų kokybė; Optional;5;MIF
+7bfd83da-0877-58f4-9b1c-4a7c251e3c16;Programų sistemų kūrimas; Compulsory;5;MIF
+4fcd7a2d-edbf-5962-8f10-f802daa9881f;Programų sistemų kūrimo metodai ir įrankiai; Compulsory;5;MIF
+7593249e-a7f3-5ba6-a397-569536491aab;Programų sistemų kūrimo metodai ir įrankiai; Optional;5;MIF
+5db79238-1f2c-5104-b2f5-2aa77f1adede;Programų sistemų modeliavimas ir verifikavimas; Compulsory;5;MIF
+2e1e08e3-bd9c-5875-aed5-acf53a60049d;Programų sistemų modeliavimas ir verifikavimas; Optional;5;MIF
+f8240478-1721-5db7-a5b9-596ff2aa5fdf;Programų sistemų projektavimas; Compulsory;5;MIF
+7a991d73-73d6-5fa7-b373-391bb6539e33;Programų sistemų projektų ir kokybės valdymas; Compulsory;5;MIF
+c3508298-f92e-566e-b345-4af560377a2e;Programų sistemų statistinė analizė; Optional;5;MIF
+e9b90c83-a9e8-5525-b8e7-326ed7c144b0;Programų sistemų testavimas; Compulsory;5;MIF
+2fc97a74-bd65-5ddd-980a-3d01f6026423;Programų sistemų testavimas ir konfigūracijos valdymas; Optional;5;MIF
+425cc3c1-d849-565b-94d3-681d0760f095;Projektinis darbas; Optional;5;MIF
+2691fb1f-a8d6-5614-8fd7-181795603858;Projektų vadyba; Compulsory;5;MIF
+37a3dbda-5719-5ff8-a7eb-9ee9018e1354;Projektų valdymas; Compulsory;5;MIF
+52caadef-76de-5526-b02b-96bc308e2c6c;Projektų valdymas; Optional;5;MIF
+dc4df383-9dc4-5de3-81be-6b10c1756194;Psichologijos įvadas; Compulsory;5;MIF
+2443a71f-bd04-5d33-bbf2-b745eee76bae;Randomizuoti algoritmai; Optional;5;MIF
+09621bd5-bc20-522c-b553-ec6b79632e69;Realaus laiko sistemų projektavimo pagrindai; Optional;5;MIF
+3304b6e4-c1d2-5672-ae0f-ad9dc91d32ad;Regioninė ekonomika ir politika; Optional;5;MIF
+851b53c1-437f-5669-9abb-f1a2e467474e;Regresiniai modeliai; Compulsory;5;MIF
+6e679059-e427-5cf3-99fb-7e711d79339c;Reikalavimų inžinerija; Compulsory;5;MIF
+c650e70c-d723-5703-a6c8-8c3e5b28cd0a;Reikalavimų inžinerija; Optional;5;MIF
+36aeb041-7c72-518f-9eca-102a380f5efe;Reikalavimų inžinerijos pagrindai; Compulsory;5;MIF
+068f334e-5208-5b2f-87e0-e6b03f9508f4;Rinkodara; Optional;5;MIF
+b760c876-3a14-55d0-b2f8-c5ef30ec4fc7;Rinktiniai algebros skyriai; Compulsory;5;MIF
+8dc2b785-31de-54fc-802d-01eea5edfb41;Rinktiniai analizės skyriai; Compulsory;5;MIF
+80d59c81-65d3-590e-b31c-7fec0257aa87;Rinktiniai analizės skyriai; Optional;5;MIF
+a37d9948-e50a-5479-a8b4-f93fe15ece20;Rinktiniai analizės skyriai I/II d.; Compulsory;5;MIF
+969b485f-303d-58a0-8a1a-d3cd9b98e9e0;Rinktiniai analizės skyriai II/II d.; Compulsory;5;MIF
+0530feea-5fa1-5d41-b9c3-d44159b21854;Rinktiniai diskrečių struktūrų skyriai; Compulsory;5;MIF
+8e90492b-2393-5fa6-88a6-123fbac3e99b;Rinktiniai duomenų bazių valdymo sistemų skyriai; Optional;5;MIF
+44841867-0598-51cd-b82a-24e20ea32c93;Rinktiniai informacijos saugos skyriai; Compulsory;5;MIF
+cdd669d0-5d5e-5427-8700-be4f17609afc;Rinktiniai kodavimo teorijos skyriai; Optional;5;MIF
+0b6c65f0-23f8-5ee7-b688-462dc86198cf;Rinktiniai skaičių teorijos skyriai; Compulsory;5;MIF
+769f0827-64fb-5858-9f6f-f3d424347da7;Rizikos teorija; Compulsory;5;MIF
+86d9185d-fc7e-53b5-9c71-8ca3ea4309a6;Rizikos teorija; Optional;5;MIF
+f1ac8b4a-2a9a-559a-9ece-b4a282ceb92c;Rizikos valdymas; Compulsory;5;MIF
+71f1737c-6a96-5c2b-b76f-8757d42cc07c;Rizikos valdymas; Optional;5;MIF
+5b55a219-d60b-5cc4-9667-6dde8093957f;Saugios interneto technologijos; Compulsory;5;MIF
+778a0a47-cb46-59b8-8863-473338556895;Saugios operacinės sistemos; Optional;5;MIF
+c910dbfc-2eb1-5112-8201-27531622422e;Saugus dinaminis internetas; Optional;5;MIF
+f0ca8d55-8969-5400-81dd-ef7e64a21df3;Saugūs tinklai; Optional;5;MIF
+24fb2094-98c3-51d6-85cc-349bc1856ebc;Silpnasis mato konvergavimas; Optional;5;MIF
+de6752f3-6441-5013-ad9e-c65e3e3c55dd;Sistemų saugumo auditas; Optional;5;MIF
+52977488-e8f0-5fb2-bd61-c3766fd3a092;Skaičių teorija; Compulsory;5;MIF
+e5466482-146c-53b9-b68f-eca4c414a304;Skaičių teorija; Optional;5;MIF
+e81beaa0-c108-5813-bf03-4461316cbae7;Skaičiuojamosios geometrijos algoritmai; Optional;5;MIF
+8008f49a-95ef-5cea-90d4-b7c75994212b;Skaitiniai metodai; Compulsory;5;MIF
+3bfa735d-8665-5d4a-9994-b4e1ce5cec10;Skaitiniai metodai; Optional;5;MIF
+14029658-efe1-5c44-a723-135386ba5f2e;Skaitiniai metodai I/II d.; Compulsory;5;MIF
+01d3c90a-0108-553e-92a7-fd902a343502;Skaitiniai metodai I/II d.; Optional;5;MIF
+a152f960-a4b2-52d3-b3a3-8c3c47e0addc;Skaitiniai metodai II/II d.; Optional;5;MIF
+ff4f9a2d-8ff3-5dff-935b-6d1265fb7788;Skaitmeninis intelektas ir sprendimų priėmimas; Optional;5;MIF
+4c534cf2-0bd4-558d-ae44-237e62cd949e;Skaitmeninis vaizdų apdorojimas; Optional;5;MIF
+f74adaab-7e0f-5539-a05a-81b165230184;Sociologijos pagrindai; Compulsory;5;MIF
+43e5a848-f263-541c-b7e6-cad9777abb5c;Specialybės anglų kalba; Compulsory;5;MIF
+852296bb-23ef-5875-8401-cff14e20d7d5;Specialybės kalba; Compulsory;5;MIF
+8376b39a-4c11-5210-9aad-7243654e5af6;Specialybės kalba; Optional;5;MIF
+7d693158-622d-5c19-843d-ced98f563b58;Stabilumo teorija; Optional;5;MIF
+86791661-91e5-5eea-b354-7d3566ee8bec;Statistika; Compulsory;5;MIF
+649741ce-4e1c-5b7b-8e91-60b262399aff;Statistika I/II d.; Compulsory;5;MIF
+5f0fc18b-f4a1-59ca-8d2e-b55e9a6d26c2;Statistika I/II d.; Optional;5;MIF
+f9203030-fc6b-5561-9900-01aa4b839016;Statistika II/II d.; Compulsory;5;MIF
+a8651990-e47c-5470-bd3f-a3cbdbe4e668;Statistika švietimo tyrimuose; Optional;5;MIF
+8ca1ddd2-97bd-5ac7-aa91-5a3bd220a75b;Statistikos įvadas; Compulsory;5;MIF
+e9128863-2658-59b4-ace0-d1484ffc08ed;Statistikos paketai; Compulsory;5;MIF
+513b4d7b-1b7f-5560-ab70-404a933482ab;Statistinė duomenų analizė; Optional;5;MIF
+cd0593e7-3ac4-54ea-8448-b4c91d747d8e;Statistiniai duomenų analizės metodai; Compulsory;5;MIF
+72e1003c-8f3d-5dde-b2b6-6cde76fc4a83;Statistiniai modeliai; Optional;5;MIF
+1ed9b5f0-cbc1-536f-97af-e5f490cf0626;Statistiniai modeliai medicinoje; Optional;5;MIF
+7704a62f-e862-5f90-bbb6-49abe4a1c2ea;Statistiniai mokymo algoritmai; Compulsory;5;MIF
+a53f3406-17b8-5b30-8ab0-9cac9ba7ed52;Statistiniai programų paketai; Compulsory;5;MIF
+a5896a37-057c-5e2b-a5fb-88165083d6b6;Statistinis modeliavimas; Optional;5;MIF
+08651704-6a42-5a4a-9325-0f6f3b94de13;Statistinių duomenų analizė; Compulsory;5;MIF
+d858060b-083e-5118-8805-8af6304b8d4b;Statistinių duomenų tyryba; Compulsory;5;MIF
+42b5a7bd-99b6-5491-b6b0-bccb0dc11a6f;Statistinių sprendimų teorija; Compulsory;5;MIF
+8266a1ee-1972-56be-aafe-9286939ee078;Statistinių sprendimų teorija; Optional;5;MIF
+d43c0f0c-eb3a-597c-9c0d-829b54ad2868;Stochastika ir skaičių teorija mokyklinėje matematikoje; Optional;5;MIF
+d3815f49-6d61-5d04-b77b-5a2b83931a0c;Stochastinė analizė; Compulsory;5;MIF
+f50d647e-a03c-5a91-a903-35061623be57;Stochastinė analizė; Optional;5;MIF
+433f3342-e101-5e1c-a401-cb37f7397f9d;Stochastinės diferencialinės lygtys; Optional;5;MIF
+bc42abe1-4efc-5178-9ecd-69afc2679b62;Stochastiniai finansų matematikos modeliai; Optional;5;MIF
+99392170-eac4-5974-b7b7-4e3b4fe1c739;Stochastiniai patikimumo modeliai; Compulsory;5;MIF
+3f82e036-c8d4-58f3-9239-38561cbf789d;Sveikatos draudimas; Compulsory;5;MIF
+71275124-856c-5b21-9ea7-2936e45674d4;Šiuolaikinė ekonominė mintis; Compulsory;5;MIF
+ea50e8a9-349a-51fb-a4da-807f7d4127bd;Šiuolaikinė ekonominė mintis; Optional;5;MIF
+eb26a7df-d15c-51cb-aadd-3260aa872b13;Šiuolaikinė matematinė ekonomika; Optional;5;MIF
+e4245a96-ea70-5523-bccf-98e7653bd6c8;Taikomasis objektinis programavimas; Compulsory;5;MIF
+0c5dc947-3898-5517-bfa4-8833151e6a9b;Taikomasis objektinis programavimas; Optional;5;MIF
+7abfc584-ade1-5a8d-9507-06583fe983b9;Taikomoji fizika; Compulsory;5;MIF
+0303491b-dd2a-5b8c-8a12-5ab90672686f;Taikomoji statistika; Compulsory;5;MIF
+f3fbe28e-1e20-5686-a900-ee5b49c61b9c;Taikomųjų programų kūrimas mobiliesiems įrenginiams; Optional;5;MIF
+712a4557-349c-5e67-a5f6-242c5fdc06a3;Tarptautiniai finansai; Optional;5;MIF
+0144633c-bbbb-5fa9-b984-722c01b31cfe;TESTAS; Complimentary;5;MIF
+a53a3eed-5c32-52d6-9dfc-d308625cbb2d;Testų teorija statistiniuose tyrimuose; Compulsory;5;MIF
+4cd162f8-8d3a-56f2-9806-8f7c7383e5db;Tiesinė algebra ir geometrija; Compulsory;5;MIF
+e7baab24-2063-5310-90f4-edb69f28b108;Tikimybinė kombinatorika; Optional;5;MIF
+f1b399c2-f23f-557e-b0b0-8dc8bfd3d7fd;Tikimybių teorija; Compulsory;5;MIF
+53ad3c08-3cad-58e5-80ac-eb7ed8f19286;Tikimybių teorija; Optional;5;MIF
+eced8290-ee9a-54cf-a71f-594ba63e6afe;Tikimybių teorija I/II d.; Compulsory;5;MIF
+4e7614c6-8c9f-58fb-a223-0794b145a928;Tikimybių teorija II/II d.; Compulsory;5;MIF
+5b4b7c12-f587-5657-bfa2-00df61dd4663;Tikimybių teorija ir matematinė statistika; Compulsory;5;MIF
+57c1f6f5-fb54-5607-aacb-1288fe34247d;Tikimybių teorija ir matematinė statistika; Optional;5;MIF
+94fac502-8cd1-5096-8167-99cd157e8e64;Tikimybių teorija ir matematinė statistika I/II d.; Compulsory;5;MIF
+143bc9e0-1550-5bc8-91cc-38129c7484b2;Tikimybių teorija ir matematinė statistika II/II d.; Compulsory;5;MIF
+0f5a8c7d-02c5-595e-a29c-9631de2c8f08;Tinklų saugumas; Compulsory;5;MIF
+7ece1864-e1b2-5600-b31d-40b643351b2f;Tinklų saugumas; Optional;5;MIF
+31bbc308-204f-5ef6-a71c-cc2ec27f2b30;Tiriamasis seminaras; Compulsory;5;MIF
+9f615255-478d-5005-adbd-66146cb522d4;Transliavimo metodai; Compulsory;5;MIF
+0438037c-1748-5368-8d40-8e4ab58fd855;Transliavimo metodai; Optional;5;MIF
+7a9c9c34-1859-57c1-94cf-ec04c6f59856;Ugdymo filosofija; Compulsory;5;MIF
+7d865835-0ea5-574d-a004-5fee9d288423;UML ir MDA įvadas; Optional;5;MIF
+458b77fc-9906-5c88-a1c7-8d5c701659c5;UNIX operacinės sistemos; Compulsory;5;MIF
+cae62075-031f-58b2-9e4c-9af37132d264;UNIX operacinės sistemos; Optional;5;MIF
+34d7d859-2647-5a19-b348-361b1b3bc516;Užsienio kalba (anglų); Compulsory;5;MIF
+21a0beb2-aa49-5fc2-8b0e-fd585fe3a578;Užsienio kalba (anglų) I/II d.; Compulsory;5;MIF
+ee4405ed-fa51-55d9-901c-a4afa5417d8b;Užsienio kalba (anglų) I/II d. (dalykinė); Compulsory;5;MIF
+8e3b2a4f-460b-5621-b876-99e12cd925d1;Užsienio kalba (anglų) II/II d.; Compulsory;5;MIF
+0362c228-ece4-5a13-a4ab-5e504a5f368c;Užsienio kalba (anglų) II/II d. (dalykinė); Compulsory;5;MIF
+30ec0562-2b01-5ebb-9001-ceda2e795b25;Užsienio kalba (anglų) III/III d.; Compulsory;5;MIF
+09dc5127-49fe-593a-bb8c-eecf547f7439;Užsienio kalba (lietuvių) I/II d.; Compulsory;5;MIF
+a53667e0-176c-54fc-a10f-a0333f4ff8fe;Užsienio kalba (lietuvių) I/II d. (dalykinė); Compulsory;5;MIF
+59a0490c-f571-5877-b8af-1efea9e99d7c;Užsienio kalba (lietuvių) II/II d.; Compulsory;5;MIF
+a733ddc8-58ae-5f67-baf4-31b14ccc6ced;Užsienio kalba (lietuvių) II/II d. (dalykinė); Compulsory;5;MIF
+c46d6499-8c26-5205-aef4-80701bca5a2f;Užsienio kalba (lietuvių) III/III d.; Compulsory;5;MIF
+27ef9245-8fad-52a9-9ab9-de7520b58bd5;Užsienio kalba (prancūzų) I/II d.; Compulsory;5;MIF
+1973cb17-9315-53d2-bbe6-698a0809a845;Užsienio kalba (prancūzų) I/II d. (dalykinė); Compulsory;5;MIF
+62243785-b0ad-5f5b-a29b-ad41e70f1295;Užsienio kalba (prancūzų) II/II d.; Compulsory;5;MIF
+50cbe52a-acc7-5001-92ce-37b45a44e079;Užsienio kalba (prancūzų) II/II d. (dalykinė); Compulsory;5;MIF
+1344c5ab-f58d-5275-ba6d-9c98c979878a;Užsienio kalba (prancūzų) III/III d.; Compulsory;5;MIF
+897416bc-089f-5e3b-a9b0-4e364e1529f4;Užsienio kalba (rusų) I/II d.; Compulsory;5;MIF
+79f88282-587f-553a-86f7-8b98b48bd910;Užsienio kalba (rusų) I/II d. (dalykinė); Compulsory;5;MIF
+ab8bd521-3e9d-5086-8231-691d4d8908fb;Užsienio kalba (rusų) II/II d.; Compulsory;5;MIF
+b11e7d21-8cec-5a8b-aa47-d6f7ea0f322b;Užsienio kalba (rusų) II/II d. (dalykinė); Compulsory;5;MIF
+7a6eed7b-5ce9-5cb5-b8ff-c6f974f1fab3;Užsienio kalba (rusų) III/III d.; Compulsory;5;MIF
+01dab11c-428f-5900-a252-ffd069eda348;Užsienio kalba (vokiečių) I/II d.; Compulsory;5;MIF
+2ef1f825-62a0-5758-a364-9ec8cb653f36;Užsienio kalba (vokiečių) I/II d. (dalykinė); Compulsory;5;MIF
+feb28f5b-d768-539c-a23c-c9eeda6f0c57;Užsienio kalba (vokiečių) II/II d.; Compulsory;5;MIF
+33269865-ec3b-5280-8a1b-126377c3ef0f;Užsienio kalba (vokiečių) II/II d. (dalykinė); Compulsory;5;MIF
+47a31607-7719-535e-bd81-33b02a25eba8;Užsienio kalba (vokiečių) III/III d.; Compulsory;5;MIF
+3dbc585d-8c43-5d3a-89f0-b70bc1047e15;Vadybos pagrindai; Compulsory;5;MIF
+83014cb0-eb46-5281-8402-085475f64ef0;Vadybos pagrindai; Optional;5;MIF
+1f7a32f0-9594-56d7-b9bd-a2575db9e648;Vaizdų ir signalų analizė ir apdorojimas; Compulsory;5;MIF
+1277ecf4-7aad-565e-98f4-f659d3134938;Vaizdų ir signalų analizė ir apdorojimas; Optional;5;MIF
+d883742b-7917-56d9-af78-717934def595;Valstybinė statistika; Compulsory;5;MIF
+bc8f8b0f-9f06-55be-a054-87650149e5e0;Valstybinė statistika; Optional;5;MIF
+032a79fe-b57e-5acf-ad59-d4b500d23f80;Variaciniai metodai netiesiniams reiškiniams; Optional;5;MIF
+6d174dbe-3979-556b-bca1-4267a963ae82;Variacinis skaičiavimas; Optional;5;MIF
+e52521b3-9435-5440-9904-3a17771b6019;Variacinis skaičiavimas ir optimalus valdymas; Optional;5;MIF
+76f4afb3-5ece-5e34-add0-f7d48cd643dc;Verslo analitika; Optional;5;MIF
+057b1807-b07b-54ee-aaa2-e69a13d17c5d;Verslo pagrindai I/II d.; Compulsory;5;MIF
+8ffea7fd-75eb-560b-8987-b65683f39084;Verslo pagrindai II/II d.; Compulsory;5;MIF
+632ec6b8-ebaf-5d67-9829-70d4c65f67d4;Verslo procesų automatizavimas; Optional;5;MIF
+c676fced-07c3-542d-8c0b-1383448fb76b;Verslo procesų modeliavimas; Compulsory;5;MIF
+b7bb3892-ecee-5f90-826e-e7a139e2c64f;Viešieji finansai; Optional;5;MIF
+39a5e11d-ec8b-5a04-8014-c57381eb3674;Viešojo sektoriaus ekonomika; Optional;5;MIF
 f6d55d8a-130c-56b1-ab3e-ced24ca9c19d;Vyriškumo studijos; BUS;5;MIF
-a1a3e7cc-40df-5737-8a2b-b64bc8620808;Virtualiosios mokymo aplinkos; Pasirenkamasis;5;MIF
-cf1aaa08-79e8-510a-8b67-fa41fb233e24;Virtualizacijos pagrindai; Privalomasis;5;MIF
-98c317fa-45a5-5ce4-8cc5-37c9ffb62291;Virtualizacijos pagrindai; Pasirenkamasis;5;MIF
-6e7be4fd-d2c2-56da-944e-e3198bda0192;Vizualus programavimas; Privalomasis;5;MIF
-e13777f7-1acd-5221-b7c4-d43fd40d3e75;Vizualus programavimas; Pasirenkamasis;5;MIF
-ba88e88f-847d-597f-909b-e9375a8a280c;Web servisai; Pasirenkamasis;5;MIF
-4032c665-8f1a-5ca6-926f-b73a0f7f22b6;Žinių vaizdavimas; Pasirenkamasis;5;MIF
-62554bb7-43de-53a0-8b41-3cded6e48ff7;Žmogaus ir kompiuterio sąveika; Privalomasis;5;MIF
-fc2b703c-4cb8-55bd-9f0d-5ae19d63947a;Žmogaus ir kompiuterio sąveikos projektavimas; Pasirenkamasis;5;MIF
-b16b06ad-ed6e-5d0c-8b54-08f8bf2ca8e4;Žmogaus-kompiuterio sąveika; Privalomasis;5;MIF
-aba3ae6d-d16a-5613-b4c2-5b80db628882;Žmogaus-kompiuterio sąveika; Pasirenkamasis;5;MIF
+a1a3e7cc-40df-5737-8a2b-b64bc8620808;Virtualiosios mokymo aplinkos; Optional;5;MIF
+cf1aaa08-79e8-510a-8b67-fa41fb233e24;Virtualizacijos pagrindai; Compulsory;5;MIF
+98c317fa-45a5-5ce4-8cc5-37c9ffb62291;Virtualizacijos pagrindai; Optional;5;MIF
+6e7be4fd-d2c2-56da-944e-e3198bda0192;Vizualus programavimas; Compulsory;5;MIF
+e13777f7-1acd-5221-b7c4-d43fd40d3e75;Vizualus programavimas; Optional;5;MIF
+ba88e88f-847d-597f-909b-e9375a8a280c;Web servisai; Optional;5;MIF
+4032c665-8f1a-5ca6-926f-b73a0f7f22b6;Žinių vaizdavimas; Optional;5;MIF
+62554bb7-43de-53a0-8b41-3cded6e48ff7;Žmogaus ir kompiuterio sąveika; Compulsory;5;MIF
+fc2b703c-4cb8-55bd-9f0d-5ae19d63947a;Žmogaus ir kompiuterio sąveikos projektavimas; Optional;5;MIF
+b16b06ad-ed6e-5d0c-8b54-08f8bf2ca8e4;Žmogaus-kompiuterio sąveika; Compulsory;5;MIF
+aba3ae6d-d16a-5613-b4c2-5b80db628882;Žmogaus-kompiuterio sąveika; Optional;5;MIF

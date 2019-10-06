@@ -30,6 +30,7 @@ namespace RateMyP.WinForm
                 context.SaveChanges();
                 }
             }
+
         private static void LoadCoursesToDb()
             {
             using (var context = new RateMyPDbContext())
@@ -39,6 +40,7 @@ namespace RateMyP.WinForm
                 context.SaveChanges();
                 }
             }
+
         private static void LoadTeacherActivitiesToDb()
             {
             using (var context = new RateMyPDbContext())
@@ -48,6 +50,7 @@ namespace RateMyP.WinForm
                 context.SaveChanges();
                 }
             }
+
         private static void LoadStudentsToDb()
             {
             using (var context = new RateMyPDbContext())
@@ -72,6 +75,7 @@ namespace RateMyP.WinForm
 
             return csvReader.GetRecords<Teacher>().ToList();
             }
+
         private static List<Course> ParseCoursesFromCsv()
             {
             var assembly = typeof(Program).Assembly;
@@ -83,6 +87,7 @@ namespace RateMyP.WinForm
 
             return csvReader.GetRecords<Course>().ToList();
             }
+
         private static List<TeacherActivity> ParseTeacherActivitiesFromCsv()
             {
             var assembly = typeof(Program).Assembly;
@@ -110,6 +115,7 @@ namespace RateMyP.WinForm
                 }
             return aList;
             }
+
         private static List<Student> ParseStudentsFromCsv()
             {
             var assembly = typeof(Program).Assembly;

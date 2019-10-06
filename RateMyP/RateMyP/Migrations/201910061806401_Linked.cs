@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateBaseEntities : DbMigration
+    public partial class Linked : DbMigration
     {
         public override void Up()
         {
@@ -102,31 +102,31 @@
                 c => new
                     {
                         Id = c.Guid(nullable: false),
+                        TeacherId = c.Guid(nullable: false),
+                        CourseId = c.Guid(nullable: false),
                         DateStarted = c.DateTime(nullable: false),
                         Type = c.Int(nullable: false),
-                        Course_Id = c.Guid(),
-                        Teacher_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Courses", t => t.Course_Id)
-                .ForeignKey("dbo.Teachers", t => t.Teacher_Id)
-                .Index(t => t.Course_Id)
-                .Index(t => t.Teacher_Id);
+                .ForeignKey("dbo.Courses", t => t.CourseId, cascadeDelete: true)
+                .ForeignKey("dbo.Teachers", t => t.TeacherId, cascadeDelete: true)
+                .Index(t => t.TeacherId)
+                .Index(t => t.CourseId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.TeacherActivities", "Teacher_Id", "dbo.Teachers");
-            DropForeignKey("dbo.TeacherActivities", "Course_Id", "dbo.Courses");
+            DropForeignKey("dbo.TeacherActivities", "TeacherId", "dbo.Teachers");
+            DropForeignKey("dbo.TeacherActivities", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Ratings", "Teacher_Id", "dbo.Teachers");
             DropForeignKey("dbo.Ratings", "Student_Id", "dbo.Students");
             DropForeignKey("dbo.Ratings", "Course_Id", "dbo.Courses");
             DropForeignKey("dbo.CommentLikes", "StudentId", "dbo.Students");
             DropForeignKey("dbo.CommentLikes", "CommentId", "dbo.Comments");
             DropForeignKey("dbo.Comments", "Student_Id", "dbo.Students");
-            DropIndex("dbo.TeacherActivities", new[] { "Teacher_Id" });
-            DropIndex("dbo.TeacherActivities", new[] { "Course_Id" });
+            DropIndex("dbo.TeacherActivities", new[] { "CourseId" });
+            DropIndex("dbo.TeacherActivities", new[] { "TeacherId" });
             DropIndex("dbo.Ratings", new[] { "Teacher_Id" });
             DropIndex("dbo.Ratings", new[] { "Student_Id" });
             DropIndex("dbo.Ratings", new[] { "Course_Id" });
