@@ -7,13 +7,13 @@ namespace RateMyP.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class CreateBaseEntities : IMigrationMetadata
+    public sealed partial class Linked : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateBaseEntities));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Linked));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910011722414_CreateBaseEntities"; }
+            get { return "201910061806401_Linked"; }
         }
         
         string IMigrationMetadata.Source
