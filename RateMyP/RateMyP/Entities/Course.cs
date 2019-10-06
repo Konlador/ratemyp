@@ -5,7 +5,10 @@ namespace RateMyP.Entities
     {
     public enum CourseType
         {
-        Standard,
+        None,
+        Optional,
+        Compulsory,
+        Complimentary,
         BUS
         }
 
