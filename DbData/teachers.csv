@@ -1,369 +1,370 @@
-﻿Id,Name,Surname,Rank,Faculty
-937af60f-1e12-554d-9503-982706fee73e,Andrius,Adamonis,Docent,MIF
-937af60f-1e12-554d-9503-982706fee73e,Andrius,Adamonis,PhD Student,MIF
-715687e1-220f-5b13-ba32-b14afbbadf3e,Liudas,Ališauskas,PhD Student,MIF
-a4462f48-e23b-5c24-91af-e51905117778,Giedrius,Alkauskas,Senior Research Doctor,MIF
-2749d051-7d9d-5cf0-9bb2-2e3af1c14c91,Romas,Alonderis,Research Doctor,MIF
-0b526470-d6d4-5f4c-a7a0-e944b7ab80a9,Gediminas,Alzbutas,Docent,MIF
-22a5c14a-ef91-5a27-9cd8-a52382f26e2f,Algirdas,Ambrazevičius,Professor,MIF
-d00d96ee-ba0d-5631-8822-7887283d5848,Julius,Andrikonis,Assistant,MIF
-fea689b0-b978-5aa4-a778-4a3f6c688bb9,Daumilas,Ardickas,PhD Student,MIF
-29af1e23-836f-5d2b-969c-6c6e7c2d8893,Jaroslava,Arsenjeva,PhD Student,MIF
-b4bcb179-326a-5aff-8b59-a9e708d77de1,Rokas,Astrauskas,Assistant,MIF
-5ca5a892-4df1-556d-b16f-0cbdb9e9d69a,Arvydas,Astrauskas,Research Doctor,MIF
-785c851c-6062-5348-bb44-ff2618f02c06,Vytautas,Ašeris,Professor,MIF
-5e1a9dc0-2bc3-5ce9-89fe-968393a837d4,Gediminas,Bagdonas,Assistant,MIF
-87550daa-00b9-5179-bebc-ed6036c19ce1,Vilijandas,Bagdonavičius,Professor,MIF
-eb42778f-e634-5742-84ae-b55da7165df4,Gintaras,Bakštys,Professor,MIF
-34a48bd1-a038-5062-9ba7-714af5459a65,Aidas,Balčiūnas,Assistant,MIF
-81e1e33c-ab5f-5daa-894c-2a919713cbcb,Gintautas,Bareikis,Docent,MIF
-1a6fb420-55cc-5094-9c50-eee835264700,Darius,Baronas,Lecturer,MIF
-19ed458d-f1ad-5bb1-90fa-8a8fe9f6fd81,Romas,Baronas,Professor,MIF
-624b8eb3-e3a3-5406-a3c8-ea08bbcf3125,Karolis,Bartkus,PhD Student,MIF
-3d6e1098-ec2c-5f74-966d-d0818fd6b752,Igoris,Belovas,Senior Research Doctor,MIF
-e5e4c858-0713-5be9-a046-b746cba5471e,Margarita,Beniušė,Assistant,MIF
-628c87ba-45a1-5f58-a75f-632f765f052c,Jolita,Bernatavičienė,Senior Research Doctor,MIF
-cf2c4510-3972-5895-8be9-0a34c0c4f7ff,Andrius,Berniukevičius,PhD Student,MIF
-155f10c9-595e-50d3-83d4-f3416714b76f,Rytis,Bieliauskas,PhD Student,MIF
-547893a7-8f28-52ad-ad40-a3da91358bca,Kristina,Bingelė,Assistant,MIF
-6a7ef39a-8a15-5524-a880-23ab82ced724,Algimantas,Birbilas,PhD Student,MIF
-c379df2c-a299-5e58-84ee-03840baae593,Adomas,Birštunas,Assistant,MIF
-d4a0a7fc-9031-52ea-b83f-29ded0e118b7,Marija,Biteniekytė,Lecturer,MIF
-2eed2c1a-3636-505d-976d-763f6d8a5902,Genė,Biziulevičienė,Professor,MIF
-3840d638-7ae7-5116-9482-50d966ddd0cc,Saulius,Blažiūnas,Lecturer,MIF
-54ca003a-0192-5c13-87c3-a4382e988182,Mindaugas,Bloznelis,Professor,MIF
-7dc24373-32d3-51dd-a8e8-2d0ad5606aa5,Agnė,Brilingaitė,Docent,MIF
-39b545cd-2098-5543-a7df-0cc0fa49504f,Jonas,Brusokas,Assistant,MIF
-df2e12a4-2b6e-59db-889c-583329e255d9,Saulius,Bucka,PhD Student,MIF
-92fac018-8243-5f6f-be41-0a3fed1abc37,Linas,Bukauskas,Docent,MIF
-0c5fe2d8-304c-5da8-8c32-621e42b16e09,Viktoras,Bulavas,Lecturer,MIF
-5ea140b3-3ef7-5635-9ff6-6178cc60fce1,Rūta,Burbaitė,Lecturer,MIF
-222e9e34-800c-5851-96b7-7a9c1e2b3e59,Martynas,Burbulevičius,PhD Student,MIF
-d740b534-8ff9-5030-a54a-fe8c58c9855e,Andrius,Buteikis,Assistant,MIF
-7a99732a-a35f-5365-9784-7badcd6eab5a,Linas,Būtėnas,Lecturer,MIF
-9b15214c-becc-540b-81d2-db46865f6695,Dmitrij,Celov,Assistant,MIF
-259341cd-f668-5154-85bc-8524f6cc8fd3,Albertas,Čaplinskas,Professor,MIF
-3cc7ff09-d2d6-5098-a32e-1713fab8eabc,Vaida,Čeikutė,Lecturer,MIF
-5d8723e8-fd08-5b91-98b7-89807943817b,Vydas,Čekanavičius,Professor,MIF
-104fbacf-df9b-5e7a-a40c-aa775b791748,Bernardas,Čiapas,PhD Student,MIF
-a40e60ef-84a0-5339-b6fd-5dec9b5f66ba,Andrius,Čiginas,Research Doctor,MIF
-2f7c410b-810a-597e-84f0-7579f8ee326c,Vytautas,Čyras,Docent,MIF
-597526b4-bd0e-55a8-9d8d-8ce9ba753aee,Alminas,Čivilis,Assistant,MIF
-aa12e1e2-9890-5b17-a329-ffa4468cf712,Daiva,Dabkevičienė,Research Doctor,MIF
-b3942087-7ccf-53d9-a32e-c7061f747b4a,Valentina,Dagienė,Senior Research Doctor,MIF
-19c26e45-bc42-5182-b3e7-87b8beb3079d,Indrė,Dalgėdienė,Assistant,MIF
-daa2cbe9-b7a1-52ea-9fcb-b5e62a4ad4d5,Julius,Damarackas,Assistant,MIF
-0ebf787b-bde4-561b-a8fc-5add32822a53,Paulius,Danielius,PhD Student,MIF
-af71d51c-1911-5743-bda1-a28c80279a36,Tadas,Danielius,PhD Student,MIF
-a30e53a9-60d2-553b-8181-0af0af4f0979,Svetlana,Danilenko,Research Doctor,MIF
-a61a9fd2-1833-55ef-9877-b6187e056341,Sigitas,Dapkūnas,Docent,MIF
-aba5739f-faa3-5a9b-9733-32f136ba3c2e,Boleslovas,Dapkūnas,Assistant,MIF
-71279f9a-2eb4-5e1f-bec1-92d922a7d3e5,Aušra,Dapšienė,Lecturer,MIF
-8cb63765-088f-5a82-bf59-d3a80a1a9a79,Andrius,Daranda,PhD Student,MIF
-27c13ddf-89b8-58fe-ad65-61385f98ded3,Natalja,Denisenko,PhD Student,MIF
-4c178e34-df9e-52fb-81de-f7d00c8c7788,Valdas,Dičiūnas,Assistant,MIF
-e283a5ee-2ce3-5de2-a19e-3df2b1b1d326,Šarūnas,Dirmeikis,Lecturer,MIF
-f71277c5-b7c6-5723-a003-552b097783e4,Vladimiras,Dolgopolovas,Research Doctor,MIF
-3c3e8fd8-0de8-5289-8e20-43a735dc9a28,Gintaras,Dreižas,PhD Student,MIF
-403bd67f-4268-5013-89dc-43362f5cad24,Paulius,Drungilas,Professor,MIF
-c8a46b15-36aa-574a-a857-509c406bc65e,Artūras,Dubickas,Senior Research Doctor,MIF
-327f1d11-53ee-5edc-89d3-4a369d7bfb5e,Kęstutis,Dučinskas,Professor,MIF
-f8f37f15-4b29-5ada-bacc-dd6fa190164b,Rita,Dukynaitė,Senior Research Doctor,MIF
-072f01b8-58ab-5ba1-809f-caa10850ed42,Vytautas,Dulskis,PhD Student,MIF
-30b65ab6-fcee-5339-aa54-59ca62418ce7,Viktorija,Dvareckienė,PhD Student,MIF
-ddf4da99-9f38-5e4b-969d-68efcc44aee0,Gintautas,Dzemyda,Professor,MIF
-f867f47d-bb70-5634-a51c-29cc23586b44,Dalė,Dzemydienė,Professor,MIF
-fb47fa17-ef37-5f73-9863-f5a660be6405,Ramūnas,Dzindzalieta,Lecturer,MIF
-223716f6-45ca-5191-acb9-0741cdece917,Dainius,Dzindzalieta,Research Doctor,MIF
-15230df8-49ac-5248-bcc2-67d8cd33a922,Rimantas,Eidukevičius,Docent,MIF
-941b69bb-1c65-545a-bb66-37aacc475318,Aistė,Elijio,Docent,MIF
-082556b5-3c49-52f0-8f33-87dbf7d14424,Ernestas,Filatovas,Senior Research Doctor,MIF
-47ae8689-3d27-5b9a-a698-e204973d6050,Violeta,Franckevič,PhD Student,MIF
-f224d4a7-a5ca-556c-ab13-7fdfe80a25d7,Edmundas,Gaigalas,Docent,MIF
-cff8ca9e-d228-5b6a-b9ac-154c0030f3e5,Ramūnas,Garunkštis,Professor,MIF
-5fbd02d1-8686-5c86-9b5c-e4baa4845734,Haroldas,Giedra,Assistant,MIF
-ceedea90-0978-5e05-9206-87905cbf0488,Rokas,Gylys,PhD Student,MIF
-7cd2fc41-909b-5b4c-8604-f7529a05b048,Albertas,Gimbutas,Lecturer,MIF
-b5a5ccc2-ebb1-51bb-ae2d-a5ceeb41d0bf,Laura,Giniūnienė,Lecturer,MIF
-c5ba9cc0-e1fc-5255-a147-39bbcf661cce,Saulė,Girdzijauskaitė,Lecturer,MIF
-f78ce971-9514-5646-bad5-f923b5268e31,Aldas,Glemža,Professor,MIF
-8cd5f799-9064-580f-8313-da887030470f,Emilija,Globienė,Assistant,MIF
-3d509539-48ba-50eb-a34a-a1696b6cb2b2,Viktoras,Golubevas,Lecturer,MIF
-6f3304f7-9fec-5dbc-96a5-97220a1e7507,Diana,Gornatkevičienė,Lecturer,MIF
-0ed757ae-2de9-542a-8bec-8037246c8f22,Giedrius,Graževičius,Lecturer,MIF
-4d41e4f8-d489-5bc8-8cfe-6c9215bc6091,Saulius,Gražulis,Professor,MIF
-5713c9f0-df19-52f9-bc74-c8dd23b44a46,Andrius,Grevys,Lecturer,MIF
-69ca2be4-4cc5-527b-a61e-54ae1398d4ff,Saulius,Grigaitis,Docent,MIF
-7e9994a9-c986-5175-ba21-6bf5e1ecc5ff,Andrius,Grigutis,Docent,MIF
-bbaa66af-860c-5658-9ed5-6b45046f1fb8,Irus,Grinis,Lecturer,MIF
-65da1ecc-ac4d-53b1-8487-abb42c696a82,Mantas,Grubliauskis,Lecturer,MIF
-2161c944-19ae-5239-bc36-d2508622e0de,Jovita,Gudan,Assistant,MIF
-429c990f-9631-5f7a-aa81-de5ff0c30ae7,Saulius,Gudas,Senior Research Doctor,MIF
-8c0c004f-e8dd-509a-9885-f2cee6363f2e,Arūnas,Gudinavičius,Docent,MIF
-f073b48b-25eb-52ca-9777-2e40e4e46484,Povilas,Gudžius,PhD Student,MIF
-813f9b0b-f18e-56e8-97cb-5736feef2dbf,Eglė,Gutauskaitė,Assistant,MIF
-83ab1c1a-f4c8-5c89-9fc2-b6378707878c,Jolita,Ignatavičiūtė,Lecturer,MIF
-1357a540-c1d3-5520-9211-b1c38758bfd8,Aleksandr,Igumenov,Lecturer,MIF
-15536349-5265-57ca-aaf0-b9230aa3f21b,Ovidiu,Ivancu,Assistant,MIF
-fe54d14e-ffbc-536b-9a2c-eb198a01fe7a,Zorian,Ivanec,Lecturer,MIF
-6c676aeb-cf0f-5adc-b3a4-1067548c4b95,Audronė,Jakaitienė,Professor,MIF
-74588f95-b37d-59ff-8c38-488ebee92bcd,Arūnas,Janeliūnas,Docent,MIF
-0a420ccb-192c-55eb-a5f9-52e1304560a5,Erika,Janiūnienė,Docent,MIF
-f727be34-7e50-5b64-9d40-7ec8c968179c,Ana,Jankūnienė,Lecturer,MIF
-bf0fec01-346f-57ea-a4ca-463bf7c80737,Artūras,Jankus,Lecturer,MIF
-30a0e0ea-4300-5da2-952a-6ff5eb52c78c,Jonas,Jarutis,PhD Student,MIF
-8aa83d1f-e547-52a3-bc14-7b0004bb8dd4,Eglė,Jasutė,Docent,MIF
-1fc5c9ba-13bc-59ce-8a4c-654d12f0580d,Eglė,Jaunė,Assistant,MIF
-33ba64ff-cc07-5f7e-a305-86e6a27b6382,Tatjana,Jevsikova,Research Doctor,MIF
-789c708e-0cae-5740-9db7-33e29c98da4f,Saulius,Jokubaitis,PhD Student,MIF
-4c389dd3-d6cc-5d8e-9f7e-722e8b22ad51,Vytautas,Jonkus,Docent,MIF
-e1dedd61-4dc8-58c9-bbd6-45a9662f275b,Justinas,Jucevičius,PhD Student,MIF
-10f3cfac-6e5c-5492-a365-fb7c2f78d4d2,Domantas,Judeikis,Assistant,MIF
-ce5f612b-d1c0-5eee-ab89-3b7eb3fb749e,Grintas,Junevičius,PhD Student,MIF
-c296a857-3f5a-54e6-b4a2-8c061dbbdb11,Rita,Juodagalvytė,PhD Student,MIF
-3d752ab8-6912-5dce-bdb3-b03175826308,Algimantas,Juozapavičius,Professor,MIF
-504c28f4-306d-543d-b070-0bd656c2a07e,Vilius,Jurgelevičius,Assistant,MIF
-e9baefc2-284f-53d8-8727-a4b4f56c20be,Albertas,Jurgelevičius,PhD Student,MIF
-b6fa35a2-f1d3-5c92-983d-8e221751778c,Vaidas,Jusevičius,Docent,MIF
-da7d07f0-9f01-5ac8-8f26-e1321532f5a4,Mindaugas,Jusis,PhD Student,MIF
-f2bed0fc-08d7-5315-9ac6-20830c6e796c,Anita,Juškevičienė,Research Doctor,MIF
-071235c5-30aa-5b2a-8718-4e0307303ec3,Tomas,Juškevičius,Research Doctor,MIF
-8cfa03eb-93d9-55a4-846c-0f0875c00215,Audrius,Kačėnas,Lecturer,MIF
-ca664a69-e774-51a3-aaef-bfb4d4a7bddf,Laura,Kalinienė,Docent,MIF
-6d380398-df02-573d-8de8-3244d2b3f74c,Marta,Karaliutė,PhD Student,MIF
-41ad8652-33b6-5a8a-a46f-f2cf279d7653,Rasa,Karbauskaitė,Research Doctor,MIF
-75115fb5-d1cf-5070-8bc6-c606a876a7c7,Kęstutis,Karčiauskas,Senior Research Doctor,MIF
-39c173fc-3fb5-5b4a-a925-6f061cd51c11,Erikas,Karikovas,Assistant,MIF
-52a7d339-0051-58f5-8612-5039c420c130,Mindaugas,Karpinskas,Lecturer,MIF
-08b939ed-044c-55c4-80f9-f69176ab5f13,Pijus,Kasparaitis,Docent,MIF
-992cc53e-a978-5532-b283-81f97aa7d5ee,Romualdas,Kašuba,Docent,MIF
-0ac1485b-24b4-54a6-9879-39e9864a8ccc,Pranas,Katauskis,Professor,MIF
-fe355a33-4191-5b0d-8cba-a0ed940134dc,Igor,Katin,Assistant,MIF
-e682665e-05ac-538b-b92a-3e39eb969d99,Joana,Katina,Assistant,MIF
-d335753f-d48d-576b-a79c-9d327d02a1c2,Kristina,Kaulakytė,Docent,MIF
-0f7469b2-1e0a-5823-b012-eb086adcb2d4,Algis,Kavaliauskas,Assistant,MIF
-fce199a7-40eb-50e5-90ae-61fedcf4204a,Donatas,Kavaliauskas,PhD Student,MIF
-4205763b-a300-51bf-803e-c03c3d08d847,Vytautas,Kazakevičius,Professor,MIF
-d345dd3f-fc59-5e93-81cf-64fc033f6b9f,Laima,Kaziulytė,Assistant,MIF
-e94a8c4e-25e8-5268-8364-a8810a481672,Brigita,Kazlauskaitė,PhD Student,MIF
-0bc50607-c189-5bb8-a08f-3d655e597dc6,Rimantas,Kybartas,Professor,MIF
-9871f602-6707-5c7d-9807-55f86965b825,Ieva,Kilienė,PhD Student,MIF
-d0df04c1-d7ef-59c2-a344-b3bcf7627400,Donatas,Kimutis,Lecturer,MIF
-302a521e-4b8a-5a25-9708-dacefc9fed62,Andrius,Kirilovas,Assistant,MIF
-b43efc70-2cbc-58c0-ba0f-a92a8b09b546,Viktor,Kiško,Lecturer,MIF
-ac69d1b0-8ba3-5f6f-b863-ab5e63ee2480,Edita,Kizinevič,Assistant,MIF
-909052ca-3322-5e5e-a11b-70146a479742,Neringa,Klovienė,Research Doctor,MIF
-6efb1883-6716-597b-aa43-e1b7dd03b40b,Nikolaj,Kondrat,PhD Student,MIF
-8287c1a7-136b-5777-8ed1-d5b012d30e6a,Gražina,Korvel,Senior Research Doctor,MIF
-7e18d404-3c11-5922-997f-d5b4f1d86efb,Andrius,Košuba,Lecturer,MIF
-f8b8a47d-3bfe-564c-a1bc-a961fad11ac1,Gintarė,Košubienė,Lecturer,MIF
-5227b0c6-0a08-5582-8ef4-945b65a771e4,Nikolajus,Kozulinas,Assistant,MIF
-7db25f7e-b0be-50f1-8e96-0b53277f95e7,Rimvydas,Krasauskas,Docent,MIF
-7f82364e-626f-5f90-bfd6-d2d0db183e05,Arvydas,Kregždė,Docent,MIF
-efdf4b78-d8f3-5748-9c80-acd3327edd53,Rima,Kriauzienė,PhD Student,MIF
-51f843fe-6f49-5350-b498-b21d7239c96e,Dalia,Krikščiūnienė,Professor,MIF
-c9cfaed4-cdc2-5773-8943-43ba4df85825,Irina,Krikun,PhD Student,MIF
-9b5ad748-cb42-5409-a82d-2453185a5e99,Virgilijus,Krinickij,Lecturer,MIF
-a956a24c-24c2-50ec-a848-006482b663d8,Kęstutis,Kubilius,Senior Research Doctor,MIF
-070561e4-7641-507d-aa6c-a41ca1a03388,Tautvydas,Kuras,PhD Student,MIF
-ddbd7be0-9f28-5959-a75c-c800c3a48b35,Olga,Kurasova,Professor,MIF
-aa0d1840-215a-5f51-80d2-65b013be979b,Valentas,Kurauskas,Research Doctor,MIF
-2a9f002d-28b5-5892-af36-76048dc5b776,Jevgenij,Kurilov,Senior Research Doctor,MIF
-e960ac9a-4cac-5c87-b9d5-34b2b37840b3,Julija,Kurilova,PhD Student,MIF
-dea083e7-3c60-59e3-b6dd-d4b9c56b3208,Eduardas,Kutka,Lecturer,MIF
-9b2dbf7a-9b82-5492-b3bd-b018642dd63b,Kotryna,Kvederavičiūtė,Assistant,MIF
-c083a9aa-2aee-5b8a-b0fd-0c0c21601d0a,Linas,Laibinis,Professor,MIF
-c6fcda73-75e6-51e2-8e4b-ab8752430bd5,Algirdas,Lančinskas,Docent,MIF
-f23cbaf9-df27-5500-a9ff-89a6f1ecac68,Kristina,Lapin,Docent,MIF
-231aa41d-2f3e-5836-b60a-24547f27d631,Antanas,Laurinčikas,Senior Research Doctor,MIF
-cf9ff4b0-f544-5565-bfde-4bc4322bc4a4,Rimvydas,Laužikas,Professor,MIF
-72ee01dd-0652-5c19-a686-bbb620abe46b,Žilvinas,Ledas,Assistant,MIF
-461da8ac-dcc7-534b-bab1-5f01d1508caf,Remigijus,Leipus,Professor,MIF
-a1556ae5-2a89-56b8-ad29-5f508f83d021,Antanas,Lenkevičius,Lecturer,MIF
-f361e6af-b322-56cb-9663-50600110add6,Antanas,Lenkšas,Assistant,MIF
-44a29eb7-d087-5276-b029-d12a1d9c65c7,Rūta,Levulienė,Docent,MIF
-845c46bd-fa27-5441-a3a6-6cd32d7235f2,Gabija,Liaudanskaitė,Assistant,MIF
-bab22db8-3236-5ead-95a7-d42230f9b532,Gytenis,Lileika,PhD Student,MIF
-80165f0a-752b-51d8-a485-eebaa4d9def1,Audrius,Linartas,Professor,MIF
-b014e544-2517-5090-992d-e3e46014136f,Tomas,Gžegožas,Docent,MIF
-51361405-ca9d-5cbc-a05c-16a5fcdf164c,Linas,Litvinas,Assistant,MIF
-3a4ea5bd-d0f4-57ae-b47b-ce8ace27827c,Marius,Liutvinavičius,PhD Student,MIF
-3a4ea5bd-d0f4-57ae-b47b-ce8ace27827c,Marius,Liutvinavičius,Assistant,MIF
-b702fe5e-ff99-538f-a0e2-42a253c4f87f,Živilė,Lukšienė,Professor,MIF
-edb799a1-5d69-5342-9747-f14718171dfb,Audronė,Lupeikienė,Research Doctor,MIF
-c1bacd62-cdbd-5799-b767-9170c9dd61bf,Lukas,Maciulevičius,Assistant,MIF
-ca8c5eaf-2267-5741-a291-d601df19c396,Vigirdas,Mackevičius,Professor,MIF
-3cbdeb90-8bde-50b4-9078-1413cfbe6b85,Algirdas,Mačiulis,Docent,MIF
-0c631a86-b838-5de7-8525-b4bbc3bd2b2d,Vytautas,Maniušis,Lecturer,MIF
-d4467a2c-455f-50f1-8502-cc0b1b913865,Eugenijus,Manstavičius,Professor,MIF
-ad44040c-2e43-5c76-8828-3c9b299cdfc0,Martynas,Manstavičius,Docent,MIF
-06572e92-5710-597f-bdb1-7457f5cc395d,Justinas,Marcinka,Assistant,MIF
-00ec3187-4bd3-50fe-9c52-b63d4f3b0fdc,Virginijus,Marcinkevičius,Senior Research Doctor,MIF
-c04a03c7-edba-5722-82aa-4a86097a079f,Tautvydas,Marčiulaitis,Docent,MIF
-1ffc08e7-77f9-5721-a79c-1b2890b0b12c,Ramūnas,Markauskas,Docent,MIF
-e7f66767-7bdd-5c20-ba7f-8617ff48cdae,Jurgita,Markevičiūtė,Docent,MIF
-0a49f08a-fedc-5ccf-817c-3a5c4e19f80c,Vaida,Masiulionytė-Dagienė,Lecturer,MIF
-4899ddc7-8d4e-536b-996e-bae8f6b00ea9,Rokas,Masiulis,Docent,MIF
-3af9785e-2f32-50c1-9ee7-a9ea272b3aeb,Saulius,Maskeliūnas,Research Doctor,MIF
-6eeb239b-ca90-5db6-9034-f3c083e2657b,Edmundas,Mazėtis,Docent,MIF
-6fe3eedb-b77b-5b08-b0f0-e26a70f46c05,Viktor,Medvedev,Senior Research Doctor,MIF
-33b40720-b360-5bbf-830c-1872cb9ef674,Aidas,Medžiūnas,Assistant,MIF
-49ef2518-4a64-5942-90ee-5e86e100cf7d,Andrius,Merkys,Research Doctor,MIF
-f586163f-550c-5877-946b-55621d909d28,Tadas,Meškauskas,Professor,MIF
-3bc0b88e-e49c-5cb2-8ef8-a0a918c317bf,Rolandas,Meškys,Senior Research Doctor,MIF
-fe682d16-5b15-582c-887d-44992f1995ff,Donata,Mielaikaitė,Assistant,MIF
-1607b053-9347-5994-b6c9-2bd045e72963,Vytautas,Miežys,PhD Student,MIF
-e3eb9b0b-d4ca-5584-8a99-c99aea45b761,Irmantas,Mikulėnas,Lecturer,MIF
-6006cbee-38e4-5d64-b017-c3f0c40ed2ac,Jolanta,Miliauskaitė,Research Doctor,MIF
-aff86209-9b4e-58bf-9b61-b0f2dedc3e3a,Arūnas,Miliauskas,Research Doctor,MIF
-0e416cab-aca0-5be2-ae57-101b6a035060,Asta,Mincevič,PhD Student,MIF
-554224ff-50b8-5e36-9fd7-06111214c4c1,Saulius,Minkevičius,Senior Research Doctor,MIF
-1ed5a211-7ae1-597a-a251-75e7773b294a,Oleg,Mirzianov,Assistant,MIF
-5b488d6f-4a76-58b9-9069-61bee0db941b,Andrius,Vytautas,Assistant,MIF
-a2a995f4-cf19-5515-bd44-ab51c0a7ad5d,Ieva,Mitašiūnaitė-Besson,Assistant,MIF
-59614e6a-f926-53d3-ac93-8d8cd9990ff4,Antanas,Mitašiūnas,Docent,MIF
-7088f73a-f86a-521d-8f31-a75c34cdce39,Kęstutis,Mizara,Lecturer,MIF
-05e91d45-32f0-5f82-8b16-3359f6769bdf,Gabrielė,Mongirdaitė,PhD Student,MIF
-fe57fc0e-23ec-5259-96b9-1a5781fe068b,Rūta,Montvilienė,Lecturer,MIF
-bb60e8a6-d4b6-59fd-91dc-33332142f66f,Mindaugas,Morkūnas,PhD Student,MIF
-4c69ba51-a74d-55d9-80a2-c70f0c734acf,Gediminas,Murauskas,Docent,MIF
-95005635-2732-5024-a8c9-9e97d493329e,Tomas,Mūžas,Assistant,MIF
-880462bf-a291-5f3b-a77e-dab7eab15cf3,Evaldas,Narmontas,PhD Student,MIF
-dfda638b-8674-5a87-8bc2-8c49082fe526,Anatolij,Nečiporenko,PhD Student,MIF
-8deea65b-98bd-5e98-9873-96aee5217c29,Leonas,Nekrašas,PhD Student,MIF
-a92aeac2-ed09-50d3-84f6-7a8905f79381,Karolis,Noreika,PhD Student,MIF
-f682a636-0d0a-5667-a00f-3238dde7c8fd,Rimas,Norvaiša,Professor,MIF
-ad05d9e4-6033-504a-8b07-70536afd5828,Saulius,Norvidas,Senior Research Doctor,MIF
-a3fe858c-b1ab-56e3-81c8-326749c14df2,Jurij,Novickij,Research Doctor,MIF
-c5560339-1000-50e1-a668-ee9eb9c9b639,Aivaras,Novikas,Assistant,MIF
-339c4c3f-24c1-5e61-9172-c3b2089890c9,Kliment,Olechnovič,Research Doctor,MIF
-a24df22e-bea7-5f85-bfb8-2800ea6175e4,Daniele,Ettore,Senior Research Doctor,MIF
-6d7b0e19-92d3-5796-9e26-d6718fbdcd54,Elita,Pakalnickienė,Professor,MIF
-54287b26-005f-5331-9fa0-169faaa3c5ff,Grigory,Panasenko,Senior Research Doctor,MIF
-e1f18ae4-bce4-5760-bff5-df4357e6c57b,Tadas,Panavas,PhD Student,MIF
-86701161-a564-56c3-b8e8-ab2f1d7192f1,Izolda,Pašakinskienė,Professor,MIF
-1076ebdc-8df3-5f76-b8c4-de69132a776d,Gailė,Paukštaitė,Assistant,MIF
-8b5af53e-16cc-51fb-b008-461f28513db8,Saulius,Paukštys,PhD Student,MIF
-a6108010-9dbb-590c-abb4-75cfa20a654b,Remigijus,Paulavičius,Senior Research Doctor,MIF
-1ec2bd23-9407-5074-ad2a-56e6423cba7a,Stasys,Peldžius,Assistant,MIF
-c1cd984b-5903-53a1-b3a9-2e43779a252e,Linas,Petkevičius,Assistant,MIF
-f8a403db-d0f2-57b9-8746-6a953304d2dd,Karolis,Petrauskas,Docent,MIF
-034547a2-4a11-506b-81bc-08e55f912690,Jurgita,Petuškinaitė,PhD Student,MIF
-3dbf427f-7c3b-508c-8591-0108b2958a3a,Konstantinas,Pileckas,Professor,MIF
-384e4061-4fb6-5c6e-981b-f6a1491e3439,Inga,Piščikienė,Lecturer,MIF
-f4ede524-a1c7-5571-9b93-b2cf0ebe73f5,Tomas,Plankis,Assistant,MIF
-3287006d-9a9d-51e7-bb65-e5940a99b463,Darius,Plikynas,Senior Research Doctor,MIF
-9b6b725f-4aaf-5f14-bfa0-2ec41160e4ca,Mindaugas,Plukas,Lecturer,MIF
-ce580269-afbf-52c8-a45c-8f1f980fd3c9,Lina,Povilavičiūtė,Lecturer,MIF
-df738041-4832-5ca8-bcea-cdf84f790d9e,Viačeslav,Pozdniakov,Docent,MIF
-0794bf04-783d-5b8f-99dc-93b7a1a9a476,Aušrelė,Pranculienė,Lecturer,MIF
-868ac36c-b7c2-5e01-912d-84dcb610ef6b,Ingrida,Prigodina,Assistant,MIF
-6863b4ca-d400-59cd-9c04-a6ccc40e7059,Vytautas,Pugačevskis,Docent,MIF
-07e9000a-0585-5a5b-8727-7d8f93d09e21,Donata,Puplinskaitė,Research Doctor,MIF
-49a14a4b-c055-5e0a-b29b-506a28960c4d,Gintaras,Puriuškis,Docent,MIF
-422be096-f24b-5f8b-a173-92c833183922,Roma,Puronaitė,PhD Student,MIF
-7274fe1e-dfe2-51dd-aece-12f95e0e50bd,Alicija,Račienė,Assistant,MIF
-2972a7e4-560c-59ca-8c60-08975b7ffc4a,Alfredas,Račkauskas,Professor,MIF
-0db7f5ab-a4dc-556c-a20d-8ef284ea5f70,Irmantas,Radavičius,Lecturer,MIF
-6a968b46-c319-5153-b0d1-51788b8202ce,Marijus,Radavičius,Professor,MIF
-57664337-a3bd-5e43-9932-cc4c69679497,Vytautas,Radzevičius,PhD Student,MIF
-1a9f077c-02a8-5904-ba9a-7c76cc48aea0,Saulius,Ragaišis,Docent,MIF
-3868d03c-5c5c-5262-988f-5ac341e6f792,Jonas,Ragaišis,Lecturer,MIF
-e5b0e409-a3b7-5817-a7b6-3ffd18dfa729,Tomas,Raila,Assistant,MIF
-19a9d7ba-f810-5a7b-9acf-81ec5df3d4e6,Saulė,Raižienė,Professor,MIF
-6ff6e157-27a0-516b-ae97-005956ccc277,Neringa,Ramanauskė,Lecturer,MIF
-d115f3a1-2883-5c4e-af1b-fecbb857a6fb,Valdas,Rapševičius,Docent,MIF
-a8d0d0c7-ea77-51d8-b369-1517e36d6359,Aistis,Raudys,Professor,MIF
-c6e80743-9195-5024-af57-391a119dcd34,Šarūnas,Repšys,Assistant,MIF
-d0c700c4-b69b-574e-ae45-81e866f1e5bf,Liutauras,Ričkus,Docent,MIF
-5e9320db-e4b7-552a-97e1-3508ea423a63,Gediminas,Rimša,Lecturer,MIF
-ee4e3978-5289-5b17-a7e1-150562d222cb,Laura,Ringienė,Assistant,MIF
-4999b9fe-f4a5-59db-bd99-0c5f2c55e166,Rimantas,Rudzkis,Senior Research Doctor,MIF
-ccc93418-a44d-5db2-a2d3-47622d288c23,Martynas,Sabaliauskas,Assistant,MIF
-401a55a9-bc0a-5846-b7a8-8606f293fa2d,Leonidas,Sakalauskas,Senior Research Doctor,MIF
-f476a406-ffb8-5b2d-b24f-900718a03fe7,Darius,Sauliūnas,Professor,MIF
-cec54c4a-52bb-5107-a819-65ce49815359,Raimundas,Savukynas,Assistant,MIF
-cdf1f28b-da94-5b10-b758-9c4508064852,Jūratė,Senvaitienė,Professor,MIF
-301089dd-f6f5-5251-8102-877b57da5c56,Hannah,Lucy,Lecturer,MIF
-136da91f-9aa4-519b-b45f-400ed6468969,Tomas,Silkinis,PhD Student,MIF
-17270f13-3a2c-56c1-84af-23b71788bc96,Rūta,Sirvydė,Lecturer,MIF
-5558fcc9-876c-56eb-8017-af0f13fcae89,Vladas,Skakauskas,Senior Research Doctor,MIF
-addb64a7-4c95-504d-824f-3b8ffc7f2ead,Gintaras,Skersys,Assistant,MIF
-bb6f2c10-7f83-55ac-a136-9a35bf10330b,Viktor,Skorniakov,Docent,MIF
-e204a9e1-233b-594e-9c7e-800372b3324e,Aldona,Skučaitė,Assistant,MIF
-d8fe27d1-fc09-5023-972e-c95a868fc01c,Giedrius,Slivinskas,Professor,MIF
-ce3a31bb-ee8c-5e92-9bc7-f2d51b04cf5d,Asta,Slotkienė,Assistant,MIF
-5a1c5a50-151e-57bb-b538-148c8a9b02e1,Tomas,Smagurauskas,Lecturer,MIF
-e3857d2c-ea3e-5210-8a0a-14820843db83,Jonas,Sprindys,Assistant,MIF
-97d2f8d7-3275-5d0d-b9e9-452882d01088,Vilius,Stakėnas,Docent,MIF
-1eb6d669-39f8-5b8b-954a-6019716cfd03,Rasa,Stalnionytė,Lecturer,MIF
-e2a6d1f4-181c-59af-a194-ec887bff1a27,Mantas,Stankevičius,PhD Student,MIF
-5793bf67-5f4a-56dd-9144-73a5b754daba,Ieva,Stasiūnaitė,Assistant,MIF
-419aef0a-1fb4-5c1b-8cd7-cd1a6dffadcf,Asta,Statkevičienė,Lecturer,MIF
-af17dd55-7719-5774-b487-8613896917b9,Gediminas,Stepanauskas,Professor,MIF
-d255ee15-e0b6-55c3-bb00-857e4353356e,Vytautas,Stepas,Lecturer,MIF
-16301c5b-524b-513d-b14c-6d73cdc3815e,Mindaugas,Stoncelis,PhD Student,MIF
-80baea90-e092-55b5-a831-b03b3d19d031,Danguolė,Straižytė,Lecturer,MIF
-517b334b-3ea4-5000-9a7e-341cffcfed8f,Auksė,Stravinskienė,Lecturer,MIF
-007712c6-6044-5a58-bde9-8a863b6a9eac,Linas,Stripinis,PhD Student,MIF
-461e7ec5-0291-524c-a699-acace24151b1,Dovilė,Stumbrienė,Assistant,MIF
-caefbf79-24b9-5768-9a0e-48fe4f7251b7,Gabrielė,Stupurienė,Research Doctor,MIF
-27055fd0-50e3-5db5-a35c-f17d4bd7f639,Jonas,Kazys,Professor,MIF
-bc6add09-5192-502a-8256-c8c1cbf71d93,Edita,Sužiedėlienė,Professor,MIF
-35a88502-2b0b-5857-97d8-710179535383,Audrius,Šaikūnas,Assistant,MIF
-263a2afe-8e32-5a13-9f7c-3625e990f0d5,Arūnas,Šaltis,Lecturer,MIF
-8ea4b476-dbaa-5f92-ad99-71fcb31e78d0,Germanas,Šamrickis,Lecturer,MIF
-ce6ad1ff-632e-5ad7-9c10-ceda692c044a,Albertas,Šermokas,Professor,MIF
-af485756-3dbe-50a8-a4f0-916dd06362e9,Tomas,Šiaulys,PhD Student,MIF
-12f0578a-0596-5fd7-8d81-1bc0beec0de2,Jonas,Šiaulys,Professor,MIF
-62cda166-5fd7-5a50-9693-d082e82dbd81,Raivydas,Šimėnas,Assistant,MIF
-14983992-3708-5872-a372-e7ae41cbc67c,Remigijus,Šimkus,Senior Research Doctor,MIF
-3c0fdc70-308a-5b8a-b870-e5995ad5c3dc,Aurimas,Šimkus,Lecturer,MIF
-8ba00540-e19d-51f1-b07a-7a34370e1e12,Aleksandr,Širaliov,PhD Student,MIF
-85d0472a-acf8-517d-9fc4-9edf83bb311e,Agneta,Šmergelytė,PhD Student,MIF
-4e9a8a70-bbe4-58a4-9dca-929a45ca347d,Artūras,Štikonas,Senior Research Doctor,MIF
-2ed7d65d-1df5-53d8-9d86-cc768b88f831,Olga,Štikonienė,Professor,MIF
-a9d9533a-c739-5a54-90d4-8176be749765,Balys,Šulmanas,Lecturer,MIF
-1906e713-7204-5aa7-9789-eda4583fcd4b,Andrius,Šuminas,Docent,MIF
-e020c1bf-a317-5c22-97b9-a1ac7176d96b,Vytenis,Šumskas,Assistant,MIF
-4a69964e-b615-5837-bf0d-11a06fbfc2d5,Ingrida,Takinaitė,PhD Student,MIF
-e6dbc6fc-bef9-5601-a13c-1a50cbfae926,Rokas,Tamošiūnas,Assistant,MIF
-fa785020-4b0d-58cc-be6f-6a2451c51fbb,Gintautas,Tamulevičius,Docent,MIF
-7e4928ac-c9ee-572a-ac90-88eeb7a91f27,Jelena,Tamulienė,Senior Research Doctor,MIF
-44b20d87-9aa4-518c-842a-8ed8e77a9e5e,Piotr,Tarasov,PhD Student,MIF
-3c3324fc-d91a-577f-a121-c54f994ad643,Saulius,Tautvaišas,PhD Student,MIF
-4c784aae-8f57-534e-8b86-a386c3500e5b,Ričardas,Toliušis,PhD Student,MIF
-06667d4a-1622-5e8a-9c3b-aed93776eedc,Povilas,Treigys,Docent,MIF
-61f11a88-5a59-57c2-ac04-56dea6302718,Tomas,Tumasonis,Lecturer,MIF
-8ad3ef47-ff6a-5455-85ec-a8cdb405df7b,Liudas,Tumonis,Senior Research Doctor,MIF
-8ca3ad47-b9a5-5537-808c-1574b1a89fdd,Karolis,Uosis,Lecturer,MIF
-8e45a66e-a3a0-5af5-ace7-e2dff3b90af8,Aušra,Urbaitytė,PhD Student,MIF
-8d75de95-be4c-51b2-85ef-d5241360b76c,Neringa,Urbonaitė,PhD Student,MIF
-e07e3cfb-286f-5522-865b-791bf52b3905,Rūta,Užupytė,PhD Student,MIF
-07aa1ccd-7f8d-5c76-8f5e-6c0a52de5534,Lukas,Vabalas,PhD Student,MIF
-439c45a4-b355-59ee-97d2-49c8da076d6c,Gediminas,Vadeikis,PhD Student,MIF
-ac687936-72d2-54d9-ba9d-8e367dccdec3,Rimantas,Vaicekauskas,Professor,MIF
-78f56a57-ec9d-5238-b864-7c8f6e3a172e,Marijus,Vaičiulis,Senior Research Doctor,MIF
-697d59a6-1139-55e2-968b-fce8e6c36161,Adelė,Vaiginytė,PhD Student,MIF
-6803da1e-388e-57c5-a257-108a673112c2,Žydrūnas,Vaišnoras,Assistant,MIF
-f1a83ddb-90c1-5d1e-88f8-170b9230476b,Jogaila,Vaitekaitis,PhD Student,MIF
-9699ca13-9680-5022-90ca-434a848a3c5d,Paulius,Vaitkevičius,PhD Student,MIF
-2f50e2e2-05e4-504c-a8d4-043a396a6cf6,Vytautas,Valaitis,Assistant,MIF
-c1da5e42-96bb-53f8-bc2d-278f2d0cf0b9,Vilma,Vaskelaitė,Lecturer,MIF
-7f619c7e-227e-59b6-8301-a9902c8e6330,Julius,Venskus,PhD Student,MIF
-a0f7d04e-b7d9-5b22-8bd3-861d1d994d5e,Raimundas,Vidunas,Docent,MIF
-1ccb377d-db62-50d7-89b2-447da618b98d,Lina,Vinikienė,PhD Student,MIF
-256b173d-1e5b-5495-95e5-fd58c4fa4539,Pranciškus,Vitta,Docent,MIF
-387ed039-f3de-5242-b407-2bfe06b20363,Vytas,Zacharovas,Docent,MIF
-4f165f9e-4902-51cc-96fe-92eb404bde31,Vaidotas,Zemlys,Assistant,MIF
-b4524ec8-6136-51d2-9439-a4f49b08592d,Gediminas,Ziezys,PhD Student,MIF
-81fc280d-806f-5899-b582-67b7504a1506,Eglė,Zikarienė,PhD Student,MIF
-5f7c1aba-a86b-5678-8ca1-1fcf7e6aafed,Albertas,Zinevičius,Assistant,MIF
-4c58bce8-4ac4-57e1-a40d-eef400e58c53,Giedrius,Zlatkus,Professor,MIF
-083486cf-a0b8-5a7b-84b5-a3ed16b16928,Vilma,Zubaitienė,Docent,MIF
-446ea426-5536-50c5-996c-0d0dca46733c,Severinas,Zubė,Docent,MIF
-6d6b3a39-2130-51a3-8e67-46d4ee0dadba,Rima,Žagūnienė,Lecturer,MIF
-a3e79c9d-92a4-5692-baf0-1aa1411b87f3,Rimantas,Želvys,Professor,MIF
-0b9bdb0d-d728-5a71-9a5a-5c53d0fc016a,Kęstutis,Žilinskas,Docent,MIF
-ecc2c0eb-5dbb-5d45-afea-3629ee67fe6c,Julius,Žilinskas,Senior Research Doctor,MIF
-0eb012f3-b80d-53ee-bf79-663f4fb68894,Donatas,Žvingila,Professor,MIF
+﻿Id;FirstName;LastName;Description;Rank;Faculty
+0dac4305-e000-573a-a33e-d69f99869872;Andrius;Adamonis;;Docent;MIF
+c5d915d1-600a-5a50-8bf7-c484d6fc0cc3;Andrius;Adamonis;;PhD Student;MIF
+f445fef9-0820-59b6-8865-91c08d7d4bbc;Liudas;Ališauskas;;PhD Student;MIF
+3ed921c5-ee9d-548b-a2ab-f32287e95be0;Giedrius;Alkauskas;;Senior Research Doctor;MIF
+dc8a229e-832a-5320-aca9-cffe71987fc2;Romas;Alonderis;;Research Doctor;MIF
+aa42edd1-e009-544b-9519-d4a341923ad5;Gediminas;Alzbutas;;Docent;MIF
+cb4abf6f-b625-508f-8c9c-76ae25d70bc3;Algirdas;Ambrazevičius;;Professor;MIF
+5a63ebe1-f011-50ef-a399-41155e5bd25a;Julius;Andrikonis;;Assistant;MIF
+a2f26129-6168-5b7e-bfc0-6f7934b9a4d9;Daumilas;Ardickas;;PhD Student;MIF
+0b877fb7-f344-52a6-abac-877f8e71161c;Jaroslava;Arsenjeva;;PhD Student;MIF
+35e29410-2fe3-5dbc-b0b1-21e361e21dfe;Rokas;Astrauskas;;Assistant;MIF
+01762656-9448-59a5-a1ba-082e5cda7719;Arvydas;Astrauskas;;Research Doctor;MIF
+a959eda9-d6ea-513d-b150-3c2b6fd8dd96;Vytautas;Ašeris;;Professor;MIF
+51ddfb16-db57-584e-9a71-dde293b3bd73;Gediminas;Bagdonas;;Assistant;MIF
+6988f24b-c2e7-584c-b920-f5f1ca275c52;Vilijandas;Bagdonavičius;;Professor;MIF
+978b5bca-8982-52a0-b14e-93d428a049ab;Gintaras;Bakštys;;Professor;MIF
+150210fb-9b66-5386-9e0d-49aebf8e54d5;Aidas;Balčiūnas;;Assistant;MIF
+2720342f-93d3-502a-a929-313a8ecca1c1;Gintautas;Bareikis;;Docent;MIF
+bc1db2de-e4e7-58c0-a255-7b63231c564c;Darius;Baronas;;Lecturer;MIF
+40d1d4d5-7a54-5cc1-a53c-f783486ebe77;Romas;Baronas;;Professor;MIF
+f3fe6332-8997-52b9-b027-b89816444e29;Karolis;Bartkus;;PhD Student;MIF
+d8209824-93c1-5f28-bd0b-e8f5f7018137;Igoris;Belovas;;Senior Research Doctor;MIF
+6db311c4-adde-5b15-adfe-1c75269902c8;Margarita;Beniušė;;Assistant;MIF
+6228434b-6fbe-5025-b891-c0fa45d1826d;Jolita;Bernatavičienė;;Senior Research Doctor;MIF
+042db538-98be-5ea3-a593-0c0b90035e23;Andrius;Berniukevičius;;PhD Student;MIF
+54d158c9-c1e1-5bc3-93af-31e2c6b14b76;Rytis;Bieliauskas;;PhD Student;MIF
+5f4a905c-1f65-5657-a9e8-92a452c06f53;Kristina;Bingelė;;Assistant;MIF
+b96d3127-5c4e-54b1-a095-73c9be3a8890;Algimantas;Birbilas;;PhD Student;MIF
+0c021f6e-0113-5fe0-9faa-3634367bc3be;Adomas;Birštunas;;Assistant;MIF
+abcef951-03e5-5a61-a81b-a177131828d3;Marija;Biteniekytė;;Lecturer;MIF
+df0d9b68-6d0e-5bce-be7e-32357b24660e;Genė;Biziulevičienė;;Professor;MIF
+e879f3df-f324-59d5-9753-3c384a0b2d8e;Saulius;Blažiūnas;;Lecturer;MIF
+5bc999ec-ea48-5233-a6c4-c1ea3ea4ed9f;Mindaugas;Bloznelis;;Professor;MIF
+5d39a92e-8206-5da0-9b05-b9893a23253b;Agnė;Brilingaitė;;Docent;MIF
+d663164e-abc3-5e87-8dcd-cf937d39398f;Jonas;Brusokas;;Assistant;MIF
+4c043736-9009-5d04-9682-6acc927d2911;Saulius;Bucka;;PhD Student;MIF
+f0866ac1-bad3-5dd9-8f0c-ddd6fa483c47;Linas;Bukauskas;;Docent;MIF
+b5ae462f-c324-5b48-bce9-50ed6ccc5df2;Viktoras;Bulavas;;Lecturer;MIF
+d58c7f95-ce7c-58d6-a79b-ee11aea23960;Rūta;Burbaitė;;Lecturer;MIF
+3cc521b8-eec9-52a2-9c7f-087f42d8809e;Martynas;Burbulevičius;;PhD Student;MIF
+582fbf3a-4fc2-5e96-82ad-39f856e78be8;Andrius;Buteikis;;Assistant;MIF
+95669f8c-bf02-561b-9b95-d0d52792ab94;Linas;Būtėnas;;Lecturer;MIF
+843732fe-826f-50a8-afbf-611f10f52701;Dmitrij;Celov;;Assistant;MIF
+770a789b-9e4e-5290-a30a-da280c73404b;Albertas;Čaplinskas;;Professor;MIF
+fac358c7-c946-5148-b98e-f5cc2c5013e9;Vaida;Čeikutė;;Lecturer;MIF
+d261dfad-68a5-54d4-8659-04b1c3f85a23;Vydas;Čekanavičius;;Professor;MIF
+a3afca3a-9a12-5769-839b-868247ab53b9;Bernardas;Čiapas;;PhD Student;MIF
+816b5b8d-04fd-51ee-b2f6-a7210b28b2a1;Andrius;Čiginas;;Research Doctor;MIF
+c1bfb1d6-48af-54ae-b8a5-9b9276687d1f;Vytautas;Čyras;;Docent;MIF
+c95878a8-a117-519e-aef8-b1399e32e3ab;Alminas;Čivilis;;Assistant;MIF
+547cf050-506a-5b71-b757-ccee0faae06f;Daiva;Dabkevičienė;;Research Doctor;MIF
+cb5242f3-bc01-5856-a469-970ce815c1ec;Valentina;Dagienė;;Senior Research Doctor;MIF
+52abbcbf-3b19-55fd-9316-ed9b1170f94a;Indrė;Dalgėdienė;;Assistant;MIF
+ce6b4e3c-fa65-576f-b672-d420425862a6;Julius;Damarackas;;Assistant;MIF
+a07cc09a-e84d-5f1e-bf1b-27102d4c35a8;Paulius;Danielius;;PhD Student;MIF
+9cdaac6d-3b4c-5955-bab9-558b09bac274;Tadas;Danielius;;PhD Student;MIF
+20edb6bd-64d9-5f11-8632-e9b71ab15913;Svetlana;Danilenko;;Research Doctor;MIF
+b7ba1118-f559-52b9-a7c3-b63064babb89;Sigitas;Dapkūnas;;Docent;MIF
+d4dc5651-32d3-5d30-b38a-3785d488c106;Boleslovas;Dapkūnas;;Assistant;MIF
+55d9500f-5973-5adb-b3ff-c432aa0c98c2;Aušra;Dapšienė;;Lecturer;MIF
+af126280-d555-5b6f-891a-116a618a638f;Andrius;Daranda;;PhD Student;MIF
+0c9bb94d-67fa-569c-9d7c-e782dec4c423;Natalja;Denisenko;;PhD Student;MIF
+4f4192e1-4b30-520f-aa0c-0c4826f36ade;Valdas;Dičiūnas;;Assistant;MIF
+b97bd04b-b15c-5385-8dd7-5bc043d3b323;Šarūnas;Dirmeikis;;Lecturer;MIF
+8ffdf09b-0529-5ee4-b619-84edf8e0fcf6;Vladimiras;Dolgopolovas;;Research Doctor;MIF
+1f77f7b3-1506-51bb-aa20-58ff6df51dba;Gintaras;Dreižas;;PhD Student;MIF
+5cd8dbfe-2870-59d7-a8b4-350d2cd344a4;Paulius;Drungilas;;Professor;MIF
+5ab21366-ed25-51bc-8962-78319cc87943;Artūras;Dubickas;;Senior Research Doctor;MIF
+cede196c-2e07-5dcf-a92d-05be94486b15;Kęstutis;Dučinskas;;Professor;MIF
+b2cdcecf-cc39-5513-85c5-bd015abf2e68;Rita;Dukynaitė;;Senior Research Doctor;MIF
+234068bd-d02f-5e0a-a6a9-81a524eb6c1b;Vytautas;Dulskis;;PhD Student;MIF
+1b92ee44-80c5-502d-94e3-bcc4f450b2da;Viktorija;Dvareckienė;;PhD Student;MIF
+3f88f1cf-c420-5b72-b660-b02e57e36d75;Gintautas;Dzemyda;;Professor;MIF
+19290d3a-d69d-5a21-9488-0da5d4a4e85a;Dalė;Dzemydienė;;Professor;MIF
+cf8ff3bf-eed8-53d1-bec6-238f15783bba;Ramūnas;Dzindzalieta;;Lecturer;MIF
+b112ad5f-dd5b-5e47-b242-a88d37b3b036;Dainius;Dzindzalieta;;Research Doctor;MIF
+e446362e-2b3a-5ca6-b31b-2fd983dd6e5f;Rimantas;Eidukevičius;;Docent;MIF
+1dd5b430-f4b1-59b2-837c-eabd4f240392;Aistė;Elijio;;Docent;MIF
+26fbc808-760d-595d-b0cb-99aba4f16de9;Ernestas;Filatovas;;Senior Research Doctor;MIF
+1d6bb450-7110-51e1-bb41-8ab9a9b8e05f;Violeta;Franckevič;;PhD Student;MIF
+1397ac7a-6027-57e2-8fb8-083406d456a0;Edmundas;Gaigalas;;Docent;MIF
+f47340c2-5fe1-5a3d-8039-1badc6affebc;Ramūnas;Garunkštis;;Professor;MIF
+4d646ec5-63ca-5b08-842c-f1e1072aeb99;Haroldas;Giedra;;Assistant;MIF
+3932bc02-d354-54e3-8df6-6b526a4155f2;Rokas;Gylys;;PhD Student;MIF
+111d532b-d2bf-5640-b2de-ac553c451cf5;Albertas;Gimbutas;;Lecturer;MIF
+39d6a49e-871b-5bf6-bbe7-2ab42c88ee7d;Laura;Giniūnienė;;Lecturer;MIF
+6f7ce898-7b0e-54b4-8695-253558b84b49;Saulė;Girdzijauskaitė;;Lecturer;MIF
+1f95806f-105b-5a6d-9863-8b0bb7be428f;Aldas;Glemža;;Professor;MIF
+68a76729-1da2-5539-8104-543d8b48e29f;Emilija;Globienė;;Assistant;MIF
+f59036c0-bd73-5a28-9442-9446d93b681f;Viktoras;Golubevas;;Lecturer;MIF
+1d36f5ea-bf8d-5fb8-8107-5ab5f910e4d6;Diana;Gornatkevičienė;;Lecturer;MIF
+7b035bb0-3acb-5299-be07-0c57be893b63;Giedrius;Graževičius;;Lecturer;MIF
+f4e67335-7911-5c48-b8a3-13fc00f6959c;Saulius;Gražulis;;Professor;MIF
+2de5f508-ff1c-56d0-b863-9c3ab7f2e788;Andrius;Grevys;;Lecturer;MIF
+3e0086c4-0543-5c09-9e11-6a43baac9d2c;Saulius;Grigaitis;;Docent;MIF
+f3a3324e-39c8-59d7-bba2-86c835393ea8;Andrius;Grigutis;;Docent;MIF
+e625f32f-89e8-5aa6-9d9a-f2668db06efe;Irus;Grinis;;Lecturer;MIF
+ce3763a1-8295-5db1-a99f-b5183022a769;Mantas;Grubliauskis;;Lecturer;MIF
+5fdc83ab-0aee-58a4-b832-bc71fbaa96d8;Jovita;Gudan;;Assistant;MIF
+8161e834-6198-5c2a-94e9-9f3c89b0587b;Saulius;Gudas;;Senior Research Doctor;MIF
+0645751a-15b1-57e8-aae2-b687a2cc40a3;Arūnas;Gudinavičius;;Docent;MIF
+346c1dee-80ef-53dc-a3fc-f32df8669aea;Povilas;Gudžius;;PhD Student;MIF
+55af5694-ea6b-546e-ba30-d57dbf4408f7;Eglė;Gutauskaitė;;Assistant;MIF
+99d5e29c-ffdc-541b-b6c9-b182c52836f5;Jolita;Ignatavičiūtė;;Lecturer;MIF
+a58ce1f4-fbed-5391-bdcd-bc4cfc7eb907;Aleksandr;Igumenov;;Lecturer;MIF
+b4521c0e-7900-5a3d-af93-4978b562c663;Ovidiu;Ivancu;;Assistant;MIF
+03f9456e-0fbd-53af-a6ee-4ae031359554;Zorian;Ivanec;;Lecturer;MIF
+1db82559-3fb1-509c-bc2b-77b6c128b10b;Audronė;Jakaitienė;;Professor;MIF
+53cb08bf-a1cf-54eb-8c20-bafda7bc12f3;Arūnas;Janeliūnas;;Docent;MIF
+f4a6239b-fcad-54b3-8f5f-6fafd2299233;Erika;Janiūnienė;;Docent;MIF
+3538ee08-4097-5873-9cd6-ce421ed605a7;Ana;Jankūnienė;;Lecturer;MIF
+a250424d-2c7c-5862-8bf9-08fe99823c54;Artūras;Jankus;;Lecturer;MIF
+ac9b7aee-205d-5c18-9391-15598cbf56b8;Jonas;Jarutis;;PhD Student;MIF
+8a389f35-d55b-5a8d-ae23-da98a1128ed2;Eglė;Jasutė;;Docent;MIF
+5e4a02b5-133e-5d5e-9b86-b91736e0aae3;Eglė;Jaunė;;Assistant;MIF
+309dfe6c-bc86-5f7b-acf6-4f9eed1e5a6b;Tatjana;Jevsikova;;Research Doctor;MIF
+9592874d-a461-5cf7-aaf5-37f3abb75cf4;Saulius;Jokubaitis;;PhD Student;MIF
+09565843-c6c0-5924-ac08-bba068eee988;Vytautas;Jonkus;;Docent;MIF
+de26da5c-f4ec-5528-b471-f38d3875327e;Justinas;Jucevičius;;PhD Student;MIF
+bf13c71d-49aa-54bf-b234-bc8f342949c0;Domantas;Judeikis;;Assistant;MIF
+ea1235dd-881f-584f-ab75-41c94adaa653;Grintas;Junevičius;;PhD Student;MIF
+79846f75-2360-552a-931c-623b436f2e2b;Rita;Juodagalvytė;;PhD Student;MIF
+8a7ccc28-6c7e-5ea9-b0e9-95a8a49773e6;Algimantas;Juozapavičius;;Professor;MIF
+b288e6e9-85aa-5f2a-af56-9259fd4d4179;Vilius;Jurgelevičius;;Assistant;MIF
+38536597-a144-5722-b0bc-c6189f054112;Albertas;Jurgelevičius;;PhD Student;MIF
+c945d8b0-a58b-5760-8714-6066fbb42b9e;Vaidas;Jusevičius;;Docent;MIF
+f42d0ea8-b51a-5b16-97c3-d59c21cb32c6;Mindaugas;Jusis;;PhD Student;MIF
+6ab353b3-abf0-5776-a3a6-f59cb2724597;Anita;Juškevičienė;;Research Doctor;MIF
+b86304a5-2574-526c-a360-f5179741c300;Tomas;Juškevičius;;Research Doctor;MIF
+ef1e8c9a-6206-55e9-b197-be6cdd99c239;Audrius;Kačėnas;;Lecturer;MIF
+e54d2cb4-51fd-5cff-98ed-3a0399b7e800;Laura;Kalinienė;;Docent;MIF
+bbad254b-1db5-50c8-855a-723b6438844f;Marta;Karaliutė;;PhD Student;MIF
+2e19f4b7-bc44-582a-9810-a84ac230fd55;Rasa;Karbauskaitė;;Research Doctor;MIF
+c614d591-4291-5f1c-991d-46ea7e8574f0;Kęstutis;Karčiauskas;;Senior Research Doctor;MIF
+ee4a9e05-a893-5e59-aeff-3a284dc44950;Erikas;Karikovas;;Assistant;MIF
+89ee825b-14e5-5f93-9f9f-792164fb1b5c;Mindaugas;Karpinskas;;Lecturer;MIF
+bf26338f-3866-5729-aace-9c3579eeab8c;Pijus;Kasparaitis;;Docent;MIF
+f9d2fa23-fc3d-5f78-aa5c-f292495ad5ae;Romualdas;Kašuba;;Docent;MIF
+550119ba-7bd6-56f0-9829-b599c21a7e65;Pranas;Katauskis;;Professor;MIF
+0e807c9b-61d8-54ef-a6a3-7a77b7301953;Igor;Katin;;Assistant;MIF
+5e4e4cb8-94d7-5774-8a24-858853bfe49c;Joana;Katina;;Assistant;MIF
+b7d09f11-d28e-58a2-b1a1-6d4074c2cd2d;Kristina;Kaulakytė;;Docent;MIF
+41fb35d1-fb30-5b24-adee-81e506ed0005;Algis;Kavaliauskas;;Assistant;MIF
+bfe6895a-7023-5c74-af5c-1730cecb20bd;Donatas;Kavaliauskas;;PhD Student;MIF
+ee238e54-6ed5-5044-82a2-ffd0b4996996;Vytautas;Kazakevičius;;Professor;MIF
+ac310c6f-b1a1-5a18-bc04-ae408d83ec9e;Laima;Kaziulytė;;Assistant;MIF
+b3aaaac2-8d7b-553e-b902-37f957509ba3;Brigita;Kazlauskaitė;;PhD Student;MIF
+6bc50396-2323-5df2-84df-a4994d46a37d;Rimantas;Kybartas;;Professor;MIF
+674089e7-b5dd-5ed3-9fdd-d6b31c9d6dec;Ieva;Kilienė;;PhD Student;MIF
+a1c1d016-5bf4-5b66-bcaf-155b06a038c0;Donatas;Kimutis;;Lecturer;MIF
+a2606485-0dfb-58b6-a3c6-378920f03f22;Andrius;Kirilovas;;Assistant;MIF
+ffd43d41-0192-5bff-85a7-c16e0a1b0047;Viktor;Kiško;;Lecturer;MIF
+ec000164-0dcb-591a-8a81-7d48668786f0;Edita;Kizinevič;;Assistant;MIF
+e9e54381-8ce8-501b-8433-9d4cb27dc484;Neringa;Klovienė;;Research Doctor;MIF
+e5dc561b-02ba-5e8f-9820-438168f14bcf;Nikolaj;Kondrat;;PhD Student;MIF
+81b1fd15-51b0-5956-841c-2e86636e32fa;Gražina;Korvel;;Senior Research Doctor;MIF
+3fdb8bf5-e55f-5f01-a1a6-3a6cad4f423f;Andrius;Košuba;;Lecturer;MIF
+38e719ae-f3f4-562a-9453-c1eceaf86226;Gintarė;Košubienė;;Lecturer;MIF
+ea27b165-8313-50ac-9b79-0a470510a89d;Nikolajus;Kozulinas;;Assistant;MIF
+c39d2cee-8b0c-55d2-a8f1-46eccaf65889;Rimvydas;Krasauskas;;Docent;MIF
+d1111cba-003d-593f-b2df-742d43ab247c;Arvydas;Kregždė;;Docent;MIF
+0d3ea4c3-69ec-5354-be8f-f17ab28ad7c6;Rima;Kriauzienė;;PhD Student;MIF
+a33da863-e031-570a-a09b-d787296999d6;Dalia;Krikščiūnienė;;Professor;MIF
+78ab0515-0f9c-5008-9e47-2ddf1f542f02;Irina;Krikun;;PhD Student;MIF
+ff5de7a7-7e24-570a-a4ed-545238b177e2;Virgilijus;Krinickij;;Lecturer;MIF
+361f3f15-0d78-5d5e-9227-0b9f0f9a2216;Kęstutis;Kubilius;;Senior Research Doctor;MIF
+4a031bd4-ae49-5b29-abff-63623d1153eb;Tautvydas;Kuras;;PhD Student;MIF
+aff74151-eb81-53d8-afa9-c12b915591a9;Olga;Kurasova;;Professor;MIF
+6220f630-996d-5784-b539-202c2378eabc;Valentas;Kurauskas;;Research Doctor;MIF
+701fcffe-461b-52a2-9a4c-867856c85abd;Jevgenij;Kurilov;;Senior Research Doctor;MIF
+da034deb-e35c-5592-9e95-7290208a45a5;Julija;Kurilova;;PhD Student;MIF
+e7ce3bab-0a20-5a35-b1f5-fec45419b833;Eduardas;Kutka;;Lecturer;MIF
+2b100310-9844-5c43-a41f-f8da54690351;Kotryna;Kvederavičiūtė;;Assistant;MIF
+e3f968a3-c818-549b-a4bf-4820976e4be2;Linas;Laibinis;;Professor;MIF
+966b5b4e-1bf4-59e8-9ada-498876471a2c;Algirdas;Lančinskas;;Docent;MIF
+c2ab779d-483b-5c8a-a8c3-c7f564f39dbc;Kristina;Lapin;;Docent;MIF
+000d0ddc-ffd4-531b-862c-5f39fe278882;Antanas;Laurinčikas;;Senior Research Doctor;MIF
+7b0f484e-b392-5585-ba62-2302d09e8f45;Rimvydas;Laužikas;;Professor;MIF
+dfd58a58-fc75-5583-aab2-98f390b2aff4;Žilvinas;Ledas;;Assistant;MIF
+3003dd5c-6599-5483-b6ba-5e742e7e5034;Remigijus;Leipus;;Professor;MIF
+660023a2-25fc-557f-9a5f-0945dc0ea82d;Antanas;Lenkevičius;;Lecturer;MIF
+e471e496-39da-5fe4-8dbd-b59301a86f9f;Antanas;Lenkšas;;Assistant;MIF
+b54176b5-7c5d-5345-8ffd-0983c4084f8c;Rūta;Levulienė;;Docent;MIF
+8c7f4dd5-704c-5426-ac7d-882bfd02c6d1;Gabija;Liaudanskaitė;;Assistant;MIF
+cde06e70-883e-5359-aa69-0ee50c865066;Gytenis;Lileika;;PhD Student;MIF
+1c1784f7-7df2-5252-96a9-aeac6b111b58;Audrius;Linartas;;Professor;MIF
+62b90f5c-a9e2-58f3-b3d9-307dd7501817;Tomas;Gžegožas;;Docent;MIF
+8dec61dd-7354-5967-9c6e-4f0002364173;Linas;Litvinas;;Assistant;MIF
+395808f9-7e5b-5de6-800b-b2f82b1b1c60;Marius;Liutvinavičius;;PhD Student;MIF
+60e49981-f8ab-56c9-9597-7aa4526ede85;Marius;Liutvinavičius;;Assistant;MIF
+25292b23-73f7-5bb4-8433-b97599a27596;Živilė;Lukšienė;;Professor;MIF
+3f60a7e8-b7d1-5afd-847c-c7e473b64471;Audronė;Lupeikienė;;Research Doctor;MIF
+e3b8f8e5-3765-59c1-a2c6-4c7aaf30f468;Lukas;Maciulevičius;;Assistant;MIF
+a9de63b1-425e-5148-88f1-22cd66f67b8f;Vigirdas;Mackevičius;;Professor;MIF
+02b97164-f4c5-5175-a599-274157eb3714;Algirdas;Mačiulis;;Docent;MIF
+ab786e61-be10-5873-b1db-6b903c953541;Vytautas;Maniušis;;Lecturer;MIF
+7bfb68d1-84e3-5691-9d58-49d12962a8f6;Eugenijus;Manstavičius;;Professor;MIF
+bdafb9ef-3bf0-59ca-9068-3d32a446771d;Martynas;Manstavičius;;Docent;MIF
+67ce3ca8-23d6-570c-972b-bad6b702290d;Justinas;Marcinka;;Assistant;MIF
+b7604452-ed66-5fb0-a5ff-e4dd78a693c1;Virginijus;Marcinkevičius;;Senior Research Doctor;MIF
+2954c676-b393-5f4c-b50d-91477bdf5418;Tautvydas;Marčiulaitis;;Docent;MIF
+7aa9a06b-abb1-58d9-b100-4e68181eb6b6;Ramūnas;Markauskas;;Docent;MIF
+419640c6-103e-51a7-ab20-0042816d1ebe;Jurgita;Markevičiūtė;;Docent;MIF
+40c3a777-6099-526e-ae67-4c04c5325ee3;Vaida;Masiulionytė-Dagienė;;Lecturer;MIF
+6234e8b3-08c6-5994-ac66-d7ac7c4edef7;Rokas;Masiulis;;Docent;MIF
+374012a4-42fc-57c2-90c3-20f825ae50d0;Saulius;Maskeliūnas;;Research Doctor;MIF
+02bd73f5-30c2-5cde-8440-2dc08ad33b3c;Edmundas;Mazėtis;;Docent;MIF
+edb08662-5954-5e3a-9d54-b2ce1147b541;Viktor;Medvedev;;Senior Research Doctor;MIF
+7ed81cce-b6f0-5860-8d52-d06273b5851c;Aidas;Medžiūnas;;Assistant;MIF
+873e5b73-5a92-590a-8c42-572c47021977;Andrius;Merkys;;Research Doctor;MIF
+1f443de9-d9bf-5e26-b043-cd9bf0a3f2ae;Tadas;Meškauskas;;Professor;MIF
+ac0e45e0-0489-57ed-ad7f-a3aae0fbdde5;Rolandas;Meškys;;Senior Research Doctor;MIF
+b64fe324-33d9-5154-8825-6341e9aa0b62;Donata;Mielaikaitė;;Assistant;MIF
+25fe6fd8-5a9d-5374-9ba6-f84815d0b981;Vytautas;Miežys;;PhD Student;MIF
+a9a2fa2a-bca3-57a1-a411-6b96f064ad41;Irmantas;Mikulėnas;;Lecturer;MIF
+10ed0f82-4fae-5712-89d9-cecf0dfd7f3a;Jolanta;Miliauskaitė;;Research Doctor;MIF
+1aa1e869-2ba4-5960-b63b-8ad7dc4800c8;Arūnas;Miliauskas;;Research Doctor;MIF
+21c88d37-0df2-535c-8946-5a5f0239ae35;Asta;Mincevič;;PhD Student;MIF
+4a6601b7-7ba8-5798-8ab7-e0f77adf6f3f;Saulius;Minkevičius;;Senior Research Doctor;MIF
+21f17945-b936-59c5-bc29-a9d6d86adce4;Oleg;Mirzianov;;Assistant;MIF
+cb31b096-5983-555b-b9cd-2c1b1ed2e3b8;Andrius;Vytautas;;Assistant;MIF
+83434cde-9555-517d-afee-c9370100bef5;Ieva;Mitašiūnaitė-Besson;;Assistant;MIF
+c0f0a9ce-5d03-5c13-9d9e-043919a0838e;Antanas;Mitašiūnas;;Docent;MIF
+b5d63df6-0655-5a3c-90d4-eab49aa32bce;Kęstutis;Mizara;;Lecturer;MIF
+fd51a9ad-e2ed-5c5a-8725-f6e772b1b28d;Gabrielė;Mongirdaitė;;PhD Student;MIF
+7c07f84d-5143-530f-a357-9a7087d509b0;Rūta;Montvilienė;;Lecturer;MIF
+0bb30636-fe86-5581-b723-44c94c3c0e7a;Mindaugas;Morkūnas;;PhD Student;MIF
+2394bd4e-6da4-5f30-86e7-de6c3794387d;Gediminas;Murauskas;;Docent;MIF
+3d1c39c9-5271-55ad-8415-aed7c8578755;Tomas;Mūžas;;Assistant;MIF
+ae6cbe3b-8fd4-5029-8e72-4dc7103081bf;Evaldas;Narmontas;;PhD Student;MIF
+a2cc8b35-3686-535e-8ae1-0579ea45bdfb;Anatolij;Nečiporenko;;PhD Student;MIF
+84c49733-f9fb-5252-9c53-d0d76c334e58;Leonas;Nekrašas;;PhD Student;MIF
+913332dd-1449-524f-b2de-b2b3202fb0fe;Karolis;Noreika;;PhD Student;MIF
+c53734d8-2a99-59ae-bb9d-63c3a53651bc;Rimas;Norvaiša;;Professor;MIF
+19521959-c6d1-5b6e-83f3-fb1ae261895a;Saulius;Norvidas;;Senior Research Doctor;MIF
+7aea0277-2097-573c-8bdc-e0f4aeaeaee6;Jurij;Novickij;;Research Doctor;MIF
+6e23f4af-b35e-5609-9d2f-ae96287d4be8;Aivaras;Novikas;;Assistant;MIF
+2e46b684-7ba2-51c9-9cd0-a6053e4730fe;Kliment;Olechnovič;;Research Doctor;MIF
+b8903bb6-eac8-53ca-beea-6460f1695be9;Daniele;Ettore;;Senior Research Doctor;MIF
+771a4c64-f04b-50cc-903b-3034ee9f653b;Elita;Pakalnickienė;;Professor;MIF
+3bcbbd33-950a-5ca4-aa52-f43be3ca2642;Grigory;Panasenko;;Senior Research Doctor;MIF
+bf49a1a6-e2d9-5bcc-ac62-3d734113798f;Tadas;Panavas;;PhD Student;MIF
+96fa0aea-7b99-5908-a2a0-c518e74d02b3;Izolda;Pašakinskienė;;Professor;MIF
+635ebef8-d49b-5e71-bdcc-872a6c16ae05;Gailė;Paukštaitė;;Assistant;MIF
+2e8c5caf-6e73-523a-a4b2-d97264ff2f0b;Saulius;Paukštys;;PhD Student;MIF
+f814467d-59d2-51b0-a6dc-76604113102a;Remigijus;Paulavičius;;Senior Research Doctor;MIF
+c97154fd-0f09-5860-b525-b35aee80e684;Stasys;Peldžius;;Assistant;MIF
+dbfd2521-5218-5642-a481-70e37d0c4eaa;Linas;Petkevičius;;Assistant;MIF
+dfebd9ae-ab94-5d80-a8b8-7f92d8ea0952;Karolis;Petrauskas;;Docent;MIF
+e6fabeb5-4c68-563d-b50a-20a9cabb4c91;Jurgita;Petuškinaitė;;PhD Student;MIF
+942f82b1-aa8d-5382-bb8d-dc06b0f5b2ae;Konstantinas;Pileckas;;Professor;MIF
+eb8c7ec6-956d-5462-860d-79889e5ba59d;Inga;Piščikienė;;Lecturer;MIF
+1f6f7a7d-3aa3-577b-b5ae-5d2916d1cf2e;Tomas;Plankis;;Assistant;MIF
+a0109cc7-5785-5f74-b456-791f5d167099;Darius;Plikynas;;Senior Research Doctor;MIF
+e0f4eb35-64c3-5c86-b1c3-28bed71c2468;Mindaugas;Plukas;;Lecturer;MIF
+a1182905-93ee-500f-81b3-b6a9f32a7b78;Lina;Povilavičiūtė;;Lecturer;MIF
+5f10754c-e058-5c80-97c1-57da76f31df9;Viačeslav;Pozdniakov;;Docent;MIF
+aab8f5a4-3a0a-52c5-98a4-c6049ce196bd;Aušrelė;Pranculienė;;Lecturer;MIF
+ae48d1fb-c9f6-5419-8790-b2534d82246d;Ingrida;Prigodina;;Assistant;MIF
+8ae4b96e-eae3-5a7f-9706-0e1030a65c1a;Vytautas;Pugačevskis;;Docent;MIF
+8c3c70ff-f642-5712-bbd4-dfd6f3c516c5;Donata;Puplinskaitė;;Research Doctor;MIF
+413da680-6330-588c-abcd-00603d7aed6f;Gintaras;Puriuškis;;Docent;MIF
+22dea73c-9c4a-5c4d-9bbb-8f807cc15bef;Roma;Puronaitė;;PhD Student;MIF
+422b833f-35fc-5743-ad78-71bf82fb14d1;Alicija;Račienė;;Assistant;MIF
+ceb586ef-7c64-57d6-9ee8-8e040a4e6b43;Alfredas;Račkauskas;;Professor;MIF
+6f7ddb2c-849b-59b4-97d3-e3d5e5509862;Irmantas;Radavičius;;Lecturer;MIF
+9601d4a1-2814-529b-9e6a-010ecf3bf1b5;Marijus;Radavičius;;Professor;MIF
+4470119f-1cfc-587d-a827-fc54f9b7066c;Vytautas;Radzevičius;;PhD Student;MIF
+1a9b3214-4f40-51b4-b943-7dfed138e521;Saulius;Ragaišis;;Docent;MIF
+b23e841d-d3ee-5574-a26d-7ffdbcd2495c;Jonas;Ragaišis;;Lecturer;MIF
+7bba2338-314a-51c7-b1e8-3cca11fa098f;Tomas;Raila;;Assistant;MIF
+023181eb-0231-5cba-8bbe-3361e5a8a1a9;Saulė;Raižienė;;Professor;MIF
+1713d895-c6af-581f-80e6-4fe4e0f8d201;Neringa;Ramanauskė;;Lecturer;MIF
+6657d99b-10e6-552d-8a11-7cb1e4e40bce;Valdas;Rapševičius;;Docent;MIF
+021f61f6-d8fc-5eeb-b069-362be3e79516;Aistis;Raudys;;Professor;MIF
+2d4c98bf-5155-5345-9ac0-4a19ed699e43;Šarūnas;Repšys;;Assistant;MIF
+e9cb06e8-38c4-57a7-a401-c4cfb0e28a67;Liutauras;Ričkus;;Docent;MIF
+4a6d13cb-5ec9-5ace-87ab-31c56ecc81c0;Gediminas;Rimša;;Lecturer;MIF
+e5c53dce-157a-5ab0-97d4-f4a8a98ccf9f;Laura;Ringienė;;Assistant;MIF
+9ee8dc71-2874-5ebe-9749-29d369d00690;Rimantas;Rudzkis;;Senior Research Doctor;MIF
+7d5c2d95-bbd9-5b48-b8f9-5a19f73de859;Martynas;Sabaliauskas;;Assistant;MIF
+89638b7b-f005-5488-950a-685094d347f4;Leonidas;Sakalauskas;;Senior Research Doctor;MIF
+e805a58d-15d8-561a-b9c2-315f43ac7972;Darius;Sauliūnas;;Professor;MIF
+1cfc1db2-ee0c-51eb-9f1f-191ce0fbf089;Raimundas;Savukynas;;Assistant;MIF
+99f0711c-ae1f-5ebf-b287-4ecb4b11c4f3;Jūratė;Senvaitienė;;Professor;MIF
+7ff6572c-99bf-51fd-be92-8fee19dfbb03;Hannah;Lucy;;Lecturer;MIF
+bb587da5-414e-5084-a793-45e1d271efaf;Tomas;Silkinis;;PhD Student;MIF
+dbcd1b88-4e52-5752-ad43-892ba8bc3fc2;Rūta;Sirvydė;;Lecturer;MIF
+a0660f56-bfc1-53af-babb-074ad55e4588;Vladas;Skakauskas;;Senior Research Doctor;MIF
+2ef87fbe-352a-55a9-b11a-212d805d3aeb;Gintaras;Skersys;;Assistant;MIF
+ebc03456-3255-5279-9419-7eaabff57cba;Viktor;Skorniakov;;Docent;MIF
+ac383400-e4c0-5a50-8659-90148837e8ba;Aldona;Skučaitė;;Assistant;MIF
+f609838d-f2b5-5437-b4b1-33f3ae5fbc3f;Giedrius;Slivinskas;;Professor;MIF
+80d982e1-4ec5-569f-abfa-eabfd414b8ce;Asta;Slotkienė;;Assistant;MIF
+2daae40b-ff23-5a5e-a5e0-f7c0dc2055cf;Tomas;Smagurauskas;;Lecturer;MIF
+dbc49bf5-e187-54bc-b30b-41ee04920962;Jonas;Sprindys;;Assistant;MIF
+790f5c98-a14b-5e01-9aeb-3d7bd53e6ab4;Vilius;Stakėnas;;Docent;MIF
+3a2d77a2-fc3e-5be5-b506-bba8f6a92c1b;Rasa;Stalnionytė;;Lecturer;MIF
+00ef2c4b-6cec-508b-89e7-b58c9efc8038;Mantas;Stankevičius;;PhD Student;MIF
+15bb7f28-d3fe-5205-86e2-6ac6ac93053d;Ieva;Stasiūnaitė;;Assistant;MIF
+3573249b-5978-509c-b2be-eeee6ddea389;Asta;Statkevičienė;;Lecturer;MIF
+992971e5-03d2-5f1b-bf30-92825b2c2a13;Gediminas;Stepanauskas;;Professor;MIF
+2a725c70-5bf3-5e46-a56b-9e7931aef159;Vytautas;Stepas;;Lecturer;MIF
+6f1a2bb5-8306-5a97-848c-dc0dc2712025;Mindaugas;Stoncelis;;PhD Student;MIF
+29622f76-613b-54b5-9900-adc8f2831d64;Danguolė;Straižytė;;Lecturer;MIF
+c309a417-e3c3-5a14-934f-3f83771f43ac;Auksė;Stravinskienė;;Lecturer;MIF
+730c3153-9097-52fd-9492-78799bfe5144;Linas;Stripinis;;PhD Student;MIF
+3450b549-521a-5728-8436-ba6fd280d979;Dovilė;Stumbrienė;;Assistant;MIF
+bac90fdf-ee48-54cd-bbe1-b53238db4690;Gabrielė;Stupurienė;;Research Doctor;MIF
+6d0dd476-d1a6-5137-84f1-d4b49bbadfd7;Jonas;Kazys;;Professor;MIF
+c6121337-74d1-5648-b2d4-f8a69cc81d5a;Edita;Sužiedėlienė;;Professor;MIF
+ae0e39c5-6d6e-5170-9c3a-8d68d6c0a401;Audrius;Šaikūnas;;Assistant;MIF
+a0d71cea-2ea8-5c55-baf1-8c73beb7736a;Arūnas;Šaltis;;Lecturer;MIF
+9cbbcfaf-40e9-5645-9985-a7d0d8d74418;Germanas;Šamrickis;;Lecturer;MIF
+68ae3b4f-81be-5456-ae85-5144e85a5daa;Albertas;Šermokas;;Professor;MIF
+e123342e-bf12-5c50-8702-048ad08d5793;Tomas;Šiaulys;;PhD Student;MIF
+be43a686-0e6d-51bb-9fef-2dffeae7d2c0;Jonas;Šiaulys;;Professor;MIF
+139a53d0-50a9-594c-9676-e1f8a3e05327;Raivydas;Šimėnas;;Assistant;MIF
+95ae2ed8-26fe-56ff-aebb-a0a0491c442a;Remigijus;Šimkus;;Senior Research Doctor;MIF
+3ad6c868-a387-5cec-b13d-9482f2303291;Aurimas;Šimkus;;Lecturer;MIF
+fd9b37e5-e952-56ac-8ebd-7fda2b0c75ae;Aleksandr;Širaliov;;PhD Student;MIF
+3745634f-b566-55d7-8a2e-52ba3a482d3a;Agneta;Šmergelytė;;PhD Student;MIF
+473215ed-b60a-53f1-aba5-ddcaf347269b;Artūras;Štikonas;;Senior Research Doctor;MIF
+6930b18c-5e40-5904-8061-144d929e4706;Olga;Štikonienė;;Professor;MIF
+15af6df9-41af-5459-bbf3-4000ec7b4a6d;Balys;Šulmanas;;Lecturer;MIF
+108fc7fd-de5f-572e-9cc4-b5ca139f0b93;Andrius;Šuminas;;Docent;MIF
+8d51bf45-52e0-5e48-a2a9-2272ba470b3c;Vytenis;Šumskas;;Assistant;MIF
+3e3435fa-cff6-51cb-b98f-4ddb6d9ebc4d;Ingrida;Takinaitė;;PhD Student;MIF
+abd52626-25f5-50e2-8024-c4c83392d1cb;Rokas;Tamošiūnas;;Assistant;MIF
+3d7a28d4-b794-5094-8a1b-a3c801385d96;Gintautas;Tamulevičius;;Docent;MIF
+d5dde341-b67a-5f30-b229-bde6d2648dcc;Jelena;Tamulienė;;Senior Research Doctor;MIF
+85fb5e06-d555-595c-ad68-2941ebe4100c;Piotr;Tarasov;;PhD Student;MIF
+2c630f6f-86c1-5432-a8e1-f98260ee4a90;Saulius;Tautvaišas;;PhD Student;MIF
+0e346d06-c110-5f13-9ccc-d66604fa2fa5;Ričardas;Toliušis;;PhD Student;MIF
+307271b0-5905-5147-99ab-e5e506ca4707;Povilas;Treigys;;Docent;MIF
+8e7b87e6-2bb6-50d5-9d6a-b289cfa65372;Tomas;Tumasonis;;Lecturer;MIF
+cbdcaf76-7d17-5896-a13d-06949f7b418b;Liudas;Tumonis;;Senior Research Doctor;MIF
+68c993ce-7041-57b2-825a-aaf4a34e3ef5;Karolis;Uosis;;Lecturer;MIF
+0a0f87b1-e13c-51da-97f4-34a3d2c03bc4;Aušra;Urbaitytė;;PhD Student;MIF
+1693a9b5-95d0-5197-b60e-2bf2bcc6ca3d;Neringa;Urbonaitė;;PhD Student;MIF
+e0a7987f-d17f-5174-af4f-e733a55f1df0;Rūta;Užupytė;;PhD Student;MIF
+b17516a4-8aeb-58a7-b0a2-702c78cd137c;Lukas;Vabalas;;PhD Student;MIF
+e5ccb4f8-58a5-5a39-8bae-42572b22016d;Gediminas;Vadeikis;;PhD Student;MIF
+0b81b72b-c7b2-5314-887b-2d634260e747;Rimantas;Vaicekauskas;;Professor;MIF
+917bada9-d417-51a0-b792-7648c20100e1;Marijus;Vaičiulis;;Senior Research Doctor;MIF
+464683fa-9f0d-5237-bd43-c6a33073a2fa;Adelė;Vaiginytė;;PhD Student;MIF
+52f38956-c771-5285-894a-0c172326bb6c;Žydrūnas;Vaišnoras;;Assistant;MIF
+b8fda7ec-6523-5857-a612-d822cb74170b;Jogaila;Vaitekaitis;;PhD Student;MIF
+8fcabc14-d4a3-5459-9230-b25293531b16;Paulius;Vaitkevičius;;PhD Student;MIF
+4e6c16ff-6c5a-565f-8c18-8ce921a304b8;Vytautas;Valaitis;;Assistant;MIF
+24dc899a-1e62-5b9e-9014-96c4d06a2b2d;Vilma;Vaskelaitė;;Lecturer;MIF
+805a1842-0164-558e-8051-712fef6dd668;Julius;Venskus;;PhD Student;MIF
+23b93d8f-b21c-5fe6-8b9b-db23411e8e28;Raimundas;Vidunas;;Docent;MIF
+a87e43ad-8ccd-5259-8cc7-15b48c749650;Lina;Vinikienė;;PhD Student;MIF
+bbd067d2-083b-538e-af15-318dc6631d52;Pranciškus;Vitta;;Docent;MIF
+b6a766f0-b5ac-59a0-a53f-30547fed1bc7;Vytas;Zacharovas;;Docent;MIF
+c59e773a-5c3c-5593-b16a-a9753289e88d;Vaidotas;Zemlys;;Assistant;MIF
+1f3e28aa-aa50-5cd6-b312-4b9b21afd358;Gediminas;Ziezys;;PhD Student;MIF
+781690b0-4827-52e3-9038-b17c9d018f37;Eglė;Zikarienė;;PhD Student;MIF
+606a2fc5-c4e4-526e-8aa1-098e0f8d3cb0;Albertas;Zinevičius;;Assistant;MIF
+368ae81f-b109-5846-b70b-e62ce7bfeff5;Giedrius;Zlatkus;;Professor;MIF
+f227d140-abf7-5054-bacf-7bccfed912bb;Vilma;Zubaitienė;;Docent;MIF
+1b54b061-635c-52a9-aec5-fe4045209293;Severinas;Zubė;;Docent;MIF
+9b6e2651-30ff-5ce4-b14b-db8e6a466cb9;Rima;Žagūnienė;;Lecturer;MIF
+ec605ef0-6a5d-5f2d-9b48-1c5a84b7ce9a;Rimantas;Želvys;;Professor;MIF
+24cca463-9602-5de7-b6ab-01bbdeb83360;Kęstutis;Žilinskas;;Docent;MIF
+d328fdb6-062a-59ab-9efd-555b75844474;Julius;Žilinskas;;Senior Research Doctor;MIF
+38f63553-19e7-5fbd-babb-5373a4cc89b8;Donatas;Žvingila;;Professor;MIF
+f312e7a1-9d62-5564-834c-64894424fdf2;Tatjana;Čėsnienė;;Docent;LSC

@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\TeacherActivityPeriferal.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\CommentLike.cs" />
     <Compile Include="Entities\Course.cs" />
@@ -114,12 +115,55 @@
     <Compile Include="Migrations\201910011722414_CreateBaseEntities.designer.cs">
       <DependentUpon>201910011722414_CreateBaseEntities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910051810270_AddedEntityRelationshipIds.cs" />
+    <Compile Include="Migrations\201910051810270_AddedEntityRelationshipIds.designer.cs">
+      <DependentUpon>201910051810270_AddedEntityRelationshipIds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910060941135_DoubleForeignKeyHandling.cs" />
+    <Compile Include="Migrations\201910061210376_ForeignKeyIssues.cs" />
+    <Compile Include="Migrations\201910061210376_ForeignKeyIssues.designer.cs">
+      <DependentUpon>201910061210376_ForeignKeyIssues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910061334015_ForeignKeyIssues1.cs" />
+    <Compile Include="Migrations\201910061334015_ForeignKeyIssues1.designer.cs">
+      <DependentUpon>201910061334015_ForeignKeyIssues1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910061443105_EnumIssues.cs" />
+    <Compile Include="Migrations\201910061443105_EnumIssues.designer.cs">
+      <DependentUpon>201910061443105_EnumIssues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910061553092_FKeys.cs" />
+    <Compile Include="Migrations\201910061553092_FKeys.designer.cs">
+      <DependentUpon>201910061553092_FKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910061654478_FKeys1.cs" />
+    <Compile Include="Migrations\201910061654478_FKeys1.designer.cs">
+      <DependentUpon>201910061654478_FKeys1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateMyPDbContext.cs" />
     <Compile Include="TeacherStatisticsAnalyzer.cs" />
     <EmbeddedResource Include="Migrations\201910011722414_CreateBaseEntities.resx">
       <DependentUpon>201910011722414_CreateBaseEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910051810270_AddedEntityRelationshipIds.resx">
+      <DependentUpon>201910051810270_AddedEntityRelationshipIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910061210376_ForeignKeyIssues.resx">
+      <DependentUpon>201910061210376_ForeignKeyIssues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910061334015_ForeignKeyIssues1.resx">
+      <DependentUpon>201910061334015_ForeignKeyIssues1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910061443105_EnumIssues.resx">
+      <DependentUpon>201910061443105_EnumIssues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910061553092_FKeys.resx">
+      <DependentUpon>201910061553092_FKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910061654478_FKeys1.resx">
+      <DependentUpon>201910061654478_FKeys1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

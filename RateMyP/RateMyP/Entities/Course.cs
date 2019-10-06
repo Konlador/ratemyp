@@ -5,7 +5,10 @@ namespace RateMyP.Entities
     {
     public enum CourseType
         {
-        Standard,
+        Pasirenkamasis,
+        Privalomasis,
+        None,
+        Laisvasis,
         BUS
         }
 
