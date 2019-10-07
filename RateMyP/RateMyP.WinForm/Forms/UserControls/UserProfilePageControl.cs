@@ -2,13 +2,12 @@
 using System.Windows.Forms;
 using RateMyP.Entities;
 
-namespace RateMyP.Forms.UserControls
+namespace RateMyP.WinForm.Forms.UserControls
     {
-    public partial class ProfilePage : UserControl
+    public partial class UserProfilePageControl : UserControl
         {
         private Student m_student;
-
-        public ProfilePage()
+        public UserProfilePageControl()
             {
             InitializeComponent();
             }
@@ -16,9 +15,8 @@ namespace RateMyP.Forms.UserControls
         public void LoadStudentInfo()
             {
             m_student = null; // Get current user and load it
-            sName.Text = $"{m_student.FirstName} {m_student.LastName}";
-            sFaculty.Text = m_student.Faculty;
-            sStudies.Text = m_student.Studies;
+            UserNameLabel.Text = $"{m_student.FirstName} {m_student.LastName}";
+            UserAcademicInfoLabel.Text = $"{m_student.Faculty}, {m_student.Studies}";
             }
         }
     }

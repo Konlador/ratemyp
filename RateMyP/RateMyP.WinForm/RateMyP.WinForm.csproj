@@ -45,6 +45,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MetroSet UI, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroSet_UI.1.0.4\lib\net45\MetroSet UI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -62,70 +65,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="Forms\RateMyProfessor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\RateMyProfessor.Designer.cs">
+      <DependentUpon>RateMyProfessor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\BrowsePage.cs">
+    <Compile Include="Forms\UserControls\BrowsePageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\BrowsePage.Designer.cs">
-      <DependentUpon>BrowsePage.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\BrowsePageControl.Designer.cs">
+      <DependentUpon>BrowsePageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\LandingPage.cs">
+    <Compile Include="Forms\UserControls\HomePageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\LandingPage.Designer.cs">
-      <DependentUpon>LandingPage.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\HomePageControl.Designer.cs">
+      <DependentUpon>HomePageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\LeaderboardPage.cs">
+    <Compile Include="Forms\UserControls\LeaderboardsPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\LeaderboardPage.Designer.cs">
-      <DependentUpon>LeaderboardPage.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\LeaderboardsPageControl.Designer.cs">
+      <DependentUpon>LeaderboardsPageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\ProfilePage.cs">
+    <Compile Include="Forms\UserControls\SettingsPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\ProfilePage.Designer.cs">
-      <DependentUpon>ProfilePage.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\SettingsPageControl.Designer.cs">
+      <DependentUpon>SettingsPageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\RatePage.cs">
+    <Compile Include="Forms\UserControls\TeacherProfilePageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\RatePage.Designer.cs">
-      <DependentUpon>RatePage.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\TeacherProfilePageControl.Designer.cs">
+      <DependentUpon>TeacherProfilePageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserControls\TeacherProfile.cs">
+    <Compile Include="Forms\UserControls\UserProfilePageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\UserControls\TeacherProfile.Designer.cs">
-      <DependentUpon>TeacherProfile.cs</DependentUpon>
+    <Compile Include="Forms\UserControls\UserProfilePageControl.Designer.cs">
+      <DependentUpon>UserProfilePageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\RateMyProfessor.resx">
+      <DependentUpon>RateMyProfessor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\BrowsePage.resx">
-      <DependentUpon>BrowsePage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\BrowsePageControl.resx">
+      <DependentUpon>BrowsePageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\LandingPage.resx">
-      <DependentUpon>LandingPage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\HomePageControl.resx">
+      <DependentUpon>HomePageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\LeaderboardPage.resx">
-      <DependentUpon>LeaderboardPage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\LeaderboardsPageControl.resx">
+      <DependentUpon>LeaderboardsPageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\ProfilePage.resx">
-      <DependentUpon>ProfilePage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\SettingsPageControl.resx">
+      <DependentUpon>SettingsPageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\RatePage.resx">
-      <DependentUpon>RatePage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\TeacherProfilePageControl.resx">
+      <DependentUpon>TeacherProfilePageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserControls\TeacherProfile.resx">
-      <DependentUpon>TeacherProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UserControls\UserProfilePageControl.resx">
+      <DependentUpon>UserProfilePageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -163,6 +166,8 @@
     <Content Include="Resources\b.png" />
     <Content Include="Resources\c.png" />
     <Content Include="Resources\d.png" />
+    <Content Include="Resources\everydaywestrayfurtherfromgodslight.png" />
+    <None Include="Resources\lemonke.png" />
     <Content Include="Resources\placeholderpic.png" />
     <Content Include="Resources\profile.png" />
   </ItemGroup>
