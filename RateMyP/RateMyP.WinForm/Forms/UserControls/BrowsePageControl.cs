@@ -1,37 +1,31 @@
 ﻿using System;
 using System.Windows.Forms;
-using RateMyP.Entities;
+using MetroSet_UI.Forms;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using RateMyP.Entities;
 
-namespace RateMyP.Forms.UserControls
+namespace RateMyP.WinForm.Forms.UserControls
     {
-    public partial class BrowsePage : UserControl
+    public partial class BrowsePageControl : UserControl
         {
-        public BrowsePage()
+        public BrowsePageControl()
             {
             InitializeComponent();
             LoadTeachers();
             LoadCourses();
             }
 
-        private void BrowseSearchButton_Click(object sender, EventArgs e)
-            {
-            SearchTeachers();
-            }
-
         private void TeacherListView_ItemActivate(object sender, EventArgs e)
             {
             var selectedTeacherItem = TeacherListView.SelectedItems[0];
             var selectedTeacher = (Teacher)selectedTeacherItem.Tag;
-            Hide();
-            MainForm.self.teacherProfilePage.UpdateInfo(selectedTeacher);
-            MainForm.self.teacherProfilePage.Show();
-            MainForm.self.teacherProfilePage.BringToFront();
+            RateMyProfessor.self.teacherProfilePageControl.UpdateInfo(selectedTeacher);
+            if (!RateMyProfessor.self.MenuTabControl.TabPages.Contains(RateMyProfessor.self.TabPageTeacherProfile))
+                RateMyProfessor.self.MenuTabControl.TabPages.Insert(2, RateMyProfessor.self.TabPageTeacherProfile);
+            RateMyProfessor.self.MenuTabControl.SelectedTab = RateMyProfessor.self.TabPageTeacherProfile;
             }
 
-        // Queries teachers and loads them into the teachers ListView.
         private void LoadTeachers()
             {
             using (var context = new RateMyPDbContext())
@@ -47,48 +41,24 @@ namespace RateMyP.Forms.UserControls
             foreach (var teacher in teachers)
                 {
                 var teacherInfo = new[] { $"{teacher.FirstName} {teacher.LastName}", teacher.Rank };
-                var teacherItem = new ListViewItem(teacherInfo) {Tag = teacher};
+                var teacherItem = new ListViewItem(teacherInfo) { Tag = teacher };
                 TeacherListView.Items.Add(teacherItem);
                 }
             }
 
-        // Queries courses and loads them into the courses ListView.
         private void LoadCourses()
             {
             using (var context = new RateMyPDbContext())
                 {
                 var courses = context.Courses.ToList();
-                courseListView.Items.Clear();
+                CourseListView.Items.Clear();
                 foreach (var course in courses)
                     {
                     var courseInfo = new[] { course.Name, course.Faculty };
                     var courseItem = new ListViewItem(courseInfo);
-                    courseListView.Items.Add(courseItem);
+                    CourseListView.Items.Add(courseItem);
                     }
                 }
-            }
-
-        private void SearchBox_Enter(object sender, EventArgs e)
-            {
-            if (SearchBox.Text.Equals("Search"))
-                {
-                SearchBox.Text = "";
-                SearchBox.ForeColor = Color.Black;
-                }
-            }
-
-        private void SearchBox_Leave(object sender, EventArgs e)
-            {
-            if (string.IsNullOrEmpty(SearchBox.Text))
-                {
-                SearchBox.Text = "Search";
-                SearchBox.ForeColor = Color.Silver;
-                }
-            }
-
-        private void SearchBox_TextChanged(object sender, EventArgs e)
-            {
-            SearchTeachers();
             }
 
         public void SearchTeachers()
@@ -96,12 +66,21 @@ namespace RateMyP.Forms.UserControls
             using (var context = new RateMyPDbContext())
                 {
                 var teachers = (from t in context.Teachers
-                                where (t.FirstName + " " + t.LastName).Contains(SearchBox.Text)
+                                where (t.FirstName + " " + t.LastName).Contains(SearchTextBox.Text)
                                 select t).ToList();
                 LoadTeachersListView(teachers);
                 }
             }
 
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+            {
+            SearchTeachers();
+            }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+            {
+            SearchTeachers();
+            }
         private List<Course> GetCoursesFromTeachers(List<Teacher> teachers)
             {
             var courses = new List<Course>();
@@ -110,12 +89,24 @@ namespace RateMyP.Forms.UserControls
                 foreach (var teacher in teachers)
                     {
                     var activities = (from ta in context.TeacherActivities
-                                     where ta.Teacher.Id.Equals(teacher.Id)
-                                     select ta).ToList();
+                                      where ta.Teacher.Id.Equals(teacher.Id)
+                                      select ta).ToList();
                     courses.AddRange(activities.Select(ta => ta.Course));
                     }
                 }
             return courses.Distinct().ToList();
+            }
+
+        private void CourseListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+            {
+            e.Cancel = true;
+            e.NewWidth = CourseListView.Columns[e.ColumnIndex].Width;
+            }
+
+        private void TeacherListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+            {
+            e.Cancel = true;
+            e.NewWidth = TeacherListView.Columns[e.ColumnIndex].Width;
             }
         }
     }
