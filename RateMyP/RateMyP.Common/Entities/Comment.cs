@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.Entities
@@ -12,13 +14,12 @@ namespace RateMyP.Entities
 
     public class Comment
         {
-        [Key]
         public Guid Id { get; set; }
         public Student Student { get; set; }
         public Guid CommentOnId { get; set; }
         public CommentOnType CommentOnType { get; set; }
         public string Content { get; set; }
-        public int Likes { get; set; }
+        public List<CommentLike> Likes { get; set; }
         public DateTime DateCreated { get; set; }
         }
     }

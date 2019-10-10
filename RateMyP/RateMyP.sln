@@ -1,13 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateMyP", "RateMyP\RateMyP.csproj", "{54A7817D-48D4-4052-A7AA-F1362993F462}"
+	ProjectSection(ProjectDependencies) = postProject
+		{633D9B99-79FD-48DB-B612-4756BEFC211C} = {633D9B99-79FD-48DB-B612-4756BEFC211C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateMyP.Tests", "RateMyP.Tests\RateMyP.Tests.csproj", "{31990951-B493-4112-B77B-E676BAD3BB1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateMyP.WinForm", "RateMyP.WinForm\RateMyP.WinForm.csproj", "{8E15A2BA-4EB6-4C0F-8399-75E945EBE6A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyP.Server", "RateMyP.Server\RateMyP.Server.csproj", "{48D83A6F-122D-4609-B684-26316387094A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{633D9B99-79FD-48DB-B612-4756BEFC211C} = {633D9B99-79FD-48DB-B612-4756BEFC211C}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateMyP.Common", "RateMyP.Common\RateMyP.Common.csproj", "{633D9B99-79FD-48DB-B612-4756BEFC211C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +37,14 @@ Global
 		{8E15A2BA-4EB6-4C0F-8399-75E945EBE6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E15A2BA-4EB6-4C0F-8399-75E945EBE6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E15A2BA-4EB6-4C0F-8399-75E945EBE6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48D83A6F-122D-4609-B684-26316387094A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48D83A6F-122D-4609-B684-26316387094A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48D83A6F-122D-4609-B684-26316387094A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48D83A6F-122D-4609-B684-26316387094A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633D9B99-79FD-48DB-B612-4756BEFC211C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633D9B99-79FD-48DB-B612-4756BEFC211C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633D9B99-79FD-48DB-B612-4756BEFC211C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633D9B99-79FD-48DB-B612-4756BEFC211C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

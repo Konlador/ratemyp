@@ -13,18 +13,15 @@ namespace RateMyP.Entities
 
     public class TeacherActivity
         {
-        [Key]
         public Guid Id { get; set; }
-        
-        public Guid TeacherId { get; set; }   
+        [ForeignKey("Teacher")]
+        public Guid TeacherId { get; set; }
+        [ForeignKey("Course")]
         public Guid CourseId { get; set; }
         public DateTime DateStarted { get; set; }
-        public LectureType Type { get; set; }
-        
-        [ForeignKey("CourseId")]
-        public virtual Course Course { get; set; }
+        public LectureType LectureType { get; set; }
 
-        [ForeignKey("TeacherId")]
-        public virtual Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; }
+        public Course Course { get; set; }
         }
     }

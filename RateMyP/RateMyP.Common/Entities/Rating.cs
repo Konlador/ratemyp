@@ -5,7 +5,6 @@ namespace RateMyP.Entities
     {
     public class Rating
         {
-        [Key]
         public Guid Id { get; set; }
         public Teacher Teacher { get; set; }
         public Student Student { get; set; }
