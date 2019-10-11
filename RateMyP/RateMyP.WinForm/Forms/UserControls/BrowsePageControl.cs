@@ -54,10 +54,21 @@ namespace RateMyP.WinForm.Forms.UserControls
                 CourseListView.Items.Clear();
                 foreach (var course in courses)
                     {
-                    var courseInfo = new[] { course.Name, course.Faculty };
+                    var courseInfo = new[] { course.Name, course.Faculty, course.CourseType.ToString() };
                     var courseItem = new ListViewItem(courseInfo);
                     CourseListView.Items.Add(courseItem);
                     }
+                }
+            }
+
+        private void LoadCourses(List<Course> courses)
+            {
+            CourseListView.Items.Clear();
+            foreach (var course in courses)
+                {
+                var courseInfo = new[] { course.Name, course.Faculty, course.CourseType.ToString() };
+                var courseItem = new ListViewItem(courseInfo);
+                CourseListView.Items.Add(courseItem);
                 }
             }
 
@@ -81,6 +92,27 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             SearchTeachers();
             }
+
+        private void CourseListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+            {
+            e.Cancel = true;
+            e.NewWidth = CourseListView.Columns[e.ColumnIndex].Width;
+            }
+
+        private void TeacherListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+            {
+            e.Cancel = true;
+            e.NewWidth = TeacherListView.Columns[e.ColumnIndex].Width;
+            }
+
+        private void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+            {
+            var selectedTeacher = (Teacher)e.Item.Tag;
+            List<Teacher> teachers = new List<Teacher>() { selectedTeacher };
+            var courseList = GetCoursesFromTeachers(teachers);
+            LoadCourses(courseList);
+            }
+
         private List<Course> GetCoursesFromTeachers(List<Teacher> teachers)
             {
             var courses = new List<Course>();
@@ -96,17 +128,5 @@ namespace RateMyP.WinForm.Forms.UserControls
                 }
             return courses.Distinct().ToList();
             }
-
-        private void CourseListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
-            {
-            e.Cancel = true;
-            e.NewWidth = CourseListView.Columns[e.ColumnIndex].Width;
-            }
-
-        private void TeacherListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
-            {
-            e.Cancel = true;
-            e.NewWidth = TeacherListView.Columns[e.ColumnIndex].Width;
-            }
-        }
+    }
     }

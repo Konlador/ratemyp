@@ -109,8 +109,8 @@ namespace RateMyP.WinForm
                     TeacherId = item.TeacherId,
                     CourseId = item.CourseId,
                     DateStarted = item.DateStarted,
-                    Type = item.Type
-                    };
+                    LectureType = item.LectureType
+                };
                 aList.Add(ta);
                 }
             return aList;

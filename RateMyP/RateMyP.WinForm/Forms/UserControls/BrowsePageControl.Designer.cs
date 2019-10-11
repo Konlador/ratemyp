@@ -34,7 +34,7 @@
             this.CourseListView = new System.Windows.Forms.ListView();
             this.courseName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.faculty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.credits = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SearchButton = new MetroSet_UI.Controls.MetroSetButton();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -46,6 +46,7 @@
             this.teacherName,
             this.teacherRank});
             this.TeacherListView.FullRowSelect = true;
+            this.TeacherListView.HideSelection = false;
             this.TeacherListView.LabelWrap = false;
             this.TeacherListView.Location = new System.Drawing.Point(30, 75);
             this.TeacherListView.MultiSelect = false;
@@ -57,6 +58,7 @@
             this.TeacherListView.View = System.Windows.Forms.View.Details;
             this.TeacherListView.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.TeacherListView_ColumnWidthChanging);
             this.TeacherListView.ItemActivate += new System.EventHandler(this.TeacherListView_ItemActivate);
+            this.TeacherListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.TeacherListView_ItemSelectionChanged);
             // 
             // teacherName
             // 
@@ -74,8 +76,9 @@
             this.CourseListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.courseName,
             this.faculty,
-            this.credits});
+            this.type});
             this.CourseListView.FullRowSelect = true;
+            this.CourseListView.HideSelection = false;
             this.CourseListView.LabelWrap = false;
             this.CourseListView.Location = new System.Drawing.Point(600, 75);
             this.CourseListView.MultiSelect = false;
@@ -97,10 +100,10 @@
             this.faculty.Text = "Faculty";
             this.faculty.Width = 90;
             // 
-            // credits
+            // type
             // 
-            this.credits.Text = "Credits";
-            this.credits.Width = 69;
+            this.type.Text = "Type";
+            this.type.Width = 69;
             // 
             // SearchButton
             // 
@@ -161,7 +164,7 @@
         private System.Windows.Forms.ColumnHeader teacherRank;
         private System.Windows.Forms.ColumnHeader courseName;
         private System.Windows.Forms.ColumnHeader faculty;
-        private System.Windows.Forms.ColumnHeader credits;
+        private System.Windows.Forms.ColumnHeader type;
         private System.Windows.Forms.TextBox SearchTextBox;
         }
     }
