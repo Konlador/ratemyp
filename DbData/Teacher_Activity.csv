@@ -1,4 +1,4 @@
-﻿Id;TeacherId;CourseId;DateStarted;Type
+﻿Id;TeacherId;CourseId;DateStarted;LectureType
 b647aa55-3089-4e51-bb23-c20dab90d5e5;0e807c9b-61d8-54ef-a6a3-7a77b7301953;b94562e3-ea7e-5759-bdf0-145675da2bee;2019-09-01 00:00;Lecture
 bc630002-b2fd-4be6-9e20-c536d1323746;5cd8dbfe-2870-59d7-a8b4-350d2cd344a4;1068a112-bb3a-566c-aa9d-bd476cba2d22;2019-09-01 00:00;Lecture
 eb8dc25f-5353-426e-b95c-482b36c853c1;1397ac7a-6027-57e2-8fb8-083406d456a0;1c8923c5-a48b-51ac-bc93-8d4e12f92976;2019-09-01 00:00;Lecture

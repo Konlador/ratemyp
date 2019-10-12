@@ -10,6 +10,6 @@ namespace RateMyP.Entities
         public Guid TeacherId { get; set; }
         public Guid CourseId { get; set; }
         public DateTime DateStarted { get; set; }
-        public LectureType Type { get; set; }
+        public LectureType LectureType { get; set; }
     }
 }
