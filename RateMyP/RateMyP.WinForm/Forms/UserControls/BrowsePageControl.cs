@@ -4,6 +4,8 @@ using MetroSet_UI.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using RateMyP.Entities;
+using RateMyP.Client;
+using System.Threading.Tasks;
 
 namespace RateMyP.WinForm.Forms.UserControls
     {
@@ -26,13 +28,10 @@ namespace RateMyP.WinForm.Forms.UserControls
             RateMyProfessor.self.MenuTabControl.SelectedTab = RateMyProfessor.self.TabPageTeacherProfile;
             }
 
-        private void LoadTeachers()
+        private async void LoadTeachers()
             {
-            using (var context = new RateMyPDbContext())
-                {
-                var teachers = context.Teachers.ToList();
-                LoadTeachersListView(teachers);
-                }
+            var teachers = await RateMyPClient.Client.Teachers.GetAll();
+            LoadTeachersListView(teachers);
             }
 
         private void LoadTeachersListView(List<Teacher> teachers)
@@ -46,30 +45,25 @@ namespace RateMyP.WinForm.Forms.UserControls
                 }
             }
 
-        private void LoadCourses()
+        private async void LoadCourses()
             {
-            using (var context = new RateMyPDbContext())
+            var courses = await RateMyPClient.Client.Courses.GetAll();
+            CourseListView.Items.Clear();
+            foreach (var course in courses)
                 {
-                var courses = context.Courses.ToList();
-                CourseListView.Items.Clear();
-                foreach (var course in courses)
-                    {
-                    var courseInfo = new[] { course.Name, course.Faculty };
-                    var courseItem = new ListViewItem(courseInfo);
-                    CourseListView.Items.Add(courseItem);
-                    }
+                var courseInfo = new[] { course.Name, course.Faculty };
+                var courseItem = new ListViewItem(courseInfo);
+                CourseListView.Items.Add(courseItem);
                 }
             }
 
-        public void SearchTeachers()
+        public async void SearchTeachers()
             {
-            using (var context = new RateMyPDbContext())
-                {
-                var teachers = (from t in context.Teachers
-                                where (t.FirstName + " " + t.LastName).Contains(SearchTextBox.Text)
-                                select t).ToList();
-                LoadTeachersListView(teachers);
-                }
+            var allTeachers = await RateMyPClient.Client.Teachers.GetAll();
+            var teachers = (from t in allTeachers
+                            where (t.FirstName + " " + t.LastName).ToLower().Contains(SearchTextBox.Text)
+                            select t).ToList();
+            LoadTeachersListView(teachers);
             }
 
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
@@ -81,18 +75,14 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             SearchTeachers();
             }
-        private List<Course> GetCoursesFromTeachers(List<Teacher> teachers)
+
+        private async Task<List<Course>> GetCoursesFromTeachers(List<Teacher> teachers)
             {
             var courses = new List<Course>();
-            using (var context = new RateMyPDbContext())
+            foreach (var teacher in teachers)
                 {
-                foreach (var teacher in teachers)
-                    {
-                    var activities = (from ta in context.TeacherActivities
-                                      where ta.Teacher.Id.Equals(teacher.Id)
-                                      select ta).ToList();
-                    courses.AddRange(activities.Select(ta => ta.Course));
-                    }
+                var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
+                courses.AddRange(activities.Select(ta => ta.Course));
                 }
             return courses.Distinct().ToList();
             }

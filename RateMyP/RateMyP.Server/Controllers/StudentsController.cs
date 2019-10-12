@@ -38,32 +38,6 @@ namespace RateMyP.Server.Controllers
             return student;
             }
 
-        // PUT: api/Students/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudent(Guid id, Student student)
-            {
-            if (id != student.Id)
-                return BadRequest();
-
-            m_context.Entry(student).State = EntityState.Modified;
-
-            try
-                {
-                await m_context.SaveChangesAsync();
-                }
-            catch (DbUpdateConcurrencyException)
-                {
-                if (!StudentExists(id))
-                    return NotFound();
-                else
-                    throw;
-                }
-
-            return NoContent();
-            }
-
         // POST: api/Students
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -74,20 +48,6 @@ namespace RateMyP.Server.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.Id }, student);
-            }
-
-        // DELETE: api/Students/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Student>> DeleteStudent(Guid id)
-            {
-            var student = await m_context.Students.FindAsync(id);
-            if (student == null)
-                return NotFound();
-
-            m_context.Students.Remove(student);
-            await m_context.SaveChangesAsync();
-
-            return student;
             }
 
         private bool StudentExists(Guid id)

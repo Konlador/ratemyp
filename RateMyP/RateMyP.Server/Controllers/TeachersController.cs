@@ -38,56 +38,11 @@ namespace RateMyP.Server.Controllers
             return teacher;
             }
 
-        // PUT: api/Teachers/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTeacher(Guid id, Teacher teacher)
+        // GET: api/Teachers
+        [HttpGet("{id}/select=TeacherActivities")]
+        public async Task<ActionResult<IEnumerable<TeacherActivity>>> GetTeacherActivities(Guid teacherId)
             {
-            if (id != teacher.Id)
-                return BadRequest();
-
-            m_context.Entry(teacher).State = EntityState.Modified;
-
-            try
-                {
-                await m_context.SaveChangesAsync();
-                }
-            catch (DbUpdateConcurrencyException)
-                {
-                if (!TeacherExists(id))
-                    return NotFound();
-                else
-                    throw;
-                }
-
-            return NoContent();
-            }
-
-        // POST: api/Teachers
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
-        public async Task<ActionResult<Teacher>> PostTeacher(Teacher teacher)
-            {
-            m_context.Teachers.Add(teacher);
-            await m_context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTeacher", new { id = teacher.Id }, teacher);
-            }
-
-        // DELETE: api/Teachers/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Teacher>> DeleteTeacher(Guid id)
-            {
-            var teacher = await m_context.Teachers.FindAsync(id);
-            if (teacher == null)
-                return NotFound();
-
-            m_context.Teachers.Remove(teacher);
-            await m_context.SaveChangesAsync();
-
-            return teacher;
+            return await m_context.TeacherActivities.Where(x => x.TeacherId == teacherId).ToListAsync();
             }
 
         private bool TeacherExists(Guid id)

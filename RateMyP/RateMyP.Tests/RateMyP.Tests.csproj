@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RateMyP.Tests</RootNamespace>
     <AssemblyName>RateMyP.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -20,6 +20,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +52,6 @@
     <Compile Include="Managers\StudentManagerTests.cs" />
     <Compile Include="Managers\RatingManagerTests.cs" />
     <Compile Include="Managers\TeacherManagerTests.cs" />
-    <Compile Include="RateMyPFixture.cs" />
     <Compile Include="TeacherStatisticsManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,9 +60,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RateMyP\RateMyP.csproj">
-      <Project>{54a7817d-48d4-4052-a7aa-f1362993f462}</Project>
-      <Name>RateMyP</Name>
+    <ProjectReference Include="..\RateMyP.Client\RateMyP.Client.csproj">
+      <Project>{7d42ee49-7b69-44af-b830-4183802417ea}</Project>
+      <Name>RateMyP.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RateMyP.Common\RateMyP.Common.csproj">
+      <Project>{633d9b99-79fd-48db-b612-4756befc211c}</Project>
+      <Name>RateMyP.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

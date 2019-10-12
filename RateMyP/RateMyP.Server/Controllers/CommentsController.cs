@@ -38,32 +38,6 @@ namespace RateMyP.Server.Controllers
             return comment;
             }
 
-        // PUT: api/Comments/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutComment(Guid id, Comment comment)
-            {
-            if (id != comment.Id)
-                return BadRequest();
-
-            m_context.Entry(comment).State = EntityState.Modified;
-
-            try
-                {
-                await m_context.SaveChangesAsync();
-                }
-            catch (DbUpdateConcurrencyException)
-                {
-                if (!CommentExists(id))
-                    return NotFound();
-                else
-                    throw;
-                }
-
-            return NoContent();
-            }
-
         // POST: api/Comments
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -74,20 +48,6 @@ namespace RateMyP.Server.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetComment", new { id = comment.Id }, comment);
-            }
-
-        // DELETE: api/Comments/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Comment>> DeleteComment(Guid id)
-            {
-            var comment = await m_context.Comments.FindAsync(id);
-            if (comment == null)
-                return NotFound();
-
-            m_context.Comments.Remove(comment);
-            await m_context.SaveChangesAsync();
-
-            return comment;
             }
 
         private bool CommentExists(Guid id)

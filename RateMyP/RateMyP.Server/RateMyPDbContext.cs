@@ -30,7 +30,7 @@ namespace RateMyP
             }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("Data Source=EMEA20153;Initial Catalog=ratemyplocal;Integrated Security=True;Pooling=False");
+            => options.UseSqlServer("Data Source=ratemyp.database.windows.net;Initial Catalog=RateMyP;User Id=koldunai; Password=abrikosas79?;");
 
         protected override void OnModelCreating(ModelBuilder builder)
             {

@@ -42,6 +42,11 @@ namespace RateMyP.Server.Db
             {
             using var context = new RateMyPDbContext();
             var teacherActivities = ParseEntitiesFromCsv<TeacherActivity>("teacher_activities.csv");
+            teacherActivities.ForEach(x =>
+                                          {
+                                              x.Teacher = null;
+                                              x.Course = null;
+                                          });
             context.TeacherActivities.AddRange(teacherActivities);
             context.SaveChanges();
             }
