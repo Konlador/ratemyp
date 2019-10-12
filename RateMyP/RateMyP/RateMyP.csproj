@@ -101,11 +101,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\TeacherActivityPeriferal.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\CommentLike.cs" />
     <Compile Include="Entities\Course.cs" />
     <Compile Include="Entities\TeacherActivity.cs" />
+    <Compile Include="Entities\TeacherTag.cs" />
     <Compile Include="Helpers\ArgumentChecker.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\Rating.cs" />
