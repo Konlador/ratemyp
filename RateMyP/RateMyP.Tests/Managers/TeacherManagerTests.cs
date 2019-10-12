@@ -1,7 +1,8 @@
-﻿//using NUnit.Framework;
+﻿
+//using NUnit.Framework;
 //using NUnit.Framework.Internal;
 //using RateMyP.Entities;
-//using RateMyP.Client.Managers;
+//using RateMyP.Managers;
 //using System;
 
 //namespace RateMyP.Tests
@@ -24,7 +25,7 @@
 //            var teachers = m_manager.GetAll();
 //            Assert.AreEqual(0, teachers.Count);
 //            }
-
+            
 //        [Test]
 //        public void GetAllTeachers_SingleTeacher()
 //            {
@@ -66,3 +67,4 @@
 //            }
 //        }
 //    }
+    

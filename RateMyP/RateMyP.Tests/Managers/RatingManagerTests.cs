@@ -1,7 +1,7 @@
 ﻿//using NUnit.Framework;
 //using NUnit.Framework.Internal;
 //using RateMyP.Entities;
-//using RateMyP.Client.Managers;
+//using RateMyP.Managers;
 //using System;
 
 //namespace RateMyP.Tests
@@ -12,6 +12,7 @@
 //        [SetUp]
 //        public void SetUp()
 //            {
+//            PrepareDb();
 //            m_manager = new RatingManager();
 //            }
 
@@ -21,7 +22,7 @@
 //            var teachers = m_manager.GetAll();
 //            Assert.AreEqual(0, teachers.Count);
 //            }
-
+            
 //        [Test]
 //        public void GetAllRatings_SingleRating()
 //            {
@@ -42,8 +43,8 @@
 //            m_manager.Add(rating);
 //            var ratings = m_manager.GetAll();
 //            Assert.AreEqual(1, ratings.Count);
-//            Assert.AreEqual(rating.Id, ratings[0].Id);
-//            Assert.AreEqual(rating.Comment, "good guy");
+//            Assert.AreEqual (rating.Id, ratings[0].Id);
+//            Assert.AreEqual (rating.Comment, "good guy");
 //            }
 
 //        [Test]

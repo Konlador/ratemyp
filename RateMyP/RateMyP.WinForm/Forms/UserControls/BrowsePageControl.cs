@@ -76,17 +76,6 @@ namespace RateMyP.WinForm.Forms.UserControls
             SearchTeachers();
             }
 
-        private async Task<List<Course>> GetCoursesFromTeachers(List<Teacher> teachers)
-            {
-            var courses = new List<Course>();
-            foreach (var teacher in teachers)
-                {
-                var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
-                courses.AddRange(activities.Select(ta => ta.Course));
-                }
-            return courses.Distinct().ToList();
-            }
-
         private void CourseListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
             {
             e.Cancel = true;
@@ -98,5 +87,24 @@ namespace RateMyP.WinForm.Forms.UserControls
             e.Cancel = true;
             e.NewWidth = TeacherListView.Columns[e.ColumnIndex].Width;
             }
-        }
+
+        private void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+            {
+            var selectedTeacher = (Teacher)e.Item.Tag;
+            List<Teacher> teachers = new List<Teacher>() { selectedTeacher };
+            var courseList = GetCoursesFromTeachers(teachers);
+            LoadCourses(courseList);
+            }
+
+        private List<Course> GetCoursesFromTeachers(List<Teacher> teachers)
+            {
+            var courses = new List<Course>();
+            foreach (var teacher in teachers)
+                {
+                var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
+                courses.AddRange(activities.Select(ta => ta.Course));
+                }
+            return courses.Distinct().ToList();
+            }
+    }
     }
