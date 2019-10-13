@@ -23,7 +23,7 @@ namespace RateMyP.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
             {
-            return await m_context.Ratings.ToListAsync();
+            return await m_context.Ratings.Include(x => x.Tags).ToListAsync();
             }
 
         // GET: api/Ratings/5

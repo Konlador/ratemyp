@@ -91,19 +91,23 @@ namespace RateMyP.WinForm.Forms.UserControls
 
         private async void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
             {
-            //var selectedTeacher = (Teacher)e.Item.Tag;
-            //var courseList = await GetCoursesFromTeachers(new List<Teacher> { selectedTeacher });
-            //LoadCourses(courseList);
+            if (!e.IsSelected)
+                return;
+            var selectedTeacher = (Teacher)e.Item.Tag;
+            var courseList = await GetCoursesFromTeacher(selectedTeacher);
+            LoadCourses(courseList);
             }
 
-        private async Task<List<Course>> GetCoursesFromTeachers(List<Teacher> teachers)
+        private async Task<List<Course>> GetCoursesFromTeacher(Teacher teacher)
             {
             var courses = new List<Course>();
-            foreach (var teacher in teachers)
+            if (teacher.Activities != null)
                 {
-                var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
-                if (activities != null)
-                    courses.AddRange(activities.Select(ta => ta.Course));
+                foreach (var activity in teacher.Activities)
+                    {
+                    var course = await RateMyPClient.Client.Courses.Get(activity.CourseId);
+                    courses.Add(course);
+                    }
                 }
             return courses.Distinct().ToList();
             }

@@ -23,26 +23,20 @@ namespace RateMyP.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachers()
             {
-            return await m_context.Teachers.ToListAsync();
+            return await m_context.Teachers.Include(x => x.Activities).ToListAsync();
             }
 
         // GET: api/Teachers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Teacher>> GetTeacher(Guid id)
             {
-            var teacher = await m_context.Teachers.FindAsync(id);
+            var teacher = await m_context.Teachers.Include(x => x.Activities)
+                .FirstOrDefaultAsync(i => i.Id.Equals(id));
 
             if (teacher == null)
                 return NotFound();
 
             return teacher;
-            }
-
-        // GET: api/Teachers
-        [HttpGet("{id}/selectactivities")]
-        public async Task<ActionResult<IEnumerable<TeacherActivity>>> GetTeacherActivities(Guid teacherId)
-            {
-            return await m_context.TeacherActivities.Where(x => x.TeacherId == teacherId).ToListAsync();
             }
 
         private bool TeacherExists(Guid id)

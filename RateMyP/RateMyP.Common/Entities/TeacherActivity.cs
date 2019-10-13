@@ -13,21 +13,16 @@ namespace RateMyP.Entities
     public class TeacherActivity : IEquatable<TeacherActivity>
         {
         public Guid Id { get; set; }
-        public Teacher Teacher { get; set; }
-        public Course Course { get; set; }
+        public Guid TeacherId { get; set; }
+        public Guid CourseId { get; set; }
         public DateTime DateStarted { get; set; }
         public LectureType LectureType { get; set; }
-
-        [ForeignKey("Course")]
-        public Guid CourseId { get; set; }
-        [ForeignKey("Teacher")]
-        public Guid TeacherId { get; set; }
 
         public bool Equals(TeacherActivity other) =>
             other != null &&
             other.Id.Equals(Id) &&
-            other.Teacher.Equals(Teacher) &&
-            other.Course.Equals(Course) &&
+            other.TeacherId.Equals(TeacherId) &&
+            other.CourseId.Equals(CourseId) &&
             other.DateStarted.Equals(DateStarted) &&
             other.LectureType.Equals(LectureType);
         }

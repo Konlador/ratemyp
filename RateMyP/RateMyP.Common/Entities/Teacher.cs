@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RateMyP.Entities
     {
@@ -16,6 +17,7 @@ namespace RateMyP.Entities
         public string Description { get; set; }
         public string Rank { get; set; }
         public string Faculty { get; set; }
+        public List<TeacherActivity> Activities { get; set; }
 
         public bool Equals(Teacher other) =>
             other != null &&
