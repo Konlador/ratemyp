@@ -1,14 +1,9 @@
 ﻿using CsvHelper;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using RateMyP.Entities;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using CsvHelper.Configuration;
-using RateMyP.Server;
 
 namespace RateMyP.Server.Db
     {
@@ -16,7 +11,7 @@ namespace RateMyP.Server.Db
         {
         public static void LoadDataToDb()
             {
-            //LoadTeachersToDb();
+            LoadTeachersToDb();
             LoadCoursesToDb();
             LoadTeacherActivitiesToDb();
             LoadStudentsToDb();
