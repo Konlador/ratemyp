@@ -30,7 +30,7 @@ namespace RateMyP.Client.Managers
             {
             for (var i = 0; i < 5; i++)
                 {
-                var response = await m_client.GetAsync($"/api/teacher/{teacherId}?select=TeacherActivities");
+                var response = await m_client.GetAsync($"/api/teachers/{teacherId.ToString()}/selectactivities");
                 if (response.IsSuccessStatusCode)
                     return await response.Content.ReadAsAsync<List<TeacherActivity>>();
                 }

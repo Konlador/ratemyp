@@ -3,11 +3,12 @@ using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RateMyP.Client;
 
 namespace RateMyP.Tests
     {
     [TestFixture]
-    public class TeacherStatisticsAnalyzerTests : RateMyPFixture
+    public class TeacherStatisticsAnalyzerTests
         {
         private TeacherStatisticsAnalyzer m_analyzer;
         //private RatingManager m_ratingManager;
@@ -28,7 +29,7 @@ namespace RateMyP.Tests
         [Test]
         public void GetTeacherAverageMark_SingleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -38,7 +39,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -48,11 +49,11 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
@@ -71,15 +72,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
-
-            ratings.Add(rating);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
+            RateMyPClient.Client.Ratings.Post(rating);
 
             var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id);
             Assert.AreEqual(4, averageRating);
@@ -88,7 +81,7 @@ namespace RateMyP.Tests
         [Test]
         public void GetTeacherAverageMark_MultipleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -98,7 +91,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -108,16 +101,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating1 = new Rating()
+            var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -131,7 +124,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating()
+            var rating2 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -145,7 +138,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating()
+            var rating3 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -159,17 +152,10 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            var ratings = new List<Rating> { rating1, rating2, rating3 };
 
-            ratings.Add(rating1);
-            ratings.Add(rating2);
-            ratings.Add(rating3);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
+            foreach (var rating in ratings)
+                RateMyPClient.Client.Ratings.Post(rating);
 
             var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id);
             Assert.AreEqual(5, averageRating);
@@ -178,7 +164,7 @@ namespace RateMyP.Tests
         [Test]
         public void GetTeacherAverageMark_ByDate()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -188,7 +174,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -198,16 +184,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating1 = new Rating()
+            var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -221,7 +207,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating()
+            var rating2 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -235,7 +221,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating()
+            var rating3 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -263,28 +249,20 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            List<Rating> ratings = new List<Rating> { rating1, rating2, rating3, rating4 };
 
-            ratings.Add(rating1);
-            ratings.Add(rating2);
-            ratings.Add(rating3);
-            ratings.Add(rating4);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
+            foreach (var rating in ratings)
+                RateMyPClient.Client.Ratings.Post(rating);
 
             var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id, new DateTime(2019, 01, 02), new DateTime(2019, 03, 21));
             Assert.AreEqual(7, averageRating);
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_NoRating()
+        public async void GetTeacherAverageMarkList_NoRating()
             {
             int parts = 5;
-            var list = m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(), new DateTime(2020, 12, 12),
+            var list = await m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(), new DateTime(2020, 12, 12),
                 new DateTime(2020, 12, 12), parts);
 
             for (int i = 0; i < parts; i++)
@@ -292,9 +270,9 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_SingleRating()
+        public async void GetTeacherAverageMarkList_SingleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -304,7 +282,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -314,16 +292,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating = new Rating()
+            var rating = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -337,28 +315,19 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            RateMyPClient.Client.Ratings.Post(rating);
 
-            ratings.Add(rating);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
-
-            int parts = 5;
-
-            var list = m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 10),
+            var parts = 5;
+            var list = await m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 10),
                 new DateTime(2010, 12, 12), parts);
 
             Assert.Contains(4, list);
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_MultipleRating()
+        public async void GetTeacherAverageMarkList_MultipleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -368,7 +337,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -378,16 +347,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating1 = new Rating()
+            var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -401,7 +370,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating()
+            var rating2 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -415,7 +384,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating()
+            var rating3 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -429,7 +398,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating4 = new Rating()
+            var rating4 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -443,7 +412,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating5 = new Rating()
+            var rating5 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -457,23 +426,13 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
+            var ratings = new List<Rating> { rating1, rating2, rating3, rating4, rating5 };
 
-            List<Rating> ratings = new List<Rating>();
-
-            ratings.Add(rating1);
-            ratings.Add(rating2);
-            ratings.Add(rating3);
-            ratings.Add(rating4);
-            ratings.Add(rating5);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
+            foreach (var rating in ratings)
+                RateMyPClient.Client.Ratings.Post(rating);
 
             int parts = 4;
-            var list = m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 01),
+            var list = await m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 01),
                 new DateTime(2011, 02, 01), parts);
 
             Assert.Contains(7, list);
@@ -483,16 +442,16 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_NoRating()
+        public async void GetTeacherAverageLevelOfDifficultyRating_NoRating()
             {
-            var averageRating = m_analyzer.GetTeacherAverageLevelOfDifficultyRating(Guid.NewGuid());
+            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(Guid.NewGuid());
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_SingleRating()
+        public async void GetTeacherAverageLevelOfDifficultyRating_SingleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -502,7 +461,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -512,16 +471,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating = new Rating()
+            var rating = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -535,24 +494,16 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            RateMyPClient.Client.Ratings.Post(rating);
 
-            ratings.Add(rating);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
-
-            var averageRating = m_analyzer.GetTeacherAverageLevelOfDifficultyRating(teacher.Id);
+            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacher.Id);
             Assert.AreEqual(2, averageRating);
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
+        public async void GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -562,7 +513,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -572,16 +523,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating1 = new Rating()
+            var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -595,7 +546,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating()
+            var rating2 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -609,7 +560,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating()
+            var rating3 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -623,33 +574,26 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            var ratings = new List<Rating> { rating1, rating2, rating3 };
 
-            ratings.Add(rating1);
-            ratings.Add(rating2);
-            ratings.Add(rating3);
+            foreach (var rating in ratings)
+                RateMyPClient.Client.Ratings.Post(rating);
 
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
-
-            var averageRating = m_analyzer.GetTeacherAverageLevelOfDifficultyRating(teacher.Id);
+            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacher.Id);
             Assert.AreEqual(6, averageRating);
             }
 
         [Test]
-        public void GetPercentageStudentsWouldTakeTeacherAgain_NoRating()
+        public async void GetPercentageStudentsWouldTakeTeacherAgain_NoRating()
             {
-            var averageRating = m_analyzer.GetPercentageStudentsWouldTakeTeacherAgain(Guid.NewGuid());
+            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(Guid.NewGuid());
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public void GetPercentageStudentsWouldTakeTeacherAgain_SingleRating()
+        public async void GetPercentageStudentsWouldTakeTeacherAgain_SingleRating()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -659,7 +603,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -669,16 +613,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating = new Rating()
+            var rating = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -692,24 +636,16 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            RateMyPClient.Client.Ratings.Post(rating);
 
-            ratings.Add(rating);
-
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
-
-            var averageRating = m_analyzer.GetPercentageStudentsWouldTakeTeacherAgain(teacher.Id);
+            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(teacher.Id);
             Assert.AreEqual(100, averageRating);
             }
 
         [Test]
-        public void GetPercentageStudentsWouldTakeTeacherAgain_MultipleRatings()
+        public async void GetPercentageStudentsWouldTakeTeacherAgain_MultipleRatings()
             {
-            var teacher = new Teacher()
+            var teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -719,7 +655,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var student = new Student()
+            var student = new Student
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Studentas",
@@ -729,16 +665,16 @@ namespace RateMyP.Tests
                 Description = "desc"
                 };
 
-            var course = new Course()
+            var course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Taikomasis objektinis programavimas",
-                Type = CourseType.Compulsory,
+                CourseType = CourseType.Compulsory,
                 Credits = 5,
                 Faculty = "MIF"
                 };
 
-            var rating1 = new Rating()
+            var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -752,7 +688,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating()
+            var rating2 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -766,7 +702,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating()
+            var rating3 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -780,7 +716,7 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating4 = new Rating()
+            var rating4 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 Teacher = teacher,
@@ -794,20 +730,12 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating>();
+            var ratings = new List<Rating> { rating1, rating2, rating3, rating4 };
 
-            ratings.Add(rating1);
-            ratings.Add(rating2);
-            ratings.Add(rating3);
-            ratings.Add(rating4);
+            foreach (var rating in ratings)
+                RateMyPClient.Client.Ratings.Post(rating);
 
-            using (var context = new RateMyPDbContext())
-                {
-                context.Ratings.AddRange(ratings);
-                context.SaveChanges();
-                }
-
-            var averageRating = m_analyzer.GetPercentageStudentsWouldTakeTeacherAgain(teacher.Id);
+            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(teacher.Id);
             Assert.AreEqual(25, averageRating);
             }
         }

@@ -1,5 +1,6 @@
 ﻿using RateMyP.Entities;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -23,6 +24,14 @@ namespace RateMyP.Client.Managers
                     return await response.Content.ReadAsAsync<List<Rating>>();
                 }
             return null;
+            }
+
+        public async void Post(Rating rating)
+            {
+            HttpResponseMessage response = null;
+            for (var i = 0; i < 5 && response?.StatusCode != HttpStatusCode.Created; i++)
+                response = await m_client.PostAsJsonAsync("api/ratings", rating);
+            response?.EnsureSuccessStatusCode();
             }
         }
     }

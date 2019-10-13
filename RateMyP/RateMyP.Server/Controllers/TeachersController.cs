@@ -39,7 +39,7 @@ namespace RateMyP.Server.Controllers
             }
 
         // GET: api/Teachers
-        [HttpGet("{id}/select=TeacherActivities")]
+        [HttpGet("{id}/selectactivities")]
         public async Task<ActionResult<IEnumerable<TeacherActivity>>> GetTeacherActivities(Guid teacherId)
             {
             return await m_context.TeacherActivities.Where(x => x.TeacherId == teacherId).ToListAsync();
@@ -47,7 +47,7 @@ namespace RateMyP.Server.Controllers
 
         private bool TeacherExists(Guid id)
             {
-            return m_context.Teachers.Any(e => e.Id == id);
+            return m_context.Teachers.Any(e => e.Id.Equals(id));
             }
         }
     }

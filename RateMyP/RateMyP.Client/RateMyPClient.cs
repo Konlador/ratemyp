@@ -20,7 +20,7 @@ namespace RateMyP.Client
         private RateMyPClient()
             {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://ratemypserver79.azurewebsites.net");
+            httpClient.BaseAddress = new Uri("https://localhost:44382"); // https://ratemypserver79.azurewebsites.net
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

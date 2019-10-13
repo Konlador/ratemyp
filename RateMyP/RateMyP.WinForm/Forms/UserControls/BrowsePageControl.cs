@@ -45,9 +45,10 @@ namespace RateMyP.WinForm.Forms.UserControls
                 }
             }
 
-        private async void LoadCourses()
+        private async void LoadCourses(IEnumerable<Course> courses = null)
             {
-            var courses = await RateMyPClient.Client.Courses.GetAll();
+            if (courses == null)
+                courses = await RateMyPClient.Client.Courses.GetAll();
             CourseListView.Items.Clear();
             foreach (var course in courses)
                 {
@@ -88,23 +89,23 @@ namespace RateMyP.WinForm.Forms.UserControls
             e.NewWidth = TeacherListView.Columns[e.ColumnIndex].Width;
             }
 
-        private void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private async void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
             {
-            var selectedTeacher = (Teacher)e.Item.Tag;
-            List<Teacher> teachers = new List<Teacher>() { selectedTeacher };
-            var courseList = GetCoursesFromTeachers(teachers);
-            LoadCourses(courseList);
+            //var selectedTeacher = (Teacher)e.Item.Tag;
+            //var courseList = await GetCoursesFromTeachers(new List<Teacher> { selectedTeacher });
+            //LoadCourses(courseList);
             }
 
-        private List<Course> GetCoursesFromTeachers(List<Teacher> teachers)
+        private async Task<List<Course>> GetCoursesFromTeachers(List<Teacher> teachers)
             {
             var courses = new List<Course>();
             foreach (var teacher in teachers)
                 {
                 var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
-                courses.AddRange(activities.Select(ta => ta.Course));
+                if (activities != null)
+                    courses.AddRange(activities.Select(ta => ta.Course));
                 }
             return courses.Distinct().ToList();
             }
-    }
+        }
     }
