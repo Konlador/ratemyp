@@ -1,25 +1,20 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RateMyP.Forms.UserControls
+namespace RateMyP.WinForm.Forms.UserControls
     {
-    public partial class LandingPage : UserControl
+    public partial class HomePageControl : UserControl
         {
         public const int MaxComments = 10;
 
-        public LandingPage()
+        public HomePageControl()
             {
             InitializeComponent();
             LoadRecentComments();
             }
 
-        private void TrendProfListView_SelectedIndexChanged(object sender, EventArgs e)
-            {
-
-            }
-
-        // Displays up to maxComments most recent comments.
         private void LoadRecentComments()
             {
             using (var context = new RateMyPDbContext())
@@ -27,9 +22,9 @@ namespace RateMyP.Forms.UserControls
                 var comments = (from c in context.Comments
                                 orderby c.DateCreated descending
                                 select c).Take(MaxComments).ToList();
-                RecentCommentsListView.Clear();
+                RecentCommentsList.Clear();
                 var items = comments.Select(c => new ListViewItem(c.Content)).ToArray();
-                RecentCommentsListView.Items.AddRange(items);
+                RecentCommentsList.Items.AddRange(items);
                 }
             }
         }

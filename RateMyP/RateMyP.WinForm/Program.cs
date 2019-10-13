@@ -18,7 +18,7 @@ namespace RateMyP.WinForm
             {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Forms.RateMyProfessor());
             }
 
         private static void LoadTeachersToDb()
@@ -109,8 +109,8 @@ namespace RateMyP.WinForm
                     TeacherId = item.TeacherId,
                     CourseId = item.CourseId,
                     DateStarted = item.DateStarted,
-                    Type = item.Type
-                    };
+                    LectureType = item.LectureType
+                };
                 aList.Add(ta);
                 }
             return aList;
