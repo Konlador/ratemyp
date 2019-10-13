@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using MetroSet_UI.Forms;
+﻿using RateMyP.Client;
+using RateMyP.Entities;
+using RateMyP.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RateMyP.Entities;
-using RateMyP.Client;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RateMyP.WinForm.Forms.UserControls
     {
@@ -62,7 +62,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             var allTeachers = await RateMyPClient.Client.Teachers.GetAll();
             var teachers = (from t in allTeachers
-                            where (t.FirstName + " " + t.LastName).ToLower().Contains(SearchTextBox.Text)
+                            where (t.FirstName + " " + t.LastName).ToLower().Denationalize().Contains(SearchTextBox.Text)
                             select t).ToList();
             LoadTeachersListView(teachers);
             }

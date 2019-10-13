@@ -9,7 +9,7 @@ namespace RateMyP.Server
         {
         public static void Main(string[] args)
             {
-            //DbDataLoader.LoadDataToDb();
+            DbDataLoader.LoadDataToDb();
             CreateHostBuilder(args).Build().Run();
             }
 

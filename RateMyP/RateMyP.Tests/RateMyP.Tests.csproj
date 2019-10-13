@@ -57,6 +57,7 @@
     <Compile Include="Managers\StudentManagerTests.cs" />
     <Compile Include="Managers\RatingManagerTests.cs" />
     <Compile Include="Managers\TeacherManagerTests.cs" />
+    <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="TeacherStatisticsManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

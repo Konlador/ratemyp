@@ -19,49 +19,6 @@ namespace RateMyP.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RateMyP.Entities.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CommentOnId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CommentOnType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("RateMyP.Entities.CommentLike", b =>
-                {
-                    b.Property<Guid>("CommentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CommentId", "StudentId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("CommentLikes");
-                });
-
             modelBuilder.Entity("RateMyP.Entities.Course", b =>
                 {
                     b.Property<Guid>("Id")
@@ -109,9 +66,6 @@ namespace RateMyP.Server.Migrations
                     b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
@@ -127,6 +81,21 @@ namespace RateMyP.Server.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("RateMyP.Entities.RatingLike", b =>
+                {
+                    b.Property<Guid>("RatingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RatingId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("RatingLikes");
                 });
 
             modelBuilder.Entity("RateMyP.Entities.Student", b =>
@@ -153,6 +122,20 @@ namespace RateMyP.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("RateMyP.Entities.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("RateMyP.Entities.Teacher", b =>
@@ -208,26 +191,33 @@ namespace RateMyP.Server.Migrations
                     b.ToTable("TeacherActivities");
                 });
 
-            modelBuilder.Entity("RateMyP.Entities.Comment", b =>
+            modelBuilder.Entity("RateMyP.Entities.TeacherTag", b =>
                 {
-                    b.HasOne("RateMyP.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-                });
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("RateMyP.Entities.CommentLike", b =>
-                {
-                    b.HasOne("RateMyP.Entities.Comment", "Comment")
-                        .WithMany("Likes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
 
-                    b.HasOne("RateMyP.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<Guid?>("RatingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RatingId");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherTag");
                 });
 
             modelBuilder.Entity("RateMyP.Entities.Rating", b =>
@@ -245,6 +235,21 @@ namespace RateMyP.Server.Migrations
                         .HasForeignKey("TeacherId");
                 });
 
+            modelBuilder.Entity("RateMyP.Entities.RatingLike", b =>
+                {
+                    b.HasOne("RateMyP.Entities.Rating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RateMyP.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RateMyP.Entities.TeacherActivity", b =>
                 {
                     b.HasOne("RateMyP.Entities.Course", "Course")
@@ -258,6 +263,21 @@ namespace RateMyP.Server.Migrations
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("RateMyP.Entities.TeacherTag", b =>
+                {
+                    b.HasOne("RateMyP.Entities.Rating", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("RatingId");
+
+                    b.HasOne("RateMyP.Entities.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId");
+
+                    b.HasOne("RateMyP.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
                 });
 #pragma warning restore 612, 618
         }

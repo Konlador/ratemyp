@@ -16,7 +16,7 @@ namespace RateMyP.Server.Db
         {
         public static void LoadDataToDb()
             {
-            LoadTeachersToDb();
+            //LoadTeachersToDb();
             LoadCoursesToDb();
             LoadTeacherActivitiesToDb();
             LoadStudentsToDb();
@@ -63,7 +63,7 @@ namespace RateMyP.Server.Db
             {
             var assembly = Assembly.GetExecutingAssembly();
             using var stream = assembly.GetManifestResourceStream($"RateMyP.Server.Db.SeedData.{fileName}");
-            using var reader = new StreamReader(stream, Encoding.UTF8);
+            using var reader = new StreamReader(stream);
             var csvReader = new CsvReader(reader);
             csvReader.Configuration.MissingFieldFound = null;
             csvReader.Configuration.HeaderValidated = null;
