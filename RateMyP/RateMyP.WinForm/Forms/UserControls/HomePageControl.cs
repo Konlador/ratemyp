@@ -17,15 +17,15 @@ namespace RateMyP.WinForm.Forms.UserControls
 
         private void LoadRecentComments()
             {
-            using (var context = new RateMyPDbContext())
-                {
-                var comments = (from c in context.Comments
-                                orderby c.DateCreated descending
-                                select c).Take(MaxComments).ToList();
-                RecentCommentsList.Clear();
-                var items = comments.Select(c => new ListViewItem(c.Content)).ToArray();
-                RecentCommentsList.Items.AddRange(items);
-                }
+            //using (var context = new RateMyPDbContext())
+            //    {
+            //    var comments = (from c in context.Comments
+            //                    orderby c.DateCreated descending
+            //                    select c).Take(MaxComments).ToList();
+            //    RecentCommentsList.Clear();
+            //    var items = comments.Select(c => new ListViewItem(c.Content)).ToArray();
+            //    RecentCommentsList.Items.AddRange(items);
+            //    }
             }
         }
     }
