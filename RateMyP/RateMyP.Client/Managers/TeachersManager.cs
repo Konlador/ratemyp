@@ -5,10 +5,17 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using RateMyP.Client.Managers;
 
 namespace RateMyP.Client.Managers
     {
-    public class TeachersManager
+    public interface ITeachersManager
+        {
+        Task<List<Teacher>> GetAll();
+        Task<Teacher> Get(Guid teacherId);
+        }
+
+    public class TeachersManager : ITeachersManager
         {
         private readonly HttpClient m_client;
 
