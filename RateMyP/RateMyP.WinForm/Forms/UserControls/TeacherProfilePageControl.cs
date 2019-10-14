@@ -29,16 +29,11 @@ namespace RateMyP.WinForm.Forms.UserControls
         private async Task LoadRatings()
             {
             var ratings = await RateMyPClient.Client.Ratings.GetTeacherRatings(m_teacher.Id);
-            LoadRatingsListView(ratings);
-            RatingsGridView.AutoResizeColumns();
-            }
-
-        private void LoadRatingsListView(List<Rating> ratings)
-            {
             RatingsGridView.Rows.Clear();
             foreach (var rating in ratings)
                 {
-                var ratingInfo = new[] { rating.OverallMark.ToString(), rating.LevelOfDifficulty.ToString(), rating.CourseId.ToString(), rating.Comment, rating.WouldTakeTeacherAgain.ToString(), rating.DateCreated.ToString() };
+                var course = await RateMyPClient.Client.Courses.Get(rating.CourseId);
+                var ratingInfo = new[] { rating.OverallMark.ToString(), rating.LevelOfDifficulty.ToString(), course.Name, rating.Comment, rating.WouldTakeTeacherAgain.ToString(), rating.DateCreated.ToString() };
                 RatingsGridView.Rows.Add(ratingInfo);
                 }
             }
