@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
-    public class RatingsManager
+    public interface IRatingsManager
+        {
+        Task<List<Rating>> GetAll();
+        Task<List<Rating>> GetTeacherRatings(Guid teacherId);
+        }
+
+    public class RatingsManager : IRatingsManager
         {
         private readonly HttpClient m_client;
 

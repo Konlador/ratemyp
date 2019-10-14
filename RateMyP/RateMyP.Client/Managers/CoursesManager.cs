@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
-    public class CoursesManager
+    public interface ICoursesManager
+        {
+        Task<List<Course>> GetAll();
+        Task<Course> Get(Guid courseId);
+        }
+
+    public class CoursesManager : ICoursesManager
         {
         private readonly HttpClient m_client;
 
