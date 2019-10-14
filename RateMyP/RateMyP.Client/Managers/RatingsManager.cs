@@ -32,10 +32,9 @@ namespace RateMyP.Client.Managers
             {
             for (var i = 0; i < 5; i++)
                 {
-                var response = await m_client.GetAsync("/api/ratings");
-                if (!response.IsSuccessStatusCode) continue;
-                var allRatings = await response.Content.ReadAsAsync<List<Rating>>();
-                return allRatings.Where(x => x.TeacherId.Equals(teacherId)).ToList();
+                var response = await m_client.GetAsync($"/api/ratings/teacher={teacherId}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadAsAsync<List<Rating>>();
                 }
             return null;
             }

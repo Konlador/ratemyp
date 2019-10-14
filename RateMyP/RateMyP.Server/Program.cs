@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using RateMyP.Server.Db;
 
 namespace RateMyP.Server
     {
