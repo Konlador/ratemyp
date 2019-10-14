@@ -8,10 +8,10 @@ namespace RateMyP.Client
     public interface IRateMyPClient
         {
         ITeachersManager Teachers { get; }
-        StudentsManager Students { get; }
+        IStudentsManager Students { get; }
         IRatingsManager Ratings { get; }
-        CommentsManager Comments { get; }
-        CoursesManager Courses { get; }
+        ICommentsManager Comments { get; }
+        ICoursesManager Courses { get; }
         }
     public class RateMyPClient : IRateMyPClient
         {
@@ -20,10 +20,10 @@ namespace RateMyP.Client
         public static RateMyPClient Client => s_client.Value;
 
         public ITeachersManager Teachers { get; }
-        public StudentsManager Students { get; }
+        public IStudentsManager Students { get; }
         public IRatingsManager Ratings { get; }
-        public CommentsManager Comments { get; }
-        public CoursesManager Courses { get; }
+        public ICommentsManager Comments { get; }
+        public ICoursesManager Courses { get; }
 
         private RateMyPClient()
             {

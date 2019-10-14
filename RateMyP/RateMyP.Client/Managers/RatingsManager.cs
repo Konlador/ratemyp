@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
+    public interface IRatingsManager
+        {
+        Task<List<Rating>> GetAll();
+        }
+
     public class RatingsManager : IRatingsManager
         {
         private readonly HttpClient m_client;

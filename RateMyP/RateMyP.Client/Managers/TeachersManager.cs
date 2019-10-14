@@ -3,9 +3,16 @@ using RateMyP.Entities;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using RateMyP.Client.Managers;
 
 namespace RateMyP.Client.Managers
     {
+    public interface ITeachersManager
+        {
+        Task<List<Teacher>> GetAll();
+        Task<List<TeacherActivity>> GetTeacherActivities(Guid teacherId);
+        }
+
     public class TeachersManager : ITeachersManager
         {
         private readonly HttpClient m_client;

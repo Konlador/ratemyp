@@ -2,6 +2,7 @@
 using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RateMyP.Client;
 using Moq;
 using RateMyP.Client.Managers;
@@ -12,21 +13,18 @@ namespace RateMyP.Tests
     public class TeacherStatisticsAnalyzerTests
         {
         private TeacherStatisticsAnalyzer m_analyzer;
-        //private RatingManager m_ratingManager;
         private Mock<IRateMyPClient> m_clientMock;
-
-
+        private Teacher teacher_SingleRating;
+        private Teacher teacher_MultipleRatings;
 
         [SetUp]
         public void SetUp()
             {
-            var teacherManagerMock = new Mock<ITeachersManager>();
             var ratingManagerMock = new Mock<IRatingsManager>();
 
-            List<Teacher> testTeacherList = new List<Teacher>();
             List<Rating> testRatingList = new List<Rating>();
 
-            var teacher_SingleRating = new Teacher()
+            teacher_SingleRating = new Teacher()
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -36,7 +34,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var teacher_MultipleRatings = new Teacher()
+            teacher_MultipleRatings = new Teacher()
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -137,170 +135,152 @@ namespace RateMyP.Tests
 
 
             testRatingList.AddRange(new List<Rating>() { rating_SingleRating, rating1_MultipleRatings, rating2_MultipleRatings, rating3_MultipleRatings, rating4_MultipleRatings });
-            testTeacherList.AddRange(new List<Teacher>() { teacher_SingleRating, teacher_MultipleRatings });
 
             ratingManagerMock
                 .Setup(x => x.GetAll())
                 .ReturnsAsync(testRatingList);
 
-            teacherManagerMock
-                .Setup(x => x.GetAll())
-                .ReturnsAsync(testTeacherList);
-
             m_clientMock = new Mock<IRateMyPClient>();
             m_clientMock.Setup(x => x.Ratings).Returns(ratingManagerMock.Object);
-            m_clientMock.Setup(x => x.Teachers).Returns(teacherManagerMock.Object);
 
             m_analyzer = new TeacherStatisticsAnalyzer(m_clientMock.Object);
             }
 
         [Test]
-        public void GetTeacherAverageMark_NoRating()
+        public async Task GetTeacherAverageMark_NoRating()
             {
-            var value = m_analyzer.GetTeacherAverageMark(Guid.NewGuid()).Result;
+            var value = await m_analyzer.GetTeacherAverageMark(Guid.NewGuid());
 
             Assert.AreEqual(0, value);
             }
 
         [Test]
-        public void GetTeacherAverageMark_SingleRating()
+        public async Task GetTeacherAverageMark_SingleRating()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[0].Id;
+            var teacherId = teacher_SingleRating.Id;
 
-            var value = m_analyzer.GetTeacherAverageMark(teacherId).Result;
+            var value = await m_analyzer.GetTeacherAverageMark(teacherId);
 
             Assert.AreEqual(4, value);
             }
 
         [Test]
-        public void GetTeacherAverageMark_MultipleRating()
+        public async Task GetTeacherAverageMark_MultipleRatings()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[1].Id;
+            var teacherId = teacher_MultipleRatings.Id;
 
-            var value = m_analyzer.GetTeacherAverageMark(teacherId).Result;
+            var value = await m_analyzer.GetTeacherAverageMark(teacherId);
 
             Assert.AreEqual(6.25, value);
             }
 
         [Test]
-        public void GetTeacherAverageMark_ByDate()
+        public async Task GetTeacherAverageMark_ByDate()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[1].Id;
+            var teacherId = teacher_MultipleRatings.Id;
 
-            var value = m_analyzer.GetTeacherAverageMark(teacherId,
+            var value = await m_analyzer.GetTeacherAverageMark(teacherId,
                 new DateTime(2019, 01, 02),
-                new DateTime(2019, 03, 21))
-                .Result;
+                new DateTime(2019, 03, 21));
 
             Assert.AreEqual(7, value);
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_NoRating()
+        public async Task GetTeacherAverageMarkList_NoRating()
             {
             int parts = 5;
 
-            var list = m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(),
+            var list = await m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(),
                 new DateTime(2020, 12, 12),
-                new DateTime(2020, 12, 12), parts)
-                .Result;
+                new DateTime(2020, 12, 12), parts);
 
             for (int i = 0; i < parts; i++)
                 Assert.AreEqual(0, list[i]);
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_SingleRating()
+        public async Task GetTeacherAverageMarkList_SingleRating()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[0].Id;
+            var teacherId = teacher_SingleRating.Id;
             var parts = 5;
 
-            var list = m_analyzer.GetTeacherAverageMarkList(teacherId,
+            var list = await m_analyzer.GetTeacherAverageMarkList(teacherId,
                 new DateTime(2010, 01, 01),
-                new DateTime(2019, 03, 21), parts)
-                .Result;
+                new DateTime(2019, 03, 21), parts);
 
             Assert.Contains(4, list);
             }
 
         [Test]
-        public void GetTeacherAverageMarkList_MultipleRating()
+        public async Task GetTeacherAverageMarkList_MultipleRatings()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[1].Id;
+            var teacherId = teacher_MultipleRatings.Id;
             var parts = 4;
 
-            var list = m_analyzer.GetTeacherAverageMarkList
+            var list = await m_analyzer.GetTeacherAverageMarkList
                 (teacherId,
                 new DateTime(2019, 01, 01),
-                new DateTime(2019, 03, 21), parts)
-                .Result;
+                new DateTime(2019, 03, 21), parts);
 
-            Assert.Contains(7, list);
-            Assert.Contains(2, list);
-            Assert.Contains(9, list);
+            Assert.AreEqual(7, list[0]);
+            Assert.AreEqual(0, list[1]);
+            Assert.AreEqual(2, list[2]);
+            Assert.AreEqual(9, list[3]);
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_NoRating()
+        public async Task GetTeacherAverageLevelOfDifficultyRating_NoRating()
             {
-            var averageRating = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(Guid.NewGuid()).Result;
+            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(Guid.NewGuid());
 
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_SingleRating()
+        public async Task GetTeacherAverageLevelOfDifficultyRating_SingleRating()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[0].Id;
+            var teacherId = teacher_SingleRating.Id;
 
-            var value = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId).Result;
+            var value = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId);
 
             Assert.AreEqual(2, value);
             }
 
         [Test]
-        public void GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
+        public async Task GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[1].Id;
+            var teacherId = teacher_MultipleRatings.Id;
 
-            var value = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId).Result;
+            var value = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId);
 
             Assert.AreEqual(6.5, value);
             }
 
         [Test]
-        public void GetTeachersWouldTakeTeacherAgainRatio_NoRating()
+        public async Task GetTeachersWouldTakeTeacherAgainRatio_NoRating()
             {
-            var averageRating = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(Guid.NewGuid()).Result;
+            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(Guid.NewGuid());
 
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public void GetTeachersWouldTakeTeacherAgainRatio_SingleRating()
+        public async Task GetTeachersWouldTakeTeacherAgainRatio_SingleRating()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[0].Id;
+            var teacherId = teacher_SingleRating.Id;
 
-            var value = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId).Result;
+            var value = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId);
 
             Assert.AreEqual(1, value);
             }
 
         [Test]
-        public void GetTeachersWouldTakeTeacherAgainRatio_MultipleRatings()
+        public async Task GetTeachersWouldTakeTeacherAgainRatio_MultipleRatings()
             {
-            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
-            var teacherId = teachers[1].Id;
+            var teacherId = teacher_MultipleRatings.Id;
 
-            var value = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId).Result;
+            var value = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId);
 
             Assert.AreEqual(0.75, value);
             }

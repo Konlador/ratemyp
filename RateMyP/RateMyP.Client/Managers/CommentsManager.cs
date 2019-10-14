@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
-    public class CommentsManager
+    public interface ICommentsManager
+        {
+        Task<List<Comment>> GetAll();
+        }
+
+    public class CommentsManager : ICommentsManager
         {
         private readonly HttpClient m_client;
 
