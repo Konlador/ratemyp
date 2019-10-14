@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using MetroSet_UI.Forms;
+﻿using RateMyP.Client;
+using RateMyP.Entities;
+using RateMyP.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RateMyP.Entities;
-using RateMyP.Client;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RateMyP.WinForm.Forms.UserControls
     {
@@ -62,7 +62,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             var allTeachers = await RateMyPClient.Client.Teachers.GetAll();
             var teachers = (from t in allTeachers
-                            where (t.FirstName + " " + t.LastName).ToLower().Contains(SearchTextBox.Text)
+                            where (t.FirstName + " " + t.LastName).ToLower().Denationalize().Contains(SearchTextBox.Text)
                             select t).ToList();
             LoadTeachersListView(teachers);
             }
@@ -91,19 +91,23 @@ namespace RateMyP.WinForm.Forms.UserControls
 
         private async void TeacherListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
             {
-            //var selectedTeacher = (Teacher)e.Item.Tag;
-            //var courseList = await GetCoursesFromTeachers(new List<Teacher> { selectedTeacher });
-            //LoadCourses(courseList);
+            if (!e.IsSelected)
+                return;
+            var selectedTeacher = (Teacher)e.Item.Tag;
+            var courseList = await GetCoursesFromTeacher(selectedTeacher);
+            LoadCourses(courseList);
             }
 
-        private async Task<List<Course>> GetCoursesFromTeachers(List<Teacher> teachers)
+        private async Task<List<Course>> GetCoursesFromTeacher(Teacher teacher)
             {
             var courses = new List<Course>();
-            foreach (var teacher in teachers)
+            if (teacher.Activities != null)
                 {
-                var activities = await RateMyPClient.Client.Teachers.GetTeacherActivities(teacher.Id);
-                if (activities != null)
-                    courses.AddRange(activities.Select(ta => ta.Course));
+                foreach (var activity in teacher.Activities)
+                    {
+                    var course = await RateMyPClient.Client.Courses.Get(activity.CourseId);
+                    courses.Add(course);
+                    }
                 }
             return courses.Distinct().ToList();
             }

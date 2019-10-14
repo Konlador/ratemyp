@@ -28,14 +28,14 @@ namespace RateMyP.Client
         private RateMyPClient()
             {
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://ratemypserver79.azurewebsites.net"); // https://ratemypserver79.azurewebsites.net https://localhost:44382
+            httpClient.BaseAddress = new Uri("https://localhost:44382");
+            //httpClient.BaseAddress = new Uri("https://ratemypserver79.azurewebsites.net");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             Teachers = new TeachersManager(httpClient);
             Students = new StudentsManager(httpClient);
             Ratings = new RatingsManager(httpClient);
-            Comments = new CommentsManager(httpClient);
             Courses = new CoursesManager(httpClient);
             }
         }

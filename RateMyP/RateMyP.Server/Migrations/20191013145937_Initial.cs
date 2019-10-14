@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RateMyP.Server.Migrations
 {
-    public partial class Base : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,6 +39,18 @@ namespace RateMyP.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Teachers",
                 columns: table => new
                 {
@@ -55,28 +67,6 @@ namespace RateMyP.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    StudentId = table.Column<Guid>(nullable: true),
-                    CommentOnId = table.Column<Guid>(nullable: false),
-                    CommentOnType = table.Column<int>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comments_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ratings",
                 columns: table => new
                 {
@@ -87,7 +77,6 @@ namespace RateMyP.Server.Migrations
                     OverallMark = table.Column<int>(nullable: false),
                     LevelOfDifficulty = table.Column<int>(nullable: false),
                     WouldTakeTeacherAgain = table.Column<bool>(nullable: false),
-                    Tags = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     Comment = table.Column<string>(nullable: true)
                 },
@@ -119,10 +108,10 @@ namespace RateMyP.Server.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    TeacherId = table.Column<Guid>(nullable: false),
-                    CourseId = table.Column<Guid>(nullable: false),
                     DateStarted = table.Column<DateTime>(nullable: false),
-                    LectureType = table.Column<int>(nullable: false)
+                    LectureType = table.Column<int>(nullable: false),
+                    CourseId = table.Column<Guid>(nullable: false),
+                    TeacherId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,37 +131,65 @@ namespace RateMyP.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommentLikes",
+                name: "RatingLikes",
                 columns: table => new
                 {
-                    CommentId = table.Column<Guid>(nullable: false),
+                    RatingId = table.Column<Guid>(nullable: false),
                     StudentId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommentLikes", x => new { x.CommentId, x.StudentId });
+                    table.PrimaryKey("PK_RatingLikes", x => new { x.RatingId, x.StudentId });
                     table.ForeignKey(
-                        name: "FK_CommentLikes_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
+                        name: "FK_RatingLikes_Ratings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Ratings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CommentLikes_Students_StudentId",
+                        name: "FK_RatingLikes_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_CommentLikes_StudentId",
-                table: "CommentLikes",
-                column: "StudentId");
+            migrationBuilder.CreateTable(
+                name: "TeacherTag",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    TeacherId = table.Column<Guid>(nullable: true),
+                    TagId = table.Column<Guid>(nullable: true),
+                    Count = table.Column<int>(nullable: false),
+                    RatingId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherTag", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeacherTag_Ratings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "Ratings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TeacherTag_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TeacherTag_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_StudentId",
-                table: "Comments",
+                name: "IX_RatingLikes_StudentId",
+                table: "RatingLikes",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
@@ -199,30 +216,48 @@ namespace RateMyP.Server.Migrations
                 name: "IX_TeacherActivities_TeacherId",
                 table: "TeacherActivities",
                 column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherTag_RatingId",
+                table: "TeacherTag",
+                column: "RatingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherTag_TagId",
+                table: "TeacherTag",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherTag_TeacherId",
+                table: "TeacherTag",
+                column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CommentLikes");
-
-            migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "RatingLikes");
 
             migrationBuilder.DropTable(
                 name: "TeacherActivities");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "TeacherTag");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
+
+            migrationBuilder.DropTable(
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "Teachers");
         }
     }
 }

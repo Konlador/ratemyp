@@ -1,14 +1,9 @@
 ﻿using CsvHelper;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using RateMyP.Entities;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using CsvHelper.Configuration;
-using RateMyP.Server;
 
 namespace RateMyP.Server.Db
     {
@@ -42,11 +37,6 @@ namespace RateMyP.Server.Db
             {
             using var context = new RateMyPDbContext();
             var teacherActivities = ParseEntitiesFromCsv<TeacherActivity>("teacher_activities.csv");
-            teacherActivities.ForEach(x =>
-                                          {
-                                              x.Teacher = null;
-                                              x.Course = null;
-                                          });
             context.TeacherActivities.AddRange(teacherActivities);
             context.SaveChanges();
             }
@@ -63,7 +53,7 @@ namespace RateMyP.Server.Db
             {
             var assembly = Assembly.GetExecutingAssembly();
             using var stream = assembly.GetManifestResourceStream($"RateMyP.Server.Db.SeedData.{fileName}");
-            using var reader = new StreamReader(stream, Encoding.UTF8);
+            using var reader = new StreamReader(stream);
             var csvReader = new CsvReader(reader);
             csvReader.Configuration.MissingFieldFound = null;
             csvReader.Configuration.HeaderValidated = null;
