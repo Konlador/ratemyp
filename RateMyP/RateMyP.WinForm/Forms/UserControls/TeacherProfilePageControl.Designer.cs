@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
             {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TeacherNameLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherProfilePictureBox = new System.Windows.Forms.PictureBox();
             this.TeacherAcademicInfoLabel = new MetroSet_UI.Controls.MetroSetLabel();
@@ -36,7 +36,7 @@
             this.TeacherRatings = new MetroSet_UI.Controls.MetroSetLabel();
             this.temp_TeacherRatingArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.temp_TeacherFeedbackArea = new MetroSet_UI.Controls.MetroSetLabel();
-            this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
+            this.temp_TeacherFillerArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.RatingsGridView = new System.Windows.Forms.DataGridView();
             this.OverallMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LevelOfDifficulty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +44,7 @@
             this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WouldTakeAgain = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TeacherRateButton = new MetroSet_UI.Controls.MetroSetButton();
             ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingsGridView)).BeginInit();
             this.SuspendLayout();
@@ -144,20 +145,20 @@
             this.temp_TeacherFeedbackArea.ThemeAuthor = "Narwin";
             this.temp_TeacherFeedbackArea.ThemeName = "MetroLite";
             // 
-            // metroSetLabel1
+            // temp_TeacherFillerArea
             // 
-            this.metroSetLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroSetLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.metroSetLabel1.Location = new System.Drawing.Point(570, 25);
-            this.metroSetLabel1.Name = "metroSetLabel1";
-            this.metroSetLabel1.Size = new System.Drawing.Size(150, 50);
-            this.metroSetLabel1.Style = MetroSet_UI.Design.Style.Light;
-            this.metroSetLabel1.StyleManager = null;
-            this.metroSetLabel1.TabIndex = 7;
-            this.metroSetLabel1.Text = "FILLER SPACE (BADGES, ACHIEVEMENTS ETC?)";
-            this.metroSetLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroSetLabel1.ThemeAuthor = "Narwin";
-            this.metroSetLabel1.ThemeName = "MetroLite";
+            this.temp_TeacherFillerArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.temp_TeacherFillerArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.temp_TeacherFillerArea.Location = new System.Drawing.Point(570, 25);
+            this.temp_TeacherFillerArea.Name = "temp_TeacherFillerArea";
+            this.temp_TeacherFillerArea.Size = new System.Drawing.Size(150, 50);
+            this.temp_TeacherFillerArea.Style = MetroSet_UI.Design.Style.Light;
+            this.temp_TeacherFillerArea.StyleManager = null;
+            this.temp_TeacherFillerArea.TabIndex = 7;
+            this.temp_TeacherFillerArea.Text = "FILLER SPACE (BADGES, ACHIEVEMENTS ETC?)";
+            this.temp_TeacherFillerArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.temp_TeacherFillerArea.ThemeAuthor = "Narwin";
+            this.temp_TeacherFillerArea.ThemeName = "MetroLite";
             // 
             // RatingsGridView
             // 
@@ -169,14 +170,14 @@
             this.Comment,
             this.WouldTakeAgain,
             this.Date});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.RatingsGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RatingsGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.RatingsGridView.Location = new System.Drawing.Point(25, 250);
             this.RatingsGridView.Name = "RatingsGridView";
             this.RatingsGridView.Size = new System.Drawing.Size(1145, 325);
@@ -221,12 +222,39 @@
             this.Date.ReadOnly = true;
             this.Date.Width = 200;
             // 
+            // TeacherRateButton
+            // 
+            this.TeacherRateButton.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.DisabledForeColor = System.Drawing.Color.Gray;
+            this.TeacherRateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.TeacherRateButton.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.TeacherRateButton.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.TeacherRateButton.HoverTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.Location = new System.Drawing.Point(750, 185);
+            this.TeacherRateButton.Name = "TeacherRateButton";
+            this.TeacherRateButton.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.NormalTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.TeacherRateButton.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.TeacherRateButton.PressTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.Size = new System.Drawing.Size(125, 40);
+            this.TeacherRateButton.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherRateButton.StyleManager = null;
+            this.TeacherRateButton.TabIndex = 9;
+            this.TeacherRateButton.Text = "Leave a Rating";
+            this.TeacherRateButton.ThemeAuthor = "Narwin";
+            this.TeacherRateButton.ThemeName = "MetroLite";
+            this.TeacherRateButton.Click += new System.EventHandler(this.TeacherRateButton_Click);
+            // 
             // TeacherProfilePageControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.TeacherRateButton);
             this.Controls.Add(this.RatingsGridView);
-            this.Controls.Add(this.metroSetLabel1);
+            this.Controls.Add(this.temp_TeacherFillerArea);
             this.Controls.Add(this.temp_TeacherFeedbackArea);
             this.Controls.Add(this.temp_TeacherRatingArea);
             this.Controls.Add(this.TeacherRatings);
@@ -250,7 +278,7 @@
         private MetroSet_UI.Controls.MetroSetLabel TeacherRatings;
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherRatingArea;
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherFeedbackArea;
-        private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
+        private MetroSet_UI.Controls.MetroSetLabel temp_TeacherFillerArea;
         private System.Windows.Forms.DataGridView RatingsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn OverallMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn LevelOfDifficulty;
@@ -258,5 +286,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
         private System.Windows.Forms.DataGridViewTextBoxColumn WouldTakeAgain;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private MetroSet_UI.Controls.MetroSetButton TeacherRateButton;
         }
     }
