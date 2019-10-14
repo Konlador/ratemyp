@@ -2,8 +2,9 @@
 using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using RateMyP.Client;
+using Moq;
+using RateMyP.Client.Managers;
 
 namespace RateMyP.Tests
     {
@@ -12,24 +13,30 @@ namespace RateMyP.Tests
         {
         private TeacherStatisticsAnalyzer m_analyzer;
         //private RatingManager m_ratingManager;
+        private Mock<IRateMyPClient> m_clientMock;
+
+
 
         [SetUp]
         public void SetUp()
             {
-            m_analyzer = new TeacherStatisticsAnalyzer();
-            }
+            var teacherManagerMock = new Mock<ITeachersManager>();
+            var ratingManagerMock = new Mock<IRatingsManager>();
 
-        [Test]
-        public void GetTeacherAverageMark_NoRating()
-            {
-            var averageRating = m_analyzer.GetTeacherAverageMark(Guid.NewGuid());
-            Assert.AreEqual(0, averageRating);
-            }
+            List<Teacher> testTeacherList = new List<Teacher>();
+            List<Rating> testRatingList = new List<Rating>();
 
-        [Test]
-        public void GetTeacherAverageMark_SingleRating()
-            {
-            var teacher = new Teacher
+            var teacher_SingleRating = new Teacher()
+                {
+                Id = Guid.NewGuid(),
+                FirstName = "Vardenis",
+                LastName = "Pavardenis",
+                Description = "desc",
+                Rank = "Professor",
+                Faculty = "MIF"
+                };
+
+            var teacher_MultipleRatings = new Teacher()
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -58,145 +65,24 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            var rating = new Rating()
+            var rating_SingleRating = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher,
+                Teacher = teacher_SingleRating,
                 Student = student,
                 Course = course,
                 OverallMark = 4,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
                 Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
+                DateCreated = new DateTime(2010, 01, 02),
                 Comment = "Cool guy"
                 };
 
-            RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id);
-            Assert.AreEqual(4, averageRating);
-            }
-
-        [Test]
-        public void GetTeacherAverageMark_MultipleRating()
-            {
-            var teacher = new Teacher
+            var rating1_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
-
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
-
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating1 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating2 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 9,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating3 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 2,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var ratings = new List<Rating> { rating1, rating2, rating3 };
-
-            foreach (var rating in ratings)
-                RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id);
-            Assert.AreEqual(5, averageRating);
-            }
-
-        [Test]
-        public void GetTeacherAverageMark_ByDate()
-            {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
-
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
-
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating1 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
+                Teacher = teacher_MultipleRatings,
                 Student = student,
                 Course = course,
                 OverallMark = 10,
@@ -207,536 +93,216 @@ namespace RateMyP.Tests
                 Comment = "Cool guy"
                 };
 
-            var rating2 = new Rating
+            var rating2_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher,
+                Teacher = teacher_MultipleRatings,
                 Student = student,
                 Course = course,
                 OverallMark = 9,
-                LevelOfDifficulty = 2,
+                LevelOfDifficulty = 10,
                 WouldTakeTeacherAgain = true,
                 Tags = "Lots of homework",
                 DateCreated = new DateTime(2019, 03, 21),
                 Comment = "Cool guy"
                 };
 
-            var rating3 = new Rating
+            var rating3_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher,
+                Teacher = teacher_MultipleRatings,
                 Student = student,
                 Course = course,
                 OverallMark = 2,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
+                LevelOfDifficulty = 6,
+                WouldTakeTeacherAgain = false,
                 Tags = "Lots of homework",
                 DateCreated = new DateTime(2019, 02, 11),
                 Comment = "Cool guy"
                 };
 
-            var rating4 = new Rating()
+            var rating4_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher,
+                Teacher = teacher_MultipleRatings,
                 Student = student,
                 Course = course,
-                OverallMark = 5,
-                LevelOfDifficulty = 2,
+                OverallMark = 4,
+                LevelOfDifficulty = 8,
                 WouldTakeTeacherAgain = true,
                 Tags = "Lots of homework",
                 DateCreated = new DateTime(2019, 01, 01),
                 Comment = "Cool guy"
                 };
 
-            List<Rating> ratings = new List<Rating> { rating1, rating2, rating3, rating4 };
 
-            foreach (var rating in ratings)
-                RateMyPClient.Client.Ratings.Post(rating);
+            testRatingList.AddRange(new List<Rating>() { rating_SingleRating, rating1_MultipleRatings, rating2_MultipleRatings, rating3_MultipleRatings, rating4_MultipleRatings });
+            testTeacherList.AddRange(new List<Teacher>() { teacher_SingleRating, teacher_MultipleRatings });
 
-            var averageRating = m_analyzer.GetTeacherAverageMark(teacher.Id, new DateTime(2019, 01, 02), new DateTime(2019, 03, 21));
-            Assert.AreEqual(7, averageRating);
+            ratingManagerMock
+                .Setup(x => x.GetAll())
+                .ReturnsAsync(testRatingList);
+
+            teacherManagerMock
+                .Setup(x => x.GetAll())
+                .ReturnsAsync(testTeacherList);
+
+            m_clientMock = new Mock<IRateMyPClient>();
+            m_clientMock.Setup(x => x.Ratings).Returns(ratingManagerMock.Object);
+            m_clientMock.Setup(x => x.Teachers).Returns(teacherManagerMock.Object);
+
+            m_analyzer = new TeacherStatisticsAnalyzer(m_clientMock.Object);
             }
 
         [Test]
-        public async void GetTeacherAverageMarkList_NoRating()
+        public void GetTeacherAverageMark_NoRating()
+            {
+            var value = m_analyzer.GetTeacherAverageMark(Guid.NewGuid()).Result;
+
+            Assert.AreEqual(0, value);
+            }
+
+        [Test]
+        public void GetTeacherAverageMark_SingleRating()
+            {
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[0].Id;
+
+            var value = m_analyzer.GetTeacherAverageMark(teacherId).Result;
+
+            Assert.AreEqual(4, value);
+            }
+
+        [Test]
+        public void GetTeacherAverageMark_MultipleRating()
+            {
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[1].Id;
+
+            var value = m_analyzer.GetTeacherAverageMark(teacherId).Result;
+
+            Assert.AreEqual(6.25, value);
+            }
+
+        [Test]
+        public void GetTeacherAverageMark_ByDate()
+            {
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[1].Id;
+
+            var value = m_analyzer.GetTeacherAverageMark(teacherId,
+                new DateTime(2019, 01, 02),
+                new DateTime(2019, 03, 21))
+                .Result;
+
+            Assert.AreEqual(7, value);
+            }
+
+        [Test]
+        public void GetTeacherAverageMarkList_NoRating()
             {
             int parts = 5;
-            var list = await m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(), new DateTime(2020, 12, 12),
-                new DateTime(2020, 12, 12), parts);
+
+            var list = m_analyzer.GetTeacherAverageMarkList(Guid.NewGuid(),
+                new DateTime(2020, 12, 12),
+                new DateTime(2020, 12, 12), parts)
+                .Result;
 
             for (int i = 0; i < parts; i++)
                 Assert.AreEqual(0, list[i]);
             }
 
         [Test]
-        public async void GetTeacherAverageMarkList_SingleRating()
+        public void GetTeacherAverageMarkList_SingleRating()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
-
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
-
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2010, 10, 10),
-                Comment = "Cool guy"
-                };
-
-            RateMyPClient.Client.Ratings.Post(rating);
-
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[0].Id;
             var parts = 5;
-            var list = await m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 10),
-                new DateTime(2010, 12, 12), parts);
+
+            var list = m_analyzer.GetTeacherAverageMarkList(teacherId,
+                new DateTime(2010, 01, 01),
+                new DateTime(2019, 03, 21), parts)
+                .Result;
 
             Assert.Contains(4, list);
             }
 
         [Test]
-        public async void GetTeacherAverageMarkList_MultipleRating()
+        public void GetTeacherAverageMarkList_MultipleRating()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[1].Id;
+            var parts = 4;
 
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
-
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating1 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2010, 10, 01),
-                Comment = "Cool guy"
-                };
-
-            var rating2 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 6,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2010, 11, 01),
-                Comment = "Cool guy"
-                };
-
-            var rating3 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 5,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2010, 12, 02),
-                Comment = "Cool guy"
-                };
-
-            var rating4 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 3,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2011, 01, 02),
-                Comment = "Cool guy"
-                };
-
-            var rating5 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 10,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = new DateTime(2010, 10, 31),
-                Comment = "Cool guy"
-                };
-
-            var ratings = new List<Rating> { rating1, rating2, rating3, rating4, rating5 };
-
-            foreach (var rating in ratings)
-                RateMyPClient.Client.Ratings.Post(rating);
-
-            int parts = 4;
-            var list = await m_analyzer.GetTeacherAverageMarkList(teacher.Id, new DateTime(2010, 10, 01),
-                new DateTime(2011, 02, 01), parts);
+            var list = m_analyzer.GetTeacherAverageMarkList
+                (teacherId,
+                new DateTime(2019, 01, 01),
+                new DateTime(2019, 03, 21), parts)
+                .Result;
 
             Assert.Contains(7, list);
-            Assert.Contains(6, list);
-            Assert.Contains(5, list);
-            Assert.Contains(3, list);
+            Assert.Contains(2, list);
+            Assert.Contains(9, list);
             }
 
         [Test]
-        public async void GetTeacherAverageLevelOfDifficultyRating_NoRating()
+        public void GetTeacherAverageLevelOfDifficultyRating_NoRating()
             {
-            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(Guid.NewGuid());
+            var averageRating = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(Guid.NewGuid()).Result;
+
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public async void GetTeacherAverageLevelOfDifficultyRating_SingleRating()
+        public void GetTeacherAverageLevelOfDifficultyRating_SingleRating()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[0].Id;
 
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
+            var value = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId).Result;
 
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacher.Id);
-            Assert.AreEqual(2, averageRating);
+            Assert.AreEqual(2, value);
             }
 
         [Test]
-        public async void GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
+        public void GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[1].Id;
 
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
+            var value = m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId).Result;
 
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating1 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 5,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating2 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 9,
-                LevelOfDifficulty = 6,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating3 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 2,
-                LevelOfDifficulty = 7,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var ratings = new List<Rating> { rating1, rating2, rating3 };
-
-            foreach (var rating in ratings)
-                RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacher.Id);
-            Assert.AreEqual(6, averageRating);
+            Assert.AreEqual(6.5, value);
             }
 
         [Test]
-        public async void GetPercentageStudentsWouldTakeTeacherAgain_NoRating()
+        public void GetTeachersWouldTakeTeacherAgainRatio_NoRating()
             {
-            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(Guid.NewGuid());
+            var averageRating = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(Guid.NewGuid()).Result;
+
             Assert.AreEqual(0, averageRating);
             }
 
         [Test]
-        public async void GetPercentageStudentsWouldTakeTeacherAgain_SingleRating()
+        public void GetTeachersWouldTakeTeacherAgainRatio_SingleRating()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[0].Id;
 
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
+            var value = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId).Result;
 
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 2,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(teacher.Id);
-            Assert.AreEqual(100, averageRating);
+            Assert.AreEqual(1, value);
             }
 
         [Test]
-        public async void GetPercentageStudentsWouldTakeTeacherAgain_MultipleRatings()
+        public void GetTeachersWouldTakeTeacherAgainRatio_MultipleRatings()
             {
-            var teacher = new Teacher
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Vardenis",
-                LastName = "Pavardenis",
-                Description = "desc",
-                Rank = "Professor",
-                Faculty = "MIF"
-                };
+            var teachers = m_clientMock.Object.Teachers.GetAll().Result;
+            var teacherId = teachers[1].Id;
 
-            var student = new Student
-                {
-                Id = Guid.NewGuid(),
-                FirstName = "Studentas",
-                LastName = "Studentelis",
-                Studies = "Programu sistemos",
-                Faculty = "MIF",
-                Description = "desc"
-                };
+            var value = m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId).Result;
 
-            var course = new Course
-                {
-                Id = Guid.NewGuid(),
-                Name = "Taikomasis objektinis programavimas",
-                CourseType = CourseType.Compulsory,
-                Credits = 5,
-                Faculty = "MIF"
-                };
-
-            var rating1 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 4,
-                LevelOfDifficulty = 5,
-                WouldTakeTeacherAgain = false,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating2 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 9,
-                LevelOfDifficulty = 6,
-                WouldTakeTeacherAgain = false,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating3 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 2,
-                LevelOfDifficulty = 7,
-                WouldTakeTeacherAgain = false,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var rating4 = new Rating
-                {
-                Id = Guid.NewGuid(),
-                Teacher = teacher,
-                Student = student,
-                Course = course,
-                OverallMark = 2,
-                LevelOfDifficulty = 7,
-                WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
-                DateCreated = DateTime.Now,
-                Comment = "Cool guy"
-                };
-
-            var ratings = new List<Rating> { rating1, rating2, rating3, rating4 };
-
-            foreach (var rating in ratings)
-                RateMyPClient.Client.Ratings.Post(rating);
-
-            var averageRating = await m_analyzer.GetTeachersWouldTakeTeacherAgainRation(teacher.Id);
-            Assert.AreEqual(25, averageRating);
+            Assert.AreEqual(0.75, value);
             }
         }
     }

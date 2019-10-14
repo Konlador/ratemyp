@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
-    public class TeachersManager
+    public class TeachersManager : ITeachersManager
         {
         private readonly HttpClient m_client;
 

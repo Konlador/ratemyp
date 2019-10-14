@@ -8,24 +8,31 @@ namespace RateMyP
     {
     public class TeacherStatisticsAnalyzer
         {
+        private IRateMyPClient m_client;
+
+        public TeacherStatisticsAnalyzer(IRateMyPClient client)
+            {
+            m_client = client;
+            }
+
         public async Task<double> GetTeacherAverageMark(Guid teacherId)
             {
-            var allRatings = await RateMyPClient.Client.Ratings.GetAll();
+            var allRatings = await m_client.Ratings.GetAll();
             var teacherRatings = allRatings.Where(r => r.Teacher.Id.ToString() == teacherId.ToString()).ToList();
             double sum = 0;
             foreach (var rating in teacherRatings)
                 sum += rating.OverallMark;
-            return allRatings.Count > 0 ? sum / allRatings.Count : 0;
+            return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
         public async Task<double> GetTeacherAverageMark(Guid teacherId, DateTime startDate, DateTime endDate)
             {
-            var allRatings = await RateMyPClient.Client.Ratings.GetAll();
+            var allRatings = await m_client.Ratings.GetAll();
             var teacherRatings = allRatings.Where(r => r.Teacher.Id.ToString() == teacherId.ToString() && r.DateCreated >= startDate && r.DateCreated <= endDate).ToList();
             double sum = 0;
-            foreach (var rating in allRatings)
+            foreach (var rating in teacherRatings)
                 sum += rating.OverallMark;
-            return allRatings.Count > 0 ? sum / allRatings.Count : 0;
+            return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
         public async Task<List<double>> GetTeacherAverageMarkList(Guid teacherId, DateTime startDate, DateTime endDate, int parts)
@@ -50,24 +57,24 @@ namespace RateMyP
 
         public async Task<double> GetTeachersAverageLevelOfDifficultyRating(Guid teacherId)
             {
-            var allRatings = await RateMyPClient.Client.Ratings.GetAll();
-            var ratings = allRatings.Where(r => r.Teacher.Id.ToString() == teacherId.ToString());
+            var allRatings = await m_client.Ratings.GetAll();
+            var teacherRatings = allRatings.Where(r => r.Teacher.Id.ToString() == teacherId.ToString()).ToList();
             double sum = 0;
-            foreach (var rating in ratings)
+            foreach (var rating in teacherRatings)
                 sum += rating.LevelOfDifficulty;
-            return allRatings.Count > 0 ? sum / allRatings.Count : 0;
+            return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
-        public async Task<double> GetTeachersWouldTakeTeacherAgainRation(Guid teacherId)
+        public async Task<double> GetTeachersWouldTakeTeacherAgainRatio(Guid teacherId)
             {
-            var allRatings = await RateMyPClient.Client.Ratings.GetAll();
-            var ratings = allRatings.Where(r => r.Teacher.Id.Equals(teacherId));
+            var allRatings = await m_client.Ratings.GetAll();
+            var teacherRatings = allRatings.Where(r => r.Teacher.Id.ToString() == teacherId.ToString()).ToList();
             double wouldTakeCount = 0;
 
-            foreach (var rating in ratings)
+            foreach (var rating in teacherRatings)
                 if (rating.WouldTakeTeacherAgain) wouldTakeCount++;
 
-            return allRatings.Count > 0 ? wouldTakeCount / allRatings.Count : 0;
+            return teacherRatings.Count > 0 ? wouldTakeCount / teacherRatings.Count : 0;
             }
         }
     }
