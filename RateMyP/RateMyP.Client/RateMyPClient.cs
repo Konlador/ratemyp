@@ -23,6 +23,7 @@ namespace RateMyP.Client
         public StudentsManager Students { get; }
         public RatingsManager Ratings { get; }
         public CoursesManager Courses { get; }
+        public ITagsManager Tags { get; }
 
         private RateMyPClient()
             {
@@ -36,6 +37,7 @@ namespace RateMyP.Client
             Students = new StudentsManager(httpClient);
             Ratings = new RatingsManager(httpClient);
             Courses = new CoursesManager(httpClient);
+            Tags = new TagsManager(httpClient);
             }
         }
     }
