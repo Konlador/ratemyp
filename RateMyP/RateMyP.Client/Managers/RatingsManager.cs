@@ -1,5 +1,7 @@
-﻿using RateMyP.Entities;
+﻿using System;
+using RateMyP.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,6 +24,18 @@ namespace RateMyP.Client.Managers
                 var response = await m_client.GetAsync("/api/ratings");
                 if (response.IsSuccessStatusCode)
                     return await response.Content.ReadAsAsync<List<Rating>>();
+                }
+            return null;
+            }
+
+        public async Task<List<Rating>> GetTeacherRatings(Guid teacherId)
+            {
+            for (var i = 0; i < 5; i++)
+                {
+                var response = await m_client.GetAsync("/api/ratings");
+                if (!response.IsSuccessStatusCode) continue;
+                var allRatings = await response.Content.ReadAsAsync<List<Rating>>();
+                return allRatings.Where(x => x.TeacherId.Equals(teacherId)).ToList();
                 }
             return null;
             }

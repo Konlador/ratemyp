@@ -28,16 +28,24 @@
         /// </summary>
         private void InitializeComponent()
             {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TeacherNameLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherProfilePictureBox = new System.Windows.Forms.PictureBox();
             this.TeacherAcademicInfoLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherInfoLabel = new MetroSet_UI.Controls.MetroSetLabel();
-            this.temp_TeacherCommentArea = new MetroSet_UI.Controls.MetroSetLabel();
+            this.TeacherRatings = new MetroSet_UI.Controls.MetroSetLabel();
             this.temp_TeacherRatingArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.temp_TeacherFeedbackArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
-            this.TeacherRateButton = new MetroSet_UI.Controls.MetroSetButton();
+            this.RatingsGridView = new System.Windows.Forms.DataGridView();
+            this.OverallMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LevelOfDifficulty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Course = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WouldTakeAgain = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatingsGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // TeacherNameLabel
@@ -91,20 +99,20 @@
             this.TeacherInfoLabel.ThemeAuthor = "Narwin";
             this.TeacherInfoLabel.ThemeName = "MetroLite";
             // 
-            // temp_TeacherCommentArea
+            // TeacherRatings
             // 
-            this.temp_TeacherCommentArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.temp_TeacherCommentArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.temp_TeacherCommentArea.Location = new System.Drawing.Point(25, 250);
-            this.temp_TeacherCommentArea.Name = "temp_TeacherCommentArea";
-            this.temp_TeacherCommentArea.Size = new System.Drawing.Size(700, 325);
-            this.temp_TeacherCommentArea.Style = MetroSet_UI.Design.Style.Light;
-            this.temp_TeacherCommentArea.StyleManager = null;
-            this.temp_TeacherCommentArea.TabIndex = 4;
-            this.temp_TeacherCommentArea.Text = "COMMENT AREA HERE";
-            this.temp_TeacherCommentArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.temp_TeacherCommentArea.ThemeAuthor = "Narwin";
-            this.temp_TeacherCommentArea.ThemeName = "MetroLite";
+            this.TeacherRatings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TeacherRatings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.TeacherRatings.Location = new System.Drawing.Point(25, 250);
+            this.TeacherRatings.Name = "TeacherRatings";
+            this.TeacherRatings.Size = new System.Drawing.Size(700, 325);
+            this.TeacherRatings.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherRatings.StyleManager = null;
+            this.TeacherRatings.TabIndex = 4;
+            this.TeacherRatings.Text = "Ratings here";
+            this.TeacherRatings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TeacherRatings.ThemeAuthor = "Narwin";
+            this.TeacherRatings.ThemeName = "MetroLite";
             // 
             // temp_TeacherRatingArea
             // 
@@ -151,41 +159,77 @@
             this.metroSetLabel1.ThemeAuthor = "Narwin";
             this.metroSetLabel1.ThemeName = "MetroLite";
             // 
-            // TeacherRateButton
+            // RatingsGridView
             // 
-            this.TeacherRateButton.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.TeacherRateButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.TeacherRateButton.DisabledForeColor = System.Drawing.Color.Gray;
-            this.TeacherRateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.TeacherRateButton.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.TeacherRateButton.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
-            this.TeacherRateButton.HoverTextColor = System.Drawing.Color.White;
-            this.TeacherRateButton.Location = new System.Drawing.Point(750, 175);
-            this.TeacherRateButton.Name = "TeacherRateButton";
-            this.TeacherRateButton.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.TeacherRateButton.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.TeacherRateButton.NormalTextColor = System.Drawing.Color.White;
-            this.TeacherRateButton.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.TeacherRateButton.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
-            this.TeacherRateButton.PressTextColor = System.Drawing.Color.White;
-            this.TeacherRateButton.Size = new System.Drawing.Size(150, 50);
-            this.TeacherRateButton.Style = MetroSet_UI.Design.Style.Light;
-            this.TeacherRateButton.StyleManager = null;
-            this.TeacherRateButton.TabIndex = 8;
-            this.TeacherRateButton.Text = "Leave a Rating";
-            this.TeacherRateButton.ThemeAuthor = "Narwin";
-            this.TeacherRateButton.ThemeName = "MetroLite";
-            this.TeacherRateButton.Click += new System.EventHandler(this.TeacherRateButton_Click);
+            this.RatingsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RatingsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.OverallMark,
+            this.LevelOfDifficulty,
+            this.Course,
+            this.Comment,
+            this.WouldTakeAgain,
+            this.Date});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RatingsGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.RatingsGridView.Location = new System.Drawing.Point(25, 250);
+            this.RatingsGridView.Name = "RatingsGridView";
+            this.RatingsGridView.Size = new System.Drawing.Size(1145, 325);
+            this.RatingsGridView.TabIndex = 8;
+            // 
+            // OverallMark
+            // 
+            this.OverallMark.HeaderText = "Overall mark";
+            this.OverallMark.Name = "OverallMark";
+            this.OverallMark.ReadOnly = true;
+            // 
+            // LevelOfDifficulty
+            // 
+            this.LevelOfDifficulty.HeaderText = "Level of difficulty";
+            this.LevelOfDifficulty.Name = "LevelOfDifficulty";
+            this.LevelOfDifficulty.ReadOnly = true;
+            // 
+            // Course
+            // 
+            this.Course.HeaderText = "Course";
+            this.Course.Name = "Course";
+            this.Course.ReadOnly = true;
+            // 
+            // Comment
+            // 
+            this.Comment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Comment.HeaderText = "Comment";
+            this.Comment.Name = "Comment";
+            this.Comment.ReadOnly = true;
+            this.Comment.Width = 500;
+            // 
+            // WouldTakeAgain
+            // 
+            this.WouldTakeAgain.HeaderText = "Would take again";
+            this.WouldTakeAgain.Name = "WouldTakeAgain";
+            this.WouldTakeAgain.ReadOnly = true;
+            // 
+            // Date
+            // 
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 200;
             // 
             // TeacherProfilePageControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.Controls.Add(this.TeacherRateButton);
+            this.Controls.Add(this.RatingsGridView);
             this.Controls.Add(this.metroSetLabel1);
             this.Controls.Add(this.temp_TeacherFeedbackArea);
             this.Controls.Add(this.temp_TeacherRatingArea);
-            this.Controls.Add(this.temp_TeacherCommentArea);
+            this.Controls.Add(this.TeacherRatings);
             this.Controls.Add(this.TeacherInfoLabel);
             this.Controls.Add(this.TeacherAcademicInfoLabel);
             this.Controls.Add(this.TeacherNameLabel);
@@ -193,6 +237,7 @@
             this.Name = "TeacherProfilePageControl";
             this.Size = new System.Drawing.Size(1200, 600);
             ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RatingsGridView)).EndInit();
             this.ResumeLayout(false);
 
             }
@@ -202,10 +247,16 @@
         private MetroSet_UI.Controls.MetroSetLabel TeacherNameLabel;
         private MetroSet_UI.Controls.MetroSetLabel TeacherAcademicInfoLabel;
         private MetroSet_UI.Controls.MetroSetLabel TeacherInfoLabel;
-        private MetroSet_UI.Controls.MetroSetLabel temp_TeacherCommentArea;
+        private MetroSet_UI.Controls.MetroSetLabel TeacherRatings;
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherRatingArea;
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherFeedbackArea;
         private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
-        private MetroSet_UI.Controls.MetroSetButton TeacherRateButton;
+        private System.Windows.Forms.DataGridView RatingsGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OverallMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LevelOfDifficulty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Course;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WouldTakeAgain;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         }
     }

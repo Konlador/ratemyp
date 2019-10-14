@@ -1,70 +1,66 @@
-﻿
-//using NUnit.Framework;
-//using NUnit.Framework.Internal;
-//using RateMyP.Entities;
-//using RateMyP.Managers;
-//using System;
+﻿using Moq;
+using Moq.Protected;
+using NUnit.Framework;
+using RateMyP.Client.Managers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using RateMyP.Entities;
 
-//namespace RateMyP.Tests
-//    {
-//    [TestFixture]
-//    public class TeacherManagerTests: RateMyPFixture
-//        {
-//        private TeacherManager m_manager;
+namespace RateMyP.Tests.Managers
+    {
+    public class TeacherManagerTests
+        {
+        [Test]
+        public async Task GetAllTeachers_NoTeacher()
+            {
+            // ARRANGE
+            var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            handlerMock
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+                .ReturnsAsync(new HttpResponseMessage
+                    {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent(JsonConvert.SerializeObject(new List<Teacher>()),
+                        Encoding.UTF8,
+                        "application/json"),
+                    })
+                .Verifiable();
 
-//        [SetUp]
-//        public void SetUp()
-//            {
-//            PrepareDb();
-//            m_manager = new TeacherManager();
-//            }
+            // use real http client with mocked handler here
+            var httpClient = new HttpClient(handlerMock.Object)
+                {
+                BaseAddress = new Uri("http://test.com/"),
+                };
 
-//        [Test]
-//        public void GetAllTeachers_NoTeacher()
-//            {
-//            var teachers = m_manager.GetAll();
-//            Assert.AreEqual(0, teachers.Count);
-//            }
-            
-//        [Test]
-//        public void GetAllTeachers_SingleTeacher()
-//            {
-//            var teacher = new Teacher
-//                {
-//                Id = Guid.NewGuid(),
-//                Name = "Kestis",
-//                Surname = "Morka",
-//                Rank = AcademicRank.Professor
-//                };
+            var manager = new TeachersManager(httpClient);
 
-//            m_manager.Add(teacher);
-//            var teachers = m_manager.GetAll();
-//            Assert.AreEqual(1, teachers.Count);
-//            Assert.AreEqual (teacher.Id, teachers[0].Id);
-//            Assert.AreEqual (teacher.Name, teachers[0].Name);
-//            }
+            // ACT
+            var result = await manager.GetAll();
 
-//        [Test]
-//        public void GetAllTeachers_MultipleTeachers()
-//            {
-//            m_manager.Add(new Teacher
-//                {
-//                Id = Guid.NewGuid(),
-//                Name = "Kestis",
-//                Surname = "Morka",
-//                Rank = AcademicRank.Professor
-//                });
-//            m_manager.Add(new Teacher
-//                {
-//                Id = Guid.NewGuid(),
-//                Name = "Coupe",
-//                Surname = "BMW",
-//                Rank = AcademicRank.Lecturer
-//                });
+            // ASSERT
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count);
 
-//            var teachers = m_manager.GetAll();
-//            Assert.AreEqual(2, teachers.Count);
-//            }
-//        }
-//    }
-    
+            // also check the 'http' call was like we expected it
+            var expectedUri = new Uri("http://test.com/api/teachers");
+
+            handlerMock.Protected().Verify(
+                "SendAsync",
+                Times.Exactly(1), // we expected a single external request
+                ItExpr.Is<HttpRequestMessage>(req =>
+                                                  req.Method == HttpMethod.Get  // we expected a GET request
+                                                  && req.RequestUri == expectedUri // to this uri
+                ),
+                ItExpr.IsAny<CancellationToken>()
+            );
+            }
+        }
+    }

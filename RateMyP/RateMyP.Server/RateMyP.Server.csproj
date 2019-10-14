@@ -25,10 +25,13 @@
     <Compile Remove="Migrations\20191010151001_Base.Designer.cs" />
     <Compile Remove="Migrations\20191010151035_Base.cs" />
     <Compile Remove="Migrations\20191010151035_Base.Designer.cs" />
+    <Compile Remove="Migrations\20191010151214_Base.cs" />
+    <Compile Remove="Migrations\20191010151214_Base.Designer.cs" />
+    <Compile Remove="Migrations\20191014174906_RemovedStudentFromRating.cs" />
+    <Compile Remove="Migrations\20191014174906_RemovedStudentFromRating.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Db\SeedData\comments.csv" />
     <None Remove="Db\SeedData\courses.csv" />
     <None Remove="Db\SeedData\students.csv" />
     <None Remove="Db\SeedData\teachers.csv" />
@@ -36,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Db\SeedData\comments.csv" />
     <EmbeddedResource Include="Db\SeedData\courses.csv" />
     <EmbeddedResource Include="Db\SeedData\students.csv" />
     <EmbeddedResource Include="Db\SeedData\teachers.csv" />
