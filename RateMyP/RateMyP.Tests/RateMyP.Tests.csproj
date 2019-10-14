@@ -7,7 +7,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31990951-B493-4112-B77B-E676BAD3BB1D}</ProjectGuid>
+    <ProjectGuid>{892DF59A-2C76-446F-B8B6-96EBE567EB1B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RateMyP.Tests</RootNamespace>
@@ -73,15 +73,11 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\StudentManagerTests.cs" />
-    <Compile Include="Managers\RatingManagerTests.cs" />
     <Compile Include="Managers\TeacherManagerTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="TeacherStatisticsManagerTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +89,9 @@
       <Project>{633d9b99-79fd-48db-b612-4756befc211c}</Project>
       <Name>RateMyP.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

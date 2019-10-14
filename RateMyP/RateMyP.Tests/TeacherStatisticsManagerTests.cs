@@ -67,12 +67,11 @@ namespace RateMyP.Tests
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacher_SingleRating.Id,
-                StudentId = student.Id,
                 CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<TeacherTag>(),
+                Tags = new List<RatingTag>(),
                 DateCreated = new DateTime(2010, 01, 02),
                 Comment = "Cool guy"
                 };
@@ -81,12 +80,11 @@ namespace RateMyP.Tests
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacher_MultipleRatings.Id,
-                StudentId = student.Id,
                 CourseId = course.Id,
                 OverallMark = 10,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<TeacherTag>(),
+                Tags = new List<RatingTag>(),
                 DateCreated = new DateTime(2019, 01, 02),
                 Comment = "Cool guy"
                 };
@@ -95,12 +93,11 @@ namespace RateMyP.Tests
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacher_MultipleRatings.Id,
-                StudentId = student.Id,
                 CourseId = course.Id,
                 OverallMark = 9,
                 LevelOfDifficulty = 10,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<TeacherTag>(),
+                Tags = new List<RatingTag>(),
                 DateCreated = new DateTime(2019, 03, 21),
                 Comment = "Cool guy"
                 };
@@ -109,12 +106,11 @@ namespace RateMyP.Tests
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacher_MultipleRatings.Id,
-                StudentId = student.Id,
                 CourseId = course.Id,
                 OverallMark = 2,
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = false,
-                Tags = new List<TeacherTag>(),
+                Tags = new List<RatingTag>(),
                 DateCreated = new DateTime(2019, 02, 11),
                 Comment = "Cool guy"
                 };
@@ -123,12 +119,11 @@ namespace RateMyP.Tests
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacher_MultipleRatings.Id,
-                StudentId = student.Id,
                 CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 8,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<TeacherTag>(),
+                Tags = new List<RatingTag>(),
                 DateCreated = new DateTime(2019, 01, 01),
                 Comment = "Cool guy"
                 };
