@@ -1,11 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using CsvHelper;
+﻿using Microsoft.EntityFrameworkCore;
 using RateMyP.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace RateMyP
     {
@@ -17,6 +11,8 @@ namespace RateMyP
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<RatingLike> RatingLikes { get; set; }
+        public DbSet<RatingTag> RatingTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
@@ -34,6 +30,7 @@ namespace RateMyP
         protected override void OnModelCreating(ModelBuilder builder)
             {
             builder.Entity<RatingLike>().HasKey(table => new { table.RatingId, table.StudentId });
+            builder.Entity<RatingTag>().HasKey(table => new { table.RatingId, table.TagId });
             }
         }
     }

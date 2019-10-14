@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20191010151035_Base.Designer.cs" />
     <Compile Remove="Migrations\20191010151214_Base.cs" />
     <Compile Remove="Migrations\20191010151214_Base.Designer.cs" />
+    <Compile Remove="Migrations\20191014174906_RemovedStudentFromRating.cs" />
+    <Compile Remove="Migrations\20191014174906_RemovedStudentFromRating.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

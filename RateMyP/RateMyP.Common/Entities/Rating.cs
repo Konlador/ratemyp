@@ -7,12 +7,11 @@ namespace RateMyP.Entities
         {
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
-        public Guid StudentId { get; set; }
         public Guid CourseId { get; set; }
         public int OverallMark { get; set; }
         public int LevelOfDifficulty { get; set; }
         public bool WouldTakeTeacherAgain { get; set; }
-        public List<TeacherTag> Tags { get; set; }
+        public List<RatingTag> Tags { get; set; }
         public DateTime DateCreated { get; set; }
         public string Comment { get; set; }
 
@@ -20,7 +19,6 @@ namespace RateMyP.Entities
             other != null &&
             other.Id.Equals(Id) &&
             other.TeacherId.Equals(TeacherId) &&
-            other.StudentId.Equals(StudentId) &&
             other.CourseId.Equals(CourseId) &&
             other.OverallMark.Equals(OverallMark) &&
             other.LevelOfDifficulty.Equals(LevelOfDifficulty) &&

@@ -1,7 +1,9 @@
 ﻿using System;
 using RateMyP.Entities;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using RateMyP.Client.Managers;
 
