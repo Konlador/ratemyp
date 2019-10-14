@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP;
 
 namespace RateMyP.Server.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191013145937_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace RateMyP.Server.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CourseId")
+                    b.Property<Guid?>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
@@ -63,16 +65,22 @@ namespace RateMyP.Server.Migrations
                     b.Property<int>("OverallMark")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("StudentId")
+                    b.Property<Guid?>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("WouldTakeTeacherAgain")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Ratings");
                 });
@@ -86,6 +94,8 @@ namespace RateMyP.Server.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("RatingId", "StudentId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("RatingLikes");
                 });
@@ -176,6 +186,8 @@ namespace RateMyP.Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CourseId");
+
                     b.HasIndex("TeacherId");
 
                     b.ToTable("TeacherActivities");
@@ -196,7 +208,7 @@ namespace RateMyP.Server.Migrations
                     b.Property<Guid?>("TagId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -205,13 +217,51 @@ namespace RateMyP.Server.Migrations
 
                     b.HasIndex("TagId");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("TeacherTag");
+                });
+
+            modelBuilder.Entity("RateMyP.Entities.Rating", b =>
+                {
+                    b.HasOne("RateMyP.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId");
+
+                    b.HasOne("RateMyP.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.HasOne("RateMyP.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("RateMyP.Entities.RatingLike", b =>
+                {
+                    b.HasOne("RateMyP.Entities.Rating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RateMyP.Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RateMyP.Entities.TeacherActivity", b =>
                 {
-                    b.HasOne("RateMyP.Entities.Teacher", null)
-                        .WithMany("Activities")
+                    b.HasOne("RateMyP.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RateMyP.Entities.Teacher", "Teacher")
+                        .WithMany()
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -226,6 +276,10 @@ namespace RateMyP.Server.Migrations
                     b.HasOne("RateMyP.Entities.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId");
+
+                    b.HasOne("RateMyP.Entities.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,9 +15,8 @@ namespace RateMyP
         public DbSet<TeacherActivity> TeacherActivities { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-        public DbSet<Comment> Comments { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<CommentLike> CommentLikes { get; set; }
+        public DbSet<RatingLike> RatingLikes { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
@@ -34,7 +33,7 @@ namespace RateMyP
 
         protected override void OnModelCreating(ModelBuilder builder)
             {
-            builder.Entity<CommentLike>().HasKey(table => new { table.CommentId, table.StudentId });
+            builder.Entity<RatingLike>().HasKey(table => new { table.RatingId, table.StudentId });
             }
         }
     }

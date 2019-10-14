@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RateMyP.Entities
@@ -11,7 +10,7 @@ namespace RateMyP.Entities
         Seminar
         }
 
-    public class TeacherActivity
+    public class TeacherActivity : IEquatable<TeacherActivity>
         {
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
@@ -19,10 +18,12 @@ namespace RateMyP.Entities
         public DateTime DateStarted { get; set; }
         public LectureType LectureType { get; set; }
 
-        [ForeignKey("CourseId")]
-        public virtual Course Course { get; set; }
-
-        [ForeignKey("TeacherId")]
-        public virtual Teacher Teacher { get; set; }
+        public bool Equals(TeacherActivity other) =>
+            other != null &&
+            other.Id.Equals(Id) &&
+            other.TeacherId.Equals(TeacherId) &&
+            other.CourseId.Equals(CourseId) &&
+            other.DateStarted.Equals(DateStarted) &&
+            other.LectureType.Equals(LectureType);
         }
     }

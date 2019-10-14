@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace RateMyP.Entities
     {
@@ -9,7 +9,7 @@ namespace RateMyP.Entities
         Professor
         }
 
-    public class Teacher
+    public class Teacher : IEquatable<Teacher>
         {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
@@ -17,5 +17,15 @@ namespace RateMyP.Entities
         public string Description { get; set; }
         public string Rank { get; set; }
         public string Faculty { get; set; }
+        public List<TeacherActivity> Activities { get; set; }
+
+        public bool Equals(Teacher other) =>
+            other != null &&
+            other.Id.Equals(Id) &&
+            other.FirstName.Equals(FirstName) &&
+            other.LastName.Equals(LastName) &&
+            other.Description.Equals(Description) &&
+            other.Rank.Equals(Rank) &&
+            other.FirstName.Equals(FirstName);
         }
     }
