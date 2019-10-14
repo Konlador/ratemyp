@@ -9,6 +9,7 @@ namespace RateMyP.Client.Managers
     public interface ICoursesManager
         {
         Task<List<Course>> GetAll();
+        Task<Course> Get(Guid courseId);
         }
 
     public class CoursesManager : ICoursesManager

@@ -11,6 +11,7 @@ namespace RateMyP.Client.Managers
     public interface IRatingsManager
         {
         Task<List<Rating>> GetAll();
+        Task<List<Rating>> GetTeacherRatings(Guid teacherId);
         }
 
     public class RatingsManager : IRatingsManager
