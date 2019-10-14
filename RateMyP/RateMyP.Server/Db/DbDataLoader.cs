@@ -15,6 +15,7 @@ namespace RateMyP.Server.Db
             LoadCoursesToDb();
             LoadTeacherActivitiesToDb();
             LoadStudentsToDb();
+            LoadTagsToDb();
             }
 
         private static void LoadTeachersToDb()
@@ -46,6 +47,14 @@ namespace RateMyP.Server.Db
             using var context = new RateMyPDbContext();
             var students = ParseEntitiesFromCsv<Student>("students.csv");
             context.Students.AddRange(students);
+            context.SaveChanges();
+            }
+
+        private static void LoadTagsToDb()
+            {
+            using var context = new RateMyPDbContext();
+            var tags = ParseEntitiesFromCsv<Tag>("tags.csv");
+            context.Tags.AddRange(tags);
             context.SaveChanges();
             }
 

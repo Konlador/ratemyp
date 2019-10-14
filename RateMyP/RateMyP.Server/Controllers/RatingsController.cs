@@ -26,6 +26,13 @@ namespace RateMyP.Server.Controllers
             return await m_context.Ratings.ToListAsync();
             }
 
+        // GET: api/Ratings/teacher=5
+        [HttpGet("teacher={teacherId}")]
+        public async Task<ActionResult<IEnumerable<Rating>>> GetTeacherRatings(Guid teacherId)
+            {
+            return await m_context.Ratings.Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            }
+
         // GET: api/Ratings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rating>> GetRating(Guid id)

@@ -34,6 +34,7 @@
   <ItemGroup>
     <None Remove="Db\SeedData\courses.csv" />
     <None Remove="Db\SeedData\students.csv" />
+    <None Remove="Db\SeedData\tags.csv" />
     <None Remove="Db\SeedData\teachers.csv" />
     <None Remove="Db\SeedData\teacher_activities.csv" />
   </ItemGroup>
@@ -41,6 +42,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Db\SeedData\courses.csv" />
     <EmbeddedResource Include="Db\SeedData\students.csv" />
+    <EmbeddedResource Include="Db\SeedData\tags.csv" />
     <EmbeddedResource Include="Db\SeedData\teachers.csv" />
     <EmbeddedResource Include="Db\SeedData\teacher_activities.csv" />
   </ItemGroup>

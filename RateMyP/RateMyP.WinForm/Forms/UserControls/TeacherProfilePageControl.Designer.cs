@@ -162,6 +162,7 @@
             // 
             // RatingsGridView
             // 
+            this.RatingsGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.RatingsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RatingsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OverallMark,
