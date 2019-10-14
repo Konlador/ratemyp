@@ -10,7 +10,6 @@ namespace RateMyP.Client
         ITeachersManager Teachers { get; }
         IStudentsManager Students { get; }
         IRatingsManager Ratings { get; }
-        ICommentsManager Comments { get; }
         ICoursesManager Courses { get; }
         }
     public class RateMyPClient : IRateMyPClient
@@ -22,7 +21,6 @@ namespace RateMyP.Client
         public ITeachersManager Teachers { get; }
         public IStudentsManager Students { get; }
         public IRatingsManager Ratings { get; }
-        public ICommentsManager Comments { get; }
         public ICoursesManager Courses { get; }
 
         private RateMyPClient()

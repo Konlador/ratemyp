@@ -18,7 +18,7 @@ namespace RateMyP
         public async Task<double> GetTeacherAverageMark(Guid teacherId)
             {
             var allRatings = await m_client.Ratings.GetAll();
-            var teacherRatings = allRatings.Where(r => r.Teacher.Id.Equals(teacherId)).ToList();
+            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId)).ToList();
             double sum = 0;
             foreach (var rating in teacherRatings)
                 sum += rating.OverallMark;
@@ -28,7 +28,7 @@ namespace RateMyP
         public async Task<double> GetTeacherAverageMark(Guid teacherId, DateTime startDate, DateTime endDate)
             {
             var allRatings = await m_client.Ratings.GetAll();
-            var teacherRatings = allRatings.Where(r => r.Teacher.Id.Equals(teacherId) && r.DateCreated >= startDate && r.DateCreated <= endDate).ToList();
+            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId) && r.DateCreated >= startDate && r.DateCreated <= endDate).ToList();
             double sum = 0;
             foreach (var rating in teacherRatings)
                 sum += rating.OverallMark;
@@ -58,7 +58,7 @@ namespace RateMyP
         public async Task<double> GetTeachersAverageLevelOfDifficultyRating(Guid teacherId)
             {
             var allRatings = await m_client.Ratings.GetAll();
-            var teacherRatings = allRatings.Where(r => r.Teacher.Id.Equals(teacherId)).ToList();
+            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId)).ToList();
             double sum = 0;
             foreach (var rating in teacherRatings)
                 sum += rating.LevelOfDifficulty;
@@ -68,7 +68,7 @@ namespace RateMyP
         public async Task<double> GetTeachersWouldTakeTeacherAgainRatio(Guid teacherId)
             {
             var allRatings = await m_client.Ratings.GetAll();
-            var teacherRatings = allRatings.Where(r => r.Teacher.Id.Equals(teacherId)).ToList();
+            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId)).ToList();
             double wouldTakeCount = 0;
 
             foreach (var rating in teacherRatings)

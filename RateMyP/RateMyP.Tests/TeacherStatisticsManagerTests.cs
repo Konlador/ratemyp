@@ -66,13 +66,13 @@ namespace RateMyP.Tests
             var rating_SingleRating = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher_SingleRating,
-                Student = student,
-                Course = course,
+                TeacherId = teacher_SingleRating.Id,
+                StudentId = student.Id,
+                CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
+                Tags = new List<TeacherTag>(),
                 DateCreated = new DateTime(2010, 01, 02),
                 Comment = "Cool guy"
                 };
@@ -80,13 +80,13 @@ namespace RateMyP.Tests
             var rating1_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher_MultipleRatings,
-                Student = student,
-                Course = course,
+                TeacherId = teacher_MultipleRatings.Id,
+                StudentId = student.Id,
+                CourseId = course.Id,
                 OverallMark = 10,
                 LevelOfDifficulty = 2,
                 WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
+                Tags = new List<TeacherTag>(),
                 DateCreated = new DateTime(2019, 01, 02),
                 Comment = "Cool guy"
                 };
@@ -94,13 +94,13 @@ namespace RateMyP.Tests
             var rating2_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher_MultipleRatings,
-                Student = student,
-                Course = course,
+                TeacherId = teacher_MultipleRatings.Id,
+                StudentId = student.Id,
+                CourseId = course.Id,
                 OverallMark = 9,
                 LevelOfDifficulty = 10,
                 WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
+                Tags = new List<TeacherTag>(),
                 DateCreated = new DateTime(2019, 03, 21),
                 Comment = "Cool guy"
                 };
@@ -108,13 +108,13 @@ namespace RateMyP.Tests
             var rating3_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher_MultipleRatings,
-                Student = student,
-                Course = course,
+                TeacherId = teacher_MultipleRatings.Id,
+                StudentId = student.Id,
+                CourseId = course.Id,
                 OverallMark = 2,
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = false,
-                Tags = "Lots of homework",
+                Tags = new List<TeacherTag>(),
                 DateCreated = new DateTime(2019, 02, 11),
                 Comment = "Cool guy"
                 };
@@ -122,13 +122,13 @@ namespace RateMyP.Tests
             var rating4_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                Teacher = teacher_MultipleRatings,
-                Student = student,
-                Course = course,
+                TeacherId = teacher_MultipleRatings.Id,
+                StudentId = student.Id,
+                CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 8,
                 WouldTakeTeacherAgain = true,
-                Tags = "Lots of homework",
+                Tags = new List<TeacherTag>(),
                 DateCreated = new DateTime(2019, 01, 01),
                 Comment = "Cool guy"
                 };
