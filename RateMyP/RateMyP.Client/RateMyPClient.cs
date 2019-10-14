@@ -7,22 +7,22 @@ namespace RateMyP.Client
     {
     public interface IRateMyPClient
         {
-        TeachersManager Teachers { get; }
-        StudentsManager Students { get; }
-        RatingsManager Ratings { get; }
-        CoursesManager Courses { get; }
+        ITeachersManager Teachers { get; }
+        IStudentsManager Students { get; }
+        IRatingsManager Ratings { get; }
+        ICoursesManager Courses { get; }
+        ITagsManager Tags { get; }
         }
-
     public class RateMyPClient : IRateMyPClient
         {
         private static readonly Lazy<RateMyPClient> s_client = new Lazy<RateMyPClient>(() => new RateMyPClient());
 
         public static RateMyPClient Client => s_client.Value;
 
-        public TeachersManager Teachers { get; }
-        public StudentsManager Students { get; }
-        public RatingsManager Ratings { get; }
-        public CoursesManager Courses { get; }
+        public ITeachersManager Teachers { get; }
+        public IStudentsManager Students { get; }
+        public IRatingsManager Ratings { get; }
+        public ICoursesManager Courses { get; }
         public ITagsManager Tags { get; }
 
         private RateMyPClient()

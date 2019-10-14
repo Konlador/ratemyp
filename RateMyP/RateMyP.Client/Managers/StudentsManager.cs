@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace RateMyP.Client.Managers
     {
-    public class StudentsManager
+    public interface IStudentsManager
+        {
+        Task<List<Student>> GetAll();
+        }
+
+    public class StudentsManager : IStudentsManager
         {
         private readonly HttpClient m_client;
 
