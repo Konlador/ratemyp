@@ -14,8 +14,8 @@ namespace RateMyP.Tests
         {
         private TeacherStatisticsAnalyzer m_analyzer;
         private Mock<IRateMyPClient> m_clientMock;
-        private Teacher teacher_SingleRating;
-        private Teacher teacher_MultipleRatings;
+        private Teacher m_teacherSingleRating;
+        private Teacher m_teacherMultipleRatings;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +24,7 @@ namespace RateMyP.Tests
 
             List<Rating> testRatingList = new List<Rating>();
 
-            teacher_SingleRating = new Teacher()
+            m_teacherSingleRating = new Teacher()
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -34,7 +34,7 @@ namespace RateMyP.Tests
                 Faculty = "MIF"
                 };
 
-            teacher_MultipleRatings = new Teacher()
+            m_teacherMultipleRatings = new Teacher()
                 {
                 Id = Guid.NewGuid(),
                 FirstName = "Vardenis",
@@ -66,7 +66,7 @@ namespace RateMyP.Tests
             var rating_SingleRating = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                TeacherId = teacher_SingleRating.Id,
+                TeacherId = m_teacherSingleRating.Id,
                 CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 2,
@@ -79,7 +79,7 @@ namespace RateMyP.Tests
             var rating1_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                TeacherId = teacher_MultipleRatings.Id,
+                TeacherId = m_teacherMultipleRatings.Id,
                 CourseId = course.Id,
                 OverallMark = 10,
                 LevelOfDifficulty = 2,
@@ -92,7 +92,7 @@ namespace RateMyP.Tests
             var rating2_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                TeacherId = teacher_MultipleRatings.Id,
+                TeacherId = m_teacherMultipleRatings.Id,
                 CourseId = course.Id,
                 OverallMark = 9,
                 LevelOfDifficulty = 10,
@@ -105,7 +105,7 @@ namespace RateMyP.Tests
             var rating3_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                TeacherId = teacher_MultipleRatings.Id,
+                TeacherId = m_teacherMultipleRatings.Id,
                 CourseId = course.Id,
                 OverallMark = 2,
                 LevelOfDifficulty = 6,
@@ -118,7 +118,7 @@ namespace RateMyP.Tests
             var rating4_MultipleRatings = new Rating()
                 {
                 Id = Guid.NewGuid(),
-                TeacherId = teacher_MultipleRatings.Id,
+                TeacherId = m_teacherMultipleRatings.Id,
                 CourseId = course.Id,
                 OverallMark = 4,
                 LevelOfDifficulty = 8,
@@ -152,7 +152,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageMark_SingleRating()
             {
-            var teacherId = teacher_SingleRating.Id;
+            var teacherId = m_teacherSingleRating.Id;
 
             var value = await m_analyzer.GetTeacherAverageMark(teacherId);
 
@@ -162,7 +162,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageMark_MultipleRatings()
             {
-            var teacherId = teacher_MultipleRatings.Id;
+            var teacherId = m_teacherMultipleRatings.Id;
 
             var value = await m_analyzer.GetTeacherAverageMark(teacherId);
 
@@ -172,7 +172,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageMark_ByDate()
             {
-            var teacherId = teacher_MultipleRatings.Id;
+            var teacherId = m_teacherMultipleRatings.Id;
 
             var value = await m_analyzer.GetTeacherAverageMark(teacherId,
                 new DateTime(2019, 01, 02),
@@ -197,7 +197,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageMarkList_SingleRating()
             {
-            var teacherId = teacher_SingleRating.Id;
+            var teacherId = m_teacherSingleRating.Id;
             var parts = 5;
 
             var list = await m_analyzer.GetTeacherAverageMarkList(teacherId,
@@ -210,7 +210,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageMarkList_MultipleRatings()
             {
-            var teacherId = teacher_MultipleRatings.Id;
+            var teacherId = m_teacherMultipleRatings.Id;
             var parts = 4;
 
             var list = await m_analyzer.GetTeacherAverageMarkList
@@ -235,7 +235,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageLevelOfDifficultyRating_SingleRating()
             {
-            var teacherId = teacher_SingleRating.Id;
+            var teacherId = m_teacherSingleRating.Id;
 
             var value = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId);
 
@@ -245,7 +245,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeacherAverageLevelOfDifficultyRating_MultipleRatings()
             {
-            var teacherId = teacher_MultipleRatings.Id;
+            var teacherId = m_teacherMultipleRatings.Id;
 
             var value = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId);
 
@@ -263,7 +263,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeachersWouldTakeTeacherAgainRatio_SingleRating()
             {
-            var teacherId = teacher_SingleRating.Id;
+            var teacherId = m_teacherSingleRating.Id;
 
             var value = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId);
 
@@ -273,7 +273,7 @@ namespace RateMyP.Tests
         [Test]
         public async Task GetTeachersWouldTakeTeacherAgainRatio_MultipleRatings()
             {
-            var teacherId = teacher_MultipleRatings.Id;
+            var teacherId = m_teacherMultipleRatings.Id;
 
             var value = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId);
 

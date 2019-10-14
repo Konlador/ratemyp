@@ -8,7 +8,7 @@ namespace RateMyP
     {
     public class TeacherStatisticsAnalyzer
         {
-        private IRateMyPClient m_client;
+        private readonly IRateMyPClient m_client;
 
         public TeacherStatisticsAnalyzer(IRateMyPClient client)
             {
