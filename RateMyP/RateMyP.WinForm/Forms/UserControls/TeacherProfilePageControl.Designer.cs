@@ -36,6 +36,7 @@
             this.temp_TeacherRatingArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.temp_TeacherFeedbackArea = new MetroSet_UI.Controls.MetroSetLabel();
             this.metroSetLabel1 = new MetroSet_UI.Controls.MetroSetLabel();
+            this.TeacherRateButton = new MetroSet_UI.Controls.MetroSetButton();
             ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,10 +151,37 @@
             this.metroSetLabel1.ThemeAuthor = "Narwin";
             this.metroSetLabel1.ThemeName = "MetroLite";
             // 
+            // TeacherRateButton
+            // 
+            this.TeacherRateButton.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.DisabledForeColor = System.Drawing.Color.Gray;
+            this.TeacherRateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.TeacherRateButton.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.TeacherRateButton.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.TeacherRateButton.HoverTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.Location = new System.Drawing.Point(750, 175);
+            this.TeacherRateButton.Name = "TeacherRateButton";
+            this.TeacherRateButton.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.TeacherRateButton.NormalTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.TeacherRateButton.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.TeacherRateButton.PressTextColor = System.Drawing.Color.White;
+            this.TeacherRateButton.Size = new System.Drawing.Size(150, 50);
+            this.TeacherRateButton.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherRateButton.StyleManager = null;
+            this.TeacherRateButton.TabIndex = 8;
+            this.TeacherRateButton.Text = "Leave a Rating";
+            this.TeacherRateButton.ThemeAuthor = "Narwin";
+            this.TeacherRateButton.ThemeName = "MetroLite";
+            this.TeacherRateButton.Click += new System.EventHandler(this.TeacherRateButton_Click);
+            // 
             // TeacherProfilePageControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.TeacherRateButton);
             this.Controls.Add(this.metroSetLabel1);
             this.Controls.Add(this.temp_TeacherFeedbackArea);
             this.Controls.Add(this.temp_TeacherRatingArea);
@@ -178,5 +206,6 @@
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherRatingArea;
         private MetroSet_UI.Controls.MetroSetLabel temp_TeacherFeedbackArea;
         private MetroSet_UI.Controls.MetroSetLabel metroSetLabel1;
+        private MetroSet_UI.Controls.MetroSetButton TeacherRateButton;
         }
     }

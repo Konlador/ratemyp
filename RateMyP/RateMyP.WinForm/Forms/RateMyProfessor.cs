@@ -13,9 +13,9 @@ namespace RateMyP.WinForm.Forms
             self = this;
             }
 
-        private void MenuTabControl_MouseHover(object sender,  EventArgs e)
+        private void MenuTabControl_MouseHover(object sender, EventArgs e)
             {
-            if (MenuTabControl.SelectedTab == TabPageTeacherProfile)
+            if ((MenuTabControl.SelectedTab == TabPageTeacherProfile) || (MenuTabControl.SelectedTab == TabPageRatePage))
                 {
                 TabContextMenu.Show(MousePosition);
                 }
@@ -23,7 +23,8 @@ namespace RateMyP.WinForm.Forms
 
         private void MenuTabControl_MouseClick(object sender, MouseEventArgs e)
             {
-            if ((e.Button == MouseButtons.Right) && (MenuTabControl.SelectedTab == TabPageTeacherProfile))
+            if (((e.Button == MouseButtons.Right) && ((MenuTabControl.SelectedTab == TabPageTeacherProfile) ||
+                                                     (MenuTabControl.SelectedTab == TabPageRatePage))))
                 {
                 TabContextMenu.Show(MousePosition);
                 }
@@ -32,8 +33,22 @@ namespace RateMyP.WinForm.Forms
         private void closeToolStrip_Click(object sender, EventArgs e)
             {
             MenuTabControl.Speed = 1000;
-            MenuTabControl.SelectTab(MenuTabControl.SelectedIndex - 1);
-            MenuTabControl.TabPages.Remove(TabPageTeacherProfile);
+
+            if (MenuTabControl.SelectedTab == TabPageTeacherProfile)
+                {
+                MenuTabControl.SelectTab(MenuTabControl.SelectedIndex - 1);
+                MenuTabControl.TabPages.Remove(TabPageTeacherProfile);
+                }
+            else if (MenuTabControl.SelectedTab == TabPageRatePage)
+                {
+                MenuTabControl.SelectTab(MenuTabControl.SelectedIndex - 1);
+                MenuTabControl.TabPages.Remove(TabPageRatePage);
+                }
+            else
+                {
+                throw new NotImplementedException("Idk wats going on");
+                }
+
             MenuTabControl.Speed = 100;
             TabContextMenu.Hide();
             }
