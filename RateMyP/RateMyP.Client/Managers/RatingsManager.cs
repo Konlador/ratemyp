@@ -12,6 +12,7 @@ namespace RateMyP.Client.Managers
         {
         Task<List<Rating>> GetAll();
         Task<List<Rating>> GetTeacherRatings(Guid teacherId);
+        void Post(Rating rating);
         }
 
     public class RatingsManager : IRatingsManager
