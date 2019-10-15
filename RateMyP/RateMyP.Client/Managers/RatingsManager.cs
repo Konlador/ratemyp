@@ -49,7 +49,7 @@ namespace RateMyP.Client.Managers
         public async void Post(Rating rating)
             {
             HttpResponseMessage response = null;
-            for (var i = 0; i < 10 && response?.StatusCode != HttpStatusCode.Created; i++)
+            for (var i = 0; i < 5 && response?.StatusCode != HttpStatusCode.Created; i++)
                 response = await m_client.PostAsJsonAsync("api/ratings", rating);
             response?.EnsureSuccessStatusCode();
             }
