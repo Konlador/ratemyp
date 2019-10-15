@@ -13,6 +13,7 @@ namespace RateMyP.Client
         ICoursesManager Courses { get; }
         ITagsManager Tags { get; }
         }
+
     public class RateMyPClient : IRateMyPClient
         {
         private static readonly Lazy<RateMyPClient> s_client = new Lazy<RateMyPClient>(() => new RateMyPClient());

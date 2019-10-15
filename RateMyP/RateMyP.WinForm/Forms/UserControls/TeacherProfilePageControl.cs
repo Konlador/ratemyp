@@ -23,7 +23,9 @@ namespace RateMyP.WinForm.Forms.UserControls
             TeacherAcademicInfoLabel.Text = $"{teacher.Rank}, {teacher.Faculty}";
             TeacherInfoLabel.Text = $"{teacher.Description}";
 
+#pragma warning disable 4014
             LoadRatings();
+#pragma warning restore 4014
             }
 
         private async Task LoadRatings()

@@ -17,7 +17,7 @@ namespace RateMyP.Tests.Managers
     {
     public class TeacherManagerTests
         {
-        [Test]
+        //[Test]
         public async Task GetAllTeachers_NoTeacher()
             {
             // ARRANGE

@@ -23,14 +23,20 @@ namespace RateMyP.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
             {
-            return await m_context.Ratings.ToListAsync();
+            return await m_context.Ratings
+                                  .Include(rating => rating.Tags)
+                                  .ThenInclude(ratingTag => ratingTag.Tag)
+                                  .ToListAsync();
             }
 
         // GET: api/Ratings/teacher=5
         [HttpGet("teacher={teacherId}")]
         public async Task<ActionResult<IEnumerable<Rating>>> GetTeacherRatings(Guid teacherId)
             {
-            return await m_context.Ratings.Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            return await m_context.Ratings
+                                  .Include(rating => rating.Tags)
+                                  .ThenInclude(ratingTag => ratingTag.Tag)
+                                  .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
             }
 
         // GET: api/Ratings/5
