@@ -182,7 +182,7 @@ namespace RateMyP.WinForm.Forms.UserControls
                 };
 
             newRating.Tags = GetAllSelectedTags(newRating.Id);
-            
+
             try
                 {
                 RateMyPClient.Client.Ratings.Post(newRating);
@@ -196,10 +196,6 @@ namespace RateMyP.WinForm.Forms.UserControls
                 {
                 MessageBox.Show("Feedback sending unsuccessful. Please try again later.");
                 }
-                
-            RateMyPClient.Client.Ratings.Post(newRating);
-            Console.WriteLine(TeacherDifficultySlider.Value);
-            Console.WriteLine(TeacherTakeAgainSwitch.Switched);
             }
 
         private void TeacherCoursesListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
