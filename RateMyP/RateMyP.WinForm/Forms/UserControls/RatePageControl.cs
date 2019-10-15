@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroSet_UI.Controls;
@@ -85,7 +86,6 @@ namespace RateMyP.WinForm.Forms.UserControls
                     var selectedStars = RateStarList.IndexOf(star);
                     m_currentRating = selectedStars + 1;
                     ChangeStarImage(RateStarList, selectedStars, true);
-                    Console.WriteLine(m_currentRating);
                     }
                 }
             }
@@ -100,7 +100,6 @@ namespace RateMyP.WinForm.Forms.UserControls
                     {
                     ChangeStarImage(RateStarList, RateStarList.IndexOf(star), false);
                     m_currentRating = 0;
-                    Console.WriteLine(m_currentRating);
                     }
                 }
             }
@@ -115,7 +114,6 @@ namespace RateMyP.WinForm.Forms.UserControls
                     if (m_isLocked && selection < m_currentRating - 1)
                         {
                         m_currentRating = RateStarList.IndexOf(star) + 1;
-                        Console.WriteLine(m_currentRating);
                         for (int i = m_currentRating; i < RateStarList.Count; i++)
                             {
                             RateStarList[i].Image = Properties.Resources.star_inactive;
@@ -126,7 +124,6 @@ namespace RateMyP.WinForm.Forms.UserControls
                     m_currentRating = RateStarList.IndexOf(star) + 1;
                     m_isLocked = true;
                     ChangeStarImage(RateStarList, m_currentRating - 1, true);
-                    Console.WriteLine(m_currentRating);
                     }
                 }
             }
@@ -181,10 +178,19 @@ namespace RateMyP.WinForm.Forms.UserControls
                 };
 
             newRating.Tags = GetAllSelectedTags(newRating.Id);
-            RateMyPClient.Client.Ratings.Post(newRating);
-            Console.WriteLine(TeacherDifficultySlider.Value);
-            Console.WriteLine(TeacherTakeAgainSwitch.Switched);
-
+            try
+                {
+                RateMyPClient.Client.Ratings.Post(newRating);
+                MessageBox.Show("Thank you for your feedback.");
+                ResetSelections();
+                RateMyProfessor.self.teacherProfilePageControl.RefreshRatings();
+                RateMyProfessor.self.MenuTabControl.SelectTab(RateMyProfessor.self.MenuTabControl.SelectedIndex - 1);
+                RateMyProfessor.self.MenuTabControl.TabPages.Remove(RateMyProfessor.self.TabPageRatePage);
+                }
+            catch (Exception ex)
+                {
+                MessageBox.Show("Feedback sending unsuccessful. Please try again later.");
+                }
             }
 
         private void TeacherCoursesListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
