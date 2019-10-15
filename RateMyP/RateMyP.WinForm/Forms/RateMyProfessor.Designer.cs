@@ -76,7 +76,6 @@ namespace RateMyP.WinForm.Forms
             this.MenuTabControl.ThemeAuthor = "Narwin";
             this.MenuTabControl.ThemeName = "MetroLite";
             this.MenuTabControl.UseAnimation = false;
-            //this.MenuTabControl.MouseHover += new System.EventHandler(this.MenuTabControl_MouseHover);
             this.MenuTabControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MenuTabControl_MouseClick);
             // 
             // TabPageHome

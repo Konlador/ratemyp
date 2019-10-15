@@ -37,12 +37,6 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherInfoLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherAcademicInfoLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.RateCommentTextBox = new MetroSet_UI.Controls.MetroSetTextBox();
-            this.TeacherProfilePictureBox = new System.Windows.Forms.PictureBox();
-            this.RateStarImageOne = new System.Windows.Forms.PictureBox();
-            this.RateStarImageTwo = new System.Windows.Forms.PictureBox();
-            this.RateStarImageThree = new System.Windows.Forms.PictureBox();
-            this.RateStarImageFour = new System.Windows.Forms.PictureBox();
-            this.RateStarImageFive = new System.Windows.Forms.PictureBox();
             this.RatePageButtonSend = new MetroSet_UI.Controls.MetroSetButton();
             this.TeacherCoursesListView = new System.Windows.Forms.ListView();
             this.courseName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,12 +48,22 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherOverallRatingLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherDifficultyTextLabel = new MetroSet_UI.Controls.MetroSetLabel();
             this.TeacherWouldTakeAgainLabel = new MetroSet_UI.Controls.MetroSetLabel();
-            ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageOne)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageTwo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageThree)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFour)).BeginInit();
+            this.TeacherCourseListLabel = new MetroSet_UI.Controls.MetroSetLabel();
+            this.RateStarImageFive = new System.Windows.Forms.PictureBox();
+            this.RateStarImageFour = new System.Windows.Forms.PictureBox();
+            this.RateStarImageThree = new System.Windows.Forms.PictureBox();
+            this.RateStarImageTwo = new System.Windows.Forms.PictureBox();
+            this.RateStarImageOne = new System.Windows.Forms.PictureBox();
+            this.TeacherProfilePictureBox = new System.Windows.Forms.PictureBox();
+            this.TeacherTakeAgainLabel = new MetroSet_UI.Controls.MetroSetLabel();
+            this.TeacherRateTagBox = new System.Windows.Forms.CheckedListBox();
+            this.TeacherTagsLabel = new MetroSet_UI.Controls.MetroSetLabel();
             ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageThree)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageOne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // TeacherNameLabel
@@ -130,82 +134,6 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.RateCommentTextBox.UseSystemPasswordChar = false;
             this.RateCommentTextBox.WatermarkText = "Write your astonishing review here...";
             // 
-            // TeacherProfilePictureBox
-            // 
-            this.TeacherProfilePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TeacherProfilePictureBox.Image = global::RateMyP.WinForm.Properties.Resources.everydaywestrayfurtherfromgodslight;
-            this.TeacherProfilePictureBox.Location = new System.Drawing.Point(25, 25);
-            this.TeacherProfilePictureBox.Name = "TeacherProfilePictureBox";
-            this.TeacherProfilePictureBox.Size = new System.Drawing.Size(200, 200);
-            this.TeacherProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.TeacherProfilePictureBox.TabIndex = 1;
-            this.TeacherProfilePictureBox.TabStop = false;
-            // 
-            // RateStarImageOne
-            // 
-            this.RateStarImageOne.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
-            this.RateStarImageOne.Location = new System.Drawing.Point(25, 275);
-            this.RateStarImageOne.Name = "RateStarImageOne";
-            this.RateStarImageOne.Size = new System.Drawing.Size(50, 50);
-            this.RateStarImageOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.RateStarImageOne.TabIndex = 7;
-            this.RateStarImageOne.TabStop = false;
-            this.RateStarImageOne.Click += new System.EventHandler(this.RateStarList_Click);
-            this.RateStarImageOne.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
-            this.RateStarImageOne.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
-            // 
-            // RateStarImageTwo
-            // 
-            this.RateStarImageTwo.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
-            this.RateStarImageTwo.Location = new System.Drawing.Point(75, 275);
-            this.RateStarImageTwo.Name = "RateStarImageTwo";
-            this.RateStarImageTwo.Size = new System.Drawing.Size(50, 50);
-            this.RateStarImageTwo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.RateStarImageTwo.TabIndex = 8;
-            this.RateStarImageTwo.TabStop = false;
-            this.RateStarImageTwo.Click += new System.EventHandler(this.RateStarList_Click);
-            this.RateStarImageTwo.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
-            this.RateStarImageTwo.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
-            // 
-            // RateStarImageThree
-            // 
-            this.RateStarImageThree.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
-            this.RateStarImageThree.Location = new System.Drawing.Point(125, 275);
-            this.RateStarImageThree.Name = "RateStarImageThree";
-            this.RateStarImageThree.Size = new System.Drawing.Size(50, 50);
-            this.RateStarImageThree.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.RateStarImageThree.TabIndex = 9;
-            this.RateStarImageThree.TabStop = false;
-            this.RateStarImageThree.Click += new System.EventHandler(this.RateStarList_Click);
-            this.RateStarImageThree.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
-            this.RateStarImageThree.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
-            // 
-            // RateStarImageFour
-            // 
-            this.RateStarImageFour.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
-            this.RateStarImageFour.Location = new System.Drawing.Point(175, 275);
-            this.RateStarImageFour.Name = "RateStarImageFour";
-            this.RateStarImageFour.Size = new System.Drawing.Size(50, 50);
-            this.RateStarImageFour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.RateStarImageFour.TabIndex = 10;
-            this.RateStarImageFour.TabStop = false;
-            this.RateStarImageFour.Click += new System.EventHandler(this.RateStarList_Click);
-            this.RateStarImageFour.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
-            this.RateStarImageFour.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
-            // 
-            // RateStarImageFive
-            // 
-            this.RateStarImageFive.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
-            this.RateStarImageFive.Location = new System.Drawing.Point(225, 275);
-            this.RateStarImageFive.Name = "RateStarImageFive";
-            this.RateStarImageFive.Size = new System.Drawing.Size(50, 50);
-            this.RateStarImageFive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.RateStarImageFive.TabIndex = 11;
-            this.RateStarImageFive.TabStop = false;
-            this.RateStarImageFive.Click += new System.EventHandler(this.RateStarList_Click);
-            this.RateStarImageFive.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
-            this.RateStarImageFive.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
-            // 
             // RatePageButtonSend
             // 
             this.RatePageButtonSend.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -241,10 +169,10 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherCoursesListView.FullRowSelect = true;
             this.TeacherCoursesListView.HideSelection = false;
             this.TeacherCoursesListView.LabelWrap = false;
-            this.TeacherCoursesListView.Location = new System.Drawing.Point(750, 350);
+            this.TeacherCoursesListView.Location = new System.Drawing.Point(750, 275);
             this.TeacherCoursesListView.MultiSelect = false;
             this.TeacherCoursesListView.Name = "TeacherCoursesListView";
-            this.TeacherCoursesListView.Size = new System.Drawing.Size(425, 225);
+            this.TeacherCoursesListView.Size = new System.Drawing.Size(450, 300);
             this.TeacherCoursesListView.TabIndex = 13;
             this.TeacherCoursesListView.UseCompatibleStateImageBehavior = false;
             this.TeacherCoursesListView.View = System.Windows.Forms.View.Details;
@@ -263,7 +191,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             // type
             // 
             this.type.Text = "Type";
-            this.type.Width = 39;
+            this.type.Width = 59;
             // 
             // TeacherDifficultyLabel
             // 
@@ -326,13 +254,14 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherTakeAgainSwitch.ThemeAuthor = "Narwin";
             this.TeacherTakeAgainSwitch.ThemeName = "MetroLite";
             this.TeacherTakeAgainSwitch.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.TeacherTakeAgainSwitch.SwitchedChanged += new MetroSet_UI.Controls.MetroSetSwitch.SwitchedChangedEventHandler(this.TeacherTakeAgainSwitch_Switch);
             // 
             // TeacherOverallRatingLabel
             // 
             this.TeacherOverallRatingLabel.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeacherOverallRatingLabel.Location = new System.Drawing.Point(25, 225);
             this.TeacherOverallRatingLabel.Name = "TeacherOverallRatingLabel";
-            this.TeacherOverallRatingLabel.Size = new System.Drawing.Size(150, 50);
+            this.TeacherOverallRatingLabel.Size = new System.Drawing.Size(150, 40);
             this.TeacherOverallRatingLabel.Style = MetroSet_UI.Design.Style.Light;
             this.TeacherOverallRatingLabel.StyleManager = null;
             this.TeacherOverallRatingLabel.TabIndex = 17;
@@ -346,7 +275,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherDifficultyTextLabel.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeacherDifficultyTextLabel.Location = new System.Drawing.Point(290, 225);
             this.TeacherDifficultyTextLabel.Name = "TeacherDifficultyTextLabel";
-            this.TeacherDifficultyTextLabel.Size = new System.Drawing.Size(150, 50);
+            this.TeacherDifficultyTextLabel.Size = new System.Drawing.Size(150, 40);
             this.TeacherDifficultyTextLabel.Style = MetroSet_UI.Design.Style.Light;
             this.TeacherDifficultyTextLabel.StyleManager = null;
             this.TeacherDifficultyTextLabel.TabIndex = 18;
@@ -360,7 +289,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherWouldTakeAgainLabel.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeacherWouldTakeAgainLabel.Location = new System.Drawing.Point(420, 225);
             this.TeacherWouldTakeAgainLabel.Name = "TeacherWouldTakeAgainLabel";
-            this.TeacherWouldTakeAgainLabel.Size = new System.Drawing.Size(174, 50);
+            this.TeacherWouldTakeAgainLabel.Size = new System.Drawing.Size(174, 40);
             this.TeacherWouldTakeAgainLabel.Style = MetroSet_UI.Design.Style.Light;
             this.TeacherWouldTakeAgainLabel.StyleManager = null;
             this.TeacherWouldTakeAgainLabel.TabIndex = 19;
@@ -369,9 +298,141 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.TeacherWouldTakeAgainLabel.ThemeAuthor = "Narwin";
             this.TeacherWouldTakeAgainLabel.ThemeName = "MetroLite";
             // 
+            // TeacherCourseListLabel
+            // 
+            this.TeacherCourseListLabel.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeacherCourseListLabel.Location = new System.Drawing.Point(750, 225);
+            this.TeacherCourseListLabel.Name = "TeacherCourseListLabel";
+            this.TeacherCourseListLabel.Size = new System.Drawing.Size(100, 40);
+            this.TeacherCourseListLabel.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherCourseListLabel.StyleManager = null;
+            this.TeacherCourseListLabel.TabIndex = 20;
+            this.TeacherCourseListLabel.Text = "Courses";
+            this.TeacherCourseListLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.TeacherCourseListLabel.ThemeAuthor = "Narwin";
+            this.TeacherCourseListLabel.ThemeName = "MetroLite";
+            // 
+            // RateStarImageFive
+            // 
+            this.RateStarImageFive.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
+            this.RateStarImageFive.Location = new System.Drawing.Point(225, 275);
+            this.RateStarImageFive.Name = "RateStarImageFive";
+            this.RateStarImageFive.Size = new System.Drawing.Size(50, 50);
+            this.RateStarImageFive.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RateStarImageFive.TabIndex = 11;
+            this.RateStarImageFive.TabStop = false;
+            this.RateStarImageFive.Click += new System.EventHandler(this.RateStarList_Click);
+            this.RateStarImageFive.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
+            this.RateStarImageFive.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
+            // 
+            // RateStarImageFour
+            // 
+            this.RateStarImageFour.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
+            this.RateStarImageFour.Location = new System.Drawing.Point(175, 275);
+            this.RateStarImageFour.Name = "RateStarImageFour";
+            this.RateStarImageFour.Size = new System.Drawing.Size(50, 50);
+            this.RateStarImageFour.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RateStarImageFour.TabIndex = 10;
+            this.RateStarImageFour.TabStop = false;
+            this.RateStarImageFour.Click += new System.EventHandler(this.RateStarList_Click);
+            this.RateStarImageFour.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
+            this.RateStarImageFour.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
+            // 
+            // RateStarImageThree
+            // 
+            this.RateStarImageThree.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
+            this.RateStarImageThree.Location = new System.Drawing.Point(125, 275);
+            this.RateStarImageThree.Name = "RateStarImageThree";
+            this.RateStarImageThree.Size = new System.Drawing.Size(50, 50);
+            this.RateStarImageThree.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RateStarImageThree.TabIndex = 9;
+            this.RateStarImageThree.TabStop = false;
+            this.RateStarImageThree.Click += new System.EventHandler(this.RateStarList_Click);
+            this.RateStarImageThree.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
+            this.RateStarImageThree.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
+            // 
+            // RateStarImageTwo
+            // 
+            this.RateStarImageTwo.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
+            this.RateStarImageTwo.Location = new System.Drawing.Point(75, 275);
+            this.RateStarImageTwo.Name = "RateStarImageTwo";
+            this.RateStarImageTwo.Size = new System.Drawing.Size(50, 50);
+            this.RateStarImageTwo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RateStarImageTwo.TabIndex = 8;
+            this.RateStarImageTwo.TabStop = false;
+            this.RateStarImageTwo.Click += new System.EventHandler(this.RateStarList_Click);
+            this.RateStarImageTwo.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
+            this.RateStarImageTwo.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
+            // 
+            // RateStarImageOne
+            // 
+            this.RateStarImageOne.Image = global::RateMyP.WinForm.Properties.Resources.star_inactive;
+            this.RateStarImageOne.Location = new System.Drawing.Point(25, 275);
+            this.RateStarImageOne.Name = "RateStarImageOne";
+            this.RateStarImageOne.Size = new System.Drawing.Size(50, 50);
+            this.RateStarImageOne.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.RateStarImageOne.TabIndex = 7;
+            this.RateStarImageOne.TabStop = false;
+            this.RateStarImageOne.Click += new System.EventHandler(this.RateStarList_Click);
+            this.RateStarImageOne.MouseEnter += new System.EventHandler(this.RateStarList_MouseEnter);
+            this.RateStarImageOne.MouseLeave += new System.EventHandler(this.RateStarList_MouseLeave);
+            // 
+            // TeacherProfilePictureBox
+            // 
+            this.TeacherProfilePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TeacherProfilePictureBox.Image = global::RateMyP.WinForm.Properties.Resources.everydaywestrayfurtherfromgodslight;
+            this.TeacherProfilePictureBox.Location = new System.Drawing.Point(25, 25);
+            this.TeacherProfilePictureBox.Name = "TeacherProfilePictureBox";
+            this.TeacherProfilePictureBox.Size = new System.Drawing.Size(200, 200);
+            this.TeacherProfilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.TeacherProfilePictureBox.TabIndex = 1;
+            this.TeacherProfilePictureBox.TabStop = false;
+            // 
+            // TeacherTakeAgainLabel
+            // 
+            this.TeacherTakeAgainLabel.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeacherTakeAgainLabel.Location = new System.Drawing.Point(485, 310);
+            this.TeacherTakeAgainLabel.Name = "TeacherTakeAgainLabel";
+            this.TeacherTakeAgainLabel.Size = new System.Drawing.Size(40, 20);
+            this.TeacherTakeAgainLabel.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherTakeAgainLabel.StyleManager = null;
+            this.TeacherTakeAgainLabel.TabIndex = 21;
+            this.TeacherTakeAgainLabel.Text = "No";
+            this.TeacherTakeAgainLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TeacherTakeAgainLabel.ThemeAuthor = "Narwin";
+            this.TeacherTakeAgainLabel.ThemeName = "MetroLite";
+            // 
+            // TeacherRateTagBox
+            // 
+            this.TeacherRateTagBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TeacherRateTagBox.FormattingEnabled = true;
+            this.TeacherRateTagBox.Location = new System.Drawing.Point(750, 56);
+            this.TeacherRateTagBox.Name = "TeacherRateTagBox";
+            this.TeacherRateTagBox.Size = new System.Drawing.Size(300, 167);
+            this.TeacherRateTagBox.Sorted = true;
+            this.TeacherRateTagBox.TabIndex = 23;
+            // 
+            // TeacherTagsLabel
+            // 
+            this.TeacherTagsLabel.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeacherTagsLabel.Location = new System.Drawing.Point(750, 25);
+            this.TeacherTagsLabel.Name = "TeacherTagsLabel";
+            this.TeacherTagsLabel.Size = new System.Drawing.Size(100, 25);
+            this.TeacherTagsLabel.Style = MetroSet_UI.Design.Style.Light;
+            this.TeacherTagsLabel.StyleManager = null;
+            this.TeacherTagsLabel.TabIndex = 24;
+            this.TeacherTagsLabel.Text = "Tags";
+            this.TeacherTagsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TeacherTagsLabel.ThemeAuthor = "Narwin";
+            this.TeacherTagsLabel.ThemeName = "MetroLite";
+            // 
             // RatePageControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.TeacherTagsLabel);
+            this.Controls.Add(this.TeacherRateTagBox);
+            this.Controls.Add(this.TeacherTakeAgainLabel);
+            this.Controls.Add(this.TeacherCourseListLabel);
             this.Controls.Add(this.TeacherWouldTakeAgainLabel);
             this.Controls.Add(this.TeacherDifficultyTextLabel);
             this.Controls.Add(this.TeacherOverallRatingLabel);
@@ -392,12 +453,12 @@ namespace RateMyP.WinForm.Forms.UserControls
             this.Controls.Add(this.TeacherProfilePictureBox);
             this.Name = "RatePageControl";
             this.Size = new System.Drawing.Size(1200, 600);
-            ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageOne)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageTwo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageThree)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageFour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageThree)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RateStarImageOne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TeacherProfilePictureBox)).EndInit();
             this.ResumeLayout(false);
 
             }
@@ -427,5 +488,9 @@ namespace RateMyP.WinForm.Forms.UserControls
         private MetroSetLabel TeacherOverallRatingLabel;
         private MetroSetLabel TeacherDifficultyTextLabel;
         private MetroSetLabel TeacherWouldTakeAgainLabel;
+        private MetroSetLabel TeacherCourseListLabel;
+        private MetroSetLabel TeacherTakeAgainLabel;
+        private CheckedListBox TeacherRateTagBox;
+        private MetroSetLabel TeacherTagsLabel;
         }
     }

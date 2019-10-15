@@ -13,20 +13,15 @@ namespace RateMyP.WinForm.Forms
             self = this;
             }
 
-        private void MenuTabControl_MouseHover(object sender, EventArgs e)
-            {
-            if ((MenuTabControl.SelectedTab == TabPageTeacherProfile) || (MenuTabControl.SelectedTab == TabPageRatePage))
-                {
-                TabContextMenu.Show(MousePosition);
-                }
-            }
-
         private void MenuTabControl_MouseClick(object sender, MouseEventArgs e)
             {
             if (((e.Button == MouseButtons.Right) && ((MenuTabControl.SelectedTab == TabPageTeacherProfile) ||
                                                      (MenuTabControl.SelectedTab == TabPageRatePage))))
                 {
-                TabContextMenu.Show(MousePosition);
+                if (MenuTabControl.GetTabRect(MenuTabControl.SelectedIndex).Contains(e.Location))
+                    {
+                    TabContextMenu.Show(MousePosition);
+                    }
                 }
             }
 
@@ -41,6 +36,7 @@ namespace RateMyP.WinForm.Forms
                 }
             else if (MenuTabControl.SelectedTab == TabPageRatePage)
                 {
+                ratePageControl.ResetSelections();
                 MenuTabControl.SelectTab(MenuTabControl.SelectedIndex - 1);
                 MenuTabControl.TabPages.Remove(TabPageRatePage);
                 }

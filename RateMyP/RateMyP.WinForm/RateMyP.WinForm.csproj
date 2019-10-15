@@ -53,6 +53,9 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -189,7 +192,6 @@
     <Content Include="Resources\everydaywestrayfurtherfromgodslight.png" />
     <None Include="Resources\star_inactive.png" />
     <None Include="Resources\star.png" />
-    <None Include="Resources\lemonke.png" />
     <Content Include="Resources\placeholderpic.png" />
     <Content Include="Resources\profile.png" />
   </ItemGroup>

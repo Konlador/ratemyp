@@ -20,17 +20,37 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             InitializeComponent();
             InitializeRatingList();
+            LoadTags();
+            ResetSelections();
             }
 
         // Workaround so the designer doesn't nuke it every time you rebuild.
         private void InitializeRatingList()
             {
-            RateStarList = new List<PictureBox>();
-            RateStarList.Add(RateStarImageOne);
-            RateStarList.Add(RateStarImageTwo);
-            RateStarList.Add(RateStarImageThree);
-            RateStarList.Add(RateStarImageFour);
-            RateStarList.Add(RateStarImageFive);
+            RateStarList = new List<PictureBox>
+                {
+                RateStarImageOne,
+                RateStarImageTwo,
+                RateStarImageThree,
+                RateStarImageFour,
+                RateStarImageFive
+                };
+            }
+
+        public void ResetSelections()
+            {
+            TeacherTakeAgainSwitch.Switched = false;
+            m_isLocked = false;
+            m_currentRating = 0;
+            m_difficultyRating = 1;
+            ChangeStarImage(RateStarList, 4, false);
+            RateCommentTextBox.Text = null;
+            RateCommentTextBox.Lines = null;
+            TeacherDifficultySlider.Value = 1;
+            for (int i = 0; i < TeacherRateTagBox.Items.Count; i++)
+                {
+                TeacherRateTagBox.SetItemCheckState(i, CheckState.Unchecked);
+                }
             }
 
         public async void UpdateInfo(Teacher teacher)
@@ -111,23 +131,40 @@ namespace RateMyP.WinForm.Forms.UserControls
                 }
             }
 
-        private void RatePageButtonSend_Click(object sender, EventArgs e)
+        private bool CheckIfValidRating()
             {
             if (m_currentRating == 0)
                 {
-                Console.WriteLine("Please leave a star rating");
-                return;
+                MessageBox.Show("Please leave a star rating.");
+                return false;
                 }
             if (RateCommentTextBox.Text.Length < 20)
                 {
-                Console.WriteLine("Please write at least 20 characters");
-                return;
+                MessageBox.Show("Please write at least 20 characters.");
+                return false;
                 };
             if (TeacherCoursesListView.SelectedItems.Count == 0)
                 {
-                Console.WriteLine("Please select a Course from the list");
-                return;
+                MessageBox.Show("Please select a course from the list.");
+                return false;
                 }
+            if (TeacherRateTagBox.CheckedItems.Count > 5)
+                {
+                MessageBox.Show("Please select no more than 5 tags");
+                return false;
+                }
+            if (m_difficultyRating == 0)
+                {
+                MessageBox.Show("Please adjust the difficulty slider.");
+                return false;
+                }
+
+            return true;
+            }
+
+        private void RatePageButtonSend_Click(object sender, EventArgs e)
+            {
+            if (!CheckIfValidRating()) return;
 
             var course = (Course)(TeacherCoursesListView.SelectedItems[0].Tag);
             var newRating = new Rating()
@@ -143,6 +180,7 @@ namespace RateMyP.WinForm.Forms.UserControls
                 WouldTakeTeacherAgain = TeacherTakeAgainSwitch.Switched
                 };
 
+            newRating.Tags = GetAllSelectedTags(newRating.Id);
             RateMyPClient.Client.Ratings.Post(newRating);
             Console.WriteLine(TeacherDifficultySlider.Value);
             Console.WriteLine(TeacherTakeAgainSwitch.Switched);
@@ -187,6 +225,39 @@ namespace RateMyP.WinForm.Forms.UserControls
             var trackbar = (MetroSetTrackBar)sender;
             TeacherDifficultyLabel.Text = trackbar.Value.ToString();
             m_difficultyRating = trackbar.Value;
+            }
+
+        private async void LoadTags()
+            {
+            var tags = await RateMyPClient.Client.Tags.GetAll();
+            LoadTagList(tags);
+            }
+
+        private void LoadTagList(List<Tag> tags)
+            {
+            foreach (var tag in tags)
+                {
+                TeacherRateTagBox.Items.Add(tag);
+                }
+            }
+
+        private List<RatingTag> GetAllSelectedTags(Guid ratingId)
+            {
+            var ratingTags = new List<RatingTag>();
+            foreach (var tag in TeacherRateTagBox.CheckedItems)
+                {
+                ratingTags.Add(new RatingTag()
+                    {
+                    RatingId = ratingId,
+                    TagId = ((Tag)tag).Id,
+                    });
+                }
+            return ratingTags;
+            }
+
+        private void TeacherTakeAgainSwitch_Switch(object sender)
+            {
+            TeacherTakeAgainLabel.Text = TeacherTakeAgainSwitch.Switched ? "Yes" : "No";
             }
         }
     }
