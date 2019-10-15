@@ -99,6 +99,12 @@
     <Compile Include="Forms\UserControls\LeaderboardsPageControl.Designer.cs">
       <DependentUpon>LeaderboardsPageControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\RatePageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\RatePageControl.Designer.cs">
+      <DependentUpon>RatePageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\SettingsPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\LeaderboardsPageControl.resx">
       <DependentUpon>LeaderboardsPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\RatePageControl.resx">
+      <DependentUpon>RatePageControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\SettingsPageControl.resx">
       <DependentUpon>SettingsPageControl.cs</DependentUpon>
@@ -181,7 +190,8 @@
     <Content Include="Resources\c.png" />
     <Content Include="Resources\d.png" />
     <Content Include="Resources\everydaywestrayfurtherfromgodslight.png" />
-    <None Include="Resources\lemonke.png" />
+    <None Include="Resources\star_inactive.png" />
+    <None Include="Resources\star.png" />
     <Content Include="Resources\placeholderpic.png" />
     <Content Include="Resources\profile.png" />
   </ItemGroup>

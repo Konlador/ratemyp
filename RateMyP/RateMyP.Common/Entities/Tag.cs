@@ -10,5 +10,9 @@ namespace RateMyP.Entities
         public bool Equals(Tag other) =>
             other != null &&
             other.Text.Equals(Text);
+        public override string ToString()
+            {
+            return this.Text;
+            }
         }
     }

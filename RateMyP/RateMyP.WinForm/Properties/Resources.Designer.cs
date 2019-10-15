@@ -113,9 +113,9 @@ namespace RateMyP.WinForm.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lemonke {
+        internal static System.Drawing.Bitmap profile {
             get {
-                object obj = ResourceManager.GetObject("lemonke", resourceCulture);
+                object obj = ResourceManager.GetObject("profile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,19 @@ namespace RateMyP.WinForm.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap profile {
+        internal static System.Drawing.Bitmap star {
             get {
-                object obj = ResourceManager.GetObject("profile", resourceCulture);
+                object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star_inactive {
+            get {
+                object obj = ResourceManager.GetObject("star_inactive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

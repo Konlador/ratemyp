@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms.VisualStyles;
 
 namespace RateMyP.WinForm.Forms
     {
@@ -37,17 +38,20 @@ namespace RateMyP.WinForm.Forms
             this.TabPageUserProfile = new System.Windows.Forms.TabPage();
             this.TabPageSettings = new System.Windows.Forms.TabPage();
             this.TabPageTeacherProfile = new System.Windows.Forms.TabPage();
+            this.TabPageRatePage = new System.Windows.Forms.TabPage();
             this.browsePageControl = new RateMyP.WinForm.Forms.UserControls.BrowsePageControl();
             this.homePageControl = new RateMyP.WinForm.Forms.UserControls.HomePageControl();
             this.teacherProfilePageControl = new RateMyP.WinForm.Forms.UserControls.TeacherProfilePageControl();
             this.userProfilePageControl = new RateMyP.WinForm.Forms.UserControls.UserProfilePageControl();
             this.settingsPageControl = new RateMyP.WinForm.Forms.UserControls.SettingsPageControl();
             this.leaderboardsPageControl = new RateMyP.WinForm.Forms.UserControls.LeaderboardsPageControl();
+            this.ratePageControl = new RateMyP.WinForm.Forms.UserControls.RatePageControl();
             this.TabContextMenu = new MetroSet_UI.Controls.MetroSetContextMenuStrip();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTabControl.SuspendLayout();
             this.TabPageBrowse.SuspendLayout();
             this.TabPageTeacherProfile.SuspendLayout();
+            this.TabPageRatePage.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuTabControl
@@ -71,8 +75,7 @@ namespace RateMyP.WinForm.Forms
             this.MenuTabControl.TabStyle = MetroSet_UI.Enums.TabStyle.Style1;
             this.MenuTabControl.ThemeAuthor = "Narwin";
             this.MenuTabControl.ThemeName = "MetroLite";
-            this.MenuTabControl.UseAnimation = true;
-            //this.MenuTabControl.MouseHover += new System.EventHandler(this.MenuTabControl_MouseHover);
+            this.MenuTabControl.UseAnimation = false;
             this.MenuTabControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MenuTabControl_MouseClick);
             // 
             // TabPageHome
@@ -131,6 +134,15 @@ namespace RateMyP.WinForm.Forms
             this.TabPageTeacherProfile.TabIndex = 5;
             this.TabPageTeacherProfile.Text = "Teacher Profile";
             //
+            // TabPageRatePage
+            //
+            this.TabPageRatePage.Controls.Add(this.ratePageControl);
+            this.TabPageRatePage.Location = new System.Drawing.Point(4, 42);
+            this.TabPageRatePage.Name = "TabPageRatePage";
+            this.TabPageRatePage.Size = new System.Drawing.Size(1242, 586);
+            this.TabPageRatePage.TabIndex = 6;
+            this.TabPageRatePage.Text = "Rate";
+            //
             // homePageControl
             //
             this.browsePageControl.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -184,6 +196,14 @@ namespace RateMyP.WinForm.Forms
             this.teacherProfilePageControl.Name = "teacherProfilePageControl";
             this.teacherProfilePageControl.Size = new System.Drawing.Size(1200, 600);
             //
+            // ratePageControl
+            // 
+            this.teacherProfilePageControl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.teacherProfilePageControl.Location = new System.Drawing.Point(0, 0);
+            this.teacherProfilePageControl.Margin = new System.Windows.Forms.Padding(0, 0, 0, 50);
+            this.teacherProfilePageControl.Name = "ratePageControl";
+            this.teacherProfilePageControl.Size = new System.Drawing.Size(1200, 600);
+            //
             // TabContextMenu
             //
             this.TabContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -225,12 +245,14 @@ namespace RateMyP.WinForm.Forms
         public System.Windows.Forms.TabPage TabPageUserProfile;
         public System.Windows.Forms.TabPage TabPageSettings;
         public System.Windows.Forms.TabPage TabPageTeacherProfile;
+        public System.Windows.Forms.TabPage TabPageRatePage;
 
         private UserControls.BrowsePageControl browsePageControl;
         private UserControls.HomePageControl homePageControl;
         private UserControls.UserProfilePageControl userProfilePageControl;
         private UserControls.SettingsPageControl settingsPageControl;
         private UserControls.LeaderboardsPageControl leaderboardsPageControl;
+        public UserControls.RatePageControl ratePageControl;
         public UserControls.TeacherProfilePageControl teacherProfilePageControl;
 
         private MetroSet_UI.Controls.MetroSetContextMenuStrip TabContextMenu;
