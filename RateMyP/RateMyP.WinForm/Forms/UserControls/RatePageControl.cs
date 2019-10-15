@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroSet_UI.Controls;
@@ -181,10 +182,24 @@ namespace RateMyP.WinForm.Forms.UserControls
                 };
 
             newRating.Tags = GetAllSelectedTags(newRating.Id);
+            
+            try
+                {
+                RateMyPClient.Client.Ratings.Post(newRating);
+                MessageBox.Show("Thank you for your feedback.");
+                ResetSelections();
+                RateMyProfessor.self.teacherProfilePageControl.RefreshRatings();
+                RateMyProfessor.self.MenuTabControl.SelectTab(RateMyProfessor.self.MenuTabControl.SelectedIndex - 1);
+                RateMyProfessor.self.MenuTabControl.TabPages.Remove(RateMyProfessor.self.TabPageRatePage);
+                }
+            catch (Exception ex)
+                {
+                MessageBox.Show("Feedback sending unsuccessful. Please try again later.");
+                }
+                
             RateMyPClient.Client.Ratings.Post(newRating);
             Console.WriteLine(TeacherDifficultySlider.Value);
             Console.WriteLine(TeacherTakeAgainSwitch.Switched);
-
             }
 
         private void TeacherCoursesListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)

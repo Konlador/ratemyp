@@ -16,6 +16,13 @@ namespace RateMyP.WinForm.Forms.UserControls
             InitializeComponent();
             }
 
+        public void RefreshRatings()
+            {
+#pragma warning disable 4014
+            LoadRatings();
+#pragma warning restore 4014
+            }
+
         public void UpdateInfo(Teacher teacher)
             {
             m_teacher = teacher;
