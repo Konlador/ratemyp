@@ -2,7 +2,6 @@
 
 namespace RateMyP.Entities
     {
-    [Flags]
     public enum CourseType
         {
         None,
