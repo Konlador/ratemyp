@@ -62,7 +62,7 @@ namespace RateMyP.WinForm.Forms.UserControls
             {
             var allTeachers = await RateMyPClient.Client.Teachers.GetAll();
             var teachers = (from t in allTeachers
-                            where (t.FirstName + " " + t.LastName).ToLower().Denationalize().Contains(SearchTextBox.Text)
+                            where (t.FirstName + " " + t.LastName).ToLower().Denationalize().Contains(SearchTextBox.Text.ToLower().Denationalize())
                             select t).ToList();
             LoadTeachersListView(teachers);
             }

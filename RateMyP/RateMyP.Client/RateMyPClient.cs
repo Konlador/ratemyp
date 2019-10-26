@@ -2,6 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using RateMyP.Helpers;
 
 namespace RateMyP.Client
     {

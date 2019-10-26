@@ -25,7 +25,6 @@ namespace RateMyP.Entities
             other.FirstName.Equals(FirstName) &&
             other.LastName.Equals(LastName) &&
             other.Description.Equals(Description) &&
-            other.Rank.Equals(Rank) &&
-            other.FirstName.Equals(FirstName);
+            other.Rank.Equals(Rank);
         }
     }
