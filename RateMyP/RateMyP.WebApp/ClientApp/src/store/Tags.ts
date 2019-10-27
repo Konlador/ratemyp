@@ -4,62 +4,49 @@ import { AppThunkAction } from '.';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface TeachersState {
+export interface TagsState {
     isLoading: boolean;
-    teachers: Teacher[];
+    tags: Tag[];
 }
 
-export interface Teacher {
+export interface Tag {
     id: string,
-    firstName: string;
-    lastName: string;
-    rank: string;
-    faculty: string;
-    description: string;
-    activities: TeacherActivity[];
-}
-
-export interface TeacherActivity {
-    id: string,
-    teacherId: string;
-    courseId: string;
-    dateStarted: string;
-    lectureType: string;
+    text: string;
 }
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestTeachersAction {
-    type: 'REQUEST_TEACHERS';
+interface RequestTagsAction {
+    type: 'REQUEST_TAGS';
 }
 
-interface ReceiveTeachersAction {
-    type: 'RECEIVE_TEACHERS';
-    teachers: Teacher[];
+interface ReceiveTagsAction {
+    type: 'RECEIVE_TAGS';
+    tags: Tag[];
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeachersAction | ReceiveTeachersAction;
+type KnownAction = RequestTagsAction | ReceiveTagsAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestTags: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.teachers && appState.teachers.isLoading === false && appState.teachers.teachers.length === 0) {
-            fetch(`api/teachers`)
-                .then(response => response.json() as Promise<Teacher[]>)
+        if (appState && appState.tags && appState.tags.isLoading === false && appState.tags.tags.length === 0) {
+            fetch(`api/tags`)
+                .then(response => response.json() as Promise<Tag[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHERS', teachers: data });
+                    dispatch({ type: 'RECEIVE_TAGS', tags: data });
                 });
 
-            dispatch({ type: 'REQUEST_TEACHERS' });
+            dispatch({ type: 'REQUEST_TAGS' });
         }
     }
 };
@@ -67,22 +54,22 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeachersState = { teachers: [], isLoading: false };
+const unloadedState: TagsState = { tags: [], isLoading: false };
 
-export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined, incomingAction: Action): TeachersState => {
+export const reducer: Reducer<TagsState> = (state: TagsState | undefined, incomingAction: Action): TagsState => {
     if (state === undefined)
         return unloadedState;
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'REQUEST_TEACHERS':
+        case 'REQUEST_TAGS':
             return {
-                teachers: state.teachers,
+                tags: state.tags,
                 isLoading: true
             };
-        case 'RECEIVE_TEACHERS':
+        case 'RECEIVE_TAGS':
             return {
-                teachers: action.teachers,
+                tags: action.tags,
                 isLoading: false
             };
     }

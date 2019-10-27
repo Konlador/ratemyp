@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import Browse from './components/Browse';
+import TeacherProfile from './components/TeacherProfile';
 
 import './custom.css'
 
@@ -14,5 +15,6 @@ export default () => (
         <Route path='/counter' component={Counter} />
         <Route path='/browse' component={Browse} />
         <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
+        <Route path='/profile/:teacherId' component={TeacherProfile} />
     </Layout>
 );

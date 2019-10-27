@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
 import * as TeachersStore from '../store/Teachers';
 
@@ -32,26 +34,29 @@ class Browse extends React.PureComponent<TeachersProps> {
 
     private renderTeachersTable() {
         return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Last name</th>
-                        <th>Rank</th>
-                        <th>Faculty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.props.teachers.map((teacher: TeachersStore.Teacher) =>
+            <div>
+                {this.props.isLoading && <span>Loading...</span>}
+                <Table className='table table-striped' aria-labelledby="tabelLabel" hover size="sm">
+                    <thead>
                         <tr>
-                            <td>{teacher.firstName}</td>
-                            <td>{teacher.lastName}</td>
-                            <td>{teacher.rank}</td>
-                            <td>{teacher.faculty}</td>
+                            <th>Name</th>
+                            <th>Last name</th>
+                            <th>Rank</th>
+                            <th>Faculty</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {this.props.teachers.map((teacher: TeachersStore.Teacher) =>
+                            <tr onClick={() => this.props.history.push(`/profile/${teacher.id}`)}>
+                                <td>{teacher.firstName}</td>
+                                <td>{teacher.lastName}</td>
+                                <td>{teacher.rank}</td>
+                                <td>{teacher.faculty}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+            </div>
         );
     }
 }

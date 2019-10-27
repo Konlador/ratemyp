@@ -1,65 +1,65 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '.';
+//import { Tag } from './Tags';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface TeachersState {
+export interface RatingsState {
     isLoading: boolean;
-    teachers: Teacher[];
+    ratings: Rating[];
 }
 
-export interface Teacher {
-    id: string,
-    firstName: string;
-    lastName: string;
-    rank: string;
-    faculty: string;
-    description: string;
-    activities: TeacherActivity[];
-}
-
-export interface TeacherActivity {
+export interface Rating {
     id: string,
     teacherId: string;
     courseId: string;
-    dateStarted: string;
-    lectureType: string;
+    overallMark: number;
+    levelOfDifficulty: number;
+    wouldTakeTeacherAgain: boolean;
+    dateCreated: Date;
+    comment: string;
+    tags: RatingTag[];
+}
+
+interface RatingTag {
+    ratingId: string,
+    tagId: string;
 }
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestTeachersAction {
-    type: 'REQUEST_TEACHERS';
+interface RequestRatingsAction {
+    type: 'REQUEST_RATINGS';
 }
 
-interface ReceiveTeachersAction {
-    type: 'RECEIVE_TEACHERS';
-    teachers: Teacher[];
+interface ReceiveRatingsAction {
+    type: 'RECEIVE_RATINGS';
+    ratings: Rating[];
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeachersAction | ReceiveTeachersAction;
+type KnownAction = RequestRatingsAction | ReceiveRatingsAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestRatings: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.teachers && appState.teachers.isLoading === false && appState.teachers.teachers.length === 0) {
-            fetch(`api/teachers`)
-                .then(response => response.json() as Promise<Teacher[]>)
+        if (appState && appState.ratings && appState.ratings.isLoading === false && appState.ratings.ratings.length === 0) {
+            fetch(`api/ratings`)
+                .then(response => response.json() as Promise<Rating[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHERS', teachers: data });
+                    dispatch({ type: 'RECEIVE_RATINGS', ratings: data });
                 });
 
-            dispatch({ type: 'REQUEST_TEACHERS' });
+            dispatch({ type: 'REQUEST_RATINGS' });
         }
     }
 };
@@ -67,22 +67,22 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeachersState = { teachers: [], isLoading: false };
+const unloadedState: RatingsState = { ratings: [], isLoading: false };
 
-export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined, incomingAction: Action): TeachersState => {
+export const reducer: Reducer<RatingsState> = (state: RatingsState | undefined, incomingAction: Action): RatingsState => {
     if (state === undefined)
         return unloadedState;
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'REQUEST_TEACHERS':
+        case 'REQUEST_RATINGS':
             return {
-                teachers: state.teachers,
+                ratings: state.ratings,
                 isLoading: true
             };
-        case 'RECEIVE_TEACHERS':
+        case 'RECEIVE_RATINGS':
             return {
-                teachers: action.teachers,
+                ratings: action.ratings,
                 isLoading: false
             };
     }
