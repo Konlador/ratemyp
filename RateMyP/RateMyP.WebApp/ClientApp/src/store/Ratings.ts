@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '.';
-//import { Tag } from './Tags';
+import { Tag } from './Tags';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -12,20 +12,15 @@ export interface RatingsState {
 }
 
 export interface Rating {
-    id: string,
-    teacherId: string;
-    courseId: string;
-    overallMark: number;
-    levelOfDifficulty: number;
-    wouldTakeTeacherAgain: boolean;
-    dateCreated: Date;
-    comment: string;
-    tags: RatingTag[];
-}
-
-interface RatingTag {
-    ratingId: string,
-    tagId: string;
+    Id: string,
+    TeacherId: string;
+    CourseId: string;
+    OverallMark: number;
+    LevelOfDifficulty: number;
+    WouldTakeTeacherAgain: boolean;
+    DateCreated: Date;
+    Comment: string;
+    Tags: Tag[];
 }
 
 // -----------------

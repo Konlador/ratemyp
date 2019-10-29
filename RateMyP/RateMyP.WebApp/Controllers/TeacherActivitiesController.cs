@@ -19,7 +19,7 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        [HttpGet("{teacherId}")]
+        [HttpGet("teacher={teacherId}")]
         public async Task<ActionResult<IEnumerable<TeacherActivity>>> GetTeacherActivities(Guid teacherId)
             {
             return await m_context.TeacherActivities

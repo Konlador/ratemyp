@@ -38,10 +38,10 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
             <div>
                 <h1>Ratings</h1>
                 {this.props.isLoading && <span>Loading...</span>}
-                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm">
+                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
-                            <th>Courese</th>
+                            <th>Courses</th>
                             <th>Overall mark</th>
                             <th>Level of difficulty</th>
                             <th>Would take again</th>
@@ -52,12 +52,12 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
                     <tbody>
                         {this.props.ratings.map((rating: RatingsStore.Rating) =>
                             <tr>
-                                <td>{rating.courseId}</td>
-                                <td>{rating.overallMark}</td>
-                                <td>{rating.levelOfDifficulty}</td>
-                                <td>{rating.wouldTakeTeacherAgain}</td>
-                                <td>{rating.dateCreated}</td>
-                                <td>{rating.comment}</td>
+                                <td>{rating.CourseId}</td>
+                                <td>{rating.OverallMark}</td>
+                                <td>{rating.LevelOfDifficulty}</td>
+                                <td>{rating.WouldTakeTeacherAgain}</td>
+                                <td>{rating.DateCreated}</td>
+                                <td>{rating.Comment}</td>
                             </tr>
                         )}
                     </tbody>

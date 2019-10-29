@@ -4,7 +4,7 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import TeacherInfo from './TeacherInfo';
 import TeacherRatings from './TeacherRatings';
-
+import TeacherActivities from './TeacherActivities';
 
 type TeacherProfileProps =
     RouteComponentProps<{ teacherId: string }>;

@@ -11,12 +11,10 @@ type TeachersProps =
     RouteComponentProps<{}>;
 
 class Browse extends React.PureComponent<TeachersProps> {
-    // This method is called when the component is first added to the document
     public componentDidMount() {
         this.props.requestTeachers();
     }
 
-    // This method is called when the route parameters change
     public componentDidUpdate() {
         this.props.requestTeachers();
     }

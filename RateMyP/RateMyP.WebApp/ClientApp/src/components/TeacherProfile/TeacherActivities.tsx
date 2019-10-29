@@ -41,23 +41,17 @@ class TeacherActivities extends React.PureComponent<TeacherActivitiesProps & Tea
                 <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
-                            <th>Courese</th>
-                            <th>Overall mark</th>
-                            <th>Level of difficulty</th>
-                            <th>Would take again</th>
-                            <th>Date created</th>
-                            <th>Comment</th>
+                            <th>Course</th>
+                            <th>Date started</th>
+                            <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.teacherActivites.map((rating: TeacherActivitiesStore.TeacherActivity) =>
+                        {this.props.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
                             <tr>
-                                <td>{rating.courseId}</td>
-                                <td>{rating.overallMark}</td>
-                                <td>{rating.levelOfDifficulty}</td>
-                                <td>{rating.wouldTakeTeacherAgain}</td>
-                                <td>{rating.dateCreated}</td>
-                                <td>{rating.comment}</td>
+                                <td>{activity.courseId}</td>
+                                <td>{activity.dateStarted}</td>
+                                <td>{activity.lectureType}</td>
                             </tr>
                         )}
                     </tbody>

@@ -13,7 +13,7 @@ export interface TeacherActivitesState {
 export interface TeacherActivity {
     id: string,
     teacherId: string;
-    courseId: number;
+    courseId: string;
     dateStarted: Date;
     lectureType: number;
 }
@@ -22,33 +22,33 @@ export interface TeacherActivity {
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestTeacherActivitesAction {
+interface RequestTeacherActivitiesAction {
     type: 'REQUEST_TEACHERACTIVITIES';
     teacherId: string;
 }
 
-interface ReceiveTeacherActivitesAction {
+interface ReceiveTeacherActivitiesAction {
     type: 'RECEIVE_TEACHERACTIVITIES';
     teacherActivites: TeacherActivity[];
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeacherActivitesAction | ReceiveTeacherActivitesAction;
+type KnownAction = RequestTeacherActivitiesAction | ReceiveTeacherActivitiesAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeacherActivites: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestTeacherActivities: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState &&
             appState.teacherActivites &&
             appState.teacherActivites.isLoading === false &&
             appState.teacherActivites.teacherActivites.length === 0) {
-            fetch(`api/teacheractivites/${teacherId}`)
+            fetch(`api/teacheractivites/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<TeacherActivity[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERACTIVITIES', teacherActivites: data });
