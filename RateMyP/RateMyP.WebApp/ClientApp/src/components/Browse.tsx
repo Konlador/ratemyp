@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Table } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Table } from 'reactstrap';
 import { ApplicationState } from '../store';
 import * as TeachersStore from '../store/Teachers';
 

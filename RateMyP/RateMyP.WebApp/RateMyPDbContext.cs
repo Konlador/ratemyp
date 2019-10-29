@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RateMyP.Entities;
+using RateMyP.WebApp.Models;
 
 namespace RateMyP.WebApp
     {

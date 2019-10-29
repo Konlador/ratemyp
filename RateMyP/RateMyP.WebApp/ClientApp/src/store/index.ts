@@ -4,6 +4,7 @@ import * as Teachers from './Teachers';
 import * as Ratings from './Ratings';
 import * as Tags from './Tags';
 import * as Courses from './Courses';
+import * as TeacherActivites from './TeacherActivities';
 
 // The top-level state object
 export interface ApplicationState {
@@ -13,6 +14,7 @@ export interface ApplicationState {
     ratings: Ratings.RatingsState | undefined;
     tags: Tags.TagsState | undefined;
     courses: Courses.CoursesState | undefined;
+    teacherActivites: TeacherActivites.TeacherActivitesState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -24,7 +26,8 @@ export const reducers = {
     teachers: Teachers.reducer,
     ratings: Ratings.reducer,
     tags: Tags.reducer,
-    courses: Courses.reducer
+    courses: Courses.reducer,
+    teacherActivites: TeacherActivites.reducer
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyP.Entities;
+using RateMyP.WebApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,7 +17,6 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        // GET: api/Tags
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tag>>> GetTags()
             {

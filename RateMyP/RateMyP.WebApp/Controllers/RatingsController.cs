@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyP.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using RateMyP.WebApp.Models;
+using ClientErrorData = Microsoft.AspNetCore.Mvc.ClientErrorData;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -19,17 +21,18 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        // GET: api/Ratings
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
             {
+            var jObj = JObject.FromObject(await m_context.Ratings.ToListAsync());
+
+
             return await m_context.Ratings
                                   .Include(rating => rating.Tags)
                                   .ThenInclude(ratingTag => ratingTag.Tag)
                                   .ToListAsync();
             }
 
-        // GET: api/Ratings/teacher=5
         [HttpGet("teacher={teacherId}")]
         public async Task<ActionResult<IEnumerable<Rating>>> GetTeacherRatings(Guid teacherId)
             {
@@ -39,7 +42,6 @@ namespace RateMyP.WebApp.Controllers
                                   .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
             }
 
-        // GET: api/Ratings/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rating>> GetRating(Guid id)
             {

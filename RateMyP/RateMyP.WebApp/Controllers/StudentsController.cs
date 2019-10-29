@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyP.Entities;
+using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +19,12 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        // GET: api/Students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
             {
             return await m_context.Students.ToListAsync();
             }
 
-        // GET: api/Students/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(Guid id)
             {
