@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyP.Entities;
+using Newtonsoft.Json.Linq;
+using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,36 +20,51 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        // GET: api/Ratings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
+        public async Task<IActionResult> GetRatings()
             {
-            return await m_context.Ratings
-                                  .Include(rating => rating.Tags)
-                                  .ThenInclude(ratingTag => ratingTag.Tag)
-                                  .ToListAsync();
+            var ratings = await m_context.Ratings
+                                         .Include(rating => rating.Tags)
+                                         .ThenInclude(ratingTag => ratingTag.Tag)
+                                         .ToListAsync();
+            return Ok(SerializeRatings(ratings));
             }
 
-        // GET: api/Ratings/teacher=5
         [HttpGet("teacher={teacherId}")]
-        public async Task<ActionResult<IEnumerable<Rating>>> GetTeacherRatings(Guid teacherId)
+        public async Task<IActionResult> GetTeacherRatings(Guid teacherId)
             {
-            return await m_context.Ratings
-                                  .Include(rating => rating.Tags)
-                                  .ThenInclude(ratingTag => ratingTag.Tag)
-                                  .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            var ratings = await m_context.Ratings
+                                         .Include(rating => rating.Tags)
+                                         .ThenInclude(ratingTag => ratingTag.Tag)
+                                         .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            return Ok(SerializeRatings(ratings));
             }
 
-        // GET: api/Ratings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rating>> GetRating(Guid id)
+        public async Task<IActionResult> GetRating(Guid id)
             {
-            var rating = await m_context.Ratings.FindAsync(id);
+            var rating = await m_context.Ratings
+                                        .Include(r => r.Tags)
+                                        .ThenInclude(ratingTag => ratingTag.Tag)
+                                        .SingleAsync(x => x.Id.Equals(id));
 
             if (rating == null)
                 return NotFound();
 
-            return rating;
+            return Ok(SerializeRating(rating));
+            }
+
+        private static JArray SerializeRatings(IEnumerable<Rating> ratings)
+            {
+            return JArray.FromObject(ratings.Select(SerializeRating));
+            }
+
+        private static JObject SerializeRating(Rating rating)
+            {
+            var serializedRating = JObject.FromObject(rating);
+            var serializedTagsList = rating.Tags.Select(ratingTag => JObject.FromObject(ratingTag.Tag)).ToList();
+            serializedRating["Tags"] = JArray.FromObject(serializedTagsList);
+            return serializedRating;
             }
 
         // POST: api/Ratings
@@ -61,11 +77,6 @@ namespace RateMyP.WebApp.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
-            }
-
-        private bool RatingExists(Guid id)
-            {
-            return m_context.Ratings.Any(e => e.Id == id);
             }
         }
     }
