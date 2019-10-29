@@ -50,9 +50,13 @@ interface ReceiveTeacherAction {
     selectedTeacher: Teacher;
 }
 
+interface ClearSelectedTeacher {
+    type: 'CLEAR_SELECTED_TEACHER'
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeacherAction | ReceiveTeacherAction;
+type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeacherAction | ReceiveTeacherAction | ClearSelectedTeacher;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -88,6 +92,7 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_TEACHER' });
         }
     },
+    clearSelectedTeacher: () => ({ type: 'CLEAR_SELECTED_TEACHER' } as ClearSelectedTeacher)
 };
 
 // ----------------
@@ -124,6 +129,12 @@ export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined
                 teachers: state.teachers,
                 selectedTeacher: action.selectedTeacher,
                 isLoading: false
+            };
+        case 'CLEAR_SELECTED_TEACHER':
+            return {
+                teachers: state.teachers,
+                selectedTeacher: undefined,
+                isLoading: state.isLoading
             };
     }
 

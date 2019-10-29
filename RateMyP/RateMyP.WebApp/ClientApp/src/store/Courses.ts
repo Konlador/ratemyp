@@ -8,6 +8,7 @@ export interface CoursesState {
     isLoading: boolean;
     courses: Course[];
     selectedCourse: Course | undefined;
+    teacherId: string | undefined;
 }
 
 export interface Course {
@@ -31,9 +32,19 @@ interface ReceiveCoursesAction {
     courses: Course[];
 }
 
+interface RequestTeacherCoursesAction {
+    type: 'REQUEST_TEACHER_COURSES';
+    teacherId: string;
+}
+
+interface ReceiveTeacherCoursesAction {
+    type: 'RECEIVE_TEACHER_COURSES';
+    courses: Course[];
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestCoursesAction | ReceiveCoursesAction;
+type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestTeacherCoursesAction | ReceiveTeacherCoursesAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -41,9 +52,11 @@ type KnownAction = RequestCoursesAction | ReceiveCoursesAction;
 
 export const actionCreators = {
     requestCourses: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.courses && appState.courses.isLoading === false && appState.courses.courses.length === 0) {
+        if (appState &&
+            appState.courses &&
+            appState.courses.isLoading === false &&
+            (appState.courses.teacherId !== undefined || appState.courses.courses.length === 0)) {
             fetch(`api/courses`)
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
@@ -54,16 +67,18 @@ export const actionCreators = {
         }
     },
     requestTeacherCourses: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.courses && appState.courses.isLoading === false && appState.courses.courses.length === 0) {
-            fetch(`api/courses`)
+        if (appState &&
+            appState.courses &&
+            appState.courses.isLoading === false &&
+            appState.courses.teacherId !== teacherId) {
+            fetch(`api/courses/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_COURSES', courses: data });
+                    dispatch({ type: 'RECEIVE_TEACHER_COURSES', courses: data });
                 });
 
-            dispatch({ type: 'REQUEST_COURSES' });
+            dispatch({ type: 'REQUEST_TEACHER_COURSES', teacherId });
         }
     }
 };
@@ -71,7 +86,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false };
+const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false, teacherId: undefined };
 
 export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, incomingAction: Action): CoursesState => {
     if (state === undefined)
@@ -83,13 +98,29 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
             return {
                 courses: state.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: true
+                isLoading: true,
+                teacherId: undefined
             };
         case 'RECEIVE_COURSES':
             return {
                 courses: action.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: false
+                isLoading: false,
+                teacherId: state.teacherId
+            };
+        case 'REQUEST_TEACHER_COURSES':
+            return {
+                courses: state.courses,
+                selectedCourse: undefined,
+                isLoading: true,
+                teacherId: action.teacherId
+            };
+        case 'RECEIVE_TEACHER_COURSES':
+            return {
+                courses: action.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: false,
+                teacherId: state.teacherId
             };
     }
 

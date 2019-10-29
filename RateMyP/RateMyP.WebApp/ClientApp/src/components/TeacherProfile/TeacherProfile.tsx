@@ -1,17 +1,24 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import TeacherInfo from './TeacherInfo';
 import TeacherRatings from './TeacherRatings';
 import TeacherActivities from './TeacherActivities';
+import * as TeachersStore from '../../store/Teachers';
+
 
 type TeacherProfileProps =
+    typeof TeachersStore.actionCreators &
     RouteComponentProps<{ teacherId: string }>;
 
 class TeacherProfile extends React.PureComponent<TeacherProfileProps> {
+    public componentWillUnmount(){
+        this.props.clearSelectedTeacher();
+    }
+
     public render() {
-        console.log(this.props.match.params.teacherId);
         return (
             <React.Fragment>
                 <TeacherInfo teacherId={this.props.match.params.teacherId}/>
@@ -24,4 +31,8 @@ class TeacherProfile extends React.PureComponent<TeacherProfileProps> {
     }
 }
 
-export default TeacherProfile;
+
+export default connect(
+    undefined,
+    TeachersStore.actionCreators
+)(TeacherProfile as any);

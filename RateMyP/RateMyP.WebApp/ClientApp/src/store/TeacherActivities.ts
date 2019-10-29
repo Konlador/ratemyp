@@ -47,8 +47,8 @@ export const actionCreators = {
         if (appState &&
             appState.teacherActivites &&
             appState.teacherActivites.isLoading === false &&
-            appState.teacherActivites.teacherActivites.length === 0) {
-            fetch(`api/teacheractivites/teacher=${teacherId}`)
+            appState.teacherActivites.teacherId !== teacherId) {
+            fetch(`api/teacheractivities/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<TeacherActivity[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERACTIVITIES', teacherActivites: data });

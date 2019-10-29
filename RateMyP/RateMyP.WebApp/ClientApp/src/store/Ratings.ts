@@ -47,7 +47,6 @@ type KnownAction = RequestTeacherRatingsAction | ReceiveTeacherRatingsAction;
 
 export const actionCreators = {
     requestTeacherRatings: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState &&
             appState.ratings &&

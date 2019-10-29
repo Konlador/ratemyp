@@ -1,16 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as RatingsStore from '../../store/Ratings';
+import * as CoursesStore from '../../store/Courses';
 
 interface TeacherRatingsOwnProps {
     teacherId: string
 };
 
 type TeacherRatingsProps =
-    RatingsStore.RatingsState &
-    typeof RatingsStore.actionCreators;
+    {
+    ratings: RatingsStore.RatingsState,
+    courses: CoursesStore.CoursesState
+    } &
+    typeof RatingsStore.actionCreators &
+    typeof CoursesStore.actionCreators;
 
 class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRatingsOwnProps> {
     public componentDidMount() {
@@ -21,6 +27,11 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
         this.ensureDataFetched();
     }
 
+    private ensureDataFetched() {
+        this.props.requestTeacherCourses(this.props.teacherId);
+        this.props.requestTeacherRatings(this.props.teacherId);
+    }
+
     public render() {
         return (
             <React.Fragment>
@@ -29,15 +40,11 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
         );
     }
 
-    private ensureDataFetched() {
-        this.props.requestTeacherRatings(this.props.teacherId);
-    }
-
     private renderTeacherInfo() {
         return (
             <div>
                 <h1>Ratings</h1>
-                {this.props.isLoading && <span>Loading...</span>}
+                {this.props.ratings.isLoading && <span>Loading...</span>}
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
@@ -50,13 +57,13 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.ratings.map((rating: RatingsStore.Rating) =>
+                        {this.props.ratings.ratings.map((rating: RatingsStore.Rating) =>
                             <tr>
-                                <td>{rating.CourseId}</td>
+                                <td>{this.getCourseName(rating.CourseId)}</td>
                                 <td>{rating.OverallMark}</td>
                                 <td>{rating.LevelOfDifficulty}</td>
-                                <td>{rating.WouldTakeTeacherAgain}</td>
-                                <td>{rating.DateCreated}</td>
+                                <td>{rating.WouldTakeTeacherAgain ? "Yes" : "No"}</td>
+                                <td>{new Date(rating.DateCreated).toISOString().split('T')[0]}</td>
                                 <td>{rating.Comment}</td>
                             </tr>
                         )}
@@ -65,17 +72,25 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
             </div>
         );
     }
+
+    private getCourseName(courseId: string): string {
+        const course = this.props.courses.courses.find(x => x.id === courseId);
+        return course ? course.name : "Unknown";
+    }
 }
 
 function mapStateToProps(state: ApplicationState, ownProps: TeacherRatingsOwnProps) {
     return {
-        ...state.ratings,
+        ratings: state.ratings,
+        courses: state.courses,
         teacherId: ownProps.teacherId
     }
 };
 
-export default connect(
-    mapStateToProps, // Selects which state properties are merged into the component's props
-    RatingsStore.actionCreators // Selects which action creators are merged into the component's props
-)(TeacherRatings as any);
+const actions = {
+    ...RatingsStore.actionCreators,
+    ...CoursesStore.actionCreators
+}
+
+export default connect(mapStateToProps, actions)(TeacherRatings as any);
 

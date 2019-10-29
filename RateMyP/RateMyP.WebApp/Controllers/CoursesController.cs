@@ -36,9 +36,16 @@ namespace RateMyP.WebApp.Controllers
             return course;
             }
 
-        private bool CourseExists(Guid id)
+        [HttpGet("teacher={teacherId}")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetTeacherCourses(Guid teacherId)
             {
-            return m_context.Courses.Any(e => e.Id == id);
+            var courseIds = await m_context.TeacherActivities
+                                           .Where(x => x.TeacherId.Equals(teacherId))
+                                           .Select(x => x.CourseId)
+                                           .Distinct()
+                                           .ToListAsync();
+            var courses = await m_context.Courses.Where(r => courseIds.Contains(r.Id)).ToListAsync();
+            return courses;
             }
         }
     }

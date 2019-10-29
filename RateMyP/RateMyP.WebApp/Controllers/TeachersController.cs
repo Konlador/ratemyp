@@ -44,7 +44,7 @@ namespace RateMyP.WebApp.Controllers
             return teacher;
             }
 
-        [HttpGet("search/{searchString}")]
+        [HttpGet("search={searchString}")]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetSearchedTeachers(string searchString)
             {
             var search = searchString.ToLower().Denationalize();
