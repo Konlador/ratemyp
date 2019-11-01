@@ -1,13 +1,19 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
+import { AppThunkAction } from '..';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface TeacherActivitesState {
-    teacherId: string | undefined;
-    teacherActivites: TeacherActivity[];
     isLoading: boolean;
+    teacherActivites: TeacherActivity[];
+    teacherId: string | undefined;
+}
+
+export enum LectureType {
+    Lecture = 0,
+    Practice = 1,
+    Seminar = 2
 }
 
 export interface TeacherActivity {
@@ -15,7 +21,7 @@ export interface TeacherActivity {
     teacherId: string;
     courseId: string;
     dateStarted: Date;
-    lectureType: number;
+    lectureType: LectureType;
 }
 
 // -----------------

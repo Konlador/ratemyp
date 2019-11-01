@@ -1,24 +1,24 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as RatingsStore from '../../store/Ratings';
-import * as CoursesStore from '../../store/Courses';
+import * as TeacherRatingsStore from '../../store/Teacher/TeacherRatings';
+import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
 
-interface TeacherRatingsOwnProps {
+interface OwnProps {
     teacherId: string
 };
 
-type TeacherRatingsProps =
+type Props =
     {
-    ratings: RatingsStore.RatingsState,
-    courses: CoursesStore.CoursesState
+    ratings: TeacherRatingsStore.TeacherRatingsState,
+    courses: TeacherCoursesStore.TeacherCoursesState
     } &
-    typeof RatingsStore.actionCreators &
-    typeof CoursesStore.actionCreators;
+    typeof TeacherRatingsStore.actionCreators &
+    typeof TeacherCoursesStore.actionCreators;
 
-class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRatingsOwnProps> {
+class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -79,17 +79,17 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: TeacherRatingsOwnProps) {
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         ratings: state.ratings,
-        courses: state.courses,
+        courses: state.teacherCourses,
         teacherId: ownProps.teacherId
     }
 };
 
 const actions = {
-    ...RatingsStore.actionCreators,
-    ...CoursesStore.actionCreators
+    ...TeacherRatingsStore.actionCreators,
+    ...TeacherCoursesStore.actionCreators
 }
 
 export default connect(mapStateToProps, actions)(TeacherRatings as any);

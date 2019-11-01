@@ -8,12 +8,11 @@ import TeacherRatings from './TeacherRatings';
 import TeacherActivities from './TeacherActivities';
 import * as TeachersStore from '../../store/Teachers';
 
-
-type TeacherProfileProps =
+type Props =
     typeof TeachersStore.actionCreators &
     RouteComponentProps<{ teacherId: string }>;
 
-class TeacherProfile extends React.PureComponent<TeacherProfileProps> {
+class TeacherProfile extends React.PureComponent<Props> {
     public componentWillUnmount(){
         this.props.clearSelectedTeacher();
     }
@@ -23,7 +22,7 @@ class TeacherProfile extends React.PureComponent<TeacherProfileProps> {
             <React.Fragment>
                 <TeacherInfo teacherId={this.props.match.params.teacherId}/>
                 <div>TODO: Teacher statistics</div>
-                <Button color="primary" tag={Link} to={`/rate/${this.props.match.params.teacherId}`}>Add a rating</Button>{' '}
+                <Button color="primary" tag={Link} to={`/rate-teacher/${this.props.match.params.teacherId}`}>Add a rating</Button>{' '}
                 <TeacherActivities teacherId={this.props.match.params.teacherId}/>
                 <TeacherRatings teacherId={this.props.match.params.teacherId}/>
             </React.Fragment>

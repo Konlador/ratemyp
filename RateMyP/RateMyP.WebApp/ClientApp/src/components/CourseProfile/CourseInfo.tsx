@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import * as TeachersStore from '../../store/Teachers';
+import * as CoursesStore from '../../store/Courses';
 
 interface OwnProps {
-    teacherId: string
+    courseId: string
 };
 
 type Props =
-    TeachersStore.TeachersState &
-    typeof TeachersStore.actionCreators;
+    CoursesStore.CoursesState &
+    typeof CoursesStore.actionCreators;
 
-class TeacherInfo extends React.PureComponent<Props & OwnProps> {
+class CourseInfo extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -23,31 +23,31 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
     public render() {
         return (
             <React.Fragment>
-                {this.renderTeacherInfo()}
+                {this.renderCourseInfo()}
             </React.Fragment>
         );
     }
 
     private ensureDataFetched() {
-        this.props.requestTeacher(this.props.teacherId);
+        this.props.requestCourse(this.props.courseId);
     }
 
-    private renderTeacherInfo() {
-        const teacher = this.props.selectedTeacher;
-        if (!teacher)
+    private renderCourseInfo() {
+        const course = this.props.selectedCourse;
+        if (!course)
             return;
 
         return (
             <React.Fragment>
                 <h1>
-                    {`${teacher.firstName} ${teacher.lastName}`}
+                    {course.name}
                 </h1>
                 <p>
-                    <p><strong>Faculty: </strong>{teacher.faculty}</p>
-                    <p><strong>Rank: </strong>{teacher.rank}</p>
+                    <p><strong>Faculty: </strong>{course.faculty}</p>
+                    <p><strong>Credits: </strong>{course.credits}</p>
                 </p>
                 <p>
-                    {teacher.description && ("Description:" + teacher.description)}
+                    {"Type: " + course.courseType}
                 </p>
             </React.Fragment>
         );
@@ -56,13 +56,13 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
 
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
-        ...state.teachers,
-        teacherId: ownProps.teacherId
+        ...state.courses,
+        courseId: ownProps.courseId
     }
 };
 
 export default connect(
     mapStateToProps, // Selects which state properties are merged into the component's props
-    TeachersStore.actionCreators // Selects which action creators are merged into the component's props
-)(TeacherInfo as any);
+    CoursesStore.actionCreators // Selects which action creators are merged into the component's props
+)(CourseInfo as any);
 

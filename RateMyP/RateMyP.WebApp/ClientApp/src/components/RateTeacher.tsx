@@ -4,12 +4,12 @@ import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as RatingsStore from '../store/Ratings';
 
-type RateProps =
+type Props =
     RatingsStore.RatingsState &
     typeof RatingsStore.actionCreators &
     RouteComponentProps<{ teacherId: string}>;
 
-class Rate extends React.PureComponent<RateProps> {
+class Rate extends React.PureComponent<Props> {
     public componentDidMount() {
         this.ensureDataFetched();
     }

@@ -1,24 +1,26 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
-import * as TeacherActivitiesStore from '../../store/TeacherActivities';
-import * as CoursesStore from '../../store/Courses';
+import { LectureType } from '../../store/Teacher/TeacherActivities';
+import * as TeacherActivitiesStore from '../../store/Teacher/TeacherActivities';
+import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
 
-
-interface TeacherActivitiesOwnProps {
+interface OwnProps {
     teacherId: string
 };
 
-type TeacherActivitiesProps =
+type Props =
     {
     activities: TeacherActivitiesStore.TeacherActivitesState,
-    courses: CoursesStore.CoursesState
+    courses: TeacherCoursesStore.TeacherCoursesState
     } &
     typeof TeacherActivitiesStore.actionCreators &
-    typeof CoursesStore.actionCreators;
+    typeof TeacherCoursesStore.actionCreators &
+    RouteComponentProps<{}>;
 
-class TeacherActivities extends React.PureComponent<TeacherActivitiesProps & TeacherActivitiesOwnProps> {
+class TeacherActivities extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -45,7 +47,7 @@ class TeacherActivities extends React.PureComponent<TeacherActivitiesProps & Tea
             <div>
                 <h1>Activities</h1>
                 {this.props.activities.isLoading && <span>Loading...</span>}
-                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm">
+                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
                             <th>Course</th>
@@ -55,10 +57,10 @@ class TeacherActivities extends React.PureComponent<TeacherActivitiesProps & Tea
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr>
+                            <tr onClick={() => this.props.history.push(`/course-profile/${activity.courseId}`)}>
                                 <td>{this.getCourseName(activity.courseId)}</td>
                                 <td>{new Date(activity.dateStarted).toISOString().split('T')[0]}</td>
-                                <td>{activity.lectureType}</td>
+                                <td>{LectureType[activity.lectureType]}</td>
                             </tr>
                         )}
                     </tbody>
@@ -73,21 +75,22 @@ class TeacherActivities extends React.PureComponent<TeacherActivitiesProps & Tea
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: TeacherActivitiesOwnProps) {
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         activities: state.teacherActivites,
-        courses: state.courses,
+        courses: state.teacherCourses,
         teacherId: ownProps.teacherId
     }
 };
 
 const actions = {
     ...TeacherActivitiesStore.actionCreators,
-    ...CoursesStore.actionCreators
+    ...TeacherCoursesStore.actionCreators
 }
 
-export default connect(
-    mapStateToProps,
-    actions
-)(TeacherActivities as any);
-
+export default withRouter(
+    connect(
+        mapStateToProps,
+        actions
+    )(TeacherActivities as any) as React.ComponentType<any>
+);

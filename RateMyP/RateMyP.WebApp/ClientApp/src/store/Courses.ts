@@ -8,7 +8,6 @@ export interface CoursesState {
     isLoading: boolean;
     courses: Course[];
     selectedCourse: Course | undefined;
-    teacherId: string | undefined;
 }
 
 export interface Course {
@@ -32,19 +31,23 @@ interface ReceiveCoursesAction {
     courses: Course[];
 }
 
-interface RequestTeacherCoursesAction {
-    type: 'REQUEST_TEACHER_COURSES';
-    teacherId: string;
+interface RequestCourseAction {
+    type: 'REQUEST_COURSE';
+    courseId: string;
 }
 
-interface ReceiveTeacherCoursesAction {
-    type: 'RECEIVE_TEACHER_COURSES';
-    courses: Course[];
+interface ReceiveCourseAction {
+    type: 'RECEIVE_COURSE';
+    course: Course;
+}
+
+interface ClearSelectedCourse {
+    type: 'CLEAR_SELECTED_COURSE'
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestTeacherCoursesAction | ReceiveTeacherCoursesAction;
+type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -56,7 +59,7 @@ export const actionCreators = {
         if (appState &&
             appState.courses &&
             appState.courses.isLoading === false &&
-            (appState.courses.teacherId !== undefined || appState.courses.courses.length === 0)) {
+            appState.courses.courses.length === 0) {
             fetch(`api/courses`)
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
@@ -66,27 +69,29 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_COURSES' });
         }
     },
-    requestTeacherCourses: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestCourse: (courseId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
             appState.courses &&
             appState.courses.isLoading === false &&
-            appState.courses.teacherId !== teacherId) {
-            fetch(`api/courses/teacher=${teacherId}`)
-                .then(response => response.json() as Promise<Course[]>)
+            (appState.courses.selectedCourse === undefined ||
+            appState.courses.selectedCourse.id !== courseId)) {
+            fetch(`api/courses/${courseId}`)
+                .then(response => response.json() as Promise<Course>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHER_COURSES', courses: data });
+                    dispatch({ type: 'RECEIVE_COURSE', course: data });
                 });
 
-            dispatch({ type: 'REQUEST_TEACHER_COURSES', teacherId });
+            dispatch({ type: 'REQUEST_COURSE', courseId });
         }
-    }
+    },
+    clearSelectedCourse: () => ({ type: 'CLEAR_SELECTED_COURSE' } as ClearSelectedCourse)
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false, teacherId: undefined };
+const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false };
 
 export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, incomingAction: Action): CoursesState => {
     if (state === undefined)
@@ -98,29 +103,31 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
             return {
                 courses: state.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: true,
-                teacherId: undefined
+                isLoading: true
             };
         case 'RECEIVE_COURSES':
             return {
                 courses: action.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: false,
-                teacherId: state.teacherId
+                isLoading: false
             };
-        case 'REQUEST_TEACHER_COURSES':
+        case 'REQUEST_COURSE':
+            return {
+                courses: state.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: true
+            };
+        case 'RECEIVE_COURSE':
+            return {
+                courses: state.courses,
+                selectedCourse: action.course,
+                isLoading: false
+            };
+        case 'CLEAR_SELECTED_COURSE':
             return {
                 courses: state.courses,
                 selectedCourse: undefined,
-                isLoading: true,
-                teacherId: action.teacherId
-            };
-        case 'RECEIVE_TEACHER_COURSES':
-            return {
-                courses: action.courses,
-                selectedCourse: state.selectedCourse,
-                isLoading: false,
-                teacherId: state.teacherId
+                isLoading: state.isLoading
             };
     }
 

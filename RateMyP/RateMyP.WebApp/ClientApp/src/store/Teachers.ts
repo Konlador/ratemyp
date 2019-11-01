@@ -66,7 +66,10 @@ export const actionCreators = {
     requestTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.teachers && appState.teachers.isLoading === false && appState.teachers.teachers.length === 0) {
+        if (appState &&
+            appState.teachers &&
+            appState.teachers.isLoading === false &&
+            appState.teachers.teachers.length === 0) {
             fetch(`api/teachers`)
                 .then(response => response.json() as Promise<Teacher[]>)
                 .then(data => {

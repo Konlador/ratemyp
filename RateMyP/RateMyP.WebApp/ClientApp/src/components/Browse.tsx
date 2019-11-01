@@ -1,16 +1,17 @@
 import * as React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../store';
 import * as TeachersStore from '../store/Teachers';
 
-type TeachersProps =
+type Props =
     TeachersStore.TeachersState &
     typeof TeachersStore.actionCreators &
     RouteComponentProps<{}>;
 
-class Browse extends React.PureComponent<TeachersProps> {
+class Browse extends React.PureComponent<Props> {
     public componentDidMount() {
         this.props.requestTeachers();
     }
@@ -44,7 +45,7 @@ class Browse extends React.PureComponent<TeachersProps> {
                     </thead>
                     <tbody>
                         {this.props.teachers.map((teacher: TeachersStore.Teacher) =>
-                            <tr onClick={() => this.props.history.push(`/profile/${teacher.id}`)}>
+                            <tr onClick={() => this.props.history.push(`/teacher-profile/${teacher.id}`)}>
                                 <td>{teacher.firstName}</td>
                                 <td>{teacher.lastName}</td>
                                 <td>{teacher.rank}</td>
