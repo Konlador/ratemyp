@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as CoursesStore from '../../store/Courses';
+import { CourseType } from '../../store/Courses';
 
 interface OwnProps {
     courseId: string
@@ -39,15 +40,17 @@ class CourseInfo extends React.PureComponent<Props & OwnProps> {
 
         return (
             <React.Fragment>
-                <h1>
-                    {course.name}
-                </h1>
+                <div>
+                    Course
+                    <h1>
+                        {course.name}
+                    </h1>
+                </div>
+                
                 <p>
                     <p><strong>Faculty: </strong>{course.faculty}</p>
                     <p><strong>Credits: </strong>{course.credits}</p>
-                </p>
-                <p>
-                    {"Type: " + course.courseType}
+                    <p><strong>Course type: </strong>{CourseType[course.courseType]}</p>
                 </p>
             </React.Fragment>
         );

@@ -43,7 +43,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     private renderTeacherInfo() {
         return (
             <div>
-                <h1>Ratings</h1>
+                <h2>Ratings</h2>
                 {this.props.ratings.isLoading && <span>Loading...</span>}
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>

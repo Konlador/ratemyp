@@ -39,9 +39,13 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
 
         return (
             <React.Fragment>
-                <h1>
-                    {`${teacher.firstName} ${teacher.lastName}`}
-                </h1>
+                <div>
+                    Teacher
+                    <h1>
+                        {`${teacher.firstName} ${teacher.lastName}`}
+                    </h1>
+                </div>
+                
                 <p>
                     <p><strong>Faculty: </strong>{teacher.faculty}</p>
                     <p><strong>Rank: </strong>{teacher.rank}</p>

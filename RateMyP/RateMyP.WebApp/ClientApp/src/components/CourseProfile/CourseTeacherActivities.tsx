@@ -46,7 +46,7 @@ class CourseTeacherActivities extends React.PureComponent<Props & OwnProps> {
     private renderCourseTeacherActivites() {
         return (
             <div>
-                <h1>Activities</h1>
+                <h2>Teachers</h2>
                 {this.props.activities.isLoading && <span>Loading...</span>}
                 <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
