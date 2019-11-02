@@ -85,8 +85,35 @@ namespace RateMyP.WebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Rating>> PostRating(Rating rating)
+        public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
+            var jTags = data["Tags"].ToArray();
+            //var tags = deserialize from jobject
+            var ratingTags = new List<RatingTag>();
+            var Id = Guid.NewGuid();
+            foreach(var jTag in jTags)
+                {
+                var ratingTag = new RatingTag
+                    {
+                    RatingId = Id,
+                    TagId = (Guid)jTag["id"],
+                    };
+                // TODO: check if tag exists
+                ratingTags.Add(ratingTag);
+                }
+
+            var rating = new Rating
+                {
+                Comment = data["Comment"].ToObject<string>(),
+                CourseId = data["CourseId"].ToObject<Guid>(),
+                DateCreated = DateTime.Now,
+                Id = Id,
+                LevelOfDifficulty = data["LevelOfDifficulty"].ToObject<int>(),
+                OverallMark = data["OverallMark"].ToObject<int>(),
+                Tags = ratingTags,
+                TeacherId = data["TeacherId"].ToObject<Guid>(),
+                WouldTakeTeacherAgain = data["WouldTakeTeacherAgain"].ToObject<Boolean>()
+                };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 
