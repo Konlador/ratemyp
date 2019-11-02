@@ -7,6 +7,7 @@ import TeacherInfo from './TeacherInfo';
 import TeacherRatings from './TeacherRatings';
 import TeacherActivities from './TeacherActivities';
 import * as TeachersStore from '../../store/Teachers';
+import TeacherStatistics from './TeacherStatistics';
 
 type Props =
     typeof TeachersStore.actionCreators &
@@ -21,7 +22,7 @@ class TeacherProfile extends React.PureComponent<Props> {
         return (
             <React.Fragment>
                 <TeacherInfo teacherId={this.props.match.params.teacherId}/>
-                <div>TODO: Teacher statistics</div>
+                <TeacherStatistics teacherId={this.props.match.params.teacherId}/>
                 <Button color="primary" tag={Link} to={`/rate-teacher/${this.props.match.params.teacherId}`}>Add a rating</Button>{' '}
                 <TeacherActivities teacherId={this.props.match.params.teacherId}/>
                 <TeacherRatings teacherId={this.props.match.params.teacherId}/>
