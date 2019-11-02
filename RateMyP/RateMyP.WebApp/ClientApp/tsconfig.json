@@ -13,7 +13,6 @@
     "noEmit": true,
     "jsx": "preserve",
     "lib": [
-      "es2015",
       "dom",
       "es2017"
     ],

@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Browse from './components/Browse';
 import Login from './components/Login';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
+import Rate from './components/Rate/Rate';
 import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/RateTeacher';
 import RateCourse from './components/RateCourse';
@@ -20,5 +21,6 @@ export default () => (
         <Route path='/course-profile/:courseId' component={CourseProfile} />
         <Route path='/rate-teacher/:teacherId' component={RateTeacher} />
         <Route path='/rate-course/:coureId' component={RateCourse} />
+        <Route path='/rate/:teacherId' component={Rate} />
     </Layout>
 );

@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
-import { TeacherActivity } from './TeacherActivities';
+import { AppThunkAction } from '..';
+import { TeacherActivity } from '../TeacherActivities';
 import { statement } from '@babel/template';
 
 // -----------------
