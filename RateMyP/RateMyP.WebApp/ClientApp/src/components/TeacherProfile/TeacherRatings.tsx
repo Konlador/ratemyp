@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Table, Spinner } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as RatingsStore from '../../store/Ratings';
+import * as TagsStore from '../../store/Tags';
 import * as TeacherRatingsStore from '../../store/Teacher/TeacherRatings';
 import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
+import './TeacherRatings.css';
 
 interface OwnProps {
     teacherId: string
@@ -48,23 +50,17 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
-                            <th>Courses</th>
-                            <th>Overall mark</th>
-                            <th>Level of difficulty</th>
-                            <th>Would take again</th>
-                            <th>Date created</th>
+                            <th>Course</th>
+                            <th>Rating</th>
                             <th>Comment</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.ratings.ratings.map((rating: RatingsStore.Rating) =>
                             <tr>
-                                <td>{this.getCourseName(rating.CourseId)}</td>
-                                <td>{rating.OverallMark}</td>
-                                <td>{rating.LevelOfDifficulty}</td>
-                                <td>{rating.WouldTakeTeacherAgain ? "Yes" : "No"}</td>
-                                <td>{new Date(rating.DateCreated).toISOString().split('T')[0]}</td>
-                                <td>{rating.Comment}</td>
+                                <td>{this.getCourseName(rating.courseId)}</td>
+                                <td>{this.renderRatingInfo(rating)}</td>
+                                <td>{this.renderComment(rating)}</td>
                             </tr>
                         )}
                     </tbody>
@@ -76,6 +72,32 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     private getCourseName(courseId: string): string {
         const course = this.props.courses.courses.find(x => x.id === courseId);
         return course ? course.name : "Unknown";
+    }
+
+    private renderRatingInfo(rating: RatingsStore.Rating) {
+        return (
+            <div>
+                <p>{new Date(rating.dateCreated).toISOString().split('T')[0]}</p>
+                <p>Overall mark: {rating.overallMark}</p>
+                <p>Level of difficulty: {rating.levelOfDifficulty}</p>
+                <p>Would take again: {rating.wouldTakeTeacherAgain ? "Yes" : "No"}</p>
+            </div>
+        );
+    }
+
+    private renderComment(rating: RatingsStore.Rating) {
+        return (
+            <div>
+                <div className="tagbox">
+                    {rating.tags.map((tag: TagsStore.Tag) =>
+                        <span>
+                            {tag.text}
+                        </span>
+                    )}
+                </div>
+                <p>{rating.comment}</p>
+            </div>
+        );
     }
 }
 

@@ -12,15 +12,15 @@ export interface RatingsState {
 }
 
 export interface Rating {
-    Id: string,
-    TeacherId: string;
-    CourseId: string;
-    OverallMark: number;
-    LevelOfDifficulty: number;
-    WouldTakeTeacherAgain: boolean;
-    DateCreated: Date;
-    Comment: string;
-    Tags: Tag[];
+    id: string,
+    teacherId: string;
+    courseId: string;
+    overallMark: number;
+    levelOfDifficulty: number;
+    wouldTakeTeacherAgain: boolean;
+    dateCreated: Date;
+    comment: string;
+    tags: Tag[];
 }
 
 // -----------------
