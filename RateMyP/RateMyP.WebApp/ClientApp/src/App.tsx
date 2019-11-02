@@ -7,7 +7,7 @@ import Login from './components/Login';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import Rate from './components/Rate/Rate';
 import CourseProfile from './components/CourseProfile/CourseProfile';
-import RateTeacher from './components/RateTeacher';
+import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/RateCourse';
 
 import './custom.css'

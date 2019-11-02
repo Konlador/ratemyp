@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { ApplicationState } from '../store';
-import * as RateStore from '../store/Rate';
+import { ApplicationState } from '../../store';
+import * as RateStore from '../../store/Rate/Rate';
 import { Button, Form, FormGroup, Label, Input, CustomInput, UncontrolledTooltip, UncontrolledAlert } from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import { Multiselect } from 'react-widgets'
 import 'react-widgets/dist/css/react-widgets.css';
-import TeacherActivities from './TeacherProfile/TeacherActivities';
+import RateTeacherActivities from './RateTeacherActivities';
 
-type RateProps =
+type Props =
     RateStore.RateState &
     typeof RateStore.actionCreators &
     RouteComponentProps<{ teacherId: string}>
 
-class Rate extends React.PureComponent<Props> {
+class RateTeacher extends React.PureComponent<Props> {
     public componentDidMount() {
         this.props.requestTags();
     }
@@ -41,7 +41,7 @@ class Rate extends React.PureComponent<Props> {
               <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
             </FormGroup>
             {this.renderTagsMultiselect()}
-            <TeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {value => this.props.setTeacherActivity(value)} />
+            <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {value => this.props.setTeacherActivity(value)} />
             <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
           </Form>
         );
@@ -171,4 +171,4 @@ class Rate extends React.PureComponent<Props> {
 export default connect(
     (state: ApplicationState) => state.rate, // Selects which state properties are merged into the component's props
     RateStore.actionCreators // Selects which action creators are merged into the component's props
-)(Rate as any);
+)(RateTeacher as any);

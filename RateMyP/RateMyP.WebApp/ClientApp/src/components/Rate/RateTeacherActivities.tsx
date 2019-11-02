@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as TeacherActivitiesStore from '../../store/Rate/RateTeacherActivities';
-import * as CoursesStore from '../../store/Courses';
+import * as CoursesStore from '../../store/Rate/RateCourses';
 
 
 interface TeacherActivitiesOwnProps {
@@ -40,7 +40,7 @@ class RateTeacherActivities extends React.PureComponent<TeacherActivitiesProps &
     }
 
     private ensureDataFetched() {
-        this.props.requestTeacherCourses(this.props.teacherId);
+        this.props.requestCourses(this.props.teacherId);
         this.props.requestTeacherActivities(this.props.teacherId);
     }
 
