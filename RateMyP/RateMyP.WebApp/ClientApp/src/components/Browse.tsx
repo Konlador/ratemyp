@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { Table } from 'reactstrap';
+import { Table, Spinner } from 'reactstrap';
 import { ApplicationState } from '../store';
 import * as TeachersStore from '../store/Teachers';
 
@@ -33,7 +32,7 @@ class Browse extends React.PureComponent<Props> {
     private renderTeachersTable() {
         return (
             <div>
-                {this.props.isLoading && <span>Loading...</span>}
+                {this.props.isLoading && <Spinner type="grow" color="success" />}
                 <Table className='table table-striped' aria-labelledby="tabelLabel" hover size="sm">
                     <thead>
                         <tr>

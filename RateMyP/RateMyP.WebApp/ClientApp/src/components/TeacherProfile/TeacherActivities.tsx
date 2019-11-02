@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Table, Spinner } from 'reactstrap';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
 import { LectureType } from '../../store/Teacher/TeacherActivities';
@@ -46,7 +46,7 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
         return (
             <div>
                 <h2>Courses</h2>
-                {this.props.activities.isLoading && <span>Loading...</span>}
+                {this.props.activities.isLoading && <Spinner type="grow" color="success" />}
                 <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
