@@ -11,7 +11,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace RateMyP.WebApp.Controllers
     {
-    [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
@@ -22,6 +21,7 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
+        [Route("api/ratings")]
         [HttpGet]
         public async Task<IActionResult> GetRatings()
             {
@@ -32,6 +32,7 @@ namespace RateMyP.WebApp.Controllers
             return Ok(SerializeRatings(ratings));
             }
 
+        [Route("api/ratings")]
         [HttpGet("teacher={teacherId}")]
         public async Task<IActionResult> GetTeacherRatings(Guid teacherId)
             {
@@ -42,6 +43,7 @@ namespace RateMyP.WebApp.Controllers
             return Ok(SerializeRatings(ratings));
             }
 
+        [Route("api/ratings")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRating(Guid id)
             {
@@ -73,6 +75,7 @@ namespace RateMyP.WebApp.Controllers
             return serializedRating;
             }
 
+        [Route("api/ratings")]
         [HttpPost]
         public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
             {
@@ -84,6 +87,8 @@ namespace RateMyP.WebApp.Controllers
         // POST: api/Ratings
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+
+        [Route("api/ratings/full")]
         [HttpPost]
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {

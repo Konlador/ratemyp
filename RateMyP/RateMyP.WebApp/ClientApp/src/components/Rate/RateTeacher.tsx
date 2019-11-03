@@ -51,7 +51,7 @@ class RateTeacher extends React.PureComponent<Props> {
         this.props.setTeacherId(this.props.match.params.teacherId)
         if(this.props.comment.length >= 30 && this.props.overallMark !== 0 && this.props.tags.length < 6 && this.props.levelOfDifficulty > 0 && this.props.courseId !== ''){
           this.props.sendRating()
-          this.props.history.push(`/profile/${this.props.match.params.teacherId}`)
+          this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
         }
       }
 

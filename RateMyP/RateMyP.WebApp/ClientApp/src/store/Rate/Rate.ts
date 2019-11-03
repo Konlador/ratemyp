@@ -120,7 +120,7 @@ export const actionCreators = {
     sendRating: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const state = getState().rate;
         if(state !== undefined){
-            fetch('api/ratings', {
+            fetch('api/ratings/full', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
