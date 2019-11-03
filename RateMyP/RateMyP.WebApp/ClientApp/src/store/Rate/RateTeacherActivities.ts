@@ -8,7 +8,6 @@ export interface RateTeacherActivitesState {
     teacherId: string | undefined;
     teacherActivites: TeacherActivity[];
     isLoading: boolean;
-    selectedTeacherActivity: TeacherActivity | undefined;
 }
 
 export interface TeacherActivity {
@@ -33,13 +32,9 @@ interface ReceiveTeacherActivitiesAction {
     teacherActivites: TeacherActivity[];
 }
 
-interface SetSelectedTeacherActivityAction {
-    type: 'SET_SELECTED_TEACHER_ACTIVITY';
-    teacherActivity: TeacherActivity;
-}
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeacherActivitiesAction | ReceiveTeacherActivitiesAction | SetSelectedTeacherActivityAction;
+type KnownAction = RequestTeacherActivitiesAction | ReceiveTeacherActivitiesAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -62,15 +57,12 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_TEACHERACTIVITIES', teacherId });
         }
     },
-    setSelectedTeacherActivity: (value: TeacherActivity): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_SELECTED_TEACHER_ACTIVITY', teacherActivity: value });
-    },
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: RateTeacherActivitesState = { teacherId: undefined, teacherActivites: [], isLoading: false, selectedTeacherActivity: undefined };
+const unloadedState: RateTeacherActivitesState = { teacherId: undefined, teacherActivites: [], isLoading: false };
 
 export const reducer: Reducer<RateTeacherActivitesState> = (state: RateTeacherActivitesState | undefined, incomingAction: Action): RateTeacherActivitesState => {
     if (state === undefined)
@@ -83,21 +75,12 @@ export const reducer: Reducer<RateTeacherActivitesState> = (state: RateTeacherAc
                 teacherId: action.teacherId,
                 teacherActivites: state.teacherActivites,
                 isLoading: true,
-                selectedTeacherActivity: state.selectedTeacherActivity
             };
         case 'RECEIVE_TEACHERACTIVITIES':
             return {
                 teacherId: state.teacherId,
                 teacherActivites: action.teacherActivites,
                 isLoading: false,
-                selectedTeacherActivity: state.selectedTeacherActivity
-            };
-        case 'SET_SELECTED_TEACHER_ACTIVITY':
-            return {
-                teacherId: state.teacherId,
-                teacherActivites: state.teacherActivites,
-                isLoading: state.isLoading,
-                selectedTeacherActivity: action.teacherActivity
             };
     }
 

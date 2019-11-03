@@ -1,7 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
-import { TeacherActivity } from '../TeacherActivities';
-import { statement } from '@babel/template';
+import { TeacherActivity } from './RateTeacherActivities';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -14,8 +13,8 @@ export interface RateState {
     Tags: Tag[];
     AllTags: Tag[];
     SubmitButtonClicked: boolean;
-    TeacherActivity: TeacherActivity | undefined;
     TeacherId: string;
+    CourseId: string;
 }
 
 export interface Tag {
@@ -70,18 +69,18 @@ interface SendRatingAction {
     type: 'SEND_RATING'
 }
 
-interface SetTeacherActivityAction {
-    type: 'SET_TEACHER_ACTIVITY'
-    value: TeacherActivity | undefined
-}
-
 interface SetTeacherIdAction {
     type: 'SET_TEACHER_ID'
     value: string
 }
+
+interface SetCourseIdAction {
+    type: 'SET_COURSE_ID'
+    value: string
+}
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type streStates (and not any other arbitrary streState).
-type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ReveiveTagsAction | RequestTagsAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherActivityAction | SetTeacherIdAction;
+type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ReveiveTagsAction | RequestTagsAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherIdAction | SetCourseIdAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -118,12 +117,9 @@ export const actionCreators = {
         dispatch({ type: 'CHANGE_TAGS', tags: value });
     },
     submitReview: () => ({ type: 'SUBMIT_REVIEW' } as SubmitReviewAction),
-    setTeacherActivity: (value: TeacherActivity | undefined): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_TEACHER_ACTIVITY', value: value });
-    },
     sendRating: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const state = getState().rate;
-        if(state != undefined && state.TeacherActivity != undefined){
+        if(state !== undefined){
             fetch('api/ratings', {
                 method: 'POST',
                 headers: {
@@ -131,7 +127,7 @@ export const actionCreators = {
                 },
                 body: JSON.stringify({
                     Comment: state.Comment,
-                    CourseId: state.TeacherActivity.courseId,
+                    CourseId: state.CourseId,
                     LevelOfDifficulty: state.LevelOfDifficulty,
                     OverallMark: state.OverallMark,
                     Tags: state.Tags,
@@ -139,22 +135,20 @@ export const actionCreators = {
                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain
                 })
             }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
-            // console.log(JSON.stringify({
-            //     headers: {
-            //         'Accept': 'application/json',
-            //         'Content-Type': 'application/json',
-            //     },}))
         }
         dispatch({type: 'SEND_RATING'});
     },
     setTeacherId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_TEACHER_ID', value: value });
     },
+    setCourseId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_COURSE_ID', value: value });
+    },
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedState: RateState = { OverallMark: 0, LevelOfDifficulty: 0, WouldTakeTeacherAgain: true, Comment: '', Tags: [], AllTags: [], SubmitButtonClicked: false, TeacherActivity: undefined, TeacherId: ''};
+const unloadedState: RateState = { OverallMark: 0, LevelOfDifficulty: 0, WouldTakeTeacherAgain: true, Comment: '', Tags: [], AllTags: [], SubmitButtonClicked: false, TeacherId: '', CourseId: ''};
 
 export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)
@@ -170,8 +164,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
                     };
         case 'SET_LEVEL_OF_DIFFICULTY':
             return { OverallMark: state.OverallMark,
@@ -181,8 +175,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
                     };
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE':
             return { OverallMark: state.OverallMark,
@@ -192,8 +186,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
                     };
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE':
             return { OverallMark: state.OverallMark,
@@ -203,8 +197,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
                     };
         case 'CHANGE_COMMENT':
             return { OverallMark: state.OverallMark,
@@ -214,8 +208,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
                     };
         case 'REQUEST_TAGS':
             return { OverallMark: state.OverallMark,
@@ -225,8 +219,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.Tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
             };
         case 'RECEIVE_TAGS':
             return { OverallMark: state.OverallMark,
@@ -236,8 +230,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: action.tags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
             };
         case 'CHANGE_TAGS':
             return { OverallMark: state.OverallMark,
@@ -247,8 +241,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: action.tags,
                      AllTags: state.AllTags, 
                      SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
             };
         case 'SUBMIT_REVIEW':
             return { OverallMark: state.OverallMark,
@@ -258,20 +252,9 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                      Tags: state.Tags,
                      AllTags: state.AllTags, 
                      SubmitButtonClicked: true,
-                     TeacherActivity: state.TeacherActivity,
-                     TeacherId: state.TeacherId
+                     TeacherId: state.TeacherId,
+                     CourseId: state.CourseId
             };
-        case 'SET_TEACHER_ACTIVITY':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.AllTags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherActivity: action.value,
-                     TeacherId: state.TeacherId
-            };   
             case 'SET_TEACHER_ID':
                 return { OverallMark: state.OverallMark,
                          LevelOfDifficulty: state.LevelOfDifficulty,
@@ -280,8 +263,8 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                          Tags: state.Tags,
                          AllTags: state.AllTags, 
                          SubmitButtonClicked: state.SubmitButtonClicked,
-                         TeacherActivity: state.TeacherActivity,
-                         TeacherId: action.value
+                         TeacherId: action.value,
+                         CourseId: state.CourseId
                 };  
             case 'SEND_RATING':
                 return { OverallMark: state.OverallMark,
@@ -291,9 +274,20 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                          Tags: state.Tags,
                          AllTags: state.AllTags, 
                          SubmitButtonClicked: state.SubmitButtonClicked,
-                         TeacherActivity: state.TeacherActivity,
-                         TeacherId: state.TeacherId
-                }    
+                         TeacherId: state.TeacherId,
+                         CourseId: state.CourseId
+                };
+            case 'SET_COURSE_ID':
+                return { OverallMark: state.OverallMark,
+                         LevelOfDifficulty: state.LevelOfDifficulty,
+                         WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
+                         Comment: state.Comment,
+                         Tags: state.Tags,
+                         AllTags: state.AllTags, 
+                         SubmitButtonClicked: state.SubmitButtonClicked,
+                         TeacherId: state.TeacherId,
+                         CourseId: action.value
+                };  
         default:
                 return state;
     }

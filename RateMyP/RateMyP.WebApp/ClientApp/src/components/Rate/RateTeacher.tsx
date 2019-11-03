@@ -41,15 +41,16 @@ class RateTeacher extends React.PureComponent<Props> {
               <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
             </FormGroup>
             {this.renderTagsMultiselect()}
-            <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {value => this.props.setTeacherActivity(value)} />
+            <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {(value: string) => this.props.setCourseId(value)} />
             <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
+            {console.log(this.props.CourseId)}
           </Form>
         );
       }
     
       private onSubmitButtonPush() {
         this.props.setTeacherId(this.props.match.params.teacherId)
-        if(this.props.Comment.length >= 30 && this.props.OverallMark != 0 && this.props.Tags.length < 6 && this.props.LevelOfDifficulty > 0 && this.props.TeacherActivity != undefined){
+        if(this.props.Comment.length >= 30 && this.props.OverallMark !== 0 && this.props.Tags.length < 6 && this.props.LevelOfDifficulty > 0 && this.props.CourseId !== ''){
           this.props.sendRating()
           this.props.history.push(`/profile/${this.props.match.params.teacherId}`)
         }
@@ -64,7 +65,7 @@ class RateTeacher extends React.PureComponent<Props> {
                   name="rate1" 
                   starCount={5}
                   value={this.props.OverallMark}
-                  renderStarIcon={() => <span>♡</span>}
+                  renderStarIcon={() => <span>☭</span>}
                   starColor="#f00"
                   onStarClick={event => this.props.setOverallMark(event)}
                 />
@@ -152,16 +153,16 @@ class RateTeacher extends React.PureComponent<Props> {
             <UncontrolledAlert color="info" fade={false} isOpen = {this.props.Comment.length < minCommentLength && this.props.SubmitButtonClicked} toggle = {false}>
               Comment length too short. It must be at least {minCommentLength} characters long.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.OverallMark == 0 && this.props.SubmitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.OverallMark === 0 && this.props.SubmitButtonClicked} toggle = {false}>
               You must select a rating.
             </UncontrolledAlert>
             <UncontrolledAlert color="info" fade={false} isOpen = {this.props.Tags.length > maxTagsCount && this.props.SubmitButtonClicked} toggle = {false}>
               You cannot select more than {maxTagsCount} tags.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.LevelOfDifficulty == 0 && this.props.SubmitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.LevelOfDifficulty === 0 && this.props.SubmitButtonClicked} toggle = {false}>
               You must select a difficulty.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.TeacherActivity == undefined && this.props.SubmitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.CourseId === '' && this.props.SubmitButtonClicked} toggle = {false}>
               You must select an activity.
             </UncontrolledAlert>
           </div>
