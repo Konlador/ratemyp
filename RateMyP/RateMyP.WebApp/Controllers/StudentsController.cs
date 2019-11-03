@@ -26,12 +26,16 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> GetStudent(Guid id)
+        public async Task<ActionResult<Student>> GetStudent(string id)
             {
             var student = await m_context.Students.FindAsync(id);
 
             if (student == null)
-                return NotFound();
+                {
+                student = new Student { Id = id };
+                m_context.Students.Add(student);
+                await m_context.SaveChangesAsync();
+                }
 
             return student;
             }
@@ -46,11 +50,6 @@ namespace RateMyP.WebApp.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.Id }, student);
-            }
-
-        private bool StudentExists(Guid id)
-            {
-            return m_context.Students.Any(e => e.Id == id);
             }
         }
     }

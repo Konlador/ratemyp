@@ -23,18 +23,6 @@ namespace RateMyP.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RatingLikes",
-                columns: table => new
-                {
-                    RatingId = table.Column<Guid>(nullable: false),
-                    StudentId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RatingLikes", x => new { x.RatingId, x.StudentId });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ratings",
                 columns: table => new
                 {
@@ -45,7 +33,8 @@ namespace RateMyP.WebApp.Migrations
                     LevelOfDifficulty = table.Column<int>(nullable: false),
                     WouldTakeTeacherAgain = table.Column<bool>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
-                    Comment = table.Column<string>(nullable: true)
+                    Comment = table.Column<string>(nullable: true),
+                    StudentId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,15 +42,24 @@ namespace RateMyP.WebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RatingThumbs",
+                columns: table => new
+                {
+                    RatingId = table.Column<Guid>(nullable: false),
+                    StudentId = table.Column<string>(nullable: false),
+                    ThumbsUp = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RatingThumbs", x => new { x.RatingId, x.StudentId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Studies = table.Column<string>(nullable: true),
-                    Faculty = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    Studies = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -158,10 +156,10 @@ namespace RateMyP.WebApp.Migrations
                 name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "RatingLikes");
+                name: "RatingTags");
 
             migrationBuilder.DropTable(
-                name: "RatingTags");
+                name: "RatingThumbs");
 
             migrationBuilder.DropTable(
                 name: "Students");

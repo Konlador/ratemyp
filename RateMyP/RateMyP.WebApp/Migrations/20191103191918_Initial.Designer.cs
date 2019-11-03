@@ -10,7 +10,7 @@ using RateMyP.WebApp;
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    [Migration("20191029100759_Initial")]
+    [Migration("20191103191918_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,9 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<int>("OverallMark")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
@@ -74,19 +77,6 @@ namespace RateMyP.WebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("RateMyP.WebApp.Models.RatingLike", b =>
-                {
-                    b.Property<Guid>("RatingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("RatingId", "StudentId");
-
-                    b.ToTable("RatingLikes");
                 });
 
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>
@@ -104,23 +94,26 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("RatingTags");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
+            modelBuilder.Entity("RateMyP.WebApp.Models.RatingThumb", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("RatingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Faculty")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("ThumbsUp")
+                        .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("RatingId", "StudentId");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("RatingThumbs");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Studies")
                         .HasColumnType("nvarchar(max)");
