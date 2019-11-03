@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route } from 'react-router';
 import Layout from './components/Layout';
 import Home from './components/Home';
-import Browse from './components/Browse';
+import Browse from './components/Browse/Browse';
 import Student from './components/Student';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import CourseProfile from './components/CourseProfile/CourseProfile';
@@ -18,7 +18,7 @@ firebase.initializeApp({
 });
 
 class App extends React.Component<{}>{
-    public render(){
+    public render() {
         return (
             <div>
                 <Layout>

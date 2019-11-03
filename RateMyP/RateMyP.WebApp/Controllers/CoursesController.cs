@@ -36,14 +36,20 @@ namespace RateMyP.WebApp.Controllers
             return course;
             }
 
+        [HttpGet("startIndex={startIndex}")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex)
+            {
+            return await m_context.Courses.Skip(startIndex).Take(20).ToListAsync();
+            }
+
         [HttpGet("teacher={teacherId}")]
         public async Task<ActionResult<IEnumerable<Course>>> GetTeacherCourses(Guid teacherId)
             {
             var courseIds = await m_context.TeacherActivities
-                                           .Where(x => x.TeacherId.Equals(teacherId))
-                                           .Select(x => x.CourseId)
-                                           .Distinct()
-                                           .ToListAsync();
+                .Where(x => x.TeacherId.Equals(teacherId))
+                .Select(x => x.CourseId)
+                .Distinct()
+                .ToListAsync();
             var courses = await m_context.Courses.Where(r => courseIds.Contains(r.Id)).ToListAsync();
             return courses;
             }
