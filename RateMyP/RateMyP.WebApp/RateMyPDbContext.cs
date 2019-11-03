@@ -10,7 +10,7 @@ namespace RateMyP.WebApp
         public DbSet<Course> Courses { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<RatingLike> RatingLikes { get; set; }
+        public DbSet<RatingThumb> RatingThumbs { get; set; }
         public DbSet<RatingTag> RatingTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
@@ -30,7 +30,7 @@ namespace RateMyP.WebApp
 
         protected override void OnModelCreating(ModelBuilder builder)
             {
-            builder.Entity<RatingLike>().HasKey(table => new { table.RatingId, table.StudentId });
+            builder.Entity<RatingThumb>().HasKey(table => new { table.RatingId, table.StudentId });
             builder.Entity<RatingTag>().HasKey(table => new { table.RatingId, table.TagId });
             }
         }

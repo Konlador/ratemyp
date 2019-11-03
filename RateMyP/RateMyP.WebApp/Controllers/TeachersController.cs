@@ -49,7 +49,7 @@ namespace RateMyP.WebApp.Controllers
             return teacher;
             }
 
-        [HttpGet("search/{searchString}")]
+        [HttpGet("search={searchString}")]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetSearchedTeachers(string searchString)
             {
             var search = searchString.ToLower().Denationalize();
@@ -59,6 +59,18 @@ namespace RateMyP.WebApp.Controllers
                                                      .Denationalize()
                                                      .Contains(search))
                                          .ToListAsync();
+            }
+
+        [HttpGet("course={courseId}")]
+        public async Task<ActionResult<IEnumerable<Teacher>>> GetCourseTeachers(Guid courseId)
+            {
+            var teacherIds = await m_context.TeacherActivities
+                                           .Where(x => x.CourseId.Equals(courseId))
+                                           .Select(x => x.TeacherId)
+                                           .Distinct()
+                                           .ToListAsync();
+            var teachers = await m_context.Teachers.Where(x => teacherIds.Contains(x.Id)).ToListAsync();
+            return teachers;
             }
 
         private bool TeacherExists(Guid id)

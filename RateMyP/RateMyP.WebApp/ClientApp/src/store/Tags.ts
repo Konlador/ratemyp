@@ -39,7 +39,10 @@ export const actionCreators = {
     requestTags: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.tags && appState.tags.isLoading === false && appState.tags.tags.length === 0) {
+        if (appState &&
+            appState.tags &&
+            appState.tags.isLoading === false &&
+            appState.tags.tags.length === 0) {
             fetch(`api/tags`)
                 .then(response => response.json() as Promise<Tag[]>)
                 .then(data => {

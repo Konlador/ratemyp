@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -61,10 +63,22 @@ namespace RateMyP.WebApp.Controllers
 
         private static JObject SerializeRating(Rating rating)
             {
-            var serializedRating = JObject.FromObject(rating);
-            var serializedTagsList = rating.Tags.Select(ratingTag => JObject.FromObject(ratingTag.Tag)).ToList();
-            serializedRating["Tags"] = JArray.FromObject(serializedTagsList);
+            var serializer = new JsonSerializer
+                {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+            var serializedRating = JObject.FromObject(rating, serializer);
+            var serializedTagsList = rating.Tags.Select(ratingTag => JObject.FromObject(ratingTag.Tag, serializer)).ToList();
+            serializedRating["tags"] = JArray.FromObject(serializedTagsList, serializer);
             return serializedRating;
+            }
+
+        [HttpPost]
+        public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
+            {
+            m_context.RatingThumbs.Add(ratingThumb);
+            await m_context.SaveChangesAsync();
+            return Created("RatingThumb", ratingThumb);
             }
 
         // POST: api/Ratings

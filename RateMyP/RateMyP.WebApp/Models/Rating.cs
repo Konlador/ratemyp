@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.WebApp.Models
     {
@@ -8,7 +9,9 @@ namespace RateMyP.WebApp.Models
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
         public Guid CourseId { get; set; }
+        [Range(1, 5, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int OverallMark { get; set; }
+        [Range(1, 5, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int LevelOfDifficulty { get; set; }
         public bool WouldTakeTeacherAgain { get; set; }
         public List<RatingTag> Tags { get; set; }

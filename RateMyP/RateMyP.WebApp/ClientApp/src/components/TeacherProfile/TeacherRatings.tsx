@@ -1,24 +1,37 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
+import { Table, Spinner } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as RatingsStore from '../../store/Ratings';
+import * as TagsStore from '../../store/Tags';
+import * as TeacherRatingsStore from '../../store/Teacher/TeacherRatings';
+import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
+import './TeacherRatings.css';
 
-interface TeacherRatingsOwnProps {
+interface OwnProps {
     teacherId: string
 };
 
-type TeacherRatingsProps =
-    RatingsStore.RatingsState &
-    typeof RatingsStore.actionCreators;
+type Props =
+    {
+    ratings: TeacherRatingsStore.TeacherRatingsState,
+    courses: TeacherCoursesStore.TeacherCoursesState
+    } &
+    typeof TeacherRatingsStore.actionCreators &
+    typeof TeacherCoursesStore.actionCreators;
 
-class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRatingsOwnProps> {
+class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
 
     public componentDidUpdate() {
         this.ensureDataFetched();
+    }
+
+    private ensureDataFetched() {
+        this.props.requestTeacherCourses(this.props.teacherId);
+        this.props.requestTeacherRatings(this.props.teacherId);
     }
 
     public render() {
@@ -29,35 +42,25 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
         );
     }
 
-    private ensureDataFetched() {
-        this.props.requestTeacherRatings(this.props.teacherId);
-    }
-
     private renderTeacherInfo() {
         return (
             <div>
-                <h1>Ratings</h1>
-                {this.props.isLoading && <span>Loading...</span>}
+                <h2>Ratings</h2>
+                {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
-                            <th>Courses</th>
-                            <th>Overall mark</th>
-                            <th>Level of difficulty</th>
-                            <th>Would take again</th>
-                            <th>Date created</th>
+                            <th>Course</th>
+                            <th>Rating</th>
                             <th>Comment</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.ratings.map((rating: RatingsStore.Rating) =>
+                        {this.props.ratings.ratings.map((rating: RatingsStore.Rating) =>
                             <tr>
-                                <td>{rating.CourseId}</td>
-                                <td>{rating.OverallMark}</td>
-                                <td>{rating.LevelOfDifficulty}</td>
-                                <td>{rating.WouldTakeTeacherAgain}</td>
-                                <td>{rating.DateCreated}</td>
-                                <td>{rating.Comment}</td>
+                                <td>{this.getCourseName(rating.courseId)}</td>
+                                <td>{this.renderRatingInfo(rating)}</td>
+                                <td>{this.renderComment(rating)}</td>
                             </tr>
                         )}
                     </tbody>
@@ -65,17 +68,51 @@ class TeacherRatings extends React.PureComponent<TeacherRatingsProps & TeacherRa
             </div>
         );
     }
+
+    private getCourseName(courseId: string): string {
+        const course = this.props.courses.courses.find(x => x.id === courseId);
+        return course ? course.name : "Unknown";
+    }
+
+    private renderRatingInfo(rating: RatingsStore.Rating) {
+        return (
+            <div>
+                <p>{new Date(rating.dateCreated).toISOString().split('T')[0]}</p>
+                <p>Overall mark: {rating.overallMark}</p>
+                <p>Level of difficulty: {rating.levelOfDifficulty}</p>
+                <p>Would take again: {rating.wouldTakeTeacherAgain ? "Yes" : "No"}</p>
+            </div>
+        );
+    }
+
+    private renderComment(rating: RatingsStore.Rating) {
+        return (
+            <div>
+                <div className="tagbox">
+                    {rating.tags.map((tag: TagsStore.Tag) =>
+                        <span>
+                            {tag.text}
+                        </span>
+                    )}
+                </div>
+                <p>{rating.comment}</p>
+            </div>
+        );
+    }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: TeacherRatingsOwnProps) {
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
-        ...state.ratings,
+        ratings: state.ratings,
+        courses: state.teacherCourses,
         teacherId: ownProps.teacherId
     }
 };
 
-export default connect(
-    mapStateToProps, // Selects which state properties are merged into the component's props
-    RatingsStore.actionCreators // Selects which action creators are merged into the component's props
-)(TeacherRatings as any);
+const actions = {
+    ...TeacherRatingsStore.actionCreators,
+    ...TeacherCoursesStore.actionCreators
+}
+
+export default connect(mapStateToProps, actions)(TeacherRatings as any);
 

@@ -1,26 +1,14 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
-import { Tag } from './Tags';
+import { AppThunkAction } from '..';
+import { Rating } from "../Ratings";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RatingsState {
+export interface TeacherRatingsState {
     isLoading: boolean;
     ratings: Rating[];
     teacherId: string | undefined;
-}
-
-export interface Rating {
-    id: string,
-    teacherId: string;
-    courseId: string;
-    overallMark: number;
-    levelOfDifficulty: number;
-    wouldTakeTeacherAgain: boolean;
-    dateCreated: Date;
-    comment: string;
-    tags: Tag[];
 }
 
 // -----------------
@@ -49,9 +37,9 @@ export const actionCreators = {
     requestTeacherRatings: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
-            appState.ratings &&
-            appState.ratings.isLoading === false &&
-            appState.ratings.teacherId !== teacherId) {
+            appState.teacherRatings &&
+            appState.teacherRatings.isLoading === false &&
+            appState.teacherRatings.teacherId !== teacherId) {
             fetch(`api/ratings/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<Rating[]>)
                 .then(data => {
@@ -66,9 +54,9 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: RatingsState = { ratings: [], isLoading: false, teacherId: undefined };
+const unloadedState: TeacherRatingsState = { ratings: [], isLoading: false, teacherId: undefined };
 
-export const reducer: Reducer<RatingsState> = (state: RatingsState | undefined, incomingAction: Action): RatingsState => {
+export const reducer: Reducer<TeacherRatingsState> = (state: TeacherRatingsState | undefined, incomingAction: Action): TeacherRatingsState => {
     if (state === undefined)
         return unloadedState;
 

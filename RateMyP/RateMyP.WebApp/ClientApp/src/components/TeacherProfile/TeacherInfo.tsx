@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as TeachersStore from '../../store/Teachers';
 
-interface TeacherInfoOwnProps {
+interface OwnProps {
     teacherId: string
 };
 
-type TeacherInfoProps =
+type Props =
     TeachersStore.TeachersState &
     typeof TeachersStore.actionCreators;
 
-class TeacherInfo extends React.PureComponent<TeacherInfoProps & TeacherInfoOwnProps> {
+class TeacherInfo extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -39,9 +39,13 @@ class TeacherInfo extends React.PureComponent<TeacherInfoProps & TeacherInfoOwnP
 
         return (
             <React.Fragment>
-                <h1>
-                    {`${teacher.firstName} ${teacher.lastName}`}
-                </h1>
+                <div>
+                    Teacher
+                    <h1>
+                        {`${teacher.firstName} ${teacher.lastName}`}
+                    </h1>
+                </div>
+                
                 <p>
                     <p><strong>Faculty: </strong>{teacher.faculty}</p>
                     <p><strong>Rank: </strong>{teacher.rank}</p>
@@ -54,7 +58,7 @@ class TeacherInfo extends React.PureComponent<TeacherInfoProps & TeacherInfoOwnP
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: TeacherInfoOwnProps) {
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         ...state.teachers,
         teacherId: ownProps.teacherId

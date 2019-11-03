@@ -26,5 +26,13 @@ namespace RateMyP.WebApp.Controllers
                                   .Where(x => x.TeacherId.Equals(teacherId))
                                   .ToListAsync();
             }
+
+        [HttpGet("course={courseId}")]
+        public async Task<ActionResult<IEnumerable<TeacherActivity>>> GetCourseTeacherActivities(Guid courseId)
+            {
+            return await m_context.TeacherActivities
+                                  .Where(x => x.CourseId.Equals(courseId))
+                                  .ToListAsync();
+            }
         }
     }

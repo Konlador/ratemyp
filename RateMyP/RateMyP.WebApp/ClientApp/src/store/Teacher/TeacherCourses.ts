@@ -1,64 +1,52 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
-import { Tag } from './Tags';
+import { AppThunkAction } from '..';
+import { Course } from "../Courses";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RatingsState {
+export interface TeacherCoursesState {
     isLoading: boolean;
-    ratings: Rating[];
+    courses: Course[];
     teacherId: string | undefined;
-}
-
-export interface Rating {
-    id: string,
-    teacherId: string;
-    courseId: string;
-    overallMark: number;
-    levelOfDifficulty: number;
-    wouldTakeTeacherAgain: boolean;
-    dateCreated: Date;
-    comment: string;
-    tags: Tag[];
 }
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestTeacherRatingsAction {
-    type: 'REQUEST_TEACHER_RATINGS';
+interface RequestTeacherCoursesAction {
+    type: 'REQUEST_TEACHER_COURSES';
     teacherId: string;
 }
 
-interface ReceiveTeacherRatingsAction {
-    type: 'RECEIVE_TEACHER_RATINGS';
-    ratings: Rating[];
+interface ReceiveTeacherCoursesAction {
+    type: 'RECEIVE_TEACHER_COURSES';
+    courses: Course[];
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeacherRatingsAction | ReceiveTeacherRatingsAction;
+type KnownAction = RequestTeacherCoursesAction | ReceiveTeacherCoursesAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeacherRatings: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestTeacherCourses: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
-            appState.ratings &&
-            appState.ratings.isLoading === false &&
-            appState.ratings.teacherId !== teacherId) {
-            fetch(`api/ratings/teacher=${teacherId}`)
-                .then(response => response.json() as Promise<Rating[]>)
+            appState.teacherCourses &&
+            appState.teacherCourses.isLoading === false &&
+            appState.teacherCourses.teacherId !== teacherId) {
+            fetch(`api/courses/teacher=${teacherId}`)
+                .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHER_RATINGS', ratings: data });
+                    dispatch({ type: 'RECEIVE_TEACHER_COURSES', courses: data });
                 });
 
-            dispatch({ type: 'REQUEST_TEACHER_RATINGS', teacherId: teacherId });
+            dispatch({ type: 'REQUEST_TEACHER_COURSES', teacherId });
         }
     }
 };
@@ -66,23 +54,23 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: RatingsState = { ratings: [], isLoading: false, teacherId: undefined };
+const unloadedState: TeacherCoursesState = { courses: [], isLoading: false, teacherId: undefined };
 
-export const reducer: Reducer<RatingsState> = (state: RatingsState | undefined, incomingAction: Action): RatingsState => {
+export const reducer: Reducer<TeacherCoursesState> = (state: TeacherCoursesState | undefined, incomingAction: Action): TeacherCoursesState => {
     if (state === undefined)
         return unloadedState;
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'REQUEST_TEACHER_RATINGS':
+        case 'REQUEST_TEACHER_COURSES':
             return {
-                ratings: state.ratings,
+                courses: state.courses,
                 isLoading: true,
                 teacherId: action.teacherId
             };
-        case 'RECEIVE_TEACHER_RATINGS':
+        case 'RECEIVE_TEACHER_COURSES':
             return {
-                ratings: action.ratings,
+                courses: action.courses,
                 isLoading: false,
                 teacherId: state.teacherId
             };
