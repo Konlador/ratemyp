@@ -73,7 +73,7 @@ namespace RateMyP.WebApp.Controllers
             return serializedRating;
             }
 
-        [HttpPost]
+        [HttpPost("thumb")]
         public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
             {
             m_context.RatingThumbs.Add(ratingThumb);
@@ -85,21 +85,20 @@ namespace RateMyP.WebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
 
-        [HttpPost("full")]
+        [HttpPost]
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
-            var Tags = data["Tags"].ToObject<Tag[]>();
+            var tags = data["tags"].ToObject<Tag[]>();
             var ratingTags = new List<RatingTag>();
-            var Id = Guid.NewGuid();
-            var allTags = await m_context.Tags.ToListAsync();
-            foreach (var Tag in Tags)
+            var id = Guid.NewGuid();
+            foreach (var localTag in tags)
                 {
                 var ratingTag = new RatingTag
                     {
-                    RatingId = Id,
-                    TagId = Tag.Id
+                    RatingId = id,
+                    TagId = localTag.Id
                 };
-                if (allTags.Where(p => p.Id.Equals(Tag.Id)).Any())
+                if (await m_context.Tags.AnyAsync(tag => tag.Id.Equals(localTag.Id)))
                     {
                     ratingTags.Add(ratingTag);
                     }
@@ -111,15 +110,15 @@ namespace RateMyP.WebApp.Controllers
 
             var rating = new Rating
                 {
-                Comment = data["Comment"].ToObject<string>(),
-                CourseId = data["CourseId"].ToObject<Guid>(),
+                Comment = data["comment"].ToObject<string>(),
+                CourseId = data["courseId"].ToObject<Guid>(),
                 DateCreated = DateTime.Now,
-                Id = Id,
-                LevelOfDifficulty = data["LevelOfDifficulty"].ToObject<int>(),
-                OverallMark = data["OverallMark"].ToObject<int>(),
+                Id = id,
+                LevelOfDifficulty = data["levelOfDifficulty"].ToObject<int>(),
+                OverallMark = data["overallMark"].ToObject<int>(),
                 Tags = ratingTags,
-                TeacherId = data["TeacherId"].ToObject<Guid>(),
-                WouldTakeTeacherAgain = data["WouldTakeTeacherAgain"].ToObject<Boolean>()
+                TeacherId = data["teacherId"].ToObject<Guid>(),
+                WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>()
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
