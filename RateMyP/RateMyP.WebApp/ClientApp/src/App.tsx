@@ -6,7 +6,7 @@ import Browse from './components/Browse';
 import Student from './components/Student';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import CourseProfile from './components/CourseProfile/CourseProfile';
-import RateTeacher from './components/RateTeacher';
+import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/RateCourse';
 import firebase from "firebase";
 
