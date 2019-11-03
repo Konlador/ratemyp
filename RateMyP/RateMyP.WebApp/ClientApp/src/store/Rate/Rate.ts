@@ -6,15 +6,15 @@ import { TeacherActivity } from './RateTeacherActivities';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface RateState {
-    OverallMark: number;
-    LevelOfDifficulty: number;
-    WouldTakeTeacherAgain: boolean;
-    Comment: string;
-    Tags: Tag[];
-    AllTags: Tag[];
-    SubmitButtonClicked: boolean;
-    TeacherId: string;
-    CourseId: string;
+    overallMark: number;
+    levelOfDifficulty: number;
+    wouldTakeTeacherAgain: boolean;
+    comment: string;
+    tags: Tag[];
+    allTags: Tag[];
+    submitButtonClicked: boolean;
+    teacherId: string;
+    courseId: string;
 }
 
 export interface Tag {
@@ -103,7 +103,7 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.rate &&
-            appState.rate.AllTags.length === 0) {
+            appState.rate.allTags.length === 0) {
             fetch(`api/tags`)
                 .then(response => response.json() as Promise<Tag[]>)
                 .then(data => {
@@ -126,13 +126,13 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    Comment: state.Comment,
-                    CourseId: state.CourseId,
-                    LevelOfDifficulty: state.LevelOfDifficulty,
-                    OverallMark: state.OverallMark,
-                    Tags: state.Tags,
-                    TeacherId: state.TeacherId,
-                    WouldTakeTeacherAgain: state.WouldTakeTeacherAgain
+                    Comment: state.comment,
+                    CourseId: state.courseId,
+                    LevelOfDifficulty: state.levelOfDifficulty,
+                    OverallMark: state.overallMark,
+                    Tags: state.tags,
+                    TeacherId: state.teacherId,
+                    WouldTakeTeacherAgain: state.wouldTakeTeacherAgain
                 })
             }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
         }
@@ -148,7 +148,7 @@ export const actionCreators = {
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedState: RateState = { OverallMark: 0, LevelOfDifficulty: 0, WouldTakeTeacherAgain: true, Comment: '', Tags: [], AllTags: [], SubmitButtonClicked: false, TeacherId: '', CourseId: ''};
+const unloadedState: RateState = { overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: true, comment: '', tags: [], allTags: [], submitButtonClicked: false, teacherId: '', courseId: ''};
 
 export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)
@@ -157,136 +157,136 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
     const action = incomeStateAction as KnownAction;
     switch (action.type) {
         case 'SET_OVERALL_MARK':
-            return { OverallMark: action.value,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: action.value,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
                     };
         case 'SET_LEVEL_OF_DIFFICULTY':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: action.value,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: action.value,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
                     };
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: true,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: true,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
                     };
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: false,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: false,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
                     };
         case 'CHANGE_COMMENT':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: action.value,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: action.value,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
                     };
         case 'REQUEST_TAGS':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.Tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
             };
         case 'RECEIVE_TAGS':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: action.tags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: action.tags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
             };
         case 'CHANGE_TAGS':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: action.tags,
-                     AllTags: state.AllTags, 
-                     SubmitButtonClicked: state.SubmitButtonClicked,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: action.tags,
+                     allTags: state.allTags, 
+                     submitButtonClicked: state.submitButtonClicked,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
             };
         case 'SUBMIT_REVIEW':
-            return { OverallMark: state.OverallMark,
-                     LevelOfDifficulty: state.LevelOfDifficulty,
-                     WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                     Comment: state.Comment,
-                     Tags: state.Tags,
-                     AllTags: state.AllTags, 
-                     SubmitButtonClicked: true,
-                     TeacherId: state.TeacherId,
-                     CourseId: state.CourseId
+            return { overallMark: state.overallMark,
+                     levelOfDifficulty: state.levelOfDifficulty,
+                     wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                     comment: state.comment,
+                     tags: state.tags,
+                     allTags: state.allTags, 
+                     submitButtonClicked: true,
+                     teacherId: state.teacherId,
+                     courseId: state.courseId
             };
             case 'SET_TEACHER_ID':
-                return { OverallMark: state.OverallMark,
-                         LevelOfDifficulty: state.LevelOfDifficulty,
-                         WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                         Comment: state.Comment,
-                         Tags: state.Tags,
-                         AllTags: state.AllTags, 
-                         SubmitButtonClicked: state.SubmitButtonClicked,
-                         TeacherId: action.value,
-                         CourseId: state.CourseId
+                return { overallMark: state.overallMark,
+                         levelOfDifficulty: state.levelOfDifficulty,
+                         wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                         comment: state.comment,
+                         tags: state.tags,
+                         allTags: state.allTags, 
+                         submitButtonClicked: state.submitButtonClicked,
+                         teacherId: action.value,
+                         courseId: state.courseId
                 };  
             case 'SEND_RATING':
-                return { OverallMark: state.OverallMark,
-                         LevelOfDifficulty: state.LevelOfDifficulty,
-                         WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                         Comment: state.Comment,
-                         Tags: state.Tags,
-                         AllTags: state.AllTags, 
-                         SubmitButtonClicked: state.SubmitButtonClicked,
-                         TeacherId: state.TeacherId,
-                         CourseId: state.CourseId
+                return { overallMark: state.overallMark,
+                         levelOfDifficulty: state.levelOfDifficulty,
+                         wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                         comment: state.comment,
+                         tags: state.tags,
+                         allTags: state.allTags, 
+                         submitButtonClicked: state.submitButtonClicked,
+                         teacherId: state.teacherId,
+                         courseId: state.courseId
                 };
             case 'SET_COURSE_ID':
-                return { OverallMark: state.OverallMark,
-                         LevelOfDifficulty: state.LevelOfDifficulty,
-                         WouldTakeTeacherAgain: state.WouldTakeTeacherAgain,
-                         Comment: state.Comment,
-                         Tags: state.Tags,
-                         AllTags: state.AllTags, 
-                         SubmitButtonClicked: state.SubmitButtonClicked,
-                         TeacherId: state.TeacherId,
-                         CourseId: action.value
+                return { overallMark: state.overallMark,
+                         levelOfDifficulty: state.levelOfDifficulty,
+                         wouldTakeTeacherAgain: state.wouldTakeTeacherAgain,
+                         comment: state.comment,
+                         tags: state.tags,
+                         allTags: state.allTags, 
+                         submitButtonClicked: state.submitButtonClicked,
+                         teacherId: state.teacherId,
+                         courseId: action.value
                 };  
         default:
                 return state;
