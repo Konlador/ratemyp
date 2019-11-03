@@ -17,12 +17,14 @@ namespace RateMyP.WebApp.Models
         public List<RatingTag> Tags { get; set; }
         public DateTime DateCreated { get; set; }
         public string Comment { get; set; }
+        public string? StudentId { get; set; }
 
         public bool Equals(Rating other) =>
             other != null &&
             other.Id.Equals(Id) &&
             other.TeacherId.Equals(TeacherId) &&
             other.CourseId.Equals(CourseId) &&
+            other.StudentId.Equals(StudentId) &&
             other.OverallMark.Equals(OverallMark) &&
             other.LevelOfDifficulty.Equals(LevelOfDifficulty) &&
             other.WouldTakeTeacherAgain.Equals(WouldTakeTeacherAgain) &&

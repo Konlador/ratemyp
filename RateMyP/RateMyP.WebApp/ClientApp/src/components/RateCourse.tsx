@@ -31,6 +31,6 @@ class Rate extends React.PureComponent<Props> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.ratings, // Selects which state properties are merged into the component's props
-    RatingsStore.actionCreators // Selects which action creators are merged into the component's props
+    (state: ApplicationState) => state.ratings,
+    RatingsStore.actionCreators
 )(Rate as any);

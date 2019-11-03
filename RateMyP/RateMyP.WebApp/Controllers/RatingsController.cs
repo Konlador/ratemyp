@@ -73,7 +73,7 @@ namespace RateMyP.WebApp.Controllers
             return serializedRating;
             }
 
-        [HttpPost]
+        [HttpPost("thumb")]
         public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
             {
             m_context.RatingThumbs.Add(ratingThumb);
@@ -81,12 +81,38 @@ namespace RateMyP.WebApp.Controllers
             return Created("RatingThumb", ratingThumb);
             }
 
-        // POST: api/Ratings
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Rating>> PostRating(Rating rating)
+        public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
+            var ratingId = Guid.NewGuid();
+            var ratingTags = new List<RatingTag>();
+            var tags = JsonConvert.DeserializeObject<List<Tag>>(data["tags"].ToString());
+
+            foreach (var tag in tags)
+                {
+                if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
+                    ratingTags.Add(new RatingTag
+                                    {
+                                    RatingId = ratingId,
+                                    TagId = tag.Id
+                                    }
+                    );
+                else
+                    return NotFound("Tag not found");
+                }
+
+            var rating = new Rating
+                {
+                Comment = data["comment"].ToObject<string>(),
+                CourseId = data["courseId"].ToObject<Guid>(),
+                DateCreated = DateTime.Now,
+                Id = ratingId,
+                LevelOfDifficulty = data["levelOfDifficulty"].ToObject<int>(),
+                OverallMark = data["overallMark"].ToObject<int>(),
+                Tags = ratingTags,
+                TeacherId = data["teacherId"].ToObject<Guid>(),
+                WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>()
+                };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 

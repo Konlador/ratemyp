@@ -13,8 +13,8 @@
     "noEmit": true,
     "jsx": "preserve",
     "lib": [
-      "es2015",
-      "dom"
+      "dom",
+      "es2017"
     ],
     "skipLibCheck": false
   },
