@@ -5,7 +5,7 @@ namespace RateMyP.WebApp.Models
     public class RatingThumb : IEquatable<RatingThumb>
         {
         public Guid RatingId { get; set; }
-        public Guid StudentId { get; set; }
+        public string StudentId { get; set; }
         public bool ThumbsUp { get; set; }
 
         public bool Equals(RatingThumb other) =>

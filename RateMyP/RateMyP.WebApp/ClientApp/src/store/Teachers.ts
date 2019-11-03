@@ -64,7 +64,6 @@ type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeache
 
 export const actionCreators = {
     requestTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState &&
             appState.teachers &&
@@ -80,7 +79,6 @@ export const actionCreators = {
         }
     },
     requestTeacher: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState && appState.teachers &&
             appState.teachers.isLoading === false &&

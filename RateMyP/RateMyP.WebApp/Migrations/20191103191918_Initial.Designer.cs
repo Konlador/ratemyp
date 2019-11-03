@@ -10,8 +10,8 @@ using RateMyP.WebApp;
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    [Migration("20191102141037_Thumbs")]
-    partial class Thumbs
+    [Migration("20191103191918_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,9 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<int>("OverallMark")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
@@ -96,8 +99,8 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<Guid>("RatingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("ThumbsUp")
                         .HasColumnType("bit");
@@ -109,15 +112,8 @@ namespace RateMyP.WebApp.Migrations
 
             modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Studies")
                         .HasColumnType("nvarchar(max)");

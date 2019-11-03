@@ -63,6 +63,9 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<int>("OverallMark")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
@@ -94,8 +97,8 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<Guid>("RatingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("ThumbsUp")
                         .HasColumnType("bit");
@@ -107,15 +110,8 @@ namespace RateMyP.WebApp.Migrations
 
             modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Studies")
                         .HasColumnType("nvarchar(max)");
