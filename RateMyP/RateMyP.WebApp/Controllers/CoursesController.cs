@@ -36,6 +36,12 @@ namespace RateMyP.WebApp.Controllers
             return course;
             }
 
+        [HttpGet("startIndex={startIndex}")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex)
+            {
+            return await m_context.Courses.Skip(startIndex).Take(20).ToListAsync();
+            }
+
         private bool CourseExists(Guid id)
             {
             return m_context.Courses.Any(e => e.Id == id);

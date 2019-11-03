@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
-import Browse from './components/Browse';
+import Browse from './components/Browse/Browse';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import Rate from './components/Rate';
 

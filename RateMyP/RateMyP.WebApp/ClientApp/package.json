@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.2.0",
+    "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^4.0.0-alpha.30",
     "@types/mui-datatables": "^2.12.0",
     "@types/react-transition-group": "^2.0.15",
     "bootstrap": "^4.3.1",
@@ -20,7 +21,7 @@
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "react-scripts": "^3.0.1",
-    "reactstrap": "7.0.2",
+    "reactstrap": "^8.1.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
     "typescript": "3.2.2"
@@ -34,7 +35,7 @@
     "@types/react-redux": "6.0.11",
     "@types/react-router": "4.4.3",
     "@types/react-router-dom": "4.3.1",
-    "@types/reactstrap": "6.4.3",
+    "@types/reactstrap": "^8.0.6",
     "cross-env": "5.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-flowtype": "2.50.3",

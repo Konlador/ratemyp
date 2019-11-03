@@ -1,15 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import MUIDataTable, { MUIDataTableColumn, MUIDataTableOptions } from "mui-datatables";
-
-const columns = ["Name", "Company", "City", "State"];
-
-const data = [
- ["Joe James", "Test Corp", "Yonkers", "NY"],
- ["John Walsh", "Test Corp", "Hartford", "CT"],
- ["Bob Herm", "Test Corp", "Tampa", "FL"],
- ["James Houston", "Test Corp", "Dallas", "TX"],
-];
 
 declare module 'react-transition-group' {
   export const SwitchTransitionProps: any
@@ -17,11 +7,6 @@ declare module 'react-transition-group' {
 
 const Home = () => (
   <div>
-    <MUIDataTable
-    title={"Employee List"}
-    data={data}
-    columns={columns}
-  />
     <h1>Hello, world!</h1>
     <p>Welcome to your new single-page application, built with:</p>
     <ul>
