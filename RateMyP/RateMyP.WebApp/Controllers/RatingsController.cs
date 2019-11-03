@@ -5,9 +5,11 @@ using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using RateMyP.WebApp.Controllers;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -93,17 +95,23 @@ namespace RateMyP.WebApp.Controllers
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
             var jTags = data["Tags"].ToArray();
-            //var tags = deserialize from jobject
             var ratingTags = new List<RatingTag>();
             var Id = Guid.NewGuid();
-            foreach(var jTag in jTags)
+            var allTags = await m_context.Tags.ToListAsync();
+            foreach (var jTag in jTags)
                 {
+                var tagId = (Guid)jTag["id"];
                 var ratingTag = new RatingTag
                     {
                     RatingId = Id,
-                    TagId = (Guid)jTag["id"],
+                    TagId = tagId
                     };
-                // TODO: check if tag exists
+                var matches = allTags.Where(p => p.Id == tagId);
+                if(!matches.Any())
+                    {
+                    return NotFound("Tag not found");
+                    }
+
                 ratingTags.Add(ratingTag);
                 }
 
@@ -124,5 +132,5 @@ namespace RateMyP.WebApp.Controllers
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }
-        }
+    }
     }
