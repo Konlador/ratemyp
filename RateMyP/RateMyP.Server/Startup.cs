@@ -28,7 +28,11 @@ namespace RateMyP.Server
                                        {
                                            c.SwaggerDoc("v1", new OpenApiInfo { Title = "RateMyP app", Version = "v1" });
                                        });
-            }
+            services.AddMvc()
+                .AddNewtonsoftJson();
+            services.AddControllers()
+                .AddNewtonsoftJson();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
