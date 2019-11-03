@@ -20,6 +20,14 @@ export interface Course {
     faculty: string;
 }
 
+export enum CourseType {
+    None,
+    Optional,
+    Compulsory,
+    Complimentary,
+    BUS
+}
+
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.

@@ -11,14 +11,6 @@ type CoursesProps =
     typeof CoursesStore.actionCreators &
     RouteComponentProps<{}>;
 
-enum CourseType {
-    None,
-    Optional,
-    Compulsory,
-    Complimentary,
-    BUS
-}
-
 class Courses extends React.PureComponent<CoursesProps> {
 
     tableOptions = {
@@ -90,7 +82,7 @@ class Courses extends React.PureComponent<CoursesProps> {
                     data={this.props.courses.map((course: CoursesStore.Course) => {
                     return [
                         course.name,
-                        CourseType[course.courseType],
+                        CoursesStore.CourseType[course.courseType],
                         course.credits,
                         course.faculty,
                     ]})
