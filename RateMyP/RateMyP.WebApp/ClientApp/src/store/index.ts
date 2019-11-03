@@ -7,6 +7,7 @@ import * as CourseTeachers from './Course/CourseTeachers';
 import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Ratings from './Ratings';
 import * as Tags from './Tags';
+import * as Student from './Student';
 import * as Rate from './Rate/RateTeacher';
 import * as RateCourses from './Rate/RateCourses'
 
@@ -23,6 +24,8 @@ export interface ApplicationState {
 
     ratings: Ratings.RatingsState | undefined;
     tags: Tags.TagsState | undefined;
+
+    student: Student.StudentState | undefined;
     rate: Rate.RateTeacherState | undefined; // rename to reateTeacher
     rateCourses: RateCourses.RateCoursesState | undefined; // rename to RateCourse
 }
@@ -42,6 +45,8 @@ export const reducers = {
 
     ratings: Ratings.reducer,
     tags: Tags.reducer,
+
+    student: Student.reducer,
     rate: Rate.reducer,
     rateCourses: RateCourses.reducer
 };
