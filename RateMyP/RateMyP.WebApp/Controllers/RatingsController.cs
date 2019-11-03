@@ -5,14 +5,13 @@ using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using RateMyP.WebApp.Controllers;
 
 namespace RateMyP.WebApp.Controllers
     {
+    [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
@@ -23,7 +22,6 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        [Route("api/ratings")]
         [HttpGet]
         public async Task<IActionResult> GetRatings()
             {
@@ -34,7 +32,6 @@ namespace RateMyP.WebApp.Controllers
             return Ok(SerializeRatings(ratings));
             }
 
-        [Route("api/ratings")]
         [HttpGet("teacher={teacherId}")]
         public async Task<IActionResult> GetTeacherRatings(Guid teacherId)
             {
@@ -45,7 +42,6 @@ namespace RateMyP.WebApp.Controllers
             return Ok(SerializeRatings(ratings));
             }
 
-        [Route("api/ratings")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRating(Guid id)
             {
@@ -77,7 +73,6 @@ namespace RateMyP.WebApp.Controllers
             return serializedRating;
             }
 
-        [Route("api/ratings")]
         [HttpPost]
         public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
             {
@@ -90,29 +85,28 @@ namespace RateMyP.WebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
 
-        [Route("api/ratings/full")]
-        [HttpPost]
+        [HttpPost("full")]
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
-            var jTags = data["Tags"].ToArray();
+            var Tags = data["Tags"].ToObject<Tag[]>();
             var ratingTags = new List<RatingTag>();
             var Id = Guid.NewGuid();
             var allTags = await m_context.Tags.ToListAsync();
-            foreach (var jTag in jTags)
+            foreach (var Tag in Tags)
                 {
-                var tagId = (Guid)jTag["id"];
                 var ratingTag = new RatingTag
                     {
                     RatingId = Id,
-                    TagId = tagId
-                    };
-                var matches = allTags.Where(p => p.Id == tagId);
-                if(!matches.Any())
+                    TagId = Tag.Id
+                };
+                if (allTags.Where(p => p.Id.Equals(Tag.Id)).Any())
+                    {
+                    ratingTags.Add(ratingTag);
+                    }
+                else
                     {
                     return NotFound("Tag not found");
                     }
-
-                ratingTags.Add(ratingTag);
                 }
 
             var rating = new Rating
@@ -132,5 +126,5 @@ namespace RateMyP.WebApp.Controllers
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }
-    }
+        }
     }
