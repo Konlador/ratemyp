@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/Rate';
+import * as RateStore from '../../store/Rate/RateTeacher';
 import { Button, Form, FormGroup, Label, Input, CustomInput, UncontrolledTooltip, UncontrolledAlert } from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import { Multiselect } from 'react-widgets'
@@ -10,7 +10,7 @@ import 'react-widgets/dist/css/react-widgets.css';
 import RateTeacherActivities from './RateTeacherActivities';
 
 type Props =
-    RateStore.RateState &
+    RateStore.RateTeacherState &
     typeof RateStore.actionCreators &
     RouteComponentProps<{ teacherId: string}>
 
@@ -33,7 +33,7 @@ class RateTeacher extends React.PureComponent<Props> {
               <Label>Level of difficulty</Label>
             </FormGroup>
             <FormGroup check inline>
-              <Label>{this.props.levelOfDifficulty}</Label>
+              <Label>{this.props.rating.levelOfDifficulty}</Label>
             </FormGroup>
             {this.renderLevelOfDifficultySlider()}
             <FormGroup>
@@ -47,9 +47,9 @@ class RateTeacher extends React.PureComponent<Props> {
         );
       }
     
-      private onSubmitButtonPush() {
+      private onSubmitButtonPush() { // cia negraziai atrodo, bet veliau pafixinsiu
         this.props.setTeacherId(this.props.match.params.teacherId)
-        if(this.props.comment.length >= 30 && this.props.overallMark !== 0 && this.props.tags.length < 6 && this.props.levelOfDifficulty > 0 && this.props.courseId !== ''){
+        if(this.props.rating.comment.length >= 30 && this.props.rating.overallMark !== 0 && this.props.rating.tags.length < 6 && this.props.rating.levelOfDifficulty > 0 && this.props.rating.courseId !== ''){
           this.props.sendRating()
           this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
         }
@@ -63,7 +63,7 @@ class RateTeacher extends React.PureComponent<Props> {
                 <StarRatingComponent 
                   name="rate1" 
                   starCount={5}
-                  value={this.props.overallMark}
+                  value={this.props.rating.overallMark}
                   renderStarIcon={() => <span>☭</span>}
                   starColor="#f00"
                   onStarClick={event => this.props.setOverallMark(event)}
@@ -98,7 +98,7 @@ class RateTeacher extends React.PureComponent<Props> {
           <FormGroup check inline>
               <input type="range" className="custom-range0" id="customRange" 
               min="1" max="5" step="1"
-              value={this.props.levelOfDifficulty}
+              value={this.props.rating.levelOfDifficulty}
               onChange={event => this.props.setLevelOfDifficulty(event.target.valueAsNumber)} >
               </input>
               <UncontrolledTooltip placement="right" target="customRange">
@@ -109,8 +109,8 @@ class RateTeacher extends React.PureComponent<Props> {
       }    
 
       private difficultyMessage() {
-        switch (this.props.levelOfDifficulty) {
-          case 0:
+        switch (this.props.rating.levelOfDifficulty) {
+          case 0: // enum
             return 'Select one'
           case 1: 
             return 'Very easy';
@@ -133,10 +133,10 @@ class RateTeacher extends React.PureComponent<Props> {
                 <Multiselect
                   dropUp
                   data={this.props.allTags}
-                  value={this.props.tags}
+                  value={this.props.rating.tags}
                   textField='text'
                   placeholder='Your tags'
-                  disabled={this.props.tags.length>=5 ? this.props.allTags.filter(x => !this.props.tags.includes(x)) : []}
+                  disabled={this.props.rating.tags.length>=5 ? this.props.allTags.filter(x => !this.props.rating.tags.includes(x)) : []}
                   onChange={value => this.props.changeTags(value)}
                 />
               </div>
@@ -149,19 +149,19 @@ class RateTeacher extends React.PureComponent<Props> {
         var maxTagsCount = 5
         return(
           <div>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.comment.length < minCommentLength && this.props.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.comment.length < minCommentLength && this.props.submitButtonClicked} toggle = {false}>
               Comment length too short. It must be at least {minCommentLength} characters long.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.overallMark === 0 && this.props.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.overallMark === 0 && this.props.submitButtonClicked} toggle = {false}>
               You must select a rating.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.tags.length > maxTagsCount && this.props.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.tags.length > maxTagsCount && this.props.submitButtonClicked} toggle = {false}>
               You cannot select more than {maxTagsCount} tags.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.levelOfDifficulty === 0 && this.props.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.levelOfDifficulty === 0 && this.props.submitButtonClicked} toggle = {false}>
               You must select a difficulty.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.courseId === '' && this.props.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.courseId === '' && this.props.submitButtonClicked} toggle = {false}>
               You must select an activity.
             </UncontrolledAlert>
           </div>

@@ -3,7 +3,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
-import * as TeacherActivitiesStore from '../../store/Rate/RateTeacherActivities';
+import * as TeacherActivitiesStore from '../../store/Teacher/TeacherActivities';
 import * as CoursesStore from '../../store/Rate/RateCourses';
 
 
@@ -14,7 +14,7 @@ interface OwnProps {
 
 type Props =
     {
-    activities: TeacherActivitiesStore.RateTeacherActivitesState,
+    activities: TeacherActivitiesStore.TeacherActivitesState,
     courses: CoursesStore.RateCoursesState
     } &
     typeof TeacherActivitiesStore.actionCreators &

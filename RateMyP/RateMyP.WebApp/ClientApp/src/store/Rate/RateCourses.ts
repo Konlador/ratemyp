@@ -5,7 +5,7 @@ import { Course } from "../Courses";
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RateCoursesState {
+export interface RateCoursesState { // RateCourse
     isLoading: boolean;
     courses: Course[];
     teacherId: string | undefined;

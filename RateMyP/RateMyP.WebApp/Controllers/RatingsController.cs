@@ -81,31 +81,24 @@ namespace RateMyP.WebApp.Controllers
             return Created("RatingThumb", ratingThumb);
             }
 
-        // POST: api/Ratings
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-
         [HttpPost]
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
-            var tags = data["tags"].ToObject<Tag[]>();
+            var ratingId = Guid.NewGuid();
             var ratingTags = new List<RatingTag>();
-            var id = Guid.NewGuid();
-            foreach (var localTag in tags)
+            var tags = JsonConvert.DeserializeObject<List<Tag>>(data["tags"].ToString());
+
+            foreach (var tag in tags)
                 {
-                var ratingTag = new RatingTag
-                    {
-                    RatingId = id,
-                    TagId = localTag.Id
-                };
-                if (await m_context.Tags.AnyAsync(tag => tag.Id.Equals(localTag.Id)))
-                    {
-                    ratingTags.Add(ratingTag);
-                    }
+                if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
+                    ratingTags.Add(new RatingTag
+                                    {
+                                    RatingId = ratingId,
+                                    TagId = tag.Id
+                                    }
+                    );
                 else
-                    {
                     return NotFound("Tag not found");
-                    }
                 }
 
             var rating = new Rating
@@ -113,7 +106,7 @@ namespace RateMyP.WebApp.Controllers
                 Comment = data["comment"].ToObject<string>(),
                 CourseId = data["courseId"].ToObject<Guid>(),
                 DateCreated = DateTime.Now,
-                Id = id,
+                Id = ratingId,
                 LevelOfDifficulty = data["levelOfDifficulty"].ToObject<int>(),
                 OverallMark = data["overallMark"].ToObject<int>(),
                 Tags = ratingTags,
