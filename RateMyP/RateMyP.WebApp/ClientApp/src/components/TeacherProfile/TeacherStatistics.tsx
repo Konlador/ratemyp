@@ -2,6 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as TeacherStatisticsStore from '../../store/TeacherStatistics';
+import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
+import * as TagsStore from "../../store/Tags";
 import { Row, Col } from 'reactstrap';
 import {
     Card, CardTitle, CardText, CardBody  } from 'reactstrap';
@@ -12,9 +14,13 @@ interface OwnProps {
 
 type Props =
     {
-    statistics: TeacherStatisticsStore.TeacherStatisticsState
+    statistics: TeacherStatisticsStore.TeacherStatisticsState,
+    ratings: TeacherRatingsStore.TeacherRatingsState,
+    tags: TagsStore.TagsState
     } &
-    typeof TeacherStatisticsStore.actionCreators;
+    typeof TeacherStatisticsStore.actionCreators &
+    typeof TeacherRatingsStore.actionCreators &
+    typeof TagsStore.actionCreators;
 
 class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
@@ -35,6 +41,8 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
     private ensureDataFetched() {
         this.props.requestTeacherStatistics(this.props.teacherId);
+        this.props.requestTeacherRatings(this.props.teacherId);
+        this.props.requestTags();
     }
 
     private renderTeacherStatistics() {
@@ -97,21 +105,79 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                             </CardBody>
                         </Card>
                     </Col>
+                    <Col>
+                    {this.renderTags()}
+                    </Col>
                 </Row>
             </div>
         );
+    }
+
+    private renderTags() {
+        const distinctTeacherTags = this.getDistinctTeacherTags();
+        if (typeof distinctTeacherTags !== 'undefined') {
+            return (
+                <div>
+                    <div className="tagbox">
+                        {distinctTeacherTags.map((tag: TagsStore.Tag) =>
+                            <span>
+                                {tag.text} ({this.countTags(tag)})
+                            </span>)}
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    private getAllTeacherTags() {
+        var tags = [];
+        var ratings = this.props.ratings.ratings;
+        if (this.props.ratings.ratings.length > 0)
+        {
+            for (let val of ratings)
+            {
+                for(let value of val.tags)
+                {
+                    tags.push(value);
+                }
+            }
+            return tags;
+        }
+    }
+    private getDistinctTeacherTags(){
+        var allTeachers = this.getAllTeacherTags();
+        if(typeof allTeachers !== 'undefined')
+        {
+            allTeachers = allTeachers.filter((elem, index, self) => 
+            self.findIndex((t) => {return (t.id === elem.id && t.text === elem.text)}) === index);
+            return allTeachers;
+        }
+    }
+    
+    private countTags(tag: TagsStore.Tag){
+        var allTeacherTags = this.getAllTeacherTags();
+        if(typeof allTeacherTags !== 'undefined') 
+        {
+            var count = 0;
+            allTeacherTags.forEach((v) => (v.id === tag.id && count++));
+            return count;
+        }
     }
 }
 
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         statistics: state.teacherStatistics,
+        ratings: state.ratings,
+        tags: state.tags,
         teacherId: ownProps.teacherId
     }
 };
 
 const actions = {
-    ...TeacherStatisticsStore.actionCreators
+    ...TeacherStatisticsStore.actionCreators,
+    ...TeacherRatingsStore.actionCreators,
+    ...TagsStore.actionCreators
 }
 
 export default connect(
