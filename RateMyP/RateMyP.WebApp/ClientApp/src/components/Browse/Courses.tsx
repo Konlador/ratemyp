@@ -6,12 +6,12 @@ import * as CoursesStore from '../../store/Courses';
 import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
 
-type CoursesProps =
+type Props =
     CoursesStore.CoursesState &
     typeof CoursesStore.actionCreators &
     RouteComponentProps<{}>;
 
-class Courses extends React.PureComponent<CoursesProps> {
+class Courses extends React.PureComponent<Props> {
 
     tableOptions = {
         print: false,
@@ -20,6 +20,10 @@ class Courses extends React.PureComponent<CoursesProps> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
+        onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
+            console.log(rowData, rowState);
+            !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
+          }
     };
     
     state = {
@@ -85,6 +89,7 @@ class Courses extends React.PureComponent<CoursesProps> {
                         CoursesStore.CourseType[course.courseType],
                         course.credits,
                         course.faculty,
+                        course.id
                     ]})
                     }
                     columns={
@@ -92,7 +97,8 @@ class Courses extends React.PureComponent<CoursesProps> {
                             {name: 'Name', options: { sortDirection: 'asc', filter: false}},
                             {name: 'Type'},
                             {name: 'Credits'},
-                            {name: 'Faculty'}
+                            {name: 'Faculty'},
+                            {name: 'Id', options: {filter: false, display: 'excluded'}}
                         ]
                     }
                     options={this.tableOptions}
@@ -103,7 +109,9 @@ class Courses extends React.PureComponent<CoursesProps> {
 
 }
 
-export default connect(
-    (state: ApplicationState) => state.courses, // Selects which state properties are merged into the component's props
-    CoursesStore.actionCreators // Selects which action creators are merged into the component's props
-)(Courses as any);
+export default withRouter(
+    connect(
+        (state: ApplicationState) => state.courses,
+        CoursesStore.actionCreators
+    )(Courses as any) as React.ComponentType<any>
+);

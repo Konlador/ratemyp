@@ -8,8 +8,8 @@ export interface CoursesState {
     isLoading: boolean;
     courses: Course[];
     selectedCourse: Course | undefined;
-    currentIndex: number;
     canLoadMore: boolean;
+    currentIndex: number;
 }
 
 export interface Course {
@@ -21,11 +21,11 @@ export interface Course {
 }
 
 export enum CourseType {
-    None,
-    Optional,
-    Compulsory,
-    Complimentary,
-    BUS
+    None = 0,
+    Optional = 1,
+    Compulsory = 2,
+    Complimentary = 3,
+    BUS = 4
 }
 
 // -----------------
@@ -41,13 +41,27 @@ interface ReceiveCoursesAction {
     courses: Course[];
 }
 
+interface RequestCourseAction {
+    type: 'REQUEST_COURSE';
+    courseId: string;
+}
+
+interface ReceiveCourseAction {
+    type: 'RECEIVE_COURSE';
+    course: Course;
+}
+
+interface ClearSelectedCourse {
+    type: 'CLEAR_SELECTED_COURSE'
+}
+
 interface CheckCourseAvailabilityAction {
     type: 'CHECK_COURSE_AVAILABILITY'
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestCoursesAction | ReceiveCoursesAction | CheckCourseAvailabilityAction;
+type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse | CheckCourseAvailabilityAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -55,32 +69,37 @@ type KnownAction = RequestCoursesAction | ReceiveCoursesAction | CheckCourseAvai
 
 export const actionCreators = {
     requestCourses: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.courses && appState.courses.isLoading === false) {
+        if (appState &&
+            appState.courses &&
+            appState.courses.isLoading === false) {
             fetch(`api/courses/startIndex=${appState.courses.currentIndex}`)
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_COURSES', courses: data });
-                    if (data.length < 20) dispatch({ type: 'CHECK_COURSE_AVAILABILITY'})
+                    if (data.length < 20) dispatch({ type: 'CHECK_COURSE_AVAILABILITY' });
                 });
 
             dispatch({ type: 'REQUEST_COURSES' });
         }
     },
-    requestTeacherCourses: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        // Only load data if it's something we don't already have (and are not already loading)
+    requestCourse: (courseId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.courses && appState.courses.isLoading === false && appState.courses.courses.length === 0) {
-            fetch(`api/courses`)
-                .then(response => response.json() as Promise<Course[]>)
+        if (appState &&
+            appState.courses &&
+            appState.courses.isLoading === false &&
+            (appState.courses.selectedCourse === undefined ||
+                appState.courses.selectedCourse.id !== courseId)) {
+            fetch(`api/courses/${courseId}`)
+                .then(response => response.json() as Promise<Course>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_COURSES', courses: data });
+                    dispatch({ type: 'RECEIVE_COURSE', course: data });
                 });
 
-            dispatch({ type: 'REQUEST_COURSES' });
+            dispatch({ type: 'REQUEST_COURSE', courseId });
         }
-    }
+    },
+    clearSelectedCourse: () => ({ type: 'CLEAR_SELECTED_COURSE' } as ClearSelectedCourse)
 };
 
 // ----------------
@@ -99,16 +118,40 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
                 courses: state.courses,
                 selectedCourse: state.selectedCourse,
                 isLoading: true,
-                currentIndex: state.currentIndex,
-                canLoadMore: true
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
         case 'RECEIVE_COURSES':
             return {
                 courses: [...state.courses, ...action.courses],
                 selectedCourse: state.selectedCourse,
                 isLoading: false,
-                currentIndex: state.currentIndex + 20,
-                canLoadMore: true
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex + 20
+            };
+        case 'REQUEST_COURSE':
+            return {
+                courses: state.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: true,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
+            };
+        case 'RECEIVE_COURSE':
+            return {
+                courses: state.courses,
+                selectedCourse: action.course,
+                isLoading: false,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
+            };
+        case 'CLEAR_SELECTED_COURSE':
+            return {
+                courses: state.courses,
+                selectedCourse: undefined,
+                isLoading: state.isLoading,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
         case 'CHECK_COURSE_AVAILABILITY':
             return {

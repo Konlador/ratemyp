@@ -6,16 +6,16 @@ import * as TeachersStore from '../../store/Teachers';
 import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
 
-interface TeachersOwnProps {
+interface OwnProps {
     teacherId: string
 };
 
-type TeachersProps =
+type Props =
     TeachersStore.TeachersState &
     typeof TeachersStore.actionCreators &
     RouteComponentProps<{}>;
 
-class Teachers extends React.PureComponent<TeachersProps & TeachersOwnProps> {
+class Teachers extends React.PureComponent<Props & OwnProps> {
 
     tableOptions = {
         print: false,
@@ -26,7 +26,7 @@ class Teachers extends React.PureComponent<TeachersProps & TeachersOwnProps> {
         sort: false,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
-            !this.props.isLoading && this.props.history.push(`/profile/${rowData[4]}`);
+            !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
           }
     };
     
@@ -111,7 +111,7 @@ class Teachers extends React.PureComponent<TeachersProps & TeachersOwnProps> {
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: TeachersOwnProps) {
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         ...state.teachers,
         teacherId: ownProps.teacherId
