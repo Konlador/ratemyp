@@ -2,6 +2,7 @@ import * as Teachers from './Teachers';
 import * as TeacherCourses from './Teacher/TeacherCourses';
 import * as TeacherActivites from './Teacher/TeacherActivities';
 import * as TeacherRatings from './Teacher/TeacherRatings';
+import * as TeacherStatistics from './TeacherStatistics';
 import * as Courses from './Courses';
 import * as CourseTeachers from './Course/CourseTeachers';
 import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
@@ -17,6 +18,7 @@ export interface ApplicationState {
     teacherCourses: TeacherCourses.TeacherCoursesState | undefined;
     teacherActivites: TeacherActivites.TeacherActivitesState | undefined;
     teacherRatings: TeacherRatings.TeacherRatingsState | undefined;
+    teacherStatistics: TeacherStatistics.TeacherStatisticsState | undefined;
 
     courses: Courses.CoursesState | undefined;
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
@@ -38,6 +40,7 @@ export const reducers = {
     teacherCourses: TeacherCourses.reducer,
     teacherActivites: TeacherActivites.reducer,
     teacherRatings: TeacherRatings.reducer,
+    teacherStatistics: TeacherStatistics.reducer,
 
     courses: Courses.reducer,
     courseTeachers: CourseTeachers.reducer,
