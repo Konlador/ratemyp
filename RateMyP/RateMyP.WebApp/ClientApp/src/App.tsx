@@ -7,7 +7,7 @@ import Student from './components/Student';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/Rate/RateTeacher';
-import RateCourse from './components/RateCourse';
+import RateCourse from './components/Rate/RateCourse';
 import firebase from "firebase";
 
 import './custom.css'
@@ -28,7 +28,7 @@ class App extends React.Component<{}>{
                     <Route path='/teacher-profile/:teacherId' component={TeacherProfile} />
                     <Route path='/course-profile/:courseId' component={CourseProfile} />
                     <Route path='/rate-teacher/:teacherId' component={RateTeacher} />
-                    <Route path='/rate-course/:coureId' component={RateCourse} />
+                    <Route path='/rate-course/:courseId' component={RateCourse} />
                 </Layout>
             </div>
         );

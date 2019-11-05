@@ -28,8 +28,8 @@ export interface ApplicationState {
     tags: Tags.TagsState | undefined;
 
     student: Student.StudentState | undefined;
-    rate: Rate.RateTeacherState | undefined; // rename to reateTeacher
-    rateCourses: RateCourses.RateCoursesState | undefined; // rename to RateCourse
+    rate: Rate.RateTeacherState | undefined; 
+    rateCourses: RateCourses.RateCoursesState | undefined; 
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
