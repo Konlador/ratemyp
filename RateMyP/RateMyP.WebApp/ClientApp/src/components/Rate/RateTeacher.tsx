@@ -8,12 +8,12 @@ import 'react-widgets/dist/css/react-widgets.css';
 import RateTeacherActivities from './RateTeacherActivities';
 import * as TagStore from '../../store/Tags'
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateTeacher';
+import * as RateStore from '../../store/Rate/RatePageStore';
 
 
 type Props =
     {tags: TagStore.TagsState
-    rating: RateStore.RateTeacherState} &
+    rating: RateStore.RateState} &
     typeof RateStore.actionCreators &
     typeof TagStore.actionCreators &
     RouteComponentProps<{ teacherId: string}>
@@ -29,27 +29,34 @@ class RateTeacher extends React.PureComponent<Props> {
 
     render() {      
         return (
-          <Form>
-            {this.renderAlerts()}
-            {this.renderStarRating()}
-            {this.renderWouldTakeAgain()}
-            <FormGroup>
-              <Label>Level of difficulty</Label>
-            </FormGroup>
-            <FormGroup check inline>
-              <Label>{this.props.rating.rating.levelOfDifficulty}</Label>
-            </FormGroup>
-            {this.renderLevelOfDifficultySlider()}
-            <FormGroup>
-              <Label for="comment">Comment</Label>
-              <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
-            </FormGroup>
-            {this.renderTagsMultiselect()}
-            <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {(value: string) => this.props.setCourseId(value)} />
-            <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
-          </Form>
+          <React.Fragment>
+            {this.renderForm()}
+          </React.Fragment>
         );
       }
+    private renderForm() {
+      return(
+      <Form>
+          {this.renderAlerts()}
+          {this.renderStarRating()}
+          {this.renderWouldTakeAgain()}
+          <FormGroup>
+            <Label>Level of difficulty</Label>
+          </FormGroup>
+          <FormGroup check inline>
+            <Label>{this.props.rating.rating.levelOfDifficulty}</Label>
+          </FormGroup>
+          {this.renderLevelOfDifficultySlider()}
+          <FormGroup>
+            <Label for="comment">Comment</Label>
+            <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
+          </FormGroup>
+          {this.renderTagsMultiselect()}
+          <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {(value: string) => this.props.setCourseId(value)} />
+          <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
+      </Form>
+      );
+    }
     
       private onSubmitButtonPush() {
         this.props.setTeacherId(this.props.match.params.teacherId)
@@ -98,11 +105,11 @@ class RateTeacher extends React.PureComponent<Props> {
       private renderLevelOfDifficultySlider() {
         enum difficultyMessage {
             'Select one',
-            'Very easy',
-            'Easy',
-            'Medium',
-            'Hard',
-            'Very hard',
+            'Paltry effort',
+            'Some work',
+            'Not great, not terrible',
+            'Heavy lifting',
+            'Fight for life',
         }
         return(
           <FormGroup check inline>

@@ -6,13 +6,13 @@ import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
 import 'react-widgets/dist/css/react-widgets.css';
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateTeacher';
+import * as RateStore from '../../store/Rate/RatePageStore';
 import * as TagStore from '../../store/Tags'
 
 type Props =
     {
     tags: TagStore.TagsState
-    rating: RateStore.RateTeacherState
+    rating: RateStore.RateState
     } &
     typeof RateStore.actionCreators &
     typeof TagStore.actionCreators &
@@ -29,27 +29,35 @@ class RateCourse extends React.PureComponent<Props> {
 
     render() {      
         return (
-          <Form>
-            {this.renderAlerts()}
-            {this.renderStarRating()}
-            {this.renderWouldTakeAgain()}
-            <FormGroup>
-              <Label>Level of difficulty</Label>
-            </FormGroup>
-            <FormGroup check inline>
-              <Label>{this.props.rating.rating.levelOfDifficulty}</Label>
-            </FormGroup>
-            {this.renderLevelOfDifficultySlider()}
-            <FormGroup>
-              <Label for="comment">Comment</Label>
-              <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
-            </FormGroup>
-            {this.renderTagsMultiselect()}
-            <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
-          </Form>
+          <React.Fragment>
+            {this.renderForm()}
+          </React.Fragment>
         );
       }
     
+    private renderForm() {
+      return (
+        <Form>
+          {this.renderAlerts()}
+          {this.renderStarRating()}
+          {this.renderWouldTakeAgain()}
+          <FormGroup>
+            <Label>Level of difficulty</Label>
+          </FormGroup>
+          <FormGroup check inline>
+            <Label>{this.props.rating.rating.levelOfDifficulty}</Label>
+          </FormGroup>
+          {this.renderLevelOfDifficultySlider()}
+          <FormGroup>
+            <Label for="comment">Comment</Label>
+            <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
+          </FormGroup>
+          {this.renderTagsMultiselect()}
+          <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
+        </Form>
+      );
+    }
+
       private onSubmitButtonPush() {
         this.props.setCourseId(this.props.match.params.courseId)
         if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
@@ -97,11 +105,11 @@ class RateCourse extends React.PureComponent<Props> {
       private renderLevelOfDifficultySlider() {
         enum difficultyMessage {
             'Select one',
-            'Very easy',
-            'Easy',
-            'Medium',
-            'Hard',
-            'Very hard',
+            'Paltry effort',
+            'Some work',
+            'Not great, not terrible',
+            'Heavy lifting',
+            'Fight for life',
         }
         return(
           <FormGroup check inline>

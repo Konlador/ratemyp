@@ -6,7 +6,7 @@ import { Rating } from '../Ratings';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RateTeacherState {
+export interface RateState {
     submitButtonClicked: boolean;
     rating: Rating
 }
@@ -106,9 +106,9 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: ''}
-const unloadedState: RateTeacherState = {submitButtonClicked: false, rating: unloadedRating};
+const unloadedState: RateState = {submitButtonClicked: false, rating: unloadedRating};
 
-export const reducer: Reducer<RateTeacherState> = (state: RateTeacherState | undefined, incomeStateAction: Action): RateTeacherState => {
+export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)
         return unloadedState;
 

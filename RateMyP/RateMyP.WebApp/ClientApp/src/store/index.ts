@@ -9,7 +9,7 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Ratings from './Ratings';
 import * as Tags from './Tags';
 import * as Student from './Student';
-import * as Rate from './Rate/RateTeacher';
+import * as Rate from './Rate/RatePageStore';
 import * as RateCourses from './Rate/RateCourses'
 
 // The top-level state object
@@ -28,7 +28,7 @@ export interface ApplicationState {
     tags: Tags.TagsState | undefined;
 
     student: Student.StudentState | undefined;
-    rate: Rate.RateTeacherState | undefined; 
+    rate: Rate.RateState | undefined; 
     rateCourses: RateCourses.RateCoursesState | undefined; 
 }
 
