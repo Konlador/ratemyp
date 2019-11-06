@@ -9,7 +9,7 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Ratings from './Ratings';
 import * as Tags from './Tags';
 import * as Student from './Student';
-import * as Rate from './Rate/RatePageStore';
+import * as Rate from './Rate/RateStore';
 import * as RateCourses from './Rate/RateCourses'
 
 // The top-level state object

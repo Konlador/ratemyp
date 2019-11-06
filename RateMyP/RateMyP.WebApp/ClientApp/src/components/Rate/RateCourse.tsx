@@ -6,7 +6,7 @@ import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
 import 'react-widgets/dist/css/react-widgets.css';
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RatePageStore';
+import * as RateStore from '../../store/Rate/RateStore';
 import * as TagStore from '../../store/Tags'
 
 type Props =
@@ -103,7 +103,7 @@ class RateCourse extends React.PureComponent<Props> {
       }
 
       private renderLevelOfDifficultySlider() {
-        enum difficultyMessage {
+        enum DifficultyMessage {
             'Select one',
             'Paltry effort',
             'Some work',
@@ -119,7 +119,7 @@ class RateCourse extends React.PureComponent<Props> {
               onChange={event => this.props.setLevelOfDifficulty(event.target.valueAsNumber)} >
               </input>
               <UncontrolledTooltip placement="right" target="customRange">
-                {difficultyMessage[this.props.rating.rating.levelOfDifficulty]}
+                {DifficultyMessage[this.props.rating.rating.levelOfDifficulty]}
               </UncontrolledTooltip>
           </FormGroup>
         );   
