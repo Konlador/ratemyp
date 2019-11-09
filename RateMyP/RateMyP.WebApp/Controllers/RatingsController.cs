@@ -101,6 +101,11 @@ namespace RateMyP.WebApp.Controllers
                     return NotFound("Tag not found");
                 }
 
+            var teacherId = new Guid();
+
+            if (data["teacherId"].ToObject<string>() != "")
+                teacherId = data["teacherId"].ToObject<Guid>();
+
             var rating = new Rating
                 {
                 Comment = data["comment"].ToObject<string>(),
@@ -110,7 +115,7 @@ namespace RateMyP.WebApp.Controllers
                 LevelOfDifficulty = data["levelOfDifficulty"].ToObject<int>(),
                 OverallMark = data["overallMark"].ToObject<int>(),
                 Tags = ratingTags,
-                TeacherId = data["teacherId"].ToObject<Guid>(),
+                TeacherId = teacherId,
                 WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>()
                 };
             m_context.Ratings.Add(rating);

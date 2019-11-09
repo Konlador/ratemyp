@@ -6,8 +6,7 @@ import { Rating } from '../Ratings';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RateTeacherState {
-    allTags: Tag[];
+export interface RateState {
     submitButtonClicked: boolean;
     rating: Rating
 }
@@ -38,15 +37,6 @@ interface ChangeCommentAction {
     value: string;
 }
 
-interface RequestTagsAction {
-    type: 'REQUEST_TAGS'
-}
-
-interface ReceiveTagsAction {
-    type: 'RECEIVE_TAGS'
-    tags: Tag[];
-}
-
 interface ChangeTagsAction {
     type: 'CHANGE_TAGS'
     tags: Tag[];
@@ -71,7 +61,7 @@ interface SetCourseIdAction {
 }
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type streStates (and not any other arbitrary streState).
-type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ReceiveTagsAction | RequestTagsAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherIdAction | SetCourseIdAction;
+type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherIdAction | SetCourseIdAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -89,20 +79,6 @@ export const actionCreators = {
     },
     setWouldTakeTeacherAgainTrue: () => ({ type: 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE' } as SetWouldTakeTeacherAgainTrueAction),
     setWouldTakeTeacherAgainFalse: () => ({ type: 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE' } as SetWouldTakeTeacherAgainFalseAction),    
-    requestTags: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const appState = getState();
-        if (appState &&
-            appState.rate &&
-            appState.rate.allTags.length === 0) {
-            fetch(`api/tags`)
-                .then(response => response.json() as Promise<Tag[]>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_TAGS', tags: data });
-                });
-
-            dispatch({ type: 'REQUEST_TAGS' });
-        }
-    }, // nekurk naujos funkcijos kai jau yra tokia kuri atlieka ta pati darba
     changeTags: (value: Array<Tag>): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'CHANGE_TAGS', tags: value });
     },
@@ -127,24 +103,12 @@ export const actionCreators = {
         dispatch({ type: 'SET_COURSE_ID', value: value });
     },
 };
-// this.setState((state: { rating: { overallMark: any; levelOfDifficulty: any; wouldTakeTeacherAgain: any; comment: any; tags: any; dateCreated: undefined; teacherId: any; courseId: any; Id: string; }; allTags: any; submitButtonClicked: any; })
-// => (state.rating.overallMark = state.rating.overallMark,
-//    state.rating.levelOfDifficulty = state.rating.levelOfDifficulty, 
-//    state.rating.wouldTakeTeacherAgain = state.rating.wouldTakeTeacherAgain, 
-//    state.rating.comment = state.rating.comment, 
-//    state.rating.tags = state.rating.tags, 
-//    state.allTags = state.allTags,
-//    state.submitButtonClicked = state.submitButtonClicked,
-//    state.rating.dateCreated = undefined,
-//    state.rating.teacherId = state.rating.teacherId,
-//    state.rating.courseId = state.rating.courseId,
-//    state.rating.Id = '' ))
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: ''}
-const unloadedState: RateTeacherState = {allTags: [], submitButtonClicked: false, rating: unloadedRating};
+const unloadedState: RateState = {submitButtonClicked: false, rating: unloadedRating};
 
-export const reducer: Reducer<RateTeacherState> = (state: RateTeacherState | undefined, incomeStateAction: Action): RateTeacherState => {
+export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)
         return unloadedState;
 
@@ -179,13 +143,6 @@ export const reducer: Reducer<RateTeacherState> = (state: RateTeacherState | und
                     rating: Object.assign({}, state.rating, {
                         comment: action.value, 
                     }),
-                    });
-        case 'REQUEST_TAGS':
-                return Object.assign({}, state, {
-                    });
-        case 'RECEIVE_TAGS':
-                return Object.assign({}, state, {
-                    allTags: action.tags,
                     });
         case 'CHANGE_TAGS':
                 return Object.assign({}, state, {
