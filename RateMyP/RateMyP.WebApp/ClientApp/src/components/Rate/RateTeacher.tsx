@@ -8,15 +8,17 @@ import 'react-widgets/dist/css/react-widgets.css';
 import RateTeacherActivities from './RateTeacherActivities';
 import * as TagStore from '../../store/Tags'
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateStore';
+import * as RateStore from '../../store/Rate/Rate';
 
 
 type Props =
-    {tags: TagStore.TagsState
-    rating: RateStore.RateState} &
+    {
+      tags: TagStore.TagsState
+      rating: RateStore.RateState
+    } &
     typeof RateStore.actionCreators &
     typeof TagStore.actionCreators &
-    RouteComponentProps<{ teacherId: string}>
+    RouteComponentProps<{ teacherId: string }>
 
 class RateTeacher extends React.PureComponent<Props> {
     public componentDidMount() {

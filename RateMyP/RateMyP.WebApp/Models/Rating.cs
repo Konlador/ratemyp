@@ -24,6 +24,8 @@ namespace RateMyP.WebApp.Models
         public string Comment { get; set; }
         public string? StudentId { get; set; }
         public RatingType RatingType { get; set; }
+        public int ThumbUps { get; set; }
+        public int ThumbDowns { get; set; }
 
         public bool Equals(Rating other) =>
             other != null &&

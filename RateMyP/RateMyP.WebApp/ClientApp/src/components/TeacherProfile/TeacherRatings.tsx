@@ -50,9 +50,9 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
-                            <th>Course</th>
-                            <th>Rating</th>
-                            <th>Comment</th>
+                            <th className="course">Course</th>
+                            <th className="rating">Rating</th>
+                            <th className="comment">Comment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,6 +96,19 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                     )}
                 </div>
                 <p>{rating.comment}</p>
+                <div>
+                    <div>
+                        <a onClick={() => {
+                            this.props.sendRatingThumb(rating.id, true);
+                            this.props.updateRating(rating.id);
+                        }}>{rating.thumbUps} find this useful</a>
+                    </div>
+                    <div><a onClick={() => {
+                            this.props.sendRatingThumb(rating.id, false)
+                            this.props.updateRating(rating.id);
+                        }}>{rating.thumbDowns} find this not useful</a>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -103,7 +116,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
 
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
-        ratings: state.ratings,
+        ratings: state.teacherRatings,
         courses: state.teacherCourses,
         teacherId: ownProps.teacherId
     }

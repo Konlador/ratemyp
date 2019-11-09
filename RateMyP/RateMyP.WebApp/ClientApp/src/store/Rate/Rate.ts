@@ -120,7 +120,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: '', ratingType: 0}
-const unloadedState: RateState = {submitButtonClicked: false, rating: unloadedRating};
+const unloadedState: RateState = { submitButtonClicked: false, rating: unloadedRating };
 
 export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)

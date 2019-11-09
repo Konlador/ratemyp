@@ -17,3 +17,15 @@
     margin-bottom: 5px;
     text-transform: uppercase;
 }
+
+th.course {
+    width: 25% !important
+}
+
+th.rating {
+    width: 30% !important
+}
+
+th.comment {
+    width: 45% !important
+}
