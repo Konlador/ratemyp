@@ -21,6 +21,7 @@ export interface Rating {
     dateCreated: Date;
     comment: string;
     tags: Tag[];
+    ratingType: number;
 }
 
 // -----------------
