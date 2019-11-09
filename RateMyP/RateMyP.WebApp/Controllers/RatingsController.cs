@@ -116,8 +116,9 @@ namespace RateMyP.WebApp.Controllers
                 OverallMark = data["overallMark"].ToObject<int>(),
                 Tags = ratingTags,
                 TeacherId = teacherId,
-                WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>()
-                };
+                WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>(),
+                RatingType = data["ratingType"].ToObject<RatingType>(),
+            };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 

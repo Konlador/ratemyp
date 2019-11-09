@@ -59,6 +59,7 @@ class RateCourse extends React.PureComponent<Props> {
     }
 
       private onSubmitButtonPush() {
+        this.props.setRatingType(1)
         this.props.setCourseId(this.props.match.params.courseId)
         if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
           this.props.sendRating()
@@ -164,6 +165,9 @@ class RateCourse extends React.PureComponent<Props> {
           </div>
         )
       }
+      componentWillUnmount() {
+        this.props.clearStore();
+    }
 }
 
 function mapStateToProps(state: ApplicationState) {

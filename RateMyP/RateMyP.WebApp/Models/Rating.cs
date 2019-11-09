@@ -4,6 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.WebApp.Models
     {
+    public enum RatingType
+    {
+        Teacher,
+        Course
+    }
     public class Rating : IEquatable<Rating>
         {
         public Guid Id { get; set; }
@@ -18,6 +23,7 @@ namespace RateMyP.WebApp.Models
         public DateTime DateCreated { get; set; }
         public string Comment { get; set; }
         public string? StudentId { get; set; }
+        public RatingType RatingType { get; set; }
 
         public bool Equals(Rating other) =>
             other != null &&
@@ -29,6 +35,7 @@ namespace RateMyP.WebApp.Models
             other.LevelOfDifficulty.Equals(LevelOfDifficulty) &&
             other.WouldTakeTeacherAgain.Equals(WouldTakeTeacherAgain) &&
             other.DateCreated.Equals(DateCreated) &&
-            other.Comment.Equals(Comment);
-        }
+            other.Comment.Equals(Comment) &&
+            other.RatingType.Equals(RatingType);
     }
+}

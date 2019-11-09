@@ -8,7 +8,7 @@ import * as CoursesStore from '../../store/Rate/RateCourses';
 
 
 interface OwnProps {
-    teacherId: string
+    teacherId: string;
     passSelectedTeacherActivities: (value: string) => void;
 };
 
@@ -58,7 +58,7 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
             <div>
                 <h1>Activities</h1>
                 {this.props.activities.isLoading && <span>Loading...</span>}
-                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm">
+                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
                             <th>Course</th>
@@ -68,9 +68,8 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr onClick={() => this.props.passSelectedTeacherActivities(activity.courseId)}>
+                            <tr onClick={() => {this.props.setSelectedRowId(activity.id) ; this.props.passSelectedTeacherActivities(activity.courseId);}}  style={{background: activity.id===this.props.activities.selectedRowId? '#6091ff':'white'}}>
                                 <td>{this.getCourseName(activity.courseId)}</td>
-                                <td>{activity.courseId}</td>
                                 <td>{LectureType[activity.lectureType]}</td>
                             </tr>
                         )}
