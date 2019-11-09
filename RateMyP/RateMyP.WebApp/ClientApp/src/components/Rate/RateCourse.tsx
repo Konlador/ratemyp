@@ -128,7 +128,7 @@ class RateCourse extends React.PureComponent<Props> {
 
       private renderTagsMultiselect() {
         var tags = this.props.tags.tags.filter(function (item) {
-          return item.tagType === 3 || item.tagType === 2 
+          return item.type === 3 || item.type === 2 
         });
         return(
           <FormGroup>

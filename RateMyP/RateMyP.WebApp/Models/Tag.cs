@@ -9,12 +9,12 @@ namespace RateMyP.WebApp.Models
         {
         public Guid Id { get; set; }
         public string Text { get; set; }
-        public TagTypes TagType { get; set; }
+        public TagTypes Type { get; set; }
 
         public bool Equals(Tag other) =>
             other != null &&
             other.Text.Equals(Text) &&
-            other.TagType.Equals(TagType);
+            other.Type.Equals(Type);
         public override string ToString()
             {
             return this.Text;
