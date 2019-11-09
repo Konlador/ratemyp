@@ -12,6 +12,7 @@ export interface TagsState {
 export interface Tag {
     id: string,
     text: string;
+    tagType: number;
 }
 
 // -----------------
