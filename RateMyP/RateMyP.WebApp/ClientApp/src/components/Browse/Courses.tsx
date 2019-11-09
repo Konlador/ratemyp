@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import * as CoursesStore from '../../store/Courses';
 import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
+import '../../extensions/StringExtensions';
 
 type Props =
     CoursesStore.CoursesState &
@@ -23,7 +24,16 @@ class Courses extends React.PureComponent<Props> {
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
-          }
+          },
+        customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
+            let isFound = false;
+            let matchString = currentRow[0];
+            console.log(searchQuery, currentRow, columns, matchString);
+            if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
+                isFound = true;
+            }       
+            return isFound;
+        }
     };
     
     state = {
@@ -94,7 +104,7 @@ class Courses extends React.PureComponent<Props> {
                     }
                     columns={
                         [
-                            {name: 'Name', options: { sortDirection: 'asc', filter: false}},
+                            {name: 'Name', options: { filter: false}},
                             {name: 'Type'},
                             {name: 'Credits'},
                             {name: 'Faculty'},

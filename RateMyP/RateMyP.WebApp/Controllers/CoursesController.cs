@@ -39,7 +39,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet("startIndex={startIndex}")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex)
             {
-            return await m_context.Courses.Skip(startIndex).Take(20).ToListAsync();
+            return await m_context.Courses.OrderBy(course => course.Name).Skip(startIndex).Take(20).ToListAsync();
             }
 
         [HttpGet("teacher={teacherId}")]
