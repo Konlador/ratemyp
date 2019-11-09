@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP.WebApp;
 
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191109202432_Thumbs")]
+    partial class Thumbs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("ThumbUp")
+                    b.Property<bool>("ThumbsUp")
                         .HasColumnType("bit");
 
                     b.HasKey("RatingId", "StudentId");

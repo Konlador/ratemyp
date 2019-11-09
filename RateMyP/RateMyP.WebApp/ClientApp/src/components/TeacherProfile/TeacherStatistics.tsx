@@ -5,8 +5,7 @@ import * as TeacherStatisticsStore from '../../store/TeacherStatistics';
 import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
 import * as TagsStore from "../../store/Tags";
 import { Row, Col } from 'reactstrap';
-import {
-    Card, CardTitle, CardText, CardBody  } from 'reactstrap';
+import { Card, CardTitle, CardText, CardBody  } from 'reactstrap';
 
 interface OwnProps {
     teacherId: string
@@ -144,7 +143,8 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
             return tags;
         }
     }
-    private getDistinctTeacherTags(){
+
+    private getDistinctTeacherTags() {
         var allTeachers = this.getAllTeacherTags();
         if(typeof allTeachers !== 'undefined')
         {
@@ -154,10 +154,9 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         }
     }
     
-    private countTags(tag: TagsStore.Tag){
+    private countTags(tag: TagsStore.Tag) {
         var allTeacherTags = this.getAllTeacherTags();
-        if(typeof allTeacherTags !== 'undefined') 
-        {
+        if (typeof allTeacherTags !== 'undefined') {
             var count = 0;
             allTeacherTags.forEach((v) => (v.id === tag.id && count++));
             return count;
@@ -168,7 +167,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         statistics: state.teacherStatistics,
-        ratings: state.ratings,
+        ratings: state.teacherRatings,
         tags: state.tags,
         teacherId: ownProps.teacherId
     }

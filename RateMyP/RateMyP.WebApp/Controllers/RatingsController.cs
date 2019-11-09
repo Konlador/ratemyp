@@ -76,7 +76,18 @@ namespace RateMyP.WebApp.Controllers
         [HttpPost("thumb")]
         public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
             {
+            var rating = m_context.Ratings.Find(ratingThumb.RatingId);
+            if (rating == null)
+                return NotFound("Rating not found");
+
+            ratingThumb.StudentId = Guid.NewGuid().ToString();
             m_context.RatingThumbs.Add(ratingThumb);
+
+            if (ratingThumb.ThumbUp)
+                rating.ThumbUps++;
+            else
+                rating.ThumbDowns++;
+
             await m_context.SaveChangesAsync();
             return Created("RatingThumb", ratingThumb);
             }
@@ -92,10 +103,10 @@ namespace RateMyP.WebApp.Controllers
                 {
                 if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
                     ratingTags.Add(new RatingTag
-                                    {
-                                    RatingId = ratingId,
-                                    TagId = tag.Id
-                                    }
+                        {
+                        RatingId = ratingId,
+                        TagId = tag.Id
+                        }
                     );
                 else
                     return NotFound("Tag not found");
@@ -118,11 +129,18 @@ namespace RateMyP.WebApp.Controllers
                 TeacherId = teacherId,
                 WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>(),
                 RatingType = data["ratingType"].ToObject<RatingType>(),
-            };
+                ThumbUps = 0,
+                ThumbDowns = 0
+                };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
+            }
+
+        private bool RatingExists(Guid id)
+            {
+            return m_context.Ratings.Any(e => e.Id.Equals(id));
             }
         }
     }

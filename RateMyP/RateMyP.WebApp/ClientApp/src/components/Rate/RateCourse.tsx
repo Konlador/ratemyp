@@ -6,7 +6,7 @@ import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
 import 'react-widgets/dist/css/react-widgets.css';
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateStore';
+import * as RateStore from '../../store/Rate/Rate';
 import * as TagStore from '../../store/Tags'
 
 type Props =
