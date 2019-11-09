@@ -60,6 +60,7 @@ class RateTeacher extends React.PureComponent<Props> {
     
       private onSubmitButtonPush() {
         this.props.setTeacherId(this.props.match.params.teacherId)
+        this.props.setRatingType(0)
         if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
           this.props.sendRating()
           this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
@@ -167,6 +168,9 @@ class RateTeacher extends React.PureComponent<Props> {
           </div>
         )
       }
+      componentWillUnmount() {
+        this.props.clearStore();
+    }
 }
 
 function mapStateToProps(state: ApplicationState) {
