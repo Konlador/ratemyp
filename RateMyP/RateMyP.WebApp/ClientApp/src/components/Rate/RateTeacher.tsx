@@ -129,17 +129,20 @@ class RateTeacher extends React.PureComponent<Props> {
       }    
 
       private renderTagsMultiselect() {
+        var tags = this.props.tags.tags.filter(function (item) {
+          return (item.type & TagStore.TagType.Teacher) ===  TagStore.TagType.Teacher
+        });
         return(
           <FormGroup>
               <Label>Tags</Label>
               <div>
                 <Multiselect
                   dropUp
-                  data={this.props.tags.tags}
+                  data={tags}
                   value={this.props.rating.rating.tags}
                   textField='text'
                   placeholder='Your tags'
-                  disabled={this.props.rating.rating.tags.length>=5 ? this.props.tags.tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
+                  disabled={this.props.rating.rating.tags.length>=5 ? tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
                   onChange={value => this.props.changeTags(value)}
                 />
               </div>
