@@ -6,7 +6,9 @@ namespace RateMyP.WebApp.Models
     [Flags]
     public enum TagTypes 
         { 
-        None = 0, Teacher = 1, Course = 2
+        None = 0,
+        Teacher = 1,
+        Course = 2
         }
     public class Tag : IEquatable<Tag>
         {
