@@ -55,7 +55,6 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
                     <thead>
                         <tr>
                             <th>Course</th>
-                            <th>Id</th>
                             <th>Type</th>
                         </tr>
                     </thead>

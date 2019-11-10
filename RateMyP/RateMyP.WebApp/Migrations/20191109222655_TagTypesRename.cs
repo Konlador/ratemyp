@@ -14,7 +14,7 @@ namespace RateMyP.WebApp.Migrations
                 name: "Type",
                 table: "Tags",
                 nullable: false,
-                defaultValue: 3);
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -28,7 +28,7 @@ namespace RateMyP.WebApp.Migrations
                 table: "Tags",
                 type: "int",
                 nullable: false,
-                defaultValue: 3);
+                defaultValue: 0);
         }
     }
 }

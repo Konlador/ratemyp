@@ -130,7 +130,7 @@ class RateTeacher extends React.PureComponent<Props> {
 
       private renderTagsMultiselect() {
         var tags = this.props.tags.tags.filter(function (item) {
-          return item.type === 3 || item.type === 1 
+          return (item.type &  1) ===  1
         });
         return(
           <FormGroup>

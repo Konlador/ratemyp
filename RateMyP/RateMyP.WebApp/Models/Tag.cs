@@ -4,7 +4,10 @@ using System.Collections.Generic;
 namespace RateMyP.WebApp.Models
     {
     [Flags]
-    public enum TagTypes { None = 0, Teacher = 1, Course = 2 }
+    public enum TagTypes 
+        { 
+        None = 0, Teacher = 1, Course = 2
+        }
     public class Tag : IEquatable<Tag>
         {
         public Guid Id { get; set; }
