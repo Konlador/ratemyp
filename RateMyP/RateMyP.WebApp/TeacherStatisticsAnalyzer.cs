@@ -35,22 +35,21 @@ namespace RateMyP.WebApp
             return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
-        public async Task<List<double>> GetTeacherAverageMarkList(Guid teacherId, DateTime startDate, DateTime endDate, int parts)
+        public async Task<List<Tuple<DateTime, double>>> GetTeacherAverageMarkList(Guid teacherId, DateTime startDate, DateTime endDate, int parts)
             {
-            var teachersAverageMarks = new List<double>();
+            var teachersAverageMarks = new List<Tuple<DateTime, double>>();
 
             var difference = endDate - startDate;
             var singlePartInterval = TimeSpan.FromTicks(difference.Ticks / parts);
 
-            var start = startDate;
-            var end = startDate + singlePartInterval;
+            var start = startDate - singlePartInterval;
+            var end = startDate;
 
             for (var i = 0; i < parts; i++)
                 {
-                teachersAverageMarks.Add(await GetTeacherAverageMark(teacherId, start, end));
-
                 start += singlePartInterval;
                 end += singlePartInterval;
+                teachersAverageMarks.Add(Tuple.Create(start, await GetTeacherAverageMark(teacherId, start, end)));
                 }
             return teachersAverageMarks;
             }
