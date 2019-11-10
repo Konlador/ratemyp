@@ -110,7 +110,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                         }}>{rating.thumbDowns} find this not useful</a>
                     </div>
                     <div>
-                    <Button color="primary" tag={Link} to={`/rating-report/${rating.id}`}  size='sm'>Report rating</Button>{' '}
+                    <Button color="primary" tag={Link} to={{pathname: `/rating-report/${rating.id}`, state: rating}}  size='sm'>Report rating</Button>{' '}
                     </div>
                 </div>
             </div>
