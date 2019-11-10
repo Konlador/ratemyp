@@ -12,13 +12,13 @@ export interface TagsState {
 export interface Tag {
     id: string,
     text: string;
-    type: TagFlag;
+    type: TagType;
 }
 
-export enum TagFlag {
-    none = 0,
-    teacher = 1,
-    course = 2
+export enum TagType {
+    None = 0,
+    Teacher = 1,
+    Course = 2
   }
 
 // -----------------
