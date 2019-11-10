@@ -6,7 +6,7 @@ import { AppThunkAction } from '.';
 
 export interface TeacherStatisticsState {
     teacherId: string | undefined;
-    teacherStatistics: TeacherStatistic[];
+    teacherStatistics: TeacherStatistic;
     isLoading: boolean;
 }
 
@@ -14,8 +14,10 @@ export interface TeacherStatistic {
     id: string,
     teacherId: string,
     averageMark: number,
+    averageMarkByDate: number,
+    averageMarkList: [],
     averageLevelOfDifficulty: number,
-    averageWouldTakeAgainRatio: number,
+    averageWouldTakeAgainRatio: number;
 }
 
 // -----------------
@@ -25,11 +27,13 @@ export interface TeacherStatistic {
 interface RequestTeacherStatisticsAction {
     type: 'REQUEST_TEACHERSTATISTICS';
     teacherId: string;
+    startDate: number;
+    endDate: number;
 }
 
 interface ReceiveTeacherStatisticsAction {
     type: 'RECEIVE_TEACHERSTATISTICS';
-    teacherStatistics: TeacherStatistic[];
+    teacherStatistics: TeacherStatistic;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -39,30 +43,38 @@ type KnownAction = RequestTeacherStatisticsAction | ReceiveTeacherStatisticsActi
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
-
 export const actionCreators = {
-    requestTeacherStatistics: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestTeacherStatistics: (teacherId: string, startDate: number, endDate: number): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState &&
             appState.teacherStatistics &&
             appState.teacherStatistics.isLoading === false &&
             appState.teacherStatistics.teacherId !== teacherId) {
-            fetch(`api/statistics/teacher=${teacherId}`)
-                .then(response => response.json() as Promise<TeacherStatistic[]>)
+            fetch(`api/statistics/teacher=${teacherId}/date=${startDate}-${endDate}/parts=4`)
+                .then(response => response.json() as Promise<TeacherStatistic>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERSTATISTICS', teacherStatistics: data });
                 });
 
-            dispatch({ type: 'REQUEST_TEACHERSTATISTICS', teacherId });
+            dispatch({ type: 'REQUEST_TEACHERSTATISTICS', teacherId, startDate, endDate });
         }
     }
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
+const undefinedTeacherStatistic = <TeacherStatistic> {
+    id: "undefined",
+    teacherId: "undefined",
+    averageMark: 0,
+    averageMarkByDate: 0,
+    averageMarkList: [],
+    averageLevelOfDifficulty: 0,
+    averageWouldTakeAgainRatio: 0
 
-const unloadedState: TeacherStatisticsState = { teacherId: undefined, teacherStatistics: [], isLoading: false };
+}
+const unloadedState: TeacherStatisticsState = { teacherId: undefined, teacherStatistics: undefinedTeacherStatistic , isLoading: false };
 
 export const reducer: Reducer<TeacherStatisticsState> = (state: TeacherStatisticsState | undefined, incomingAction: Action): TeacherStatisticsState => {
     if (state === undefined)
