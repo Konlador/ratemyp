@@ -18,6 +18,7 @@ type Props =
 
 class Teachers extends React.PureComponent<Props & OwnProps> {
 
+
     tableOptions = {
         print: false,
         download: false,
@@ -29,22 +30,37 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
           },
+        onSearchChange: (searchText: string) => {
+            this.setState({searchText: searchText})
+            if (!this.state.canSearch) {
+                const timer = setTimeout(() => {
+                    this.setState({canSearch: true});
+                    console.log("Search!");
+                }, 500);
+                return () => clearTimeout(timer);
+            } else this.setState({canSearch: false});
+            return () => searchText;
+        },
         customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
-            let isFound = false;
-            let matchString = currentRow[0].toString().concat(" ", currentRow[1].toString());
-            console.log(searchQuery, currentRow, columns, matchString);
-            if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
-                isFound = true;
-            }       
-            return isFound;
+            if (this.state.canSearch) {
+                let isFound = false;
+                let matchString = currentRow[0].toString().concat(" ", currentRow[1].toString());
+                if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
+                    isFound = true;
+                }          
+                return isFound;
+            } else return false;
         }
     };
     
     state = {
-        data: []
+        data: [],
+        canSearch: true,
+        searchText: "a"
     }
 
     public componentDidMount() {
+        this.setState({searchText: 'a'});
         if (this.props.teachers.length === 0) this.props.requestTeachers();
         window.addEventListener("scroll", this.onScroll, false);
     }
