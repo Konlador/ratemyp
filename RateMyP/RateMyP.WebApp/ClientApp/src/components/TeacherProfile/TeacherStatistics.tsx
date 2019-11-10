@@ -223,7 +223,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         statistics: state.teacherStatistics,
-        ratings: state.ratings,
+        ratings: state.teacherRatings,
         tags: state.tags,
         teacherId: ownProps.teacherId
     }
