@@ -4,21 +4,21 @@ import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as TeacherActivitiesStore from '../../store/Teacher/TeacherActivities';
-import * as CoursesStore from '../../store/Rate/RateCourses';
+import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
 
 
 interface OwnProps {
-    teacherId: string
+    teacherId: string;
     passSelectedTeacherActivities: (value: string) => void;
 };
 
 type Props =
     {
     activities: TeacherActivitiesStore.TeacherActivitesState,
-    courses: CoursesStore.RateCoursesState
+    courses: TeacherCoursesStore.TeacherCoursesState
     } &
     typeof TeacherActivitiesStore.actionCreators &
-    typeof CoursesStore.actionCreators&
+    typeof TeacherCoursesStore.actionCreators &
     RouteComponentProps<{}>;
 
 class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
@@ -47,31 +47,22 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderTeacherActivites() {
-
-        enum LectureType {
-                Lecture,
-                Practice,
-                Seminar
-            }
-
         return (
             <div>
                 <h1>Activities</h1>
                 {this.props.activities.isLoading && <span>Loading...</span>}
-                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm">
+                <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
                             <th>Course</th>
-                            <th>Id</th>
                             <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr onClick={() => this.props.passSelectedTeacherActivities(activity.courseId)}>
+                            <tr onClick={() => {this.props.setSelectedRowId(activity.id) ; this.props.passSelectedTeacherActivities(activity.courseId);}}  style={{background: activity.id===this.props.activities.selectedRowId? '#6091ff':'white'}}>
                                 <td>{this.getCourseName(activity.courseId)}</td>
-                                <td>{activity.courseId}</td>
-                                <td>{LectureType[activity.lectureType]}</td>
+                                <td>{TeacherActivitiesStore.LectureType[activity.lectureType]}</td>
                             </tr>
                         )}
                     </tbody>
@@ -89,14 +80,14 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         activities: state.teacherActivites,
-        courses: state.rateCourses,
+        courses: state.teacherCourses,
         teacherId: ownProps.teacherId,
     }
 };
 
 const actions = {
     ...TeacherActivitiesStore.actionCreators,
-    ...CoursesStore.actionCreators
+    ...TeacherCoursesStore.actionCreators
 }
 
 export default withRouter(

@@ -12,7 +12,14 @@ export interface TagsState {
 export interface Tag {
     id: string,
     text: string;
+    type: TagType;
 }
+
+export enum TagType {
+    None = 0,
+    Teacher = 1,
+    Course = 2
+  }
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.

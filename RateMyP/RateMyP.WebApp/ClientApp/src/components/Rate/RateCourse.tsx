@@ -5,22 +5,20 @@ import { Button, Form, FormGroup, Label, Input, CustomInput, UncontrolledTooltip
 import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
 import 'react-widgets/dist/css/react-widgets.css';
-import RateTeacherActivities from './RateTeacherActivities';
-import * as TagStore from '../../store/Tags'
 import { ApplicationState } from '../../store';
 import * as RateStore from '../../store/Rate/Rate';
-
+import * as TagStore from '../../store/Tags'
 
 type Props =
     {
-      tags: TagStore.TagsState
-      rating: RateStore.RateState
+    tags: TagStore.TagsState
+    rating: RateStore.RateState
     } &
     typeof RateStore.actionCreators &
     typeof TagStore.actionCreators &
-    RouteComponentProps<{ teacherId: string }>
+    RouteComponentProps<{ courseId: string}>
 
-class RateTeacher extends React.PureComponent<Props> {
+class RateCourse extends React.PureComponent<Props> {
     public componentDidMount() {
         this.props.requestTags();
     }
@@ -36,9 +34,10 @@ class RateTeacher extends React.PureComponent<Props> {
           </React.Fragment>
         );
       }
+    
     private renderForm() {
-      return(
-      <Form>
+      return (
+        <Form>
           {this.renderAlerts()}
           {this.renderStarRating()}
           {this.renderWouldTakeAgain()}
@@ -54,18 +53,17 @@ class RateTeacher extends React.PureComponent<Props> {
             <Input type="textarea" name="text" id="comment" onChange={event => this.props.changeComment(event.target.value)}/>
           </FormGroup>
           {this.renderTagsMultiselect()}
-          <RateTeacherActivities teacherId={this.props.match.params.teacherId} passSelectedTeacherActivities = {(value: string) => this.props.setCourseId(value)} />
           <Button color="primary" onClick={() => this.props.submitReview() && this.onSubmitButtonPush() } >Submit</Button>{' '}
-      </Form>
+        </Form>
       );
     }
-    
+
       private onSubmitButtonPush() {
-        this.props.setTeacherId(this.props.match.params.teacherId)
-        this.props.setRatingType(0)
+        this.props.setRatingType(1)
+        this.props.setCourseId(this.props.match.params.courseId)
         if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
           this.props.sendRating()
-          this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
+          this.props.history.push(`/course-profile/${this.props.match.params.courseId}`)
         }
       }
 
@@ -88,7 +86,7 @@ class RateTeacher extends React.PureComponent<Props> {
       private renderWouldTakeAgain() {
         return(
           <FormGroup tag="fieldset">
-            <Label>Would you take this prof again?</Label>
+            <Label>Would you take this course again?</Label>
             <div>
               <FormGroup check inline>
                 <Label check>
@@ -130,7 +128,7 @@ class RateTeacher extends React.PureComponent<Props> {
 
       private renderTagsMultiselect() {
         var tags = this.props.tags.tags.filter(function (item) {
-          return (item.type & TagStore.TagType.Teacher) ===  TagStore.TagType.Teacher
+          return (item.type & TagStore.TagType.Course) ===  TagStore.TagType.Course
         });
         return(
           <FormGroup>
@@ -167,9 +165,6 @@ class RateTeacher extends React.PureComponent<Props> {
             <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.levelOfDifficulty === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
               You must select a difficulty.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.courseId === '' && this.props.rating.submitButtonClicked} toggle = {false}>
-              You must select an activity.
-            </UncontrolledAlert>
           </div>
         )
       }
@@ -191,4 +186,6 @@ const actions = {
 }
 
 
-export default connect(mapStateToProps, actions)(RateTeacher as any);
+export default withRouter(
+    connect(mapStateToProps, actions)(RateCourse as any) as React.ComponentType<any>
+);

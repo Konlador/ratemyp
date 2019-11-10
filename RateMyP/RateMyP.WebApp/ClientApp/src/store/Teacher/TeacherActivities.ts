@@ -8,6 +8,7 @@ export interface TeacherActivitesState {
     isLoading: boolean;
     teacherActivites: TeacherActivity[];
     teacherId: string | undefined;
+    selectedRowId: string
 }
 
 export enum LectureType {
@@ -38,9 +39,14 @@ interface ReceiveTeacherActivitiesAction {
     teacherActivites: TeacherActivity[];
 }
 
+interface SetSelectedRowId {
+    type: 'SET_SELECTED_ROW_ID';
+    value: string
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeacherActivitiesAction | ReceiveTeacherActivitiesAction;
+type KnownAction = RequestTeacherActivitiesAction | ReceiveTeacherActivitiesAction | SetSelectedRowId;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -62,13 +68,16 @@ export const actionCreators = {
 
             dispatch({ type: 'REQUEST_TEACHERACTIVITIES', teacherId });
         }
-    }
+    },
+    setSelectedRowId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_SELECTED_ROW_ID', value: value });
+    },
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeacherActivitesState = { teacherId: undefined, teacherActivites: [], isLoading: false };
+const unloadedState: TeacherActivitesState = { teacherId: undefined, teacherActivites: [], isLoading: false, selectedRowId: '' };
 
 export const reducer: Reducer<TeacherActivitesState> = (state: TeacherActivitesState | undefined, incomingAction: Action): TeacherActivitesState => {
     if (state === undefined)
@@ -80,14 +89,23 @@ export const reducer: Reducer<TeacherActivitesState> = (state: TeacherActivitesS
             return {
                 teacherId: action.teacherId,
                 teacherActivites: state.teacherActivites,
-                isLoading: true
+                isLoading: true,
+                selectedRowId: state.selectedRowId
             };
         case 'RECEIVE_TEACHERACTIVITIES':
             return {
                 teacherId: state.teacherId,
                 teacherActivites: action.teacherActivites,
-                isLoading: false
+                isLoading: false,
+                selectedRowId: state.selectedRowId
             };
+        case 'SET_SELECTED_ROW_ID':
+            return {
+                teacherId: state.teacherId,
+                teacherActivites: state.teacherActivites,
+                isLoading: false,
+                selectedRowId: action.value
+            };            
     }
 
     return state;

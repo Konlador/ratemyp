@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP.WebApp;
 
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191109214427_TagTypes")]
+    partial class TagTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,12 +74,6 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ThumbDowns")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ThumbUps")
-                        .HasColumnType("int");
-
                     b.Property<bool>("WouldTakeTeacherAgain")
                         .HasColumnType("bit");
 
@@ -109,7 +105,7 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("ThumbUp")
+                    b.Property<bool>("ThumbsUp")
                         .HasColumnType("bit");
 
                     b.HasKey("RatingId", "StudentId");
@@ -136,11 +132,11 @@ namespace RateMyP.WebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("TagType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

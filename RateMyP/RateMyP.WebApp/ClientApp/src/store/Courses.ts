@@ -8,6 +8,8 @@ export interface CoursesState {
     isLoading: boolean;
     courses: Course[];
     selectedCourse: Course | undefined;
+    canLoadMore: boolean;
+    currentIndex: number;
 }
 
 export interface Course {
@@ -53,9 +55,13 @@ interface ClearSelectedCourse {
     type: 'CLEAR_SELECTED_COURSE'
 }
 
+interface CheckCourseAvailabilityAction {
+    type: 'CHECK_COURSE_AVAILABILITY'
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse;
+type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse | CheckCourseAvailabilityAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -66,12 +72,12 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.courses &&
-            appState.courses.isLoading === false &&
-            appState.courses.courses.length === 0) {
-            fetch(`api/courses`)
+            appState.courses.isLoading === false) {
+            fetch(`api/courses/startIndex=${appState.courses.currentIndex}`)
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_COURSES', courses: data });
+                    if (data.length < 20) dispatch({ type: 'CHECK_COURSE_AVAILABILITY' });
                 });
 
             dispatch({ type: 'REQUEST_COURSES' });
@@ -83,7 +89,7 @@ export const actionCreators = {
             appState.courses &&
             appState.courses.isLoading === false &&
             (appState.courses.selectedCourse === undefined ||
-            appState.courses.selectedCourse.id !== courseId)) {
+                appState.courses.selectedCourse.id !== courseId)) {
             fetch(`api/courses/${courseId}`)
                 .then(response => response.json() as Promise<Course>)
                 .then(data => {
@@ -99,7 +105,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false };
+const unloadedState: CoursesState = { courses: [], selectedCourse: undefined, isLoading: false, currentIndex: 0, canLoadMore: true };
 
 export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, incomingAction: Action): CoursesState => {
     if (state === undefined)
@@ -111,32 +117,50 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
             return {
                 courses: state.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: true
+                isLoading: true,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
         case 'RECEIVE_COURSES':
             return {
-                courses: action.courses,
+                courses: [...state.courses, ...action.courses],
                 selectedCourse: state.selectedCourse,
-                isLoading: false
+                isLoading: false,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex + 20
             };
         case 'REQUEST_COURSE':
             return {
                 courses: state.courses,
                 selectedCourse: state.selectedCourse,
-                isLoading: true
+                isLoading: true,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
         case 'RECEIVE_COURSE':
             return {
                 courses: state.courses,
                 selectedCourse: action.course,
-                isLoading: false
+                isLoading: false,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
         case 'CLEAR_SELECTED_COURSE':
             return {
                 courses: state.courses,
                 selectedCourse: undefined,
-                isLoading: state.isLoading
+                isLoading: state.isLoading,
+                canLoadMore: state.canLoadMore,
+                currentIndex: state.currentIndex
             };
+        case 'CHECK_COURSE_AVAILABILITY':
+            return {
+                courses: state.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: false,
+                currentIndex: state.currentIndex,
+                canLoadMore: false
+            }
     }
 
     return state;

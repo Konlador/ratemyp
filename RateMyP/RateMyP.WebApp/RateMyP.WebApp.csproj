@@ -44,6 +44,8 @@
     <Compile Remove="Migrations\20191103185817_Student.Designer.cs" />
     <Compile Remove="Migrations\20191103191046_Student.cs" />
     <Compile Remove="Migrations\20191103191046_Student.Designer.cs" />
+    <Compile Remove="Migrations\20191109163123_RatingTypes.cs" />
+    <Compile Remove="Migrations\20191109163123_RatingTypes.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

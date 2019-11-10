@@ -8,6 +8,8 @@ export interface TeachersState {
     teachers: Teacher[];
     selectedTeacher: Teacher | undefined;
     isLoading: boolean;
+    currentIndex: number;
+    canLoadMore: boolean;
 }
 
 export interface Teacher {
@@ -50,13 +52,17 @@ interface ReceiveTeacherAction {
     selectedTeacher: Teacher;
 }
 
+interface CheckTeacherAvailabilityAction {
+    type: 'CHECK_TEACHER_AVAILABILITY';
+}
+
 interface ClearSelectedTeacher {
     type: 'CLEAR_SELECTED_TEACHER'
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeacherAction | ReceiveTeacherAction | ClearSelectedTeacher;
+type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeacherAction | ReceiveTeacherAction | CheckTeacherAvailabilityAction | ClearSelectedTeacher;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -65,16 +71,13 @@ type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeache
 export const actionCreators = {
     requestTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState &&
-            appState.teachers &&
-            appState.teachers.isLoading === false &&
-            appState.teachers.teachers.length === 0) {
-            fetch(`api/teachers`)
+        if (appState && appState.teachers && appState.teachers.isLoading === false) {
+            fetch(`api/teachers/startIndex=${appState.teachers.currentIndex}`)
                 .then(response => response.json() as Promise<Teacher[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERS', teachers: data });
+                    if (data.length < 20) dispatch({ type: 'CHECK_TEACHER_AVAILABILITY'})
                 });
-
             dispatch({ type: 'REQUEST_TEACHERS' });
         }
     },
@@ -99,7 +102,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeachersState = { teachers: [], selectedTeacher: undefined, isLoading: false };
+const unloadedState: TeachersState = { teachers: [], selectedTeacher: undefined, isLoading: false, currentIndex: 0, canLoadMore: true };
 
 export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined, incomingAction: Action): TeachersState => {
     if (state === undefined)
@@ -111,31 +114,49 @@ export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined
             return {
                 teachers: state.teachers,
                 selectedTeacher: state.selectedTeacher,
-                isLoading: true
+                isLoading: true,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
             };
         case 'RECEIVE_TEACHERS':
             return {
-                teachers: action.teachers,
+                teachers: [...state.teachers, ...action.teachers],
                 selectedTeacher: state.selectedTeacher,
-                isLoading: false
+                isLoading: false,
+                currentIndex: state.currentIndex + 20,
+                canLoadMore: state.canLoadMore
             };
         case 'REQUEST_TEACHER':
             return {
                 teachers: state.teachers,
                 selectedTeacher: state.selectedTeacher,
-                isLoading: true
+                isLoading: true,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
             };
         case 'RECEIVE_TEACHER':
             return {
                 teachers: state.teachers,
                 selectedTeacher: action.selectedTeacher,
-                isLoading: false
+                isLoading: false,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
             };
+        case 'CHECK_TEACHER_AVAILABILITY':
+            return {
+                teachers: state.teachers,
+                selectedTeacher: state.selectedTeacher,
+                isLoading: false,
+                currentIndex: state.currentIndex,
+                canLoadMore: false
+            }
         case 'CLEAR_SELECTED_TEACHER':
             return {
                 teachers: state.teachers,
                 selectedTeacher: undefined,
-                isLoading: state.isLoading
+                isLoading: state.isLoading,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
             };
     }
 
