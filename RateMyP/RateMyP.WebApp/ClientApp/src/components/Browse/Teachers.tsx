@@ -30,38 +30,37 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
           },
-        onSearchChange: (searchText: string) => {
-            this.setState({searchText: searchText})
-            if (!this.state.canSearch) {
-                const timer = setTimeout(() => {
-                    this.setState({canSearch: true});
-                    console.log("Search!");
-                }, 500);
-                return () => clearTimeout(timer);
-            } else this.setState({canSearch: false});
-            return () => searchText;
+        onSearchOpen: () => {
+            this.setState({previousIndex: this.state.currentIndex});
+             if (this.state.canLoadMore) this.setState({currentIndex: this.props.teachers.length});
+            this.setState({canLoadMore: false});
+        },
+        onSearchClose: () => {
+            //this.setState({currentIndex: this.state.previousIndex});
+            //if (this.state.currentIndex < this.props.teachers.length) this.setState({canLoadMore: true});
         },
         customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
-            if (this.state.canSearch) {
-                let isFound = false;
-                let matchString = currentRow[0].toString().concat(" ", currentRow[1].toString());
-                if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
+            let isFound = false;
+            let matchString = currentRow[0].toString().concat(" ", currentRow[1].toString());
+            if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
                     isFound = true;
-                }          
+            }      
                 return isFound;
-            } else return false;
         }
     };
     
     state = {
-        data: [],
+        currentIndex: 20,
+        previousIndex: 20,
         canSearch: true,
-        searchText: "a"
+        canLoadMore: true,
     }
 
     public componentDidMount() {
-        this.setState({searchText: 'a'});
-        if (this.props.teachers.length === 0) this.props.requestTeachers();
+        this.setState({currentIndex: 20});
+        this.setState({previousIndex: 20});
+        this.setState({canLoadMore: true});
+        if (this.props.teachers.length === 0) this.props.requestAllTeachers();
         window.addEventListener("scroll", this.onScroll, false);
     }
 
@@ -83,14 +82,17 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     }
 
     private loadMoreTeachers() {
-        this.props.requestTeachers();
+        if (this.state.canLoadMore) this.setState({currentIndex: this.state.currentIndex + 20});
+        console.log(this.state.currentIndex);
+        if (this.state.currentIndex >= this.props.teachers.length) this.setState({canLoadMore: false})
+        //this.props.requestTeachers();
     }
 
     public render() {
         return (
             <React.Fragment>
                 {this.renderTable()}
-                {this.props.canLoadMore &&
+                {this.state.canLoadMore &&
                 <Button onClick={() => this.loadMoreTeachers()} color="primary" style={{
                     position: 'absolute', 
                     left: '46%', 
@@ -112,7 +114,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
             <div>
                 <MUIDataTable
                     title={"Academic Staff"}
-                    data={this.props.teachers.map((teacher: TeachersStore.Teacher) => {
+                    data={this.props.teachers.slice(0, this.state.currentIndex).map((teacher: TeachersStore.Teacher,) => {
                     return [
                         teacher.firstName,
                         teacher.lastName,

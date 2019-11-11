@@ -23,7 +23,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachers()
             {
-            return await m_context.Teachers.ToListAsync();
+            return await m_context.Teachers.OrderBy(teacher => teacher.LastName).ToListAsync();
             }
 
         [HttpGet("startIndex={startIndex}")]
