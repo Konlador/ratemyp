@@ -13,6 +13,7 @@ namespace RateMyP.WebApp
         public DbSet<RatingThumb> RatingThumbs { get; set; }
         public DbSet<RatingTag> RatingTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<RatingReport> RatingReports { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
