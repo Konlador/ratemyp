@@ -33,7 +33,6 @@ namespace RateMyP.WebApp.Controllers
                 AverageLevelOfDifficulty = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId),
                 WouldTakeAgainRatio = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId)
                 };
-
             return teacherStatistic;
             }
         }

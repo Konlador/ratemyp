@@ -12,9 +12,12 @@ namespace RateMyP.WebApp.Models
             public List<DateMark> AverageMarkList { get; set; }
             public double AverageLevelOfDifficulty { get; set; }
             public double WouldTakeAgainRatio { get; set; }
-            public bool Equals([AllowNull] TeacherStatistic other)
-            {
-            throw new NotImplementedException();
-            }
+        public bool Equals(TeacherStatistic other) =>
+        other != null &&
+        other.Id.Equals(Id) &&
+        other.TeacherId.Equals(TeacherId) &&
+        other.AverageMark.Equals(AverageMark) &&
+        other.AverageLevelOfDifficulty.Equals(AverageLevelOfDifficulty) &&
+        other.WouldTakeAgainRatio.Equals(WouldTakeAgainRatio);
         }
     }
