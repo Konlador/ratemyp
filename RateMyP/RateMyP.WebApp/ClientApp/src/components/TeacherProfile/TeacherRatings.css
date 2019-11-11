@@ -18,14 +18,37 @@
     text-transform: uppercase;
 }
 
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+td {
+    word-wrap: break-word;
+}
+
 th.course {
-    width: 25% !important
+    width: 25%;
 }
 
 th.rating {
-    width: 30% !important
+    width: 25%;
 }
 
 th.comment {
-    width: 45% !important
+    width: 50%;
+    word-wrap: break-word;
+}
+
+div.ratings-head {
+    padding-bottom: 15px;
+}
+
+div.ratings-head h2.ratings {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+div.ratings-head .btn.add-rating {
+    display: inline-block;
 }

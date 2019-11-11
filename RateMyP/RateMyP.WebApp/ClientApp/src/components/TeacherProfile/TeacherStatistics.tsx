@@ -146,7 +146,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         const tagTextCounts = this.getTeacherTagTextCounts();
         return (
             <div className="tagbox">
-                {Array.from(tagTextCounts).map((tagTextCount) =>
+                {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount) =>
                     <span>
                         {tagTextCount[0]} ({tagTextCount[1]})
                     </span>)}

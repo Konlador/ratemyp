@@ -46,8 +46,11 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     private renderTeacherInfo() {
         return (
             <div>
-                <h2>Ratings</h2>
-                {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
+                <div className="ratings-head">
+                    <h2 className="ratings">Ratings</h2>
+                    <Button className="add-rating" color="primary" tag={Link} to={`/rate-teacher/${this.props.teacherId}`}>Add a rating</Button>{' '}
+                    {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
+                </div>
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                     <thead>
                         <tr>
