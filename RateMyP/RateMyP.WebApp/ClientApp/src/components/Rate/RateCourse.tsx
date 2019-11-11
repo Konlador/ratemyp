@@ -73,7 +73,7 @@ class RateCourse extends React.PureComponent<Props> {
             <Label>Overall rating</Label>
               <div style={{fontSize: 26}}>
                 <Rating
-                onChange={event => this.props.setOverallMark(event)}
+                onClick={event => {this.props.setOverallMark(event)}}
                 initialRating={this.props.rating.rating.overallMark}
                 // emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
                 // fullSymbol={<img src="assets/images/star-full.png" className="icon" />}

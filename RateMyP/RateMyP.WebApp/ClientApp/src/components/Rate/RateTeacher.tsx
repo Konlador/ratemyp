@@ -73,13 +73,13 @@ class RateTeacher extends React.PureComponent<Props> {
       }
     }
 
-    private renderStarRating() {
-      return(
-        <FormGroup>
-          <Label>Overall rating</Label>
-            <div style={{fontSize: 26}}>
-              <Rating
-                onChange={value => this.props.setOverallMark(value)}
+      private renderStarRating() {
+        return(
+          <FormGroup>
+            <Label>Overall rating</Label>
+              <div style={{fontSize: 26}}>
+                <Rating
+                onClick={event => this.props.setOverallMark(event)}
                 initialRating={this.props.rating.rating.overallMark}
                 // emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
                 // fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
