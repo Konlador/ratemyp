@@ -40,44 +40,46 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     public render() {
         return (
             <React.Fragment>
-                <h1>Statistics</h1>
-                <Row>
-                    <Col sm="4">
-                        {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
-                    </Col>
-                    <Col sm="4">
-                        {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                <div>
+                    <h1>Statistics</h1>
+                    <Row>
+                        <Col sm="4">
+                            {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
+                        </Col>
+                        <Col sm="4">
+                            {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                            <Card>
+                                <CardBody>
+                                    <CardTitle
+                                        style={{ fontSize: "10px" }}
+                                        body className="text-center">
+                                        <strong>Would take again</strong>
+                                    </CardTitle>
+
+                                    <CardText
+                                        style={{ fontSize: "70px" }}
+                                        body className="text-center">
+                                        <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col>
+                            {this.renderTags()}
+                        </Col>
+                    </Row>
+
+                    <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
+                        Show/Hide Statistics Graph
+                    </Button>
+                    <UncontrolledCollapse toggler="#toggler">
                         <Card>
                             <CardBody>
-                                <CardTitle
-                                    style={{ fontSize: "10px" }}
-                                    body className="text-center">
-                                    <strong>Would take again</strong>
-                                </CardTitle>
-
-                                <CardText
-                                    style={{ fontSize: "70px" }}
-                                    body className="text-center">
-                                    <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
-                                </CardText>
+                                {this.renderTeacherRatingHistory()}
                             </CardBody>
                         </Card>
-                    </Col>
-                    <Col>
-                        {this.renderTags()}
-                    </Col>
-                </Row>
-
-                <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
-                    Show/Hide Statistics Graph
-                </Button>
-                <UncontrolledCollapse toggler="#toggler">
-                    <Card>
-                        <CardBody>
-                            {this.renderTeacherRatingHistory()}
-                        </CardBody>
-                    </Card>
-                </UncontrolledCollapse>
+                    </UncontrolledCollapse>
+                </div>
             </React.Fragment>
         );
     }
@@ -127,11 +129,12 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                         },
                         vAxis: {
                             title: 'Rating',
-                            minValue: 0,
-                            maxValue: 10,
+                            minValue: 1,
+                            maxValue: 5,
                         },
                         width: 1000,
                         height: 400,
+                        legend: "none",
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 /> : <Spinner type="grow" color="success" />}

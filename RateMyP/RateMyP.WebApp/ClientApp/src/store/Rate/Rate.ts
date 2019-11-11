@@ -135,60 +135,60 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                 }),
                 });
         case 'SET_LEVEL_OF_DIFFICULTY':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        levelOfDifficulty: action.value, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    levelOfDifficulty: action.value, 
+                }),
+                });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        wouldTakeTeacherAgain: true, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    wouldTakeTeacherAgain: true, 
+                }),
+                });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        wouldTakeTeacherAgain: false, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    wouldTakeTeacherAgain: false, 
+                }),
+                });
         case 'CHANGE_COMMENT':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        comment: action.value, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    comment: action.value, 
+                }),
+                });
         case 'CHANGE_TAGS':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        tags: action.tags, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    tags: action.tags, 
+                }),
+                });
         case 'SUBMIT_REVIEW':
-                return Object.assign({}, state, {
-                    submitButtonClicked: true,
-                    });
+            return Object.assign({}, state, {
+                submitButtonClicked: true,
+                });
         case 'SET_TEACHER_ID':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        teacherId: action.value,
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    teacherId: action.value,
+                }),
+                });
         case 'SEND_RATING':
-                return Object.assign({}, state, {
-                    });
+            return Object.assign({}, state, {
+                });
         case 'SET_COURSE_ID':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        courseId: action.value,
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    courseId: action.value,
+                }),
+                });
         case 'SET_RATING_TYPE':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        ratingType: action.value,
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    ratingType: action.value,
+                }),
+                });
         case 'CLEAR_STORE':
             return unloadedState;
                     

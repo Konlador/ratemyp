@@ -53,7 +53,7 @@ export const actionCreators = {
             appState.teacherStatistics &&
             appState.teacherStatistics.isLoading === false &&
             appState.teacherStatistics.teacherId !== teacherId) {
-            fetch(`api/statistics/teacher=${teacherId}/parts=10`)
+            fetch(`api/statistics/teacher=${teacherId}/timeStamps=10`)
                 .then(response => response.json() as Promise<TeacherStatistics>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERSTATISTICS', teacherStatistics: data });
