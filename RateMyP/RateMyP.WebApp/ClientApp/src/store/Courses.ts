@@ -77,7 +77,7 @@ export const actionCreators = {
                 .then(response => response.json() as Promise<Course[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_COURSES', courses: data });
-                    if (data.length < 20) dispatch({ type: 'CHECK_COURSE_AVAILABILITY' });
+                    if (data.length === 0) dispatch({ type: 'CHECK_COURSE_AVAILABILITY' });
                 });
 
             dispatch({ type: 'REQUEST_COURSES' });
@@ -127,7 +127,7 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
                 selectedCourse: state.selectedCourse,
                 isLoading: false,
                 canLoadMore: state.canLoadMore,
-                currentIndex: state.currentIndex + 20
+                currentIndex: state.currentIndex + action.courses.length
             };
         case 'REQUEST_COURSE':
             return {
