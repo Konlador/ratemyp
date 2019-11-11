@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Teachers from './Teachers';
 import Courses from './Courses';
-import { Button, ButtonGroup, Spinner } from "reactstrap";
+import { Button, ButtonGroup } from "reactstrap";
+import '../../extensions/StringExtensions';
 
 class Browse extends React.PureComponent {
 
@@ -15,6 +16,10 @@ class Browse extends React.PureComponent {
     }
 
     renderComponents() {
+        var text;
+        text = "Tėštąs";
+        console.log(text);
+        console.log(text.denationalize());
         if (this.state.page === 0) return <Teachers/>
         else return <Courses/>
     }
