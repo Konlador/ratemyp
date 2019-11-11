@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { Spinner } from 'reactstrap';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as TeacherStatisticsStore from '../../store/TeacherStatistics';
 import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
 import * as TagsStore from "../../store/Tags";
-import { Row, Col } from 'reactstrap';
-import {
-    Card, CardTitle, CardText, CardBody  } from 'reactstrap';
+import { Card, CardTitle, CardText, CardBody, UncontrolledCollapse, Row, Col, Button } from 'reactstrap';
+import { Chart } from "react-google-charts";
 
 interface OwnProps {
     teacherId: string
@@ -31,144 +31,145 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
+    private ensureDataFetched() {
+        this.props.requestTeacherRatings(this.props.teacherId);
+        this.props.requestTeacherStatistics(this.props.teacherId);
+        this.props.requestTags();
+    }
+
     public render() {
         return (
             <React.Fragment>
-                {this.renderTeacherStatistics()}
+                <div>
+                    <h1>Statistics</h1>
+                    <Row>
+                        <Col sm="4">
+                            {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
+                        </Col>
+                        <Col sm="4">
+                            {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                            <Card>
+                                <CardBody>
+                                    <CardTitle
+                                        style={{ fontSize: "10px" }}
+                                        body className="text-center">
+                                        <strong>Would take again</strong>
+                                    </CardTitle>
+
+                                    <CardText
+                                        style={{ fontSize: "70px" }}
+                                        body className="text-center">
+                                        <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col>
+                            {this.renderTags()}
+                        </Col>
+                    </Row>
+
+                    <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
+                        Show/Hide Statistics Graph
+                    </Button>
+                    <UncontrolledCollapse toggler="#toggler">
+                        <Card>
+                            <CardBody>
+                                {this.renderTeacherRatingHistory()}
+                            </CardBody>
+                        </Card>
+                    </UncontrolledCollapse>
+                </div>
             </React.Fragment>
         );
     }
 
-    private ensureDataFetched() {
-        this.props.requestTeacherStatistics(this.props.teacherId);
-        this.props.requestTeacherRatings(this.props.teacherId);
-        this.props.requestTags();
+    private renderNumber(title: string, titleFontSize: string, bodyTextFontSize: string, value: number) {
+        return (
+            <Card>
+                <CardBody>
+                    <CardTitle
+                        style={{ fontSize: titleFontSize }}
+                        body className="text-center">
+                        <strong>{title}</strong>
+                    </CardTitle>
+
+                    <CardText
+                        style={{ fontSize: bodyTextFontSize }}
+                        body className="text-center">
+                        <strong>{value.toFixed(1)}</strong>
+                    </CardText>
+                </CardBody>
+            </Card>
+        )
     }
 
-    private renderTeacherStatistics() {
+    private renderTeacherRatingHistory() {
+        var data = [];
+        data.push(['Date', 'Rating']);
+
+        var averageMarks = this.props.statistics.teacherStatistics.averageMarks;
+        averageMarks.forEach((dateMark) => {
+            let statDate = new Date(dateMark.date);
+            var dateString = `${statDate.getFullYear()}/${statDate.getMonth() + 1}/${statDate.getDate()}`;
+            data.push([dateString, dateMark.mark]);
+        });
+
         return (
-        <div>
-                <h1>Statistics</h1>
-                <Row>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                                <CardTitle
-                                    style={{ fontSize: "25px" }}
-                                    body className="text-center">
-                                    <strong>Average Rating</strong>
-                                </CardTitle>
-
-                                {this.props.statistics.teacherStatistics.map((statistic: TeacherStatisticsStore.TeacherStatistic) =>
-                                    <CardText
-                                        style={{ fontSize: "170px" }}
-                                        body className="text-center">
-                                        <strong>{statistic.averageMark}</strong>
-                                    </CardText>
-                                )}
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col sm="4">
-                        <Card>
-                            <CardBody>
-                            <CardTitle
-                                    style={{ fontSize: "12px" }}
-                                    body className="text-center">
-                                    <strong>Average Level of Difficulty Rating</strong>
-                                </CardTitle>
-
-                                {this.props.statistics.teacherStatistics.map((statistic: TeacherStatisticsStore.TeacherStatistic) =>
-                                    <CardText
-                                        style={{ fontSize: "70px" }}
-                                        body className="text-center">
-                                        <strong>{statistic.averageLevelOfDifficulty}</strong>
-                                    </CardText>
-                                )}
-                            </CardBody>
-                        </Card>
-                        <Card>
-                        <CardBody>
-                            <CardTitle
-                                    style={{ fontSize: "10px" }}
-                                    body className="text-center">
-                                    <strong>Ratio of Students Who Would Take This Teacher Again</strong>
-                                </CardTitle>
-
-                                {this.props.statistics.teacherStatistics.map((statistic: TeacherStatisticsStore.TeacherStatistic) =>
-                                    <CardText
-                                        style={{ fontSize: "70px" }}
-                                        body className="text-center">
-                                        <strong>{statistic.averageWouldTakeAgainRatio}</strong>
-                                    </CardText>
-                                )}
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col>
-                    {this.renderTags()}
-                    </Col>
-                </Row>
+            <div className="my-pretty-chart-container">
+                {(data.length > 1) ? <Chart
+                    width={'1000px'}
+                    height={'400px'}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={data}
+                    options={{
+                        hAxis: {
+                            title: 'Part',
+                        },
+                        vAxis: {
+                            title: 'Rating',
+                            minValue: 1,
+                            maxValue: 5,
+                        },
+                        width: 1000,
+                        height: 400,
+                        legend: "none",
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                /> : <Spinner type="grow" color="success" />}
             </div>
-        );
+        )
     }
 
     private renderTags() {
-        const distinctTeacherTags = this.getDistinctTeacherTags();
-        if (typeof distinctTeacherTags !== 'undefined') {
-            return (
-                <div>
-                    <div className="tagbox">
-                        {distinctTeacherTags.map((tag: TagsStore.Tag) =>
-                            <span>
-                                {tag.text} ({this.countTags(tag)})
-                            </span>)}
-                    </div>
-                </div>
-            )
-        }
+        const tagTextCounts = this.getTeacherTagTextCounts();
+        return (
+            <div className="tagbox">
+                {Array.from(tagTextCounts).map((tagTextCount) =>
+                    <span>
+                        {tagTextCount[0]} ({tagTextCount[1]})
+                    </span>)}
+            </div>
+        )
     }
 
-    private getAllTeacherTags() {
-        var tags = [];
+    private getTeacherTagTextCounts(): Map<string, number> {
+        let tagTextCounts = new Map<string, number>();
         var ratings = this.props.ratings.ratings;
-        if (this.props.ratings.ratings.length > 0)
-        {
-            for (let val of ratings)
-            {
-                for(let value of val.tags)
-                {
-                    tags.push(value);
-                }
-            }
-            return tags;
-        }
-    }
-    private getDistinctTeacherTags(){
-        var allTeachers = this.getAllTeacherTags();
-        if(typeof allTeachers !== 'undefined')
-        {
-            allTeachers = allTeachers.filter((elem, index, self) => 
-            self.findIndex((t) => {return (t.id === elem.id && t.text === elem.text)}) === index);
-            return allTeachers;
-        }
-    }
-    
-    private countTags(tag: TagsStore.Tag){
-        var allTeacherTags = this.getAllTeacherTags();
-        if(typeof allTeacherTags !== 'undefined') 
-        {
-            var count = 0;
-            allTeacherTags.forEach((v) => (v.id === tag.id && count++));
-            return count;
-        }
+
+        for (let rating of ratings)
+            tagTextCounts = rating.tags.reduce((counter, tag) =>
+                counter.set(tag.text, 1 + (counter.get(tag.text) || 0)), tagTextCounts);
+        
+        return tagTextCounts;
     }
 }
 
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
         statistics: state.teacherStatistics,
-        ratings: state.ratings,
+        ratings: state.teacherRatings,
         tags: state.tags,
         teacherId: ownProps.teacherId
     }

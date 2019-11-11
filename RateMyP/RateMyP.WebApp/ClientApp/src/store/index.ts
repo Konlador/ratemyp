@@ -6,11 +6,10 @@ import * as TeacherStatistics from './TeacherStatistics';
 import * as Courses from './Courses';
 import * as CourseTeachers from './Course/CourseTeachers';
 import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
-import * as Ratings from './Ratings';
 import * as Tags from './Tags';
 import * as Student from './Student';
-import * as Rate from './Rate/RateStore';
-import * as RateCourses from './Rate/RateCourses'
+import * as Rate from './Rate/Rate';
+import * as RatingReport from './Rate/RatingReport'
 
 // The top-level state object
 export interface ApplicationState {
@@ -24,12 +23,10 @@ export interface ApplicationState {
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
     courseTeacherActivities: CourseTeacherActivities.CourseTeacherActivitiesState | undefined;
 
-    ratings: Ratings.RatingsState | undefined;
     tags: Tags.TagsState | undefined;
-
     student: Student.StudentState | undefined;
     rate: Rate.RateState | undefined; 
-    rateCourses: RateCourses.RateCoursesState | undefined; 
+    ratingReport: RatingReport.RatingReportState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -46,12 +43,10 @@ export const reducers = {
     courseTeachers: CourseTeachers.reducer,
     courseTeacherActivities: CourseTeacherActivities.reducer,
 
-    ratings: Ratings.reducer,
     tags: Tags.reducer,
-
     student: Student.reducer,
     rate: Rate.reducer,
-    rateCourses: RateCourses.reducer
+    ratingReport: RatingReport.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

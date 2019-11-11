@@ -6,7 +6,7 @@ import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
 import 'react-widgets/dist/css/react-widgets.css';
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateStore';
+import * as RateStore from '../../store/Rate/Rate';
 import * as TagStore from '../../store/Tags'
 
 type Props =
@@ -59,6 +59,7 @@ class RateCourse extends React.PureComponent<Props> {
     }
 
       private onSubmitButtonPush() {
+        this.props.setRatingType(1)
         this.props.setCourseId(this.props.match.params.courseId)
         if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
           this.props.sendRating()
@@ -126,17 +127,20 @@ class RateCourse extends React.PureComponent<Props> {
       }    
 
       private renderTagsMultiselect() {
+        var tags = this.props.tags.tags.filter(function (item) {
+          return (item.type & TagStore.TagType.Course) ===  TagStore.TagType.Course
+        });
         return(
           <FormGroup>
               <Label>Tags</Label>
               <div>
                 <Multiselect
                   dropUp
-                  data={this.props.tags.tags}
+                  data={tags}
                   value={this.props.rating.rating.tags}
                   textField='text'
                   placeholder='Your tags'
-                  disabled={this.props.rating.rating.tags.length>=5 ? this.props.tags.tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
+                  disabled={this.props.rating.rating.tags.length>=5 ? tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
                   onChange={value => this.props.changeTags(value)}
                 />
               </div>
@@ -164,6 +168,9 @@ class RateCourse extends React.PureComponent<Props> {
           </div>
         )
       }
+      componentWillUnmount() {
+        this.props.clearStore();
+    }
 }
 
 function mapStateToProps(state: ApplicationState) {

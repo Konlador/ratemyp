@@ -59,9 +59,19 @@ interface SetCourseIdAction {
     type: 'SET_COURSE_ID'
     value: string
 }
+
+interface ClearStoreAction {
+    type: 'CLEAR_STORE'
+}
+
+interface SetRatingTypeAction {
+    type: 'SET_RATING_TYPE'
+    value: number
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type streStates (and not any other arbitrary streState).
-type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherIdAction | SetCourseIdAction;
+type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldTakeTeacherAgainTrueAction | SetWouldTakeTeacherAgainFalseAction | ChangeCommentAction | ChangeTagsAction | SubmitReviewAction | SendRatingAction | SetTeacherIdAction | SetCourseIdAction | ClearStoreAction | SetRatingTypeAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -102,11 +112,15 @@ export const actionCreators = {
     setCourseId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_COURSE_ID', value: value });
     },
+    clearStore: () => ({ type: 'CLEAR_STORE'} as ClearStoreAction),
+    setRatingType: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_RATING_TYPE', value: value });
+    },
 };
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: ''}
-const unloadedState: RateState = {submitButtonClicked: false, rating: unloadedRating};
+const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: '', ratingType: 0}
+const unloadedState: RateState = { submitButtonClicked: false, rating: unloadedRating };
 
 export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
     if (state === undefined)
@@ -121,54 +135,63 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                 }),
                 });
         case 'SET_LEVEL_OF_DIFFICULTY':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        levelOfDifficulty: action.value, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    levelOfDifficulty: action.value, 
+                }),
+                });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        wouldTakeTeacherAgain: true, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    wouldTakeTeacherAgain: true, 
+                }),
+                });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        wouldTakeTeacherAgain: false, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    wouldTakeTeacherAgain: false, 
+                }),
+                });
         case 'CHANGE_COMMENT':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        comment: action.value, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    comment: action.value, 
+                }),
+                });
         case 'CHANGE_TAGS':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        tags: action.tags, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    tags: action.tags, 
+                }),
+                });
         case 'SUBMIT_REVIEW':
-                return Object.assign({}, state, {
-                    submitButtonClicked: true,
-                    });
+            return Object.assign({}, state, {
+                submitButtonClicked: true,
+                });
         case 'SET_TEACHER_ID':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        teacherId: action.value,
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    teacherId: action.value,
+                }),
+                });
         case 'SEND_RATING':
-                return Object.assign({}, state, {
-                    });
+            return Object.assign({}, state, {
+                });
         case 'SET_COURSE_ID':
-                return Object.assign({}, state, {
-                    rating: Object.assign({}, state.rating, {
-                        courseId: action.value,
-                    }),
-                    });
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    courseId: action.value,
+                }),
+                });
+        case 'SET_RATING_TYPE':
+            return Object.assign({}, state, {
+                rating: Object.assign({}, state.rating, {
+                    ratingType: action.value,
+                }),
+                });
+        case 'CLEAR_STORE':
+            return unloadedState;
+                    
         default:
                 return state;
     }

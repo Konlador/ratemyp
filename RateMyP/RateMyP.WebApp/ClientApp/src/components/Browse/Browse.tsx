@@ -16,6 +16,10 @@ class Browse extends React.PureComponent {
     }
 
     renderComponents() {
+        var text;
+        text = "Tėštąs";
+        console.log(text);
+        console.log(text.denationalize());
         if (this.state.page === 0) return <Teachers/>
         else return <Courses/>
     }

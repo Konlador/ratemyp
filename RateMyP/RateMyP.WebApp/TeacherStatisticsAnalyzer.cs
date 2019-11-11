@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using RateMyP.WebApp.Models;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp
     {
     public class TeacherStatisticsAnalyzer
-    {
+        {
         private RateMyPDbContext m_context;
 
         public TeacherStatisticsAnalyzer(RateMyPDbContext context)
@@ -25,32 +27,39 @@ namespace RateMyP.WebApp
             return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
-        public async Task<double> GetTeacherAverageMark(Guid teacherId, DateTime startDate, DateTime endDate)
+        public async Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount)
             {
-            var allRatings = await m_context.Ratings.ToListAsync();
-            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId) && r.DateCreated >= startDate && r.DateCreated <= endDate).ToList();
-            double sum = 0;
-            foreach (var rating in teacherRatings)
-                sum += rating.OverallMark;
-            return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
-            }
+            var teachersAverageMarks = new List<DateMark>();
+            var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId)).OrderBy(o => o.DateCreated).ToListAsync();
 
-        public async Task<List<double>> GetTeacherAverageMarkList(Guid teacherId, DateTime startDate, DateTime endDate, int parts)
-            {
-            var teachersAverageMarks = new List<double>();
+            if (ratings.Count == 0 || timeStampCount <= 1)
+                return teachersAverageMarks;
 
-            var difference = endDate - startDate;
-            var singlePartInterval = TimeSpan.FromTicks(difference.Ticks / parts);
+            var timeStamps = new List<DateTime>();
 
-            var start = startDate;
-            var end = startDate + singlePartInterval;
+            var startDate = ratings.First().DateCreated;
+            var endDate = DateTime.Now;
 
-            for (var i = 0; i < parts; i++)
+            var globalDifference = endDate - startDate;
+            var partDifference = new TimeSpan(globalDifference.Ticks / (timeStampCount - 1));
+
+            var currentDate = startDate;
+
+            while (currentDate <= endDate)
                 {
-                teachersAverageMarks.Add(await GetTeacherAverageMark(teacherId, start, end));
+                timeStamps.Add(currentDate);
+                currentDate += partDifference;
+                }
 
-                start += singlePartInterval;
-                end += singlePartInterval;
+            foreach (var timeStamp in timeStamps)
+                {
+                var ratingsBeforeStamp = ratings.Where(r => r.DateCreated <= timeStamp).ToList();
+                var averageMark = (double)ratingsBeforeStamp.Sum(r => r.OverallMark) / ratingsBeforeStamp.Count;
+                teachersAverageMarks.Add(new DateMark
+                    {
+                    Date = timeStamp,
+                    Mark = averageMark
+                    });
                 }
             return teachersAverageMarks;
             }
@@ -75,6 +84,11 @@ namespace RateMyP.WebApp
                 if (rating.WouldTakeTeacherAgain) wouldTakeCount++;
 
             return teacherRatings.Count > 0 ? wouldTakeCount / teacherRatings.Count : 0;
+            }
+
+        private static DateTime TruncateToMinutes(DateTime dt)
+            {
+            return dt.Date.AddMinutes((int)dt.TimeOfDay.TotalMinutes);
             }
         }
     }

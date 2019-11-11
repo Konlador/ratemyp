@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { Button, Form, FormGroup, Label, Input, CustomInput, UncontrolledTooltip, UncontrolledAlert } from 'reactstrap';
 import { Multiselect } from 'react-widgets'
 import Rating from 'react-rating';
@@ -8,34 +8,40 @@ import 'react-widgets/dist/css/react-widgets.css';
 import RateTeacherActivities from './RateTeacherActivities';
 import * as TagStore from '../../store/Tags'
 import { ApplicationState } from '../../store';
-import * as RateStore from '../../store/Rate/RateStore';
-
+import * as RateStore from '../../store/Rate/Rate';
 
 type Props =
-    {tags: TagStore.TagsState
-    rating: RateStore.RateState} &
+    {
+    tags: TagStore.TagsState
+    rating: RateStore.RateState
+    } &
     typeof RateStore.actionCreators &
     typeof TagStore.actionCreators &
-    RouteComponentProps<{ teacherId: string}>
+    RouteComponentProps<{ teacherId: string }>
 
 class RateTeacher extends React.PureComponent<Props> {
     public componentDidMount() {
-        this.props.requestTags();
+      this.props.requestTags();
     }
 
     public componentDidUpdate() {
-        this.props.requestTags();
+      this.props.requestTags();
     }
 
-    render() {      
-        return (
-          <React.Fragment>
-            {this.renderForm()}
-          </React.Fragment>
-        );
-      }
+    public componentWillUnmount() {
+      this.props.clearStore();
+    }
+
+    public render() {
+      return (
+        <React.Fragment>
+          {this.renderForm()}
+        </React.Fragment>
+      );
+    }
+
     private renderForm() {
-      return(
+      return (
       <Form>
           {this.renderAlerts()}
           {this.renderStarRating()}
@@ -57,116 +63,120 @@ class RateTeacher extends React.PureComponent<Props> {
       </Form>
       );
     }
-    
-      private onSubmitButtonPush() {
-        this.props.setTeacherId(this.props.match.params.teacherId)
-        if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
-          this.props.sendRating()
-          this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
-        }
-      }
 
-      private renderStarRating() {
-        return(
-          <FormGroup>
-            <Label>Overall rating</Label>
-              <div style={{fontSize: 26}}>
-                <Rating
-                onChange={event => this.props.setOverallMark(event)}
+    private onSubmitButtonPush() {
+      this.props.setTeacherId(this.props.match.params.teacherId)
+      this.props.setRatingType(0)
+      if(this.props.rating.rating.comment.length >= 30 && this.props.rating.rating.overallMark !== 0 && this.props.rating.rating.tags.length < 6 && this.props.rating.rating.levelOfDifficulty > 0 && this.props.rating.rating.courseId !== ''){
+        this.props.sendRating()
+        this.props.history.push(`/teacher-profile/${this.props.match.params.teacherId}`)
+      }
+    }
+
+    private renderStarRating() {
+      return(
+        <FormGroup>
+          <Label>Overall rating</Label>
+            <div style={{fontSize: 26}}>
+              <Rating
+                onChange={value => this.props.setOverallMark(value)}
                 initialRating={this.props.rating.rating.overallMark}
                 // emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
                 // fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
-                />
-              </div>
-          </FormGroup>
-        );        
-      }//⛧
-
-      private renderWouldTakeAgain() {
-        return(
-          <FormGroup tag="fieldset">
-            <Label>Would you take this prof again?</Label>
-            <div>
-              <FormGroup check inline>
-                <Label check>
-                  <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yeah" onClick={() => this.props.setWouldTakeTeacherAgainTrue()} />
-                </Label>
-              </FormGroup>
-              <FormGroup check inline>
-                <Label check>
-                  <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="Nah" onClick={() => this.props.setWouldTakeTeacherAgainFalse()} />
-                </Label>
-              </FormGroup>
+              />
             </div>
-          </FormGroup>
-        );   
-      }
+        </FormGroup>
+      );        
+    }//⛧
 
-      private renderLevelOfDifficultySlider() {
-        enum DifficultyMessage {
-            'Select one',
-            'Paltry effort',
-            'Some work',
-            'Not great, not terrible',
-            'Heavy lifting',
-            'Fight for life',
-        }
-        return(
-          <FormGroup check inline>
-              <input type="range" className="custom-range0" id="customRange" 
-              min="1" max="5" step="1"
-              value={this.props.rating.rating.levelOfDifficulty}
-              onChange={event => this.props.setLevelOfDifficulty(event.target.valueAsNumber)} >
-              </input>
-              <UncontrolledTooltip placement="right" target="customRange">
-                {DifficultyMessage[this.props.rating.rating.levelOfDifficulty]}
-              </UncontrolledTooltip>
-          </FormGroup>
-        );   
-      }    
-
-      private renderTagsMultiselect() {
-        return(
-          <FormGroup>
-              <Label>Tags</Label>
-              <div>
-                <Multiselect
-                  dropUp
-                  data={this.props.tags.tags}
-                  value={this.props.rating.rating.tags}
-                  textField='text'
-                  placeholder='Your tags'
-                  disabled={this.props.rating.rating.tags.length>=5 ? this.props.tags.tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
-                  onChange={value => this.props.changeTags(value)}
-                />
-              </div>
-          </FormGroup>
-        );   
-      } 
-      
-      private renderAlerts() {
-        var minCommentLength = 30
-        var maxTagsCount = 5
-        return(
+    private renderWouldTakeAgain() {
+      return(
+        <FormGroup tag="fieldset">
+          <Label>Would you take this prof again?</Label>
           <div>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.comment.length < minCommentLength && this.props.rating.submitButtonClicked} toggle = {false}>
-              Comment length too short. It must be at least {minCommentLength} characters long.
-            </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.overallMark === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
-              You must select a rating.
-            </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.tags.length > maxTagsCount && this.props.rating.submitButtonClicked} toggle = {false}>
-              You cannot select more than {maxTagsCount} tags.
-            </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.levelOfDifficulty === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
-              You must select a difficulty.
-            </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.courseId === '' && this.props.rating.submitButtonClicked} toggle = {false}>
-              You must select an activity.
-            </UncontrolledAlert>
+            <FormGroup check inline>
+              <Label check>
+                <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Yeah" onClick={() => this.props.setWouldTakeTeacherAgainTrue()} />
+              </Label>
+            </FormGroup>
+            <FormGroup check inline>
+              <Label check>
+                <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="Nah" onClick={() => this.props.setWouldTakeTeacherAgainFalse()} />
+              </Label>
+            </FormGroup>
           </div>
-        )
+        </FormGroup>
+      );   
+    }
+
+    private renderLevelOfDifficultySlider() {
+      enum DifficultyMessage {
+          'Select one',
+          'Paltry effort',
+          'Some work',
+          'Not great, not terrible',
+          'Heavy lifting',
+          'Fight for life',
       }
+      return (
+        <FormGroup check inline>
+            <input type="range" className="custom-range0" id="customRange" 
+            min="1" max="5" step="1"
+            value={this.props.rating.rating.levelOfDifficulty}
+            onChange={event => this.props.setLevelOfDifficulty(event.target.valueAsNumber)} >
+            </input>
+            <UncontrolledTooltip placement="right" target="customRange">
+              {DifficultyMessage[this.props.rating.rating.levelOfDifficulty]}
+            </UncontrolledTooltip>
+        </FormGroup>
+      );   
+    }    
+
+    private renderTagsMultiselect() {
+      var tags = this.props.tags.tags.filter(function (item) {
+        return (item.type & TagStore.TagType.Teacher) ===  TagStore.TagType.Teacher
+      });
+      return (
+        <FormGroup>
+            <Label>Tags</Label>
+            <div>
+              <Multiselect
+                dropUp
+                data={tags}
+                value={this.props.rating.rating.tags}
+                textField='text'
+                placeholder='Your tags'
+                disabled={this.props.rating.rating.tags.length>=5 ? tags.filter(x => !this.props.rating.rating.tags.includes(x)) : []}
+                onChange={value => this.props.changeTags(value)}
+              />
+            </div>
+        </FormGroup>
+      );   
+    } 
+    
+    private renderAlerts() {
+      var minCommentLength = 30;
+      var maxTagsCount = 5;
+      return (
+        <div>
+          <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.comment.length < minCommentLength && this.props.rating.submitButtonClicked} toggle = {false}>
+            Comment length too short. It must be at least {minCommentLength} characters long.
+          </UncontrolledAlert>
+          <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.overallMark === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
+            You must select a rating.
+          </UncontrolledAlert>
+          <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.tags.length > maxTagsCount && this.props.rating.submitButtonClicked} toggle = {false}>
+            You cannot select more than {maxTagsCount} tags.
+          </UncontrolledAlert>
+          <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.levelOfDifficulty === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
+            You must select a difficulty.
+          </UncontrolledAlert>
+          <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.courseId === '' && this.props.rating.submitButtonClicked} toggle = {false}>
+            You must select an activity.
+          </UncontrolledAlert>
+        </div>
+      )
+    }
 }
 
 function mapStateToProps(state: ApplicationState) {
