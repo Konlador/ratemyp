@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 using RateMyP.WebApp.Helpers;
 
 namespace RateMyP.WebApp.Controllers
@@ -29,7 +30,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet("startIndex={startIndex}")]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachersIndexed(int startIndex)
             {
-            return await m_context.Teachers.OrderBy(teacher => teacher.LastName).Skip(startIndex).Take(20).ToListAsync();
+            return await m_context.Teachers.OrderBy(teacher => teacher.LastName).Skip(startIndex).Take(Int32.Parse(ConfigurationManager.AppSettings["loadedTeachersNumber"])).ToListAsync();
             }
         /*
     [HttpGet("{startIndex}")]

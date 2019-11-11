@@ -1,5 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '.';
+import Config from '../config.json';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -95,7 +96,7 @@ export const actionCreators = {
                 .then(response => response.json() as Promise<Teacher[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERS', teachers: data });
-                    if (data.length < 20) dispatch({ type: 'CHECK_TEACHER_AVAILABILITY'})
+                    if (data.length < Config.loadedTeachersNumber) dispatch({ type: 'CHECK_TEACHER_AVAILABILITY'})
                 });
             dispatch({ type: 'REQUEST_TEACHERS' });
         }
@@ -163,7 +164,7 @@ export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined
                 teachers: [...state.teachers, ...action.teachers],
                 selectedTeacher: state.selectedTeacher,
                 isLoading: false,
-                currentIndex: state.currentIndex + 20,
+                currentIndex: state.currentIndex + Config.loadedTeachersNumber,
                 canLoadMore: state.canLoadMore
             };
         case 'REQUEST_TEACHER':
