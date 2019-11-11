@@ -9,9 +9,9 @@ namespace RateMyP.WebApp
     {
     public class TeacherStatisticsAnalyzer
     {
-        private IRateMyPDbContext m_context;
+        private RateMyPDbContext m_context;
 
-        public TeacherStatisticsAnalyzer(IRateMyPDbContext context)
+        public TeacherStatisticsAnalyzer(RateMyPDbContext context)
             {
             m_context = context;
             }
