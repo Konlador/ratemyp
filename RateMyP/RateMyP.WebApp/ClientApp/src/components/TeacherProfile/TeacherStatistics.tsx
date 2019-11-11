@@ -82,7 +82,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         );
     }
 
-    private renderNumber(title: string, titleFontSize: string, bodyTextFontSize: string, number: number) {
+    private renderNumber(title: string, titleFontSize: string, bodyTextFontSize: string, value: number) {
         return (
             <Card>
                 <CardBody>
@@ -95,7 +95,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <CardText
                         style={{ fontSize: bodyTextFontSize }}
                         body className="text-center">
-                        <strong>{Number((number).toFixed(2))}</strong>
+                        <strong>{value.toFixed(1)}</strong>
                     </CardText>
                 </CardBody>
             </Card>

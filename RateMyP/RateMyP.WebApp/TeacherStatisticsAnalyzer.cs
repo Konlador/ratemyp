@@ -44,7 +44,10 @@ namespace RateMyP.WebApp
             var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId)).ToList();
             var orderedTeacherRatings = teacherRatings.OrderBy(o => o.DateCreated).ToList();
 
-            var startDate = orderedTeacherRatings.FirstOrDefault().DateCreated;
+            if (orderedTeacherRatings.Count == 0)
+                return teachersAverageMarks;
+
+            var startDate = orderedTeacherRatings.First().DateCreated;
             var endDate = orderedTeacherRatings.Last().DateCreated;
 
             var difference = endDate - startDate;
@@ -53,7 +56,7 @@ namespace RateMyP.WebApp
             var start = startDate - singlePartInterval;
             var end = startDate;
 
-            while (!(DateTime.Compare(TruncateToMinutes(end), TruncateToMinutes(endDate)) == 0))
+            while (DateTime.Compare(TruncateToMinutes(end), TruncateToMinutes(endDate)) != 0)
                 {
                 start += singlePartInterval;
                 end += singlePartInterval;
@@ -87,7 +90,8 @@ namespace RateMyP.WebApp
 
             return teacherRatings.Count > 0 ? wouldTakeCount / teacherRatings.Count : 0;
             }
-        static DateTime TruncateToMinutes(DateTime dt)
+
+        private static DateTime TruncateToMinutes(DateTime dt)
             {
             return dt.Date.AddMinutes((int)dt.TimeOfDay.TotalMinutes);
             }
