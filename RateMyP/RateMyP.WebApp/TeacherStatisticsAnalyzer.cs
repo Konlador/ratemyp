@@ -44,10 +44,7 @@ namespace RateMyP.WebApp
             var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId)).ToList();
             var orderedTeacherRatings = teacherRatings.OrderBy(o => o.DateCreated).ToList();
 
-            if (orderedTeacherRatings.Count == 0)
-                return teachersAverageMarks;
-
-            var startDate = orderedTeacherRatings.First().DateCreated;
+            var startDate = orderedTeacherRatings.FirstOrDefault().DateCreated;
             var endDate = orderedTeacherRatings.Last().DateCreated;
 
             var difference = endDate - startDate;
@@ -55,15 +52,20 @@ namespace RateMyP.WebApp
 
             var start = startDate - singlePartInterval;
             var end = startDate;
-
-            while (DateTime.Compare(TruncateToMinutes(end), TruncateToMinutes(endDate)) != 0)
+            var averageMark = await GetTeacherAverageMark(teacherId, start + singlePartInterval, end + singlePartInterval);
+            while (!(DateTime.Compare(TruncateToMinutes(end), TruncateToMinutes(endDate)) == 0))
                 {
                 start += singlePartInterval;
                 end += singlePartInterval;
+                var mark = await GetTeacherAverageMark(teacherId, start, end);
+                if (mark > 0)
+                    {
+                    averageMark = (averageMark + mark) / 2;
+                    }
                 teachersAverageMarks.Add(new DateMark()
                     {
                     Date = start,
-                    Mark = await GetTeacherAverageMark(teacherId, start, end)
+                    Mark = averageMark
                     });
                 }
             return teachersAverageMarks;
