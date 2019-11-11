@@ -9,10 +9,9 @@ namespace RateMyP.WebApp.Models
             public Guid Id { get; set; }
             public Guid TeacherId { get; set; }
             public double AverageMark { get; set; }
-            public double AverageMarkByDate { get; set; }
-            public List<Tuple<DateTime, double>> AverageMarkList { get; set; }
+            public List<DateMark> AverageMarkList { get; set; }
             public double AverageLevelOfDifficulty { get; set; }
-            public double AverageWouldTakeAgainRatio { get; set; }
+            public double WouldTakeAgainRatio { get; set; }
             public bool Equals([AllowNull] TeacherStatistic other)
             {
             throw new NotImplementedException();
