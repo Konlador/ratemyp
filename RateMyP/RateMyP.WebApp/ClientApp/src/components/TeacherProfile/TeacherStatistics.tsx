@@ -7,7 +7,6 @@ import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
 import * as TagsStore from "../../store/Tags";
 import { Card, CardTitle, CardText, CardBody, UncontrolledCollapse, Row, Col, Button } from 'reactstrap';
 import { Chart } from "react-google-charts";
-import { RouteComponentProps } from 'react-router';
 
 interface OwnProps {
     teacherId: string
