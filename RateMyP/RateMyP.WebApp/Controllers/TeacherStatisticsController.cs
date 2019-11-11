@@ -20,21 +20,21 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             m_analyzer = new TeacherStatisticsAnalyzer(m_context);
         }
-
-        [HttpGet("teacher={teacherId}")]
-        public async Task<ActionResult<IEnumerable<TeacherStatistic>>> GetTeacherStatistics(Guid teacherId)
-        {
-            var teacherStatistic = new TeacherStatistic()
+        
+        [HttpGet("teacher={teacherId}/history/parts={parts}")]
+        public async Task<ActionResult<TeacherStatistic>> GetTeacherStatistics(Guid teacherId, int parts)
             {
+            var teacherStatistic = new TeacherStatistic()
+                {
                 Id = Guid.NewGuid(),
                 TeacherId = teacherId,
                 AverageMark = await m_analyzer.GetTeacherAverageMark(teacherId),
+                AverageMarkList = await m_analyzer.GetTeacherAverageMarkList(teacherId, parts),
                 AverageLevelOfDifficulty = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId),
-                AverageWouldTakeAgainRatio = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId)
-            };
-            List<TeacherStatistic> list = new List<TeacherStatistic>();
-            list.Add(teacherStatistic);
-            return list;
+                WouldTakeAgainRatio = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId)
+                };
+
+            return teacherStatistic;
+            }
         }
-    }
 }
