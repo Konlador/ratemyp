@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Table, Spinner } from 'reactstrap';
+import { Table, Spinner, Button } from 'reactstrap';
 import { ApplicationState } from '../../store';
+import { Link } from 'react-router-dom';
 import * as RatingsStore from '../../store/Ratings';
 import * as TagsStore from '../../store/Tags';
 import * as TeacherRatingsStore from '../../store/Teacher/TeacherRatings';
@@ -107,6 +108,9 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                             this.props.sendRatingThumb(rating.id, false)
                             this.props.updateRating(rating.id);
                         }}>{rating.thumbDowns} find this not useful</a>
+                    </div>
+                    <div>
+                    <Button color="primary" tag={Link} to={{pathname: `/rating-report/${rating.id}`, state: rating}}  size='sm'>Report rating</Button>{' '}
                     </div>
                 </div>
             </div>
