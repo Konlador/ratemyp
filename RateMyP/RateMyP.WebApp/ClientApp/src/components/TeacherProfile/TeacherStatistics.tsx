@@ -7,6 +7,7 @@ import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
 import * as TagsStore from "../../store/Tags";
 import { Card, CardTitle, CardText, CardBody, UncontrolledCollapse, Row, Col, Button } from 'reactstrap';
 import { Chart } from "react-google-charts";
+import { RouteComponentProps } from 'react-router';
 
 interface OwnProps {
     teacherId: string
@@ -31,6 +32,11 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
+    public componentWillUnmount()
+    {
+        this.props.clearSelectedStatistics();
+    }
+
     public render() {
         return (
             <React.Fragment>
@@ -47,8 +53,6 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
 
     private renderTeacherStatistics() {
-
-
         return (
             <div>
                 <h1>Statistics</h1>
@@ -121,6 +125,9 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     loader={<div>Loading Chart</div>}
                     data={data}
                     options={{
+                        series: {
+                            0: { color: '#6f9654' }
+                        },
                         hAxis: {
                             title: 'Part',
                         },
@@ -182,18 +189,6 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
             var count = 0;
             allTeacherTags.forEach((v) => (v.id === tag.id && count++));
             return count;
-        }
-    }
-
-    private getOldestRating() {
-        var ratings = this.props.ratings.ratings;
-        if (this.props.ratings.ratings.length > 0) {
-            var min = ratings[0];
-            for (let val of ratings) {
-                if (new Date(val.dateCreated) < new Date(min.dateCreated))
-                    min = val;
-            }
-            return min;
         }
     }
 }
