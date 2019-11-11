@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import * as TeachersStore from '../../store/Teachers';
 import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
+import '../../extensions/StringExtensions'
 
 interface OwnProps {
     teacherId: string
@@ -27,7 +28,16 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
-          }
+          },
+        customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
+            let isFound = false;
+            let matchString = currentRow[0].toString().concat(" ", currentRow[1].toString());
+            console.log(searchQuery, currentRow, columns, matchString);
+            if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
+                isFound = true;
+            }       
+            return isFound;
+        }
     };
     
     state = {
@@ -97,8 +107,8 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
                     }
                     columns={
                         [
-                            {name: 'Name', options: { filter: false}},
-                            {name: 'Surname', options: { sortDirection: 'asc', filter: false}},
+                            {name: 'Name', options: { filter: false }},
+                            {name: 'Surname', options: { filter: false }},
                             {name: 'Rank'},
                             {name: 'Faculty'},
                             {name: 'Id', options: { display: 'excluded', filter: false}}
