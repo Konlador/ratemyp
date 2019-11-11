@@ -41,85 +41,24 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
     private ensureDataFetched() {
         this.props.requestTeacherRatings(this.props.teacherId);
-        var firstRating = this.getOldestRating();
-        if (firstRating !== undefined) {
-            this.props.requestTeacherStatistics(this.props.teacherId, new Date(firstRating.dateCreated).getTime() * 10000 + 621355968000000000, new Date().getTime() * 10000 + 621355968000000000);
-        }
+        this.props.requestTeacherStatistics(this.props.teacherId);
         this.props.requestTags();
     }
 
 
     private renderTeacherStatistics() {
-        interface IStatisticDateAndMark {
-            item1: number,
-            item2: number
-        };
 
-        var teacherStat: TeacherStatisticsStore.TeacherStatistic;
-        teacherStat = this.props.statistics.teacherStatistics;
-        var teacherMarkList = teacherStat.averageMarkList as Array<IStatisticDateAndMark>;
-
-        var data = [];
-        data.push(['Part', 'Mark']);
-        for (var i = 0; i < teacherMarkList.length; i++) {
-            const teacherStatistic: IStatisticDateAndMark = teacherMarkList[i];
-            let statDate: Date = new Date(teacherStatistic.item1);
-            var dateString = statDate.getFullYear() + '/' + (statDate.getMonth() + 1) + '/' + (statDate.getDate());
-            data.push([dateString, teacherStatistic.item2]);
-        }
 
         return (
             <div>
                 <h1>Statistics</h1>
                 <Row>
                     <Col sm="4">
-                        <Card>
-                            <CardBody>
-                                <CardTitle
-                                    style={{ fontSize: "25px" }}
-                                    body className="text-center">
-                                    <strong>Average Rating</strong>
-                                </CardTitle>
-
-                                <CardText
-                                    style={{ fontSize: "170px" }}
-                                    body className="text-center">
-                                    <strong>{Number((this.props.statistics.teacherStatistics.averageMark).toFixed(1))}</strong>
-                                </CardText>
-                            </CardBody>
-                        </Card>
+                        {this.renderMark("Average Mark", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
                     </Col>
                     <Col sm="4">
-                        <Card>
-                            <CardBody>
-                                <CardTitle
-                                    style={{ fontSize: "12px" }}
-                                    body className="text-center">
-                                    <strong>Average Level of Difficulty Rating</strong>
-                                </CardTitle>
-
-                                <CardText
-                                    style={{ fontSize: "70px" }}
-                                    body className="text-center">
-                                    <strong>{Number((this.props.statistics.teacherStatistics.averageLevelOfDifficulty).toFixed(1))}</strong>
-                                </CardText>
-                            </CardBody>
-                        </Card>
-                        <Card>
-                            <CardBody>
-                                <CardTitle
-                                    style={{ fontSize: "10px" }}
-                                    body className="text-center">
-                                    <strong>Ratio of Students Who Would Take This Teacher Again</strong>
-                                </CardTitle>
-
-                                <CardText
-                                    style={{ fontSize: "70px" }}
-                                    body className="text-center">
-                                    <strong>{Number((this.props.statistics.teacherStatistics.averageWouldTakeAgainRatio).toFixed(1))}</strong>
-                                </CardText>
-                            </CardBody>
-                        </Card>
+                        {this.renderMark("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                        {this.renderMark("Ratio of Students Who Would Take This Teacher Again", "10px", "70px", this.props.statistics.teacherStatistics.wouldTakeAgainRatio)}
                     </Col>
                     <Col>
                         {this.renderTags()}
@@ -132,33 +71,71 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                 <UncontrolledCollapse toggler="#toggler">
                     <Card>
                         <CardBody>
-                            <div className={"my-pretty-chart-container"}>
-                                {(data.length > 1) ? <Chart
-                                    width={'1000px'}
-                                    height={'400px'}
-                                    chartType="LineChart"
-                                    loader={<div>Loading Chart</div>}
-                                    data={data}
-                                    options={{
-                                        hAxis: {
-                                            title: 'Part',
-                                        },
-                                        vAxis: {
-                                            title: 'Mark',
-                                            minValue: 0,
-                                            maxValue: 10,
-                                        },
-                                        width: 1000,
-                                        height: 400,
-                                    }}
-                                    rootProps={{ 'data-testid': '1' }}
-                                /> : <Spinner type="grow" color="success" />}
-                            </div>
+                            {this.renderTeacherMarkChart()}
                         </CardBody>
                     </Card>
                 </UncontrolledCollapse>
             </div>
         );
+    }
+
+    private renderMark(title: string, titleFontSize: string, bodyTextFontSize: string, mark: number) {
+        return (
+            <Card>
+                <CardBody>
+                    <CardTitle
+                        style={{ fontSize: titleFontSize }}
+                        body className="text-center">
+                        <strong>{title}</strong>
+                    </CardTitle>
+
+                    <CardText
+                        style={{ fontSize: bodyTextFontSize }}
+                        body className="text-center">
+                        <strong>{Number((mark).toFixed(1))}</strong>
+                    </CardText>
+                </CardBody>
+            </Card>
+        )
+    }
+
+    private renderTeacherMarkChart() {
+        var teacherStat: TeacherStatisticsStore.TeacherStatistic;
+        teacherStat = this.props.statistics.teacherStatistics;
+        var teacherMarks = teacherStat.averageMarkList as Array<TeacherStatisticsStore.DateMark>;
+        var data = [];
+        data.push(['Part', 'Rating']);
+
+        for (var i = 0; i < teacherMarks.length; i++) {
+            const teacherStatistic: TeacherStatisticsStore.DateMark = teacherMarks[i];
+            let statDate: Date = new Date(teacherStatistic.date);
+            var dateString = statDate.getFullYear() + '/' + (statDate.getMonth() + 1) + '/' + (statDate.getDate());
+            data.push([dateString, teacherStatistic.mark]);
+        }
+        return (
+            <div className={"my-pretty-chart-container"}>
+                {(data.length > 1) ? <Chart
+                    width={'1000px'}
+                    height={'400px'}
+                    chartType="LineChart"
+                    loader={<div>Loading Chart</div>}
+                    data={data}
+                    options={{
+                        hAxis: {
+                            title: 'Part',
+                        },
+                        vAxis: {
+                            title: 'Rating',
+                            minValue: 0,
+                            maxValue: 10,
+                        },
+                        width: 1000,
+                        height: 400,
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+                /> : <Spinner type="grow" color="success" />}
+            </div>
+        )
     }
 
     private renderTags() {
@@ -189,6 +166,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
             return tags;
         }
     }
+
     private getDistinctTeacherTags() {
         var allTeachers = this.getAllTeacherTags();
         if (typeof allTeachers !== 'undefined') {
