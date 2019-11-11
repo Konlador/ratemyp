@@ -14,9 +14,9 @@ interface OwnProps {
 
 type Props =
     {
-        statistics: TeacherStatisticsStore.TeacherStatisticsState,
-        ratings: TeacherRatingsStore.TeacherRatingsState,
-        tags: TagsStore.TagsState
+    statistics: TeacherStatisticsStore.TeacherStatisticsState,
+    ratings: TeacherRatingsStore.TeacherRatingsState,
+    tags: TagsStore.TagsState
     } &
     typeof TeacherStatisticsStore.actionCreators &
     typeof TeacherRatingsStore.actionCreators &
@@ -31,34 +31,37 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
-    public render() {
-        return (
-            <React.Fragment>
-                {this.renderTeacherStatistics()}
-            </React.Fragment>
-        );
-    }
-
     private ensureDataFetched() {
         this.props.requestTeacherRatings(this.props.teacherId);
         this.props.requestTeacherStatistics(this.props.teacherId);
         this.props.requestTags();
     }
 
-
-    private renderTeacherStatistics() {
-
-
+    public render() {
         return (
-            <div>
+            <React.Fragment>
                 <h1>Statistics</h1>
                 <Row>
                     <Col sm="4">
-                        {this.renderMark("Average Mark", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
+                        {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
                     </Col>
                     <Col sm="4">
-                        {this.renderMark("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
-                        {this.renderMark("Ratio of Students Who Would Take This Teacher Again", "10px", "70px", this.props.statistics.teacherStatistics.wouldTakeAgainRatio)}
+                        {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                        <Card>
+                            <CardBody>
+                                <CardTitle
+                                    style={{ fontSize: "10px" }}
+                                    body className="text-center">
+                                    <strong>Would take again</strong>
+                                </CardTitle>
+
+                                <CardText
+                                    style={{ fontSize: "70px" }}
+                                    body className="text-center">
+                                    <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
+                                </CardText>
+                            </CardBody>
+                        </Card>
                     </Col>
                     <Col>
                         {this.renderTags()}
@@ -67,19 +70,19 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
                 <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
                     Show/Hide Statistics Graph
-    </Button>
+                </Button>
                 <UncontrolledCollapse toggler="#toggler">
                     <Card>
                         <CardBody>
-                            {this.renderTeacherMarkChart()}
+                            {this.renderTeacherRatingHistory()}
                         </CardBody>
                     </Card>
                 </UncontrolledCollapse>
-            </div>
+            </React.Fragment>
         );
     }
 
-    private renderMark(title: string, titleFontSize: string, bodyTextFontSize: string, mark: number) {
+    private renderNumber(title: string, titleFontSize: string, bodyTextFontSize: string, number: number) {
         return (
             <Card>
                 <CardBody>
@@ -92,28 +95,26 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <CardText
                         style={{ fontSize: bodyTextFontSize }}
                         body className="text-center">
-                        <strong>{Number((mark).toFixed(1))}</strong>
+                        <strong>{Number((number).toFixed(2))}</strong>
                     </CardText>
                 </CardBody>
             </Card>
         )
     }
 
-    private renderTeacherMarkChart() {
-        var teacherStat: TeacherStatisticsStore.TeacherStatistic;
-        teacherStat = this.props.statistics.teacherStatistics;
-        var teacherMarks = teacherStat.averageMarkList as Array<TeacherStatisticsStore.DateMark>;
+    private renderTeacherRatingHistory() {
         var data = [];
-        data.push(['Part', 'Rating']);
+        data.push(['Date', 'Rating']);
 
-        for (var i = 0; i < teacherMarks.length; i++) {
-            const teacherStatistic: TeacherStatisticsStore.DateMark = teacherMarks[i];
-            let statDate: Date = new Date(teacherStatistic.date);
-            var dateString = statDate.getFullYear() + '/' + (statDate.getMonth() + 1) + '/' + (statDate.getDate());
-            data.push([dateString, teacherStatistic.mark]);
-        }
+        var averageMarks = this.props.statistics.teacherStatistics.averageMarks;
+        averageMarks.forEach((dateMark) => {
+            let statDate = new Date(dateMark.date);
+            var dateString = `${statDate.getFullYear()}/${statDate.getMonth() + 1}/${statDate.getDate()}`;
+            data.push([dateString, dateMark.mark]);
+        });
+
         return (
-            <div className={"my-pretty-chart-container"}>
+            <div className="my-pretty-chart-container">
                 {(data.length > 1) ? <Chart
                     width={'1000px'}
                     height={'400px'}
@@ -139,62 +140,26 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderTags() {
-        const distinctTeacherTags = this.getDistinctTeacherTags();
-        if (typeof distinctTeacherTags !== 'undefined') {
-            return (
-                <div>
-                    <div className="tagbox">
-                        {distinctTeacherTags.map((tag: TagsStore.Tag) =>
-                            <span>
-                                {tag.text} ({this.countTags(tag)})
-                            </span>)}
-                    </div>
-                </div>
-            )
-        }
+        const tagTextCounts = this.getTeacherTagTextCounts();
+        return (
+            <div className="tagbox">
+                {Array.from(tagTextCounts).map((tagTextCount) =>
+                    <span>
+                        {tagTextCount[0]} ({tagTextCount[1]})
+                    </span>)}
+            </div>
+        )
     }
 
-    private getAllTeacherTags() {
-        var tags = [];
+    private getTeacherTagTextCounts(): Map<string, number> {
+        let tagTextCounts = new Map<string, number>();
         var ratings = this.props.ratings.ratings;
-        if (this.props.ratings.ratings.length > 0) {
-            for (let val of ratings) {
-                for (let value of val.tags) {
-                    tags.push(value);
-                }
-            }
-            return tags;
-        }
-    }
 
-    private getDistinctTeacherTags() {
-        var allTeachers = this.getAllTeacherTags();
-        if (typeof allTeachers !== 'undefined') {
-            allTeachers = allTeachers.filter((elem, index, self) =>
-                self.findIndex((t) => { return (t.id === elem.id && t.text === elem.text) }) === index);
-            return allTeachers;
-        }
-    }
-
-    private countTags(tag: TagsStore.Tag) {
-        var allTeacherTags = this.getAllTeacherTags();
-        if (typeof allTeacherTags !== 'undefined') {
-            var count = 0;
-            allTeacherTags.forEach((v) => (v.id === tag.id && count++));
-            return count;
-        }
-    }
-
-    private getOldestRating() {
-        var ratings = this.props.ratings.ratings;
-        if (this.props.ratings.ratings.length > 0) {
-            var min = ratings[0];
-            for (let val of ratings) {
-                if (new Date(val.dateCreated) < new Date(min.dateCreated))
-                    min = val;
-            }
-            return min;
-        }
+        for (let rating of ratings)
+            tagTextCounts = rating.tags.reduce((counter, tag) =>
+                counter.set(tag.text, 1 + (counter.get(tag.text) || 0)), tagTextCounts);
+        
+        return tagTextCounts;
     }
 }
 

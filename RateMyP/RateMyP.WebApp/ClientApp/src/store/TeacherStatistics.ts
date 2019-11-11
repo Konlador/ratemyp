@@ -6,15 +6,15 @@ import { AppThunkAction } from '.';
 
 export interface TeacherStatisticsState {
     teacherId: string | undefined;
-    teacherStatistics: TeacherStatistic;
+    teacherStatistics: TeacherStatistics;
     isLoading: boolean;
 }
 
-export interface TeacherStatistic {
+export interface TeacherStatistics {
     id: string,
     teacherId: string,
     averageMark: number,
-    averageMarkList: DateMark[],
+    averageMarks: DateMark[],
     averageLevelOfDifficulty: number,
     wouldTakeAgainRatio: number;
 }
@@ -35,7 +35,7 @@ interface RequestTeacherStatisticsAction {
 
 interface ReceiveTeacherStatisticsAction {
     type: 'RECEIVE_TEACHERSTATISTICS';
-    teacherStatistics: TeacherStatistic;
+    teacherStatistics: TeacherStatistics;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -53,8 +53,8 @@ export const actionCreators = {
             appState.teacherStatistics &&
             appState.teacherStatistics.isLoading === false &&
             appState.teacherStatistics.teacherId !== teacherId) {
-            fetch(`api/statistics/teacher=${teacherId}/history/parts=10`)
-                .then(response => response.json() as Promise<TeacherStatistic>)
+            fetch(`api/statistics/teacher=${teacherId}/parts=10`)
+                .then(response => response.json() as Promise<TeacherStatistics>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_TEACHERSTATISTICS', teacherStatistics: data });
                 });
@@ -66,14 +66,14 @@ export const actionCreators = {
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const undefinedTeacherStatistic = <TeacherStatistic> {
+const undefinedTeacherStatistic: TeacherStatistics = {
     id: "undefined",
     teacherId: "undefined",
     averageMark: 0,
-    averageMarkList: [],
+    averageMarks: [],
     averageLevelOfDifficulty: 0,
     wouldTakeAgainRatio: 0
-}
+};
 const unloadedState: TeacherStatisticsState = { teacherId: undefined, teacherStatistics: undefinedTeacherStatistic , isLoading: false };
 
 export const reducer: Reducer<TeacherStatisticsState> = (state: TeacherStatisticsState | undefined, incomingAction: Action): TeacherStatisticsState => {

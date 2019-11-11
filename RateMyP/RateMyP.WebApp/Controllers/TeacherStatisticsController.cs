@@ -5,31 +5,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
-{
+    {
     [Route("api/statistics")]
     [ApiController]
     public class TeacherStatisticsController : ControllerBase
-    {
+        {
         private readonly RateMyPDbContext m_context;
         private TeacherStatisticsAnalyzer m_analyzer;
 
         public TeacherStatisticsController(RateMyPDbContext context)
-        {
+            {
             m_context = context;
             m_analyzer = new TeacherStatisticsAnalyzer(m_context);
-        }
-        
-        [HttpGet("teacher={teacherId}/history/parts={parts}")]
-        public async Task<ActionResult<TeacherStatistic>> GetTeacherStatistics(Guid teacherId, int parts)
+            }
+
+        [HttpGet("teacher={teacherId}/parts={parts}")]
+        public async Task<ActionResult<TeacherStatistics>> GetTeacherStatistics(Guid teacherId, int parts)
             {
-            var teacherStatistic = new TeacherStatistic()
+            var teacherStatistic = new TeacherStatistics
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacherId,
                 AverageMark = await m_analyzer.GetTeacherAverageMark(teacherId),
-                AverageMarkList = await m_analyzer.GetTeacherAverageMarkList(teacherId, parts),
+                AverageMarks = await m_analyzer.GetTeacherAverageMarks(teacherId, parts),
                 AverageLevelOfDifficulty = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId),
                 WouldTakeAgainRatio = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId)
                 };
@@ -37,4 +38,4 @@ namespace RateMyP.WebApp.Controllers
             return teacherStatistic;
             }
         }
-}
+    }

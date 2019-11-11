@@ -20,20 +20,16 @@ namespace RateMyP.WebApp.Models
 
         public override bool Equals(object obj)
             {
-            if ((obj == null) || !(obj is RatingReport))
-                {
-                return false;
-                }
-            else
-                {
-                RatingReport r = (RatingReport)obj;
-                return Equals(r);
-                }
+            return obj is RatingReport report && Equals(report);
             }
 
         public override int GetHashCode()
             {
-            return Id.GetHashCode() ^ RatingId.GetHashCode() ^ StudentId.GetHashCode() ^ DateCreated.GetHashCode() ^ Reason.GetHashCode();
+            return Id.GetHashCode() ^
+                   RatingId.GetHashCode() ^
+                   StudentId.GetHashCode() ^
+                   DateCreated.GetHashCode() ^
+                   Reason.GetHashCode();
             }
         }
     }

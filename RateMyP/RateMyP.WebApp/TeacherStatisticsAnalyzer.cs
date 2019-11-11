@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp
     {
     public class TeacherStatisticsAnalyzer
-    {
+        {
         private RateMyPDbContext m_context;
 
         public TeacherStatisticsAnalyzer(RateMyPDbContext context)
@@ -36,7 +37,7 @@ namespace RateMyP.WebApp
             return teacherRatings.Count > 0 ? sum / teacherRatings.Count : 0;
             }
 
-        public async Task<List<DateMark>> GetTeacherAverageMarkList(Guid teacherId, int parts)
+        public async Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int parts)
             {
             var teachersAverageMarks = new List<DateMark>();
             var allRatings = await m_context.Ratings.ToListAsync();
