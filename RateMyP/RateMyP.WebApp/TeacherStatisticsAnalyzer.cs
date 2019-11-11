@@ -51,21 +51,15 @@ namespace RateMyP.WebApp
 
             var start = startDate - singlePartInterval;
             var end = startDate;
-            var averageMark = await GetTeacherAverageMark(teacherId, start + singlePartInterval, end + singlePartInterval);
 
             while (!(DateTime.Compare(TruncateToMinutes(end), TruncateToMinutes(endDate)) == 0))
                 {
                 start += singlePartInterval;
                 end += singlePartInterval;
-                var mark = await GetTeacherAverageMark(teacherId, start, end);
-                if (mark > 0)
-                    {
-                    averageMark = (averageMark + mark) / 2;
-                    }
                 teachersAverageMarks.Add(new DateMark()
                     {
                     Date = start,
-                    Mark = averageMark
+                    Mark = await GetTeacherAverageMark(teacherId, start, end)
                     });
                 }
             return teachersAverageMarks;
