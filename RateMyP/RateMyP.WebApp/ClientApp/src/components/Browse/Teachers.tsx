@@ -14,7 +14,7 @@ interface OwnProps {
 type Props =
     TeachersStore.TeachersState &
     typeof TeachersStore.actionCreators &
-    RouteComponentProps<{}>;
+    RouteComponentProps<{ searchString: string }>;
 
 class Teachers extends React.PureComponent<Props & OwnProps> {
 
@@ -57,6 +57,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     }
 
     public componentDidMount() {
+        console.log(this.props.match.params.searchString);
         this.setState({currentIndex: 20});
         this.setState({previousIndex: 20});
         this.setState({canLoadMore: true});
