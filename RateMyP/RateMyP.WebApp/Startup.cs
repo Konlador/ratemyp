@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp
     {
@@ -22,6 +23,7 @@ namespace RateMyP.WebApp
         public void ConfigureServices(IServiceCollection services)
             {
             services.AddDbContext<RateMyPDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString:RateMyPDB"]));
+            services.AddTransient<ITeacherStatisticsAnalyzer, TeacherStatisticsAnalyzer>();
 
             services.AddControllersWithViews();
             services.AddMvc()
