@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using CsvHelper;
+using RateMyP.WebApp.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using CsvHelper;
-using RateMyP.WebApp.Models;
 
 namespace RateMyP.WebApp.Db
     {
     public class DbDataLoader
         {
-        public static void LoadDataToDb()
+        private readonly RateMyPDbContext m_context;
+
+        public DbDataLoader(RateMyPDbContext context)
+            {
+            m_context = context;
+            }
+
+        public void LoadDataToDb()
             {
             LoadTeachersToDb();
             LoadCoursesToDb();
@@ -18,44 +25,39 @@ namespace RateMyP.WebApp.Db
             LoadTagsToDb();
             }
 
-        private static void LoadTeachersToDb()
+        private void LoadTeachersToDb()
             {
-            using var context = new RateMyPDbContext();
             var teachers = ParseEntitiesFromCsv<Teacher>("teachers.csv");
-            context.Teachers.AddRange(teachers);
-            context.SaveChanges();
+            m_context.Teachers.AddRange(teachers);
+            m_context.SaveChanges();
             }
 
-        private static void LoadCoursesToDb()
+        private void LoadCoursesToDb()
             {
-            using var context = new RateMyPDbContext();
             var courses = ParseEntitiesFromCsv<Course>("courses.csv");
-            context.Courses.AddRange(courses);
-            context.SaveChanges();
+            m_context.Courses.AddRange(courses);
+            m_context.SaveChanges();
             }
 
-        private static void LoadTeacherActivitiesToDb()
+        private void LoadTeacherActivitiesToDb()
             {
-            using var context = new RateMyPDbContext();
             var teacherActivities = ParseEntitiesFromCsv<TeacherActivity>("teacher_activities.csv");
-            context.TeacherActivities.AddRange(teacherActivities);
-            context.SaveChanges();
+            m_context.TeacherActivities.AddRange(teacherActivities);
+            m_context.SaveChanges();
             }
 
-        private static void LoadStudentsToDb()
+        private void LoadStudentsToDb()
             {
-            using var context = new RateMyPDbContext();
             var students = ParseEntitiesFromCsv<Student>("students.csv");
-            context.Students.AddRange(students);
-            context.SaveChanges();
+            m_context.Students.AddRange(students);
+            m_context.SaveChanges();
             }
 
-        private static void LoadTagsToDb()
+        private void LoadTagsToDb()
             {
-            using var context = new RateMyPDbContext();
             var tags = ParseEntitiesFromCsv<Tag>("tags.csv");
-            context.Tags.AddRange(tags);
-            context.SaveChanges();
+            m_context.Tags.AddRange(tags);
+            m_context.SaveChanges();
             }
 
         private static List<T> ParseEntitiesFromCsv<T>(string fileName)

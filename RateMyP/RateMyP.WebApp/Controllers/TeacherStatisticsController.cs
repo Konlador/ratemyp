@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using RateMyP.WebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using RateMyP.WebApp.Statistics;
+using System;
+using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -13,13 +9,11 @@ namespace RateMyP.WebApp.Controllers
     [ApiController]
     public class TeacherStatisticsController : ControllerBase
         {
-        private readonly RateMyPDbContext m_context;
-        private TeacherStatisticsAnalyzer m_analyzer;
+        private readonly ITeacherStatisticsAnalyzer m_analyzer;
 
-        public TeacherStatisticsController(RateMyPDbContext context)
+        public TeacherStatisticsController(ITeacherStatisticsAnalyzer analyzer)
             {
-            m_context = context;
-            m_analyzer = new TeacherStatisticsAnalyzer(m_context);
+            m_analyzer = analyzer;
             }
 
         [HttpGet("teacher={teacherId}/timeStamps={timeStamps}")]
@@ -31,8 +25,8 @@ namespace RateMyP.WebApp.Controllers
                 TeacherId = teacherId,
                 AverageMark = await m_analyzer.GetTeacherAverageMark(teacherId),
                 AverageMarks = await m_analyzer.GetTeacherAverageMarks(teacherId, timeStamps),
-                AverageLevelOfDifficulty = await m_analyzer.GetTeachersAverageLevelOfDifficultyRating(teacherId),
-                WouldTakeAgainRatio = await m_analyzer.GetTeachersWouldTakeTeacherAgainRatio(teacherId)
+                AverageLevelOfDifficulty = await m_analyzer.GetTeacherAverageLevelOfDifficulty(teacherId),
+                WouldTakeAgainRatio = await m_analyzer.GetTeacherWouldTakeTeacherAgainRatio(teacherId)
                 };
 
             return teacherStatistic;
