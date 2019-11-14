@@ -14,6 +14,8 @@ namespace RateMyP.WebApp
         public DbSet<RatingTag> RatingTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<RatingReport> RatingReports { get; set; }
+        public DbSet<CourseLeaderboardPosition> CourseLeaderboardPositions { get; set; }
+        public DbSet<TeacherLeaderboardPosition> TeacherLeaderboardPositions { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
