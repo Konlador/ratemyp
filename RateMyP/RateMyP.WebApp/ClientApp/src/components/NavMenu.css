@@ -1,13 +1,20 @@
-﻿a.navbar-brand {
-    white-space: normal;
+﻿ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #100E17;
+  }
+  
+  li {
+    float: left;
+    margin: 0;
+  }
+  
+  li a {
+    display: block;
     text-align: center;
-    word-break: break-all;
-}
-
-html { font-size: 14px; }
-
-@media (min-width: 768px) {
-    html { font-size: 16px; }
-}
-
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+    padding: 14px 16px;
+    text-decoration: none;
+    margin: 0;
+  }

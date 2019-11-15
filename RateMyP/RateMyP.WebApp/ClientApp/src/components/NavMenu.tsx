@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Card, CardTitle, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
@@ -11,23 +11,41 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Navbar className="default" light style={{ backgroundColor: '#100E17', width: '100vw' }}>
                     <Container>
-                        <NavbarBrand tag={Link} to="/">RateMyP.WebApp</NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} className="mr-2"/>
-                        <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
-                            <ul className="navbar-nav flex-grow">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/browse">Browse</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/student">Login</NavLink>
-                                </NavItem>
-                            </ul>
-                        </Collapse>
+                        <NavbarBrand style={{ color: '#F66A27' }} tag={Link} to="/">RateMyP.WebApp</NavbarBrand>
+                        <ul className="NavMenu">
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/">
+                                    <Card style={{ backgroundColor: '#100E17' }}>
+                                        <img width="50px" height="50px" src={require('../images/house.svg')}/>
+                                            <CardTitle style={{ color: 'white' }}>
+                                                <strong>Home</strong>
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/browse">
+                                <Card style={{ backgroundColor: '#100E17' }}>
+                                        <img width="50px" height="50px" src={require('../images/clipboard.svg')}/>
+                                            <CardTitle style={{ color: 'white' }}>
+                                                <strong>Browse</strong>
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/student">
+                                <Card style={{ backgroundColor: '#100E17' }}>
+                                        <img width="50px" height="50px" src={require('../images/profile.svg')}/>
+                                            <CardTitle style={{ color: 'white' }}>
+                                                <strong>Login</strong>
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                        </ul>
                     </Container>
                 </Navbar>
             </header>
