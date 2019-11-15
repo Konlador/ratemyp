@@ -72,24 +72,27 @@ class Home extends React.PureComponent<Props> {
 
   redirectSearchToBrowsePage() {
     if (this.state.searchToggle) {
-      this.props.history.push(`/browse/${(this.state.inputString === undefined) ? "" : "teacher=" + this.state.inputString}`);
+      this.props.history.push(`/browse/teacher${(this.state.inputString === undefined) ? "" : "=" + this.state.inputString}`);
     }
     else {
-      this.props.history.push(`/browse/${(this.state.inputString === undefined) ? "" : "course=" + this.state.inputString}`);
+      this.props.history.push(`/browse/course${(this.state.inputString === undefined) ? "" : "=" + this.state.inputString}`);
     }
   }
 
   public render() {
     return (
       <div>
-        <div style={{ position: 'absolute', left: 0 }}>
+        <div style={{ 
+          position: 'absolute', 
+          left: 0
+          }}>
           <Parallax
             blur={{ min: -10, max: 30 }}
             bgImage={backgroundImage}
             strength={200}
           >
             <div style={{
-              height: '600px',
+              height: '30vw',
               width: '100vw',
             }} />
           </Parallax>

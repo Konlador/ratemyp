@@ -8,13 +8,14 @@ import MUIDataTable, { SelectableRows } from 'mui-datatables';
 import '../../extensions/StringExtensions'
 
 interface OwnProps {
-    teacherId: string
+    teacherId: string,
+    searchString: string
 };
 
 type Props =
     TeachersStore.TeachersState &
     typeof TeachersStore.actionCreators &
-    RouteComponentProps<{ searchString: string }>;
+    RouteComponentProps<{}>;
 
 class Teachers extends React.PureComponent<Props & OwnProps> {
 
@@ -26,6 +27,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
+        searchText: this.props.searchString,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
@@ -57,7 +59,6 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     }
 
     public componentDidMount() {
-        console.log(this.props.match.params.searchString);
         this.setState({currentIndex: 20});
         this.setState({previousIndex: 20});
         this.setState({canLoadMore: true});

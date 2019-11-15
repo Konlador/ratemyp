@@ -7,12 +7,16 @@ import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
 import '../../extensions/StringExtensions';
 
+interface OwnProps {
+    searchString: string
+};
+
 type Props =
     CoursesStore.CoursesState &
     typeof CoursesStore.actionCreators &
     RouteComponentProps<{}>;
 
-class Courses extends React.PureComponent<Props> {
+class Courses extends React.PureComponent<Props & OwnProps> {
 
     tableOptions = {
         print: false,
@@ -21,6 +25,7 @@ class Courses extends React.PureComponent<Props> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
+        searchText: this.props.searchString,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
