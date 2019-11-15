@@ -3,7 +3,7 @@
 namespace RateMyP.WebApp.Models
     {
 
-    public class CourseLeaderboardPosition
+    public class TeacherLeaderboardEntry
         {
         public Guid Id { get; set; }
         public int AllTimePosition { get; set; }
