@@ -6,8 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
-import { Parallax, Background } from 'react-parallax';
+import { Parallax } from 'react-parallax';
 import "./footer.css";
+
 
 type Props = RouteComponentProps<{}>;
 
@@ -36,12 +37,22 @@ class Home extends React.PureComponent<Props> {
   state = {
     inputString: undefined,
     searchToggle: true,
-    inputPlaceholder: "Search for teachers"
+    inputPlaceholder: "Search for teachers",
+    staffButtonStyle: { backgroundColor: '#F66A27', color: '#100E17' },
+    courseButtonStyle: { backgroundColor: '#100E17', color: '#F66A27' }
   }
 
   textChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
     inputString: e.target.value
   })
+
+  changeButtonStyle() {
+    var tmp = this.state.courseButtonStyle;
+    this.setState({
+      courseButtonStyle: this.state.staffButtonStyle,
+      staffButtonStyle: tmp
+    })
+  }
 
   changeSearchToggle() {
     if (this.state.searchToggle) {
@@ -52,6 +63,7 @@ class Home extends React.PureComponent<Props> {
       this.setState({ searchToggle: true });
       this.setPlaceholderText();
     }
+    this.changeButtonStyle();
   }
 
   setButtonStatus() {
@@ -81,87 +93,89 @@ class Home extends React.PureComponent<Props> {
 
   public render() {
     return (
-      <div>
-        <div style={{ 
-          position: 'absolute', 
-          left: 0
-          }}>
-          <Parallax
-            blur={{ min: -10, max: 30 }}
-            bgImage={backgroundImage}
-            strength={200}
-          >
-            <div style={{
-              height: '30vw',
-              width: '100vw',
-            }} />
+      <div style={{ backgroundColor: '#100E17', width: '100vw', height: 'auto', display: 'flex', position: 'absolute', left: 0 }}>
+        <div style={{display: 'flex', position: 'absolute'}}>
+          <Parallax bgImage={backgroundImage} strength={300}>
+            <div style={{ height: '30vw', width: '100vw'}} />
           </Parallax>
         </div>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{
-            minHeight: '60vh',
-          }}
-        >
-          <Grid>
-            <ButtonGroup>
-              <Button variant="text" color="primary" disabled={this.state.searchToggle} onClick={() => this.changeSearchToggle()}><strong>Staff</strong></Button>
-              <Button variant="text" color="primary" disabled={!this.state.searchToggle} onClick={() => this.changeSearchToggle()}><strong>Courses</strong></Button>
-            </ButtonGroup>
-          </Grid>
 
-          <Grid item xs={6}>
-            <this.TextFieldRender />
-          </Grid>
+        <div className="container">
 
-          <Grid>
-            <Button variant="contained" color="primary" onClick={() => { this.redirectSearchToBrowsePage() }}>
-              SEARCH
-    </Button>
-          </Grid>
-        </Grid>
-
-        <div style={{
-          width: '100vw',
-          height: '60vw',
-          position: 'absolute',
-          left: 0
-        }}>
-          <div style={{ textAlign: 'center' }}>
             <Grid
               container
-              spacing={0}
+              spacing={2}
               direction="column"
               alignItems="center"
               justify="center"
               style={{
-                minHeight: '30vh',
+                minHeight: '60vh',
               }}
             >
 
+              <Grid item>
+                <ButtonGroup>
+                  <Button variant="contained" color="default" style={this.state.staffButtonStyle} disabled={this.state.searchToggle} onClick={() => this.changeSearchToggle()}><strong>Staff</strong></Button>
+                  <Button variant="contained" color="primary" style={this.state.courseButtonStyle} disabled={!this.state.searchToggle} onClick={() => this.changeSearchToggle()}><strong>Courses</strong></Button>
+                </ButtonGroup>
+              </Grid>
+
+              <Grid item>
+                <this.SearchTextField />
+              </Grid>
+
+              <Grid item>
+                <Button variant="contained" color="primary" style={{ backgroundColor: '#F66A27', color: '#100E17' }} onClick={() => { this.redirectSearchToBrowsePage() }}>
+                  <strong>SEARCH</strong>
+                </Button>
+              </Grid>
             </Grid>
-          </div>
-          <div style={{ position: 'absolute', left: 0, bottom: 0 }}>
-            <div>
-              <footer className="footer">
-                <p>Komanda, kuri kažką padaro, Inc</p>
-                <p>Vilnius University, MIF</p>
-                <p>Our GitHub page: <a href="https://github.com/Konlador/ratemyp" target="_blank">https://github.com/Konlador/ratemyp</a></p>
-              </footer>
-            </div>
-          </div>
+
+            <Grid
+              container
+              spacing={0}
+              direction="row"
+              alignItems="center"
+              justify="center"
+              style={{
+                minHeight: '600px',
+              }}
+            >
+
+              <Grid item>
+                <div style={{
+                  width: '100vw',
+                  height: '600px',
+                  left: 0,
+                }}>
+                </div>
+              </Grid>
+            </Grid>
+
+            <Grid
+              container
+              spacing={0}
+              direction="row"
+              justify="center"
+            >
+
+              <Grid item>
+                <div>
+                  <footer className="footer">
+                    <p>Komanda, kuri kažką padaro, Inc</p>
+                    <p>Vilnius University, MIF</p>
+                    <p>Our GitHub page: <a href="https://github.com/Konlador/ratemyp" target="_blank">https://github.com/Konlador/ratemyp</a></p>
+                  </footer>
+                </div>
+              </Grid>
+
+            </Grid>
         </div>
-
-
       </div>
     );
   }
 
-  private TextFieldRender = () => {
+  private SearchTextField = () => {
     const classes = useStyles();
     return (
       <form className={classes.container} noValidate autoComplete="off">
