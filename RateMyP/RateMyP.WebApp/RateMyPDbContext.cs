@@ -1,9 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace RateMyP.WebApp
     {
-    public class RateMyPDbContext : DbContext
+    public interface IRateMyPDbContext
+        {
+        DbSet<Teacher> Teachers { get; set; }
+        DbSet<TeacherActivity> TeacherActivities { get; set; }
+        DbSet<Course> Courses { get; set; }
+        DbSet<Rating> Ratings { get; set; }
+        DbSet<Student> Students { get; set; }
+        DbSet<RatingThumb> RatingThumbs { get; set; }
+        DbSet<RatingTag> RatingTags { get; set; }
+        DbSet<Tag> Tags { get; set; }
+        DbSet<RatingReport> RatingReports { get; set; }
+        }
+
+    public class RateMyPDbContext : DbContext, IRateMyPDbContext
         {
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherActivity> TeacherActivities { get; set; }
@@ -26,8 +40,7 @@ namespace RateMyP.WebApp
             }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("Data Source=ratemyp.database.windows.net;Initial Catalog=RateMyP;User Id=koldunai; Password=abrikosas79?;");
-        //("Data Source=ratemyp.database.windows.net;Initial Catalog=RateMyP;User Id=koldunai; Password=abrikosas79?;");
+            => options.UseSqlServer("Data Source=ratemyp.database.windows.net;Initial Catalog=RateMyP;User Id=koldunai; Password=abrikosas79?;MultipleActiveResultSets=true;");
 
         protected override void OnModelCreating(ModelBuilder builder)
             {
