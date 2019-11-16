@@ -10,6 +10,7 @@ import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as RatingReport from './Rate/RatingReport'
+import * as TeacherLeaderboardEntries from './TeacherLeaderboardEntry'
 
 // The top-level state object
 export interface ApplicationState {
@@ -18,6 +19,7 @@ export interface ApplicationState {
     teacherActivites: TeacherActivites.TeacherActivitesState | undefined;
     teacherRatings: TeacherRatings.TeacherRatingsState | undefined;
     teacherStatistics: TeacherStatistics.TeacherStatisticsState | undefined;
+    teacherLeaderboardEntries: TeacherLeaderboardEntries.TeacherLeaderboardState | undefined;
 
     courses: Courses.CoursesState | undefined;
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
@@ -38,6 +40,7 @@ export const reducers = {
     teacherActivites: TeacherActivites.reducer,
     teacherRatings: TeacherRatings.reducer,
     teacherStatistics: TeacherStatistics.reducer,
+    teacherLeaderboardEntries: TeacherLeaderboardEntries.reducer,
 
     courses: Courses.reducer,
     courseTeachers: CourseTeachers.reducer,

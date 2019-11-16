@@ -5,7 +5,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using RateMyP.WebApp.Db;
 using RateMyP.WebApp.Models;
-using RateMyP.WebApp.Jobs;
 
 namespace RateMyP.WebApp
     {

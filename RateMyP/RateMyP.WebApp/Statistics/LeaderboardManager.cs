@@ -31,9 +31,9 @@ namespace RateMyP.WebApp.Statistics
         private readonly int m_minimumRatings = Int32.Parse(ConfigurationManager.AppSettings["leaderboardEntryThreshold"]);
         private readonly int m_currentYear = Int32.Parse(ConfigurationManager.AppSettings["currentAcademicYear"]);
 
-        public LeaderboardManager(ITeacherStatisticsAnalyzer analyzer)
+        public LeaderboardManager(ITeacherStatisticsAnalyzer analyzer, RateMyPDbContext context)
             {
-            m_context = new RateMyPDbContext();
+            m_context = context;
             m_analyzer = analyzer;
             }
 
