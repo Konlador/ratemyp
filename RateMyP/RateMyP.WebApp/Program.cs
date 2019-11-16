@@ -5,6 +5,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using RateMyP.WebApp.Db;
 using RateMyP.WebApp.Models;
+using RateMyP.WebApp.Jobs;
 
 namespace RateMyP.WebApp
     {
@@ -12,6 +13,8 @@ namespace RateMyP.WebApp
         {
         public static void Main(string[] args)
             {
+            var lbM = new LeaderboardManager(new RateMyPDbContext());
+            lbM.RunFullLeaderboardUpdate();
             //DbDataLoader.LoadDataToDb();
             //LoadRating();
             CreateWebHostBuilder(args).Build().Run();
