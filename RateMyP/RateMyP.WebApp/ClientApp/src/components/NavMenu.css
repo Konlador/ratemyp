@@ -26,3 +26,16 @@
       -webkit-text-fill-color: transparent;
       font-size: 20px;
   }
+  .cardstyle {
+      background-color: #100E17;
+      justify-content: center;
+      align-items: center;
+  }
+  .cardtitle {
+      color: white;
+  }
+
+  .navbarstyle {
+    background-color: #100E17;
+    width: 100vw;
+  }

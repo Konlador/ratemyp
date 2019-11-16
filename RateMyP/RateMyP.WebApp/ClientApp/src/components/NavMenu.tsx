@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Card, CardTitle, CardBody } from 'reactstrap';
+import { Container, Navbar, NavbarBrand, NavItem, NavLink, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
@@ -12,36 +12,36 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="default" light style={{ backgroundColor: '#100E17', width: '100vw' }}>
+                <Navbar className="navbarstyle" light>
                     <Container>
-                        <NavbarBrand style={{ color: 'h1' }} tag={Link} to="/"><h1 className="text"><strong>RateMyP.WebApp</strong></h1></NavbarBrand>
+                        <NavbarBrand tag={Link} to="/"><h1 className="text"><strong>RateMyP.WebApp</strong></h1></NavbarBrand>
                         <ul className="NavMenu">
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">
-                                    <Card style={{ backgroundColor: '#100E17' }}>
-                                        <img width="50px" height="50px" src={require('../images/house.svg')}/>
-                                            <CardTitle style={{ color: 'white' }}>
-                                                <strong>Home</strong>
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/house.svg')} />
+                                        <CardTitle className="text">
+                                            Home
                                             </CardTitle>
                                     </Card>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/browse">
-                                <Card style={{ backgroundColor: '#100E17' }}>
-                                        <img width="50px" height="50px" src={require('../images/clipboard.svg')}/>
-                                            <CardTitle style={{ color: 'white' }}>
-                                                <strong>Browse</strong>
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/clipboard.svg')} />
+                                        <CardTitle className="text">
+                                            Browse
                                             </CardTitle>
                                     </Card>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/student">
-                                <Card style={{ backgroundColor: '#100E17' }}>
-                                        <img width="50px" height="50px" src={require('../images/profile.svg')}/>
-                                            <CardTitle style={{ color: 'white' }}>
-                                                <strong>Login</strong>
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/profile.svg')} />
+                                        <CardTitle className="text">
+                                            Login
                                             </CardTitle>
                                     </Card>
                                 </NavLink>

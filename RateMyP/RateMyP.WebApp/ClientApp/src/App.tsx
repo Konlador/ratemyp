@@ -23,7 +23,7 @@ class App extends React.Component<{}> {
             <div>
                 <Layout>
                     <Route exact path='/' component={Home} />
-                    <Route path='/browse/' component={Browse} />
+                    <Route path='/browse' component={Browse} />
                     <Route path='/student' component={Student} />
                     <Route path='/teacher-profile/:teacherId' component={TeacherProfile} />
                     <Route path='/course-profile/:courseId' component={CourseProfile} />
