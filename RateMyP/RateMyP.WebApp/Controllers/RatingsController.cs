@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -105,9 +105,9 @@ namespace RateMyP.WebApp.Controllers
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
             var ratingId = Guid.NewGuid();
+
             var ratingTags = new List<RatingTag>();
             var tags = JsonConvert.DeserializeObject<List<Tag>>(data["tags"].ToString());
-
             foreach (var tag in tags)
                 {
                 if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
@@ -121,23 +121,20 @@ namespace RateMyP.WebApp.Controllers
                     return NotFound("Tag not found");
                 }
 
-            var teacherId = new Guid();
-
-            if (data["teacherId"].ToObject<string>() != "")
-                teacherId = data["teacherId"].ToObject<Guid>();
+            Guid.TryParse((string)data["teacherId"], out var teacherId);
 
             var rating = new Rating
                 {
-                Comment = data["comment"].ToObject<string>(),
-                CourseId = data["courseId"].ToObject<Guid>(),
-                DateCreated = DateTime.Now,
                 Id = ratingId,
-                LevelOfDifficulty = data["levelOfDifficulty"].ToObject<int>(),
-                OverallMark = data["overallMark"].ToObject<int>(),
-                Tags = ratingTags,
+                DateCreated = DateTime.Now,
                 TeacherId = teacherId,
-                WouldTakeTeacherAgain = data["wouldTakeTeacherAgain"].ToObject<Boolean>(),
-                RatingType = data["ratingType"].ToObject<RatingType>(),
+                Tags = ratingTags,
+                Comment = (string)data["comment"],
+                CourseId = (Guid)data["courseId"],
+                LevelOfDifficulty = (int)data["levelOfDifficulty"],
+                OverallMark = (int)data["overallMark"],
+                WouldTakeTeacherAgain = (bool)data["wouldTakeTeacherAgain"],
+                RatingType = (RatingType)(int)data["ratingType"],
                 ThumbUps = 0,
                 ThumbDowns = 0
                 };
