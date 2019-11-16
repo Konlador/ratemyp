@@ -75,7 +75,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <UncontrolledCollapse toggler="#toggler">
                         <Card>
                             <CardBody>
-                                {this.renderTeacherRatingHistory()}
+                                {!this.props.statistics.isLoading ? this.renderTeacherRatingHistory() : <Spinner type="grow" color="success" />}
                             </CardBody>
                         </Card>
                     </UncontrolledCollapse>
@@ -105,10 +105,12 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderTeacherRatingHistory() {
+        const averageMarks = this.props.statistics.teacherStatistics.averageMarks;
+        if (!averageMarks || averageMarks.length === 0)
+            return;
+
         var data = [];
         data.push(['Date', 'Rating']);
-
-        var averageMarks = this.props.statistics.teacherStatistics.averageMarks;
         averageMarks.forEach((dateMark) => {
             let statDate = new Date(dateMark.date);
             var dateString = `${statDate.getFullYear()}/${statDate.getMonth() + 1}/${statDate.getDate()}`;
@@ -117,7 +119,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
         return (
             <div className="my-pretty-chart-container">
-                {(data.length > 1) ? <Chart
+                <Chart
                     width={'1000px'}
                     height={'400px'}
                     chartType="LineChart"
@@ -137,7 +139,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                         legend: "none",
                     }}
                     rootProps={{ 'data-testid': '1' }}
-                /> : <Spinner type="grow" color="success" />}
+                />
             </div>
         )
     }

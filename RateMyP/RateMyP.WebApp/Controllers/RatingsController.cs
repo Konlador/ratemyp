@@ -11,6 +11,15 @@ using Newtonsoft.Json.Serialization;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface IRatingsController
+        {
+        Task<IActionResult> GetRatings();
+        Task<IActionResult> GetTeacherRatings(Guid teacherId);
+        Task<IActionResult> GetRating(Guid id);
+        Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb);
+        Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
+        }
+
     [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
@@ -136,11 +145,6 @@ namespace RateMyP.WebApp.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
-            }
-
-        private bool RatingExists(Guid id)
-            {
-            return m_context.Ratings.Any(e => e.Id.Equals(id));
             }
         }
     }
