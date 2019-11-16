@@ -5,9 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
-using RateMyP.WebApp.Statistics;
 
-namespace RateMyP.WebApp.Jobs
+namespace RateMyP.WebApp.Statistics
     {
     public interface ILeaderboardManager
         {
@@ -28,12 +27,14 @@ namespace RateMyP.WebApp.Jobs
     public class LeaderboardManager : ILeaderboardManager
         {
         private RateMyPDbContext m_context;
+        private readonly ITeacherStatisticsAnalyzer m_analyzer;
         private readonly int m_minimumRatings = Int32.Parse(ConfigurationManager.AppSettings["leaderboardEntryThreshold"]);
         private readonly int m_currentYear = Int32.Parse(ConfigurationManager.AppSettings["currentAcademicYear"]);
 
-        public LeaderboardManager(RateMyPDbContext context)
+        public LeaderboardManager(ITeacherStatisticsAnalyzer analyzer)
             {
-            m_context = context;
+            m_context = new RateMyPDbContext();
+            m_analyzer = analyzer;
             }
 
         public async void RunFullLeaderboardUpdate()
@@ -122,33 +123,30 @@ namespace RateMyP.WebApp.Jobs
 
         private async Task<int> GetTeacherRatingCount(Guid teacherId, StatType type)
             {
-            var statisticsAnalyzer = new TeacherStatisticsAnalyzer(m_context);
             return type switch
                 {
-                StatType.GlobalRatingCount => await statisticsAnalyzer.GetTeacherRatingCount(teacherId, DateTime.MinValue),
-                StatType.YearRatingCount => await statisticsAnalyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1)),
+                StatType.GlobalRatingCount => await m_analyzer.GetTeacherRatingCount(teacherId, DateTime.MinValue),
+                StatType.YearRatingCount => await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1)),
                 _ => throw new ArgumentException(),
                 };
             }
 
         private async Task<double> GetTeacherRatingAverage(Guid teacherId, StatType type)
             {
-            var statisticsAnalyzer = new TeacherStatisticsAnalyzer(m_context);
             return type switch
                 {
-                StatType.GlobalRatingAverage => await statisticsAnalyzer.GetTeacherAverageMark(teacherId),
-                StatType.YearRatingAverage => await statisticsAnalyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear),
+                StatType.GlobalRatingAverage => await m_analyzer.GetTeacherAverageMark(teacherId),
+                StatType.YearRatingAverage => await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear),
                 _ => throw new ArgumentException(),
                 };
             }
 
         private async Task<TimeSpan> GetTeacherRatingRange(Guid teacherId, StatType type)
             {
-            var statisticsAnalyzer = new TeacherStatisticsAnalyzer(m_context);
             return type switch
                 {
-                StatType.GlobalRatingRange => await statisticsAnalyzer.GetTeacherRatingDateRange(teacherId, DateTime.MinValue),
-                StatType.YearRatingRange => await statisticsAnalyzer.GetTeacherRatingDateRange(teacherId, new DateTime(2019, 9, 1)),
+                StatType.GlobalRatingRange => await m_analyzer.GetTeacherRatingDateRange(teacherId, DateTime.MinValue),
+                StatType.YearRatingRange => await m_analyzer.GetTeacherRatingDateRange(teacherId, new DateTime(2019, 9, 1)),
                 _ => throw new ArgumentException(),
                 };
             }

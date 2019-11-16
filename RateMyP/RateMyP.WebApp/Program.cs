@@ -13,8 +13,8 @@ namespace RateMyP.WebApp
         {
         public static void Main(string[] args)
             {
-            var lbM = new LeaderboardManager(new RateMyPDbContext());
-            lbM.RunFullLeaderboardUpdate();
+            //var lbM = new LeaderboardManager(new RateMyPDbContext());
+            //lbM.RunFullLeaderboardUpdate();
             //DbDataLoader.LoadDataToDb();
             //LoadRating();
             CreateWebHostBuilder(args).Build().Run();
