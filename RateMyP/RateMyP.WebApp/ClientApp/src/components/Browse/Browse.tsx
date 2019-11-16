@@ -6,7 +6,6 @@ import Courses from './Courses';
 import { Button, ButtonGroup } from "reactstrap";
 import '../../extensions/StringExtensions';
 
-
 type Props = RouteComponentProps<{}>;
 
 class Browse extends React.PureComponent<Props> {
@@ -21,35 +20,30 @@ class Browse extends React.PureComponent<Props> {
 
     renderComponents() {
         if (this.props.location.state !== undefined) {
-
             if (this.props.location.state.searchType === "teacher") {
-
                 if (this.props.location.state.search !== undefined) {
                     return <Teachers search={this.props.location.state.search} />
                 }
-                else return <Teachers/>
+                else return <Teachers />
             }
-
             else if (this.props.location.state.searchType == "course") {
-
                 if (this.props.location.state.search !== undefined) {
                     return <Courses search={this.props.location.state.search} />
                 }
-                else return <Courses/>
+                else return <Courses />
             }
         }
         else {
-            if (this.state.page === 0) return <Teachers />
-            else return <Courses />
+            return this.state.page === 0 ? <Courses /> : <Teachers />
         }
     }
 
-    switchPage() {
+    private switchPage() {
         if (this.state.page === 0) this.setState({ page: 1 })
         else this.setState({ page: 0 })
     }
 
-    setButtonStatus() {
+    private setButtonStatus() {
         return (this.state.page === 0) ? true : false
     }
 
@@ -61,7 +55,7 @@ class Browse extends React.PureComponent<Props> {
                     <ButtonGroup style={{ left: '75%' }}>
                             <Button color="primary" disabled={this.setButtonStatus()} onClick={() => this.switchPage()}>Staff</Button>
                             <Button color="primary" disabled={!this.setButtonStatus()} onClick={() => this.switchPage()}>Courses</Button>
-                        </ButtonGroup>
+                    </ButtonGroup>
                     </h1>
                 </div>
                 {this.renderComponents()}
