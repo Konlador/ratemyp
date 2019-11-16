@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ITeacherStatisticsController
+        {
+        Task<ActionResult<TeacherStatistics>> GetTeacherStatistics(Guid teacherId, int timeStamps);
+        }
+
     [Route("api/statistics")]
     [ApiController]
     public class TeacherStatisticsController : ControllerBase
