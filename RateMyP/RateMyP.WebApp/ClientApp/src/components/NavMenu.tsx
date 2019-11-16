@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { Container, Navbar, NavbarBrand, NavItem, NavLink, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+
 
 export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
     public state = {
@@ -11,23 +12,41 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Navbar className="navbarstyle" light>
                     <Container>
-                        <NavbarBrand tag={Link} to="/">RateMyP.WebApp</NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} className="mr-2"/>
-                        <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
-                            <ul className="navbar-nav flex-grow">
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/browse">Browse</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/student">Login</NavLink>
-                                </NavItem>
-                            </ul>
-                        </Collapse>
+                        <NavbarBrand tag={Link} to="/"><h1 className="text"><strong>RateMyP.WebApp</strong></h1></NavbarBrand>
+                        <ul className="NavMenu">
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/">
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/house.svg')} />
+                                        <CardTitle className="text">
+                                            Home
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/browse">
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/clipboard.svg')} />
+                                        <CardTitle className="text">
+                                            Browse
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/student">
+                                    <Card className="cardstyle">
+                                        <img width="50px" height="50px" src={require('../images/profile.svg')} />
+                                        <CardTitle className="text">
+                                            Login
+                                            </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                        </ul>
                     </Container>
                 </Navbar>
             </header>

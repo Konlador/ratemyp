@@ -1,27 +1,202 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Grid from '@material-ui/core/Grid';
+import { Parallax } from 'react-parallax';
+import "./footer.css";
+import HomeStyles from "./Home.module.css";
+import "./Home.css";
 
-declare module 'react-transition-group' {
-  export const SwitchTransitionProps: any
+type Props = RouteComponentProps<{}>;
+
+enum SearchTypeButton {
+    Staff,
+    Course
 }
 
-const Home = () => (
-  <div>
-    <h1>Hello, world!</h1>
-    <p>Welcome to your new single-page application, built with:</p>
-    <ul>
-      <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-      <li><a href='https://facebook.github.io/react/'>React</a> and <a href='https://redux.js.org/'>Redux</a> for client-side code</li>
-      <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-    </ul>
-    <p>To help you get started, we've also set up:</p>
-    <ul>
-      <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-      <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-      <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-    </ul>
-    <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-  </div>
-);
+interface State {
+    search: string | undefined,
+    searchType: "teacher" | "course",
+    searchPlaceholder: string,
+    staffButtonStyle: any,
+    courseButtonStyle: any,
+    searchToggle: string
+};
 
-export default connect()(Home);
+const backgroundImage = require('../images/image.jpg');
+
+class Home extends React.Component<Props, State> {
+
+    constructor(props: Props & State) {
+        super(props);
+
+        this.state = {
+            search: undefined,
+            searchType: "teacher",
+            searchPlaceholder: "Search for teachers",
+            staffButtonStyle: { background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%)', color: '#100E17' },
+            courseButtonStyle: { backgroundColor: '#100E17', color: '#F66A27' },
+            searchToggle: SearchTypeButton[0],
+        };
+    };
+
+    private textChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => this.setState({
+        search: e.target.value
+    })
+
+    private changeButtonStyle() {
+        var tmp = this.state.courseButtonStyle;
+        this.setState({
+            courseButtonStyle: this.state.staffButtonStyle,
+            staffButtonStyle: tmp
+        })
+    }
+
+    private changeSearchToggle() {
+        this.setPlaceholderText();
+        this.changeSearchTypeButtonToggle();
+        this.changeSearchType();
+        this.changeButtonStyle();
+    }
+
+    private changeSearchTypeButtonToggle() {
+        if (this.state.searchToggle === SearchTypeButton[0]) {
+            this.setState({ searchToggle: SearchTypeButton[1] });
+        }
+        else if (this.state.searchToggle === SearchTypeButton[1]) {
+            this.setState({ searchToggle: SearchTypeButton[0] });
+        }
+    }
+
+    private changeSearchType() {
+        if (this.state.searchType === "teacher") {
+            this.setState({ searchType: "course" });
+        }
+        else if (this.state.searchType === "course") {
+            this.setState({ searchType: "teacher" });
+        }
+    }
+
+    private setPlaceholderText() {
+        if (this.state.searchToggle === SearchTypeButton[1]) {
+            this.setState({
+                searchPlaceholder: "Search for teachers",
+            });
+        }
+        else if (this.state.searchToggle === SearchTypeButton[0]) {
+            this.setState({
+                searchPlaceholder: "Search for courses",
+            });
+        }
+    }
+
+    private redirectSearchToBrowsePage() {
+        this.props.history.push({
+            pathname: '/browse',
+            state: {
+                search: this.state.search,
+                searchType: this.state.searchType,
+            }
+        })
+    }
+
+    public render() {
+        return (
+            <div className="home-container">
+                <div className="home-parallax" style={{ zIndex: 0 }}>
+                    <Parallax bgImage={backgroundImage} strength={300}>
+                        <div className="home-parallax-dimensions" />
+                    </Parallax>
+                </div>
+                <div className="nzn-container">
+                    <Grid
+                        container
+                        spacing={1}
+                        direction="column"
+                        alignItems="center"
+                        justify="center"
+                        style={{
+                            minHeight: '60vh',
+                        }}>
+                        <Grid item>
+                            <ButtonGroup>
+                                <Button
+                                    variant="contained"
+                                    color="default"
+                                    style={this.state.staffButtonStyle}
+                                    disabled={this.state.searchToggle === SearchTypeButton[0]}
+                                    onClick={() => this.changeSearchToggle()}>
+                                        <strong>Staff</strong>
+                                </Button>
+                                <Button variant="contained" color="primary" style={this.state.courseButtonStyle} disabled={this.state.searchToggle === SearchTypeButton[1]} onClick={() => this.changeSearchToggle()}><strong>Courses</strong></Button>
+                            </ButtonGroup>
+                        </Grid>
+                        <Grid item style={{ zIndex: 1 }}>
+                            <this.SearchTextField />
+                        </Grid>
+                        <Grid item>
+                            <Button variant="contained" color="primary" style={{ background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%)', color: '#100E17' }} onClick={() => { this.redirectSearchToBrowsePage() }}>
+                                <strong>SEARCH</strong>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="row"
+                        alignItems="center"
+                        justify="center"
+                        style={{
+                            minHeight: '600px',
+                        }}>
+                        <Grid item >
+                            <div style={{
+                                width: '100vw',
+                                height: '600px',
+                                left: 0,
+                            }} />
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="row"
+                        justify="center">
+                        <Grid item>
+                            <footer className="footer">
+                                <p>Komanda, kuri kažką padaro, Inc</p>
+                                <p>Vilnius University, MIF</p>
+                                <p>Our GitHub page: <a href="https://github.com/Konlador/ratemyp" target="_blank">https://github.com/Konlador/ratemyp</a></p>
+                            </footer>
+                        </Grid>
+                    </Grid>
+                </div>
+            </div>
+        );
+    }
+
+    private SearchTextField = () => {
+        return (
+            <form className="search-container" noValidate autoComplete="off">
+                <div>
+                    <TextField
+                        className="search-text-field"
+                        value={this.state.search}
+                        placeholder={this.state.searchPlaceholder}
+                        style={{ borderRadius: 25 }}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.textChangeHandler(event)}
+                        id="standard-basic"
+                        margin="normal"
+                        InputProps={{ spellCheck: false }}
+                    />
+                </div>
+            </form>
+        );
+    }
+
+};
+
+export default connect()(Home as any) as React.ComponentType<any>;

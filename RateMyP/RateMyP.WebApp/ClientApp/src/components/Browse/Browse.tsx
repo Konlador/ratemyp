@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 import Teachers from './Teachers';
 import Courses from './Courses';
 import { Button, ButtonGroup } from "reactstrap";
 import '../../extensions/StringExtensions';
 
-class Browse extends React.PureComponent {
+type Props = RouteComponentProps<{}>;
+
+class Browse extends React.PureComponent<Props> {
 
     public componentDidMount() {
-        this.setState({page: 0})
+        this.setState({ page: 0 })
     }
 
     state = {
@@ -16,20 +19,31 @@ class Browse extends React.PureComponent {
     }
 
     renderComponents() {
-        var text;
-        text = "Tėštąs";
-        console.log(text);
-        console.log(text.denationalize());
-        if (this.state.page === 0) return <Teachers/>
-        else return <Courses/>
+        if (this.props.location.state !== undefined) {
+            if (this.props.location.state.searchType === "teacher") {
+                if (this.props.location.state.search !== undefined) {
+                    return <Teachers search={this.props.location.state.search} />
+                }
+                else return <Teachers />
+            }
+            else if (this.props.location.state.searchType == "course") {
+                if (this.props.location.state.search !== undefined) {
+                    return <Courses search={this.props.location.state.search} />
+                }
+                else return <Courses />
+            }
+        }
+        else {
+            return this.state.page === 0 ? <Courses /> : <Teachers />
+        }
     }
 
-    switchPage() {
-        if (this.state.page === 0) this.setState({page: 1})
-        else this.setState({page: 0})
+    private switchPage() {
+        if (this.state.page === 0) this.setState({ page: 1 })
+        else this.setState({ page: 0 })
     }
 
-    setButtonStatus() {
+    private setButtonStatus() {
         return (this.state.page === 0) ? true : false
     }
 
@@ -37,10 +51,10 @@ class Browse extends React.PureComponent {
         return (
             <React.Fragment>
                 <div>
-                    <h1 id="tabelLabel" style={{marginBottom: '16px'}}>Browse
-                    <ButtonGroup style={{left: '75%'}}>
-                        <Button color="primary" disabled={this.setButtonStatus()} onClick={() => this.switchPage()}>Staff</Button>
-                        <Button color="primary" disabled={!this.setButtonStatus()} onClick={() => this.switchPage()}>Courses</Button>
+                    <h1 id="tabelLabel" style={{ marginBottom: '16px' }}>Browse
+                    <ButtonGroup style={{ left: '75%' }}>
+                            <Button color="primary" disabled={this.setButtonStatus()} onClick={() => this.switchPage()}>Staff</Button>
+                            <Button color="primary" disabled={!this.setButtonStatus()} onClick={() => this.switchPage()}>Courses</Button>
                     </ButtonGroup>
                     </h1>
                 </div>
