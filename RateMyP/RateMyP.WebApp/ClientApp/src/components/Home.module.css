@@ -1,0 +1,18 @@
+.maindiv {
+    background-color: #100E17;
+    width: 100vw;
+    height: auto;
+    display: flex;
+    position: absolute;
+    left: 0;
+}
+
+.parallax {
+    display: flex;
+    position: absolute;
+}
+
+.parallaxdimensions {
+    height: 40vw;
+    width: 100vw;
+}
