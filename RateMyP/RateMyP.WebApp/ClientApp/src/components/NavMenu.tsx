@@ -3,6 +3,7 @@ import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLi
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
+
 export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
     public state = {
         isOpen: false
@@ -13,7 +14,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
             <header>
                 <Navbar className="default" light style={{ backgroundColor: '#100E17', width: '100vw' }}>
                     <Container>
-                        <NavbarBrand style={{ color: '#F66A27' }} tag={Link} to="/">RateMyP.WebApp</NavbarBrand>
+                        <NavbarBrand style={{ color: 'h1' }} tag={Link} to="/"><h1 className="text"><strong>RateMyP.WebApp</strong></h1></NavbarBrand>
                         <ul className="NavMenu">
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">
