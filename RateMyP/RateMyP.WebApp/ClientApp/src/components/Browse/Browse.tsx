@@ -6,7 +6,8 @@ import Courses from './Courses';
 import { Button, ButtonGroup } from "reactstrap";
 import '../../extensions/StringExtensions';
 
-type Props = RouteComponentProps<{ searchString: string }>;
+
+type Props = RouteComponentProps<{}>;
 
 class Browse extends React.PureComponent<Props> {
 
@@ -19,24 +20,28 @@ class Browse extends React.PureComponent<Props> {
     }
 
     renderComponents() {
-        if (this.props.match.params.searchString !== undefined) {
-            if (this.props.match.params.searchString.substring(0, 7) === "teacher") {
+        if (this.props.location.state !== undefined) {
 
-                if (this.props.match.params.searchString.substring(8) !== undefined) {
-                    return <Teachers searchString={this.props.match.params.searchString.substring(8)} />
+            if (this.props.location.state.searchType === "teacher") {
+
+                if (this.props.location.state.search !== undefined) {
+                    return <Teachers search={this.props.location.state.search} />
                 }
-                else return <Teachers />
+                else return <Teachers/>
             }
 
-            else if (this.props.match.params.searchString.substring(0, 6) == "course") {
+            else if (this.props.location.state.searchType == "course") {
 
-                if (this.props.match.params.searchString.substring(7) !== undefined) {
-                    return <Courses searchString={this.props.match.params.searchString.substring(7)} />
+                if (this.props.location.state.search !== undefined) {
+                    return <Courses search={this.props.location.state.search} />
                 }
-                else return <Courses />
+                else return <Courses/>
             }
         }
-        else return <Teachers />
+        else {
+            if (this.state.page === 0) return <Teachers />
+            else return <Courses />
+        }
     }
 
     switchPage() {

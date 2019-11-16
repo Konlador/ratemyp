@@ -9,7 +9,7 @@ import '../../extensions/StringExtensions'
 
 interface OwnProps {
     teacherId: string,
-    searchString: string
+    search: string
 };
 
 type Props =
@@ -27,7 +27,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
-        searchText: this.props.searchString,
+        searchText: this.props.search,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);

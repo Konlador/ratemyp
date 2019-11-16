@@ -8,7 +8,7 @@ import MUIDataTable, { SelectableRows } from 'mui-datatables';
 import '../../extensions/StringExtensions';
 
 interface OwnProps {
-    searchString: string
+    search: string
 };
 
 type Props =
@@ -25,7 +25,7 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
-        searchText: this.props.searchString,
+        searchText: this.props.search,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
             console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
