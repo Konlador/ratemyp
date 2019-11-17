@@ -40,7 +40,7 @@ namespace RateMyP.WebApp.Statistics
         public async void RunFullLeaderboardUpdate()
             {
             var teachers = await m_context.Teachers.ToListAsync();
-            var weightedTeachers = new List<Tuple<double, double, TeacherLeaderboardEntry>>();
+            var weightedTeachers = new List<Tuple<double, double, LeaderboardEntry>>();
 
             foreach (var teacher in teachers)
                 {
@@ -71,7 +71,7 @@ namespace RateMyP.WebApp.Statistics
             RefreshLeaderboardEntries((weightedTeachers.Select(t => t.Item3).ToList()));
             }
 
-        private async Task<Tuple<double, double, TeacherLeaderboardEntry>> RecalculateTeacherEntryData(Guid teacherId)
+        private async Task<Tuple<double, double, LeaderboardEntry>> RecalculateTeacherEntryData(Guid teacherId)
             {
             var globalRatingCount = await GetTeacherRatingCount(teacherId, StatType.GlobalRatingCount);
 
@@ -89,21 +89,22 @@ namespace RateMyP.WebApp.Statistics
                 var globalTeacherScore = ParseScore(globalAverage, globalRatingCount, globalRange);
                 var yearlyTeacherScore = ParseScore(yearlyAverage, yearlyRatingCount, yearlyRange);
 
-                return new Tuple<double, double, TeacherLeaderboardEntry>(globalTeacherScore, yearlyTeacherScore, entry);
+                return new Tuple<double, double, LeaderboardEntry>(globalTeacherScore, yearlyTeacherScore, entry);
                 }
 
             return null;
             }
 
-        private async Task<TeacherLeaderboardEntry> CreateOrUpdateTeacherLeaderboardEntry(Guid teacherId, int globalRatingCount, int yearRatingCount,
+        private async Task<LeaderboardEntry> CreateOrUpdateTeacherLeaderboardEntry(Guid teacherId, int globalRatingCount, int yearRatingCount,
                                                                                                           double globalAverage, double yearAverage)
             {
-            var entry = await m_context.TeacherLeaderboardEntries.FindAsync(teacherId);
+            var entry = await m_context.Leaderboard.FindAsync(teacherId);
             if (entry == null)
                 {
-                entry = new TeacherLeaderboardEntry
+                entry = new LeaderboardEntry
                     {
                     Id = teacherId,
+                    EntryType = EntryType.Teacher,
                     AllTimePosition = 0,
                     AllTimeRatingCount = globalRatingCount,
                     AllTimeAverage = globalAverage,
@@ -164,15 +165,15 @@ namespace RateMyP.WebApp.Statistics
             return averageRating * MathF.Log2(ratingCount);
             }
 
-        public async void RefreshLeaderboardEntries(List<TeacherLeaderboardEntry> entries)
+        public async void RefreshLeaderboardEntries(List<LeaderboardEntry> entries)
             {
             foreach (var entry in entries)
                 {
-                if (m_context.TeacherLeaderboardEntries.Find(entry.Id) == null)
+                if (m_context.Leaderboard.Find(entry.Id) == null)
                     {
-                    m_context.TeacherLeaderboardEntries.Add(entry);
+                    m_context.Leaderboard.Add(entry);
                     }
-                else m_context.TeacherLeaderboardEntries.Update(entry);
+                else m_context.Leaderboard.Update(entry);
                 }
             await m_context.SaveChangesAsync();
             }

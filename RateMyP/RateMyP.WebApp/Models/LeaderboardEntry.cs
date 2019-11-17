@@ -1,11 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.WebApp.Models
     {
 
-    public class CourseLeaderboardEntry
+    public enum EntryType
+        {
+        Teacher,
+        Course
+        }
+
+    public class LeaderboardEntry
         {
         public Guid Id { get; set; }
+        public EntryType EntryType { get; set; }
         public int AllTimePosition { get; set; }
         public int AllTimeRatingCount { get; set; }
         public double AllTimeAverage { get; set; }

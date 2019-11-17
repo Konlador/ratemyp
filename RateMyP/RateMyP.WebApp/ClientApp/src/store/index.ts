@@ -11,6 +11,7 @@ import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as RatingReport from './Rate/RatingReport'
 import * as TeacherLeaderboardEntries from './TeacherLeaderboardEntry'
+import * as CourseLeaderboardEntries from './CourseLeaderboardEntry'
 
 // The top-level state object
 export interface ApplicationState {
@@ -24,6 +25,7 @@ export interface ApplicationState {
     courses: Courses.CoursesState | undefined;
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
     courseTeacherActivities: CourseTeacherActivities.CourseTeacherActivitiesState | undefined;
+    courseLeaderboardEntries: CourseLeaderboardEntries.CourseLeaderboardState | undefined;
 
     tags: Tags.TagsState | undefined;
     student: Student.StudentState | undefined;
@@ -45,6 +47,7 @@ export const reducers = {
     courses: Courses.reducer,
     courseTeachers: CourseTeachers.reducer,
     courseTeacherActivities: CourseTeacherActivities.reducer,
+    courseLeaderboardEntries: CourseLeaderboardEntries.reducer,
 
     tags: Tags.reducer,
     student: Student.reducer,

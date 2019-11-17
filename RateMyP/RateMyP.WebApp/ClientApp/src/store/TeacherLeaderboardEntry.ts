@@ -5,13 +5,16 @@ import { AppThunkAction } from '.';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface TeacherLeaderboardState {
-    entries: TeacherLeaderboardEntry[];
+    allTimeEntries: TeacherLeaderboardEntry[];
+    thisYearEntries: TeacherLeaderboardEntry[];
     selectedEntry: TeacherLeaderboardEntry | undefined;
     isLoading: boolean;
 }
 
 export interface TeacherLeaderboardEntry {
     id: string,
+    entryType: number,
+    name: string,
     allTimePosition: number,
     allTimeRatingCount: number,
     allTimeAverage: number,
@@ -24,13 +27,22 @@ export interface TeacherLeaderboardEntry {
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface RequestTeacherLeaderboardAction {
-    type: 'REQUEST_TEACHER_LEADERBOARD';
+interface RequestAllTimeTeacherLeaderboardAction {
+    type: 'REQUEST_ALLTIME_TEACHER_LEADERBOARD';
 }
 
-interface ReceiveTeacherLeaderboardAction {
-    type: 'RECEIVE_TEACHER_LEADERBOARD';
-    entries: TeacherLeaderboardEntry[];
+interface ReceiveAllTimeTeacherLeaderboardAction {
+    type: 'RECEIVE_ALLTIME_TEACHER_LEADERBOARD';
+    allTimeEntries: TeacherLeaderboardEntry[];
+}
+
+interface RequestThisYearTeacherLeaderboardAction {
+    type: 'REQUEST_THIS_YEAR_TEACHER_LEADERBOARD'
+}
+
+interface ReceiveThisYearTeacherLeaderboardAciton {
+    type: 'RECEIVE_THIS_YEAR_TEACHER_LEADERBOARD';
+    thisYearEntries: TeacherLeaderboardEntry[];
 }
 
 interface RequestTeacherEntryAction {
@@ -44,22 +56,37 @@ interface ReceiveTeacherEntryAction {
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTeacherLeaderboardAction | ReceiveTeacherLeaderboardAction | RequestTeacherEntryAction | ReceiveTeacherEntryAction;
+type KnownAction = RequestAllTimeTeacherLeaderboardAction | ReceiveAllTimeTeacherLeaderboardAction | 
+                   RequestThisYearTeacherLeaderboardAction | ReceiveThisYearTeacherLeaderboardAciton | 
+                   RequestTeacherEntryAction | ReceiveTeacherEntryAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeacherLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestAllTimeTeacherLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.teacherLeaderboardEntries && appState.teacherLeaderboardEntries.isLoading === false) {
-            fetch(`api/leaderboard/teachers`)
+        if (appState && appState.teacherLeaderboardEntries && appState.teacherLeaderboardEntries.isLoading === false
+            && appState.teacherLeaderboardEntries.allTimeEntries.length === 0) {
+            fetch(`api/leaderboard/teachers/all`)
                 .then(response => response.json() as Promise<TeacherLeaderboardEntry[]>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHER_LEADERBOARD', entries: data });
+                    dispatch({ type: 'RECEIVE_ALLTIME_TEACHER_LEADERBOARD', allTimeEntries: data });
                 });
-            dispatch({ type: 'REQUEST_TEACHER_LEADERBOARD' });
+            dispatch({ type: 'REQUEST_ALLTIME_TEACHER_LEADERBOARD' });
+        }
+    },
+    requestThisYearTeacherLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        const appState = getState();
+        if (appState && appState.teacherLeaderboardEntries && appState.teacherLeaderboardEntries.isLoading === false
+            && appState.teacherLeaderboardEntries.thisYearEntries.length === 0) {
+            fetch(`api/leaderboard/teachers/year`)
+                .then(response => response.json() as Promise<TeacherLeaderboardEntry[]>)
+                .then(data => {
+                    dispatch({ type: 'RECEIVE_THIS_YEAR_TEACHER_LEADERBOARD', thisYearEntries: data });
+                });
+            dispatch({ type: 'REQUEST_THIS_YEAR_TEACHER_LEADERBOARD' });
         }
     },
     requestTeacherEntry: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
@@ -82,7 +109,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeacherLeaderboardState= { entries: [], selectedEntry: undefined, isLoading: false };
+const unloadedState: TeacherLeaderboardState= { allTimeEntries: [], thisYearEntries: [], selectedEntry: undefined, isLoading: false };
 
 export const reducer: Reducer<TeacherLeaderboardState> = (state: TeacherLeaderboardState | undefined, incomingAction: Action): TeacherLeaderboardState => {
     if (state === undefined)
@@ -90,27 +117,45 @@ export const reducer: Reducer<TeacherLeaderboardState> = (state: TeacherLeaderbo
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'REQUEST_TEACHER_LEADERBOARD':
+        case 'REQUEST_ALLTIME_TEACHER_LEADERBOARD':
             return {
-                entries: state.entries,
+                allTimeEntries: state.allTimeEntries,
+                thisYearEntries: state.thisYearEntries,
                 selectedEntry: state.selectedEntry,
                 isLoading: true,
             };
-        case 'RECEIVE_TEACHER_LEADERBOARD':
+        case 'RECEIVE_ALLTIME_TEACHER_LEADERBOARD':
             return {
-                entries: [...state.entries, ...action.entries],
+                allTimeEntries: [...state.allTimeEntries, ...action.allTimeEntries],
+                thisYearEntries: state.thisYearEntries,
+                selectedEntry: state.selectedEntry,
+                isLoading: false,
+            };
+        case 'REQUEST_THIS_YEAR_TEACHER_LEADERBOARD':
+            return {
+                allTimeEntries: state.allTimeEntries,
+                thisYearEntries: state.thisYearEntries,
+                selectedEntry: state.selectedEntry,
+                isLoading: true,
+            };
+        case 'RECEIVE_THIS_YEAR_TEACHER_LEADERBOARD':
+            return {
+                allTimeEntries: state.allTimeEntries,
+                thisYearEntries: [...state.thisYearEntries, ...action.thisYearEntries],
                 selectedEntry: state.selectedEntry,
                 isLoading: false,
             };
         case 'REQUEST_TEACHER_ENTRY':
             return {
-                entries: state.entries,
+                allTimeEntries: state.allTimeEntries,
+                thisYearEntries: state.thisYearEntries,
                 selectedEntry: state.selectedEntry,
                 isLoading: true,
             };
         case 'RECEIVE_TEACHER_ENTRY':
             return {
-                entries: state.entries,
+                allTimeEntries: state.allTimeEntries,
+                thisYearEntries: state.thisYearEntries,
                 selectedEntry: action.selectedEntry,
                 isLoading: false
             };

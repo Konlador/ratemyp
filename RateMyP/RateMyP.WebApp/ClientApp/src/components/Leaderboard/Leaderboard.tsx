@@ -1,24 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import TeacherLadder from './TeacherLadder';
+import TeacherLeaderboard from './TeacherLeaderboard';
+import CourseLeaderboard from './CourseLeaderboard';
 import '../../extensions/StringExtensions';
+import './Leaderboard.css';
 
 class Leaderboard extends React.PureComponent {
-
-    public componentDidMount() {
-        this.setState({teacherLeaderboardPage: 0});
-        this.setState({courseLeaderboardPage: 0});
-    }
-
-    state = {
-        teacherLeaderboardPage: 0,
-        courseLeaderboardPage: 0,
-    }
 
     public render() {
         return (
             <React.Fragment>
-                <TeacherLadder/>
+            <div>
+                <div style={{maxWidth: '48%', display: 'inline-block', marginRight: '2%'}}><TeacherLeaderboard/></div>
+                <div style={{maxWidth: '48%', display: 'inline-block', verticalAlign: 'top'}}><CourseLeaderboard/></div>
+            </div>
             </React.Fragment>
         )
     }
