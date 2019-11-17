@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route } from 'react-router';
 import Layout from './components/Layout';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Browse from './components/Browse/Browse';
 import Student from './components/Student';
 import Leaderboard from './components/Leaderboard/Leaderboard';
@@ -9,9 +9,8 @@ import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/Rate/RateCourse';
-import RatingReport from './components/Rate/RatingReport';
+import RatingReport from './components/RatingReport/RatingReport';
 import firebase from "firebase";
-
 import './custom.css'
 
 firebase.initializeApp({
@@ -19,7 +18,7 @@ firebase.initializeApp({
     authDomain: "ratemyp-44d4c.firebaseapp.com"
 });
 
-class App extends React.Component<{}>{
+class App extends React.Component<{}> {
     public render() {
         return (
             <div>

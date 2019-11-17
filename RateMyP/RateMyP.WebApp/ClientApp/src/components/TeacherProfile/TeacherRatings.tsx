@@ -38,38 +38,32 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
     public render() {
         return (
             <React.Fragment>
-                {this.renderTeacherInfo()}
-            </React.Fragment>
-        );
-    }
-
-    private renderTeacherInfo() {
-        return (
-            <div>
-                <div className="ratings-head">
-                    <h2 className="ratings">Ratings</h2>
-                    <Button className="add-rating" color="primary" tag={Link} to={`/rate-teacher/${this.props.teacherId}`}>Add a rating</Button>{' '}
-                    {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
-                </div>
-                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
-                    <thead>
-                        <tr>
-                            <th className="course">Course</th>
-                            <th className="rating">Rating</th>
-                            <th className="comment">Comment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.ratings.ratings.map((rating: RatingsStore.Rating) =>
+                <div>
+                    <div className="ratings-head">
+                        <h2 className="ratings">Ratings</h2>
+                        <Button className="add-rating" color="primary" tag={Link} to={`/rate-teacher/${this.props.teacherId}`}>Add a rating</Button>{' '}
+                        {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
+                    </div>
+                    <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
+                        <thead>
                             <tr>
-                                <td>{this.getCourseName(rating.courseId)}</td>
-                                <td>{this.renderRatingInfo(rating)}</td>
-                                <td>{this.renderComment(rating)}</td>
+                                <th className="course">Course</th>
+                                <th className="rating">Rating</th>
+                                <th className="comment">Comment</th>
                             </tr>
-                        )}
-                    </tbody>
-                </Table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {this.props.ratings.ratings.map((rating: RatingsStore.Rating, index: number) =>
+                                <tr key={rating.id}>
+                                    <td>{this.getCourseName(rating.courseId)}</td>
+                                    <td>{this.renderRatingInfo(rating)}</td>
+                                    <td>{this.renderComment(rating)}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </div>
+            </React.Fragment>
         );
     }
 
@@ -94,7 +88,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
             <div>
                 <div className="tagbox">
                     {rating.tags.map((tag: TagsStore.Tag) =>
-                        <span>
+                        <span key={tag.id}>
                             {tag.text}
                         </span>
                     )}
@@ -113,7 +107,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                         }}>{rating.thumbDowns} find this not useful</a>
                     </div>
                     <div>
-                    <Button color="primary" tag={Link} to={{pathname: `/rating-report/${rating.id}`, state: rating}}  size='sm'>Report rating</Button>{' '}
+                        <Button color="primary" tag={Link} to={`/rating-report/${rating.id}`} size='sm'>Report rating</Button>{' '}
                     </div>
                 </div>
             </div>

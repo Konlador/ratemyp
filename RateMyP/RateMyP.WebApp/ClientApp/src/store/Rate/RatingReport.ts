@@ -1,23 +1,36 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
+import { Rating } from "../Ratings";
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface RatingReportState {
     submitButtonClicked: boolean;
-    report: RatingReport
+    ratingId : string;
+    rating: Rating | undefined;
+    report: RatingReport;
 }
 
 export interface RatingReport {
-    reason: string;
     ratingId: string;
-    studentId: string
+    studentId: string;
+    reason: string;
 }
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe sometheState that is goeState to happen.
+
+interface RequestTeacherAction {
+    type: 'REQUEST_RATING';
+    ratingId: string;
+}
+
+interface ReceiveTeacherAction {
+    type: 'RECEIVE_RATING';
+    rating: Rating;
+}
 
 interface ChangeReasonAction {
     type: 'CHANGE_REASON'
@@ -49,13 +62,28 @@ interface ClearStoreAction {
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type streStates (and not any other arbitrary streState).
-type KnownAction = ChangeReasonAction | SubmitReportAction | SendReportAction | SetRatingIdAction |  ClearStoreAction | SetStudentIdAction;
+type KnownAction = RequestTeacherAction | ReceiveTeacherAction | ChangeReasonAction | SubmitReportAction | SendReportAction | SetRatingIdAction |  ClearStoreAction | SetStudentIdAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loadeState data).
 
 export const actionCreators = {
+    requestRating: (ratingId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        const appState = getState();
+        if (appState &&
+            appState.ratingReport &&
+            (appState.ratingReport.rating === undefined ||
+            appState.ratingReport.rating.id !== ratingId)) {
+            fetch(`api/ratings/${ratingId}`)
+                .then(response => response.json() as Promise<Rating>)
+                .then(data => {
+                    dispatch({ type: 'RECEIVE_RATING', rating: data });
+                });
+
+            dispatch({ type: 'REQUEST_RATING', ratingId });
+        }
+    },
     changeReason: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'CHANGE_REASON', value: value });
     },
@@ -69,7 +97,7 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(state.report)
-            }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
+            }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_REPORT'});
     },
@@ -84,7 +112,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 const unloadedRatingReport: RatingReport = { ratingId: '', reason: '', studentId: '' }
-const unloadedState: RatingReportState = { submitButtonClicked: false, report: unloadedRatingReport };
+const unloadedState: RatingReportState = { ratingId: '', rating: undefined, submitButtonClicked: false, report: unloadedRatingReport };
 
 export const reducer: Reducer<RatingReportState> = (state: RatingReportState | undefined, incomeStateAction: Action): RatingReportState => {
     if (state === undefined)
@@ -92,35 +120,47 @@ export const reducer: Reducer<RatingReportState> = (state: RatingReportState | u
 
     const action = incomeStateAction as KnownAction;
     switch (action.type) {
+        case 'REQUEST_RATING':
+            return {
+                rating: undefined,
+                ratingId: action.ratingId,
+                report: state.report,
+                submitButtonClicked: state.submitButtonClicked
+            };
+        case 'RECEIVE_RATING':
+            return {
+                rating: action.rating,
+                ratingId: state.ratingId,
+                report: state.report,
+                submitButtonClicked: state.submitButtonClicked
+            };
         case 'CHANGE_REASON':
-                return Object.assign({}, state, {
-                    report: Object.assign({}, state.report, {
-                        reason: action.value, 
-                    }),
-                    });
+            return Object.assign({}, state, {
+                report: Object.assign({}, state.report, {
+                    reason: action.value, 
+                }),
+                });
         case 'SUBMIT_REPORT':
-                return Object.assign({}, state, {
-                    submitButtonClicked: true,
-                    });
+            return Object.assign({}, state, {
+                submitButtonClicked: true,
+                });
         case 'SET_RATING_ID':
-                return Object.assign({}, state, {
+            return Object.assign({}, state, {
                     report: Object.assign({}, state.report, {
                         ratingId: action.value,
                     }),
-                    });
+                });
         case 'SET_STUDENT_ID':
-                return Object.assign({}, state, {
+            return Object.assign({}, state, {
                     report: Object.assign({}, state.report, {
                         studentId: action.value,
                     }),
-                    });
+                });
         case 'SEND_REPORT':
-                return Object.assign({}, state, {
-                    });
+            return state;
         case 'CLEAR_STORE':
             return unloadedState;
-                    
         default:
-                return state;
+            return state;
     }
 };

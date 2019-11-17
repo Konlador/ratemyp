@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ITagsController
+        {
+        Task<ActionResult<IEnumerable<Tag>>> GetTags();
+        }
+
     [Route("api/tags")]
     [ApiController]
-    public class TagsController : ControllerBase
+    public class TagsController : ControllerBase, ITagsController
         {
         private readonly RateMyPDbContext m_context;
 

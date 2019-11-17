@@ -39,5 +39,5 @@ namespace RateMyP.WebApp.Models
             other.DateCreated.Equals(DateCreated) &&
             other.Comment.Equals(Comment) &&
             other.RatingType.Equals(RatingType);
+        }
     }
-}

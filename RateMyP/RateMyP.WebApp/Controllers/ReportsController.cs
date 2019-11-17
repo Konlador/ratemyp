@@ -6,14 +6,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface IReportsController
+        {
+        Task<ActionResult<IEnumerable<RatingReport>>> GetReports();
+        Task<ActionResult<IEnumerable<RatingReport>>> GetRatingReports(Guid ratingId);
+        Task<ActionResult<RatingReport>> GetReport(Guid id);
+        Task<ActionResult<RatingReport>> PostRating([FromBody] JObject data);
+        }
+
     [Route("api/reports")]
     [ApiController]
-    public class ReportsController : ControllerBase
+    public class ReportsController : ControllerBase, IReportsController
         {
         private readonly RateMyPDbContext m_context;
 
@@ -23,23 +29,19 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet]
-        public async Task<IActionResult> GetReports()
+        public async Task<ActionResult<IEnumerable<RatingReport>>> GetReports()
             {
-            var reports = await m_context.RatingReports
-                                         .ToListAsync();
-            return Ok(SerializeReports(reports));
+            return await m_context.RatingReports.ToListAsync();
             }
 
         [HttpGet("rating={ratingId}")]
-        public async Task<IActionResult> GetTeacherRatings(Guid ratingId)
+        public async Task<ActionResult<IEnumerable<RatingReport>>> GetRatingReports(Guid ratingId)
             {
-            var reports = await m_context.RatingReports
-                                         .Where(x => x.RatingId.Equals(ratingId)).ToListAsync();
-            return Ok(SerializeReports(reports));
+            return await m_context.RatingReports.Where(x => x.RatingId.Equals(ratingId)).ToListAsync();
             }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetReport(Guid id)
+        public async Task<ActionResult<RatingReport>> GetReport(Guid id)
             {
             var report = await m_context.RatingReports
                                         .SingleAsync(x => x.Id.Equals(id));
@@ -47,50 +49,24 @@ namespace RateMyP.WebApp.Controllers
             if (report == null)
                 return NotFound();
 
-            return Ok(SerializeReport(report));
+            return report;
             }
 
-        private static JArray SerializeReports(IEnumerable<RatingReport> reports)
-            {
-            return JArray.FromObject(reports.Select(SerializeReport));
-            }
-
-        private static JObject SerializeReport(RatingReport report)
-            {
-            var serializer = new JsonSerializer
-                {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-            var serializedReport = JObject.FromObject(report, serializer);
-            return serializedReport;
-            }
-
-       
         [HttpPost]
-        public async Task<ActionResult<RatingReport>> PostRating([FromBody]JObject data)
+        public async Task<ActionResult<RatingReport>> PostRating([FromBody] JObject data)
             {
-            var studentId = Guid.Empty;
-
-            if (data["studentId"].ToObject<string>() != "")
-                studentId = data["studentId"].ToObject<Guid>();
-
             var report = new RatingReport
                 {
-                Reason = data["reason"].ToObject<string>(),
-                RatingId = data["ratingId"].ToObject<Guid>(),
-                DateCreated = DateTime.Now,
                 Id = Guid.NewGuid(),
-                StudentId = studentId
+                DateCreated = DateTime.Now,
+                StudentId = (Guid)data["studentId"],
+                RatingId = (Guid)data["ratingId"],
+                Reason = (string)data["reason"]
                 };
             m_context.RatingReports.Add(report);
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetRatingReport", new { id = report.Id }, report);
-            }
-
-        private bool ReportExists(Guid id)
-            {
-            return m_context.RatingReports.Any(e => e.Id.Equals(id));
             }
         }
     }

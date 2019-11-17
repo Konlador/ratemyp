@@ -8,9 +8,17 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ICoursesController
+        {
+        Task<ActionResult<IEnumerable<Course>>> GetCourses();
+        Task<ActionResult<Course>> GetCourse(Guid id);
+        Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex);
+        Task<ActionResult<IEnumerable<Course>>> GetTeacherCourses(Guid teacherId);
+        }
+
     [Route("api/courses")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class CoursesController : ControllerBase, ICoursesController
         {
         private readonly RateMyPDbContext m_context;
 

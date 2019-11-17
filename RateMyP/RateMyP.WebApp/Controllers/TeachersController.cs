@@ -10,9 +10,18 @@ using RateMyP.WebApp.Helpers;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ITeachersController
+        {
+        Task<ActionResult<IEnumerable<Teacher>>> GetTeachers();
+        Task<ActionResult<IEnumerable<Teacher>>> GetTeachersIndexed(int startIndex);
+        Task<ActionResult<Teacher>> GetTeacher(Guid id);
+        Task<ActionResult<IEnumerable<Teacher>>> GetSearchedTeachers(string searchString);
+        Task<ActionResult<IEnumerable<Teacher>>> GetCourseTeachers(Guid courseId);
+        }
+
     [Route("api/teachers")]
     [ApiController]
-    public class TeachersController : ControllerBase
+    public class TeachersController : ControllerBase, ITeachersController
         {
         private readonly RateMyPDbContext m_context;
 
@@ -32,17 +41,11 @@ namespace RateMyP.WebApp.Controllers
             {
             return await m_context.Teachers.OrderBy(teacher => teacher.LastName).Skip(startIndex).Take(Int32.Parse(ConfigurationManager.AppSettings["loadedTeachersNumber"])).ToListAsync();
             }
-        /*
-    [HttpGet("{startIndex}")]
-    public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachersIndexed(int startIndex)
-        {
-        return await m_context.Teachers.Skip(startIndex).Take(5).ToListAsync();
-        }*/
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Teacher>> GetTeacher(Guid id)
             {
-            var teacher = await m_context.Teachers
-                .FirstOrDefaultAsync(i => i.Id.Equals(id));
+            var teacher = await m_context.Teachers.FirstOrDefaultAsync(i => i.Id.Equals(id));
 
             if (teacher == null)
                 return NotFound();
@@ -72,11 +75,6 @@ namespace RateMyP.WebApp.Controllers
                                            .ToListAsync();
             var teachers = await m_context.Teachers.Where(x => teacherIds.Contains(x.Id)).ToListAsync();
             return teachers;
-            }
-
-        private bool TeacherExists(Guid id)
-            {
-            return m_context.Teachers.Any(e => e.Id.Equals(id));
             }
         }
     }

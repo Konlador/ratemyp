@@ -7,12 +7,16 @@ import { Button, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
 import '../../extensions/StringExtensions';
 
+interface OwnProps {
+    search: string
+};
+
 type Props =
     CoursesStore.CoursesState &
     typeof CoursesStore.actionCreators &
     RouteComponentProps<{}>;
 
-class Courses extends React.PureComponent<Props> {
+class Courses extends React.PureComponent<Props & OwnProps> {
 
     tableOptions = {
         print: false,
@@ -21,14 +25,13 @@ class Courses extends React.PureComponent<Props> {
         selectableRows: "none" as SelectableRows,
         pagination: false,
         sort: false,
+        searchText: this.props.search,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
           },
         customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
             let isFound = false;
             let matchString = currentRow[0];
-            console.log(searchQuery, currentRow, columns, matchString);
             if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
                 isFound = true;
             }       
@@ -42,28 +45,10 @@ class Courses extends React.PureComponent<Props> {
 
     public componentDidMount() {
         if (this.props.courses.length === 0) this.props.requestCourses();
-        window.addEventListener("scroll", this.onScroll, false);
     }
 
     private loadMoreCourses() {
         this.props.requestCourses();
-    }
-
-    public componentWillUnmount() {
-        window.removeEventListener("scroll", this.onScroll, false);
-    }
-
-    onScroll = () => {
-        if (this.hasReachedBottom() && !this.props.isLoading) {
-            this.loadMoreCourses()
-        }
-    };
-
-    hasReachedBottom() {
-        console.log(document.body.offsetHeight, document.body.scrollTop, document.body.scrollHeight)
-        return (
-            document.body.getBoundingClientRect().bottom < window.innerHeight
-        );
     }
 
     public render() {
@@ -116,7 +101,6 @@ class Courses extends React.PureComponent<Props> {
             </div>
         )
     }
-
 }
 
 export default withRouter(

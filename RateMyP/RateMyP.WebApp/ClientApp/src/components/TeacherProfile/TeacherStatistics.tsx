@@ -51,14 +51,14 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                             <Card>
                                 <CardBody>
                                     <CardTitle
-                                        style={{ fontSize: "10px" }}
-                                        body className="text-center">
+                                        className="text-center"
+                                        style={{ fontSize: "10px" }}>
                                         <strong>Would take again</strong>
                                     </CardTitle>
 
                                     <CardText
-                                        style={{ fontSize: "70px" }}
-                                        body className="text-center">
+                                        className="text-center"
+                                        style={{ fontSize: "70px" }}>
                                         <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
                                     </CardText>
                                 </CardBody>
@@ -75,7 +75,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <UncontrolledCollapse toggler="#toggler">
                         <Card>
                             <CardBody>
-                                {this.renderTeacherRatingHistory()}
+                                {!this.props.statistics.isLoading ? this.renderTeacherRatingHistory() : <Spinner type="grow" color="success" />}
                             </CardBody>
                         </Card>
                     </UncontrolledCollapse>
@@ -89,14 +89,14 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
             <Card>
                 <CardBody>
                     <CardTitle
-                        style={{ fontSize: titleFontSize }}
-                        body className="text-center">
+                        className="text-center"
+                        style={{ fontSize: titleFontSize }}>
                         <strong>{title}</strong>
                     </CardTitle>
 
                     <CardText
-                        style={{ fontSize: bodyTextFontSize }}
-                        body className="text-center">
+                        className="text-center"
+                        style={{ fontSize: bodyTextFontSize }}>
                         <strong>{value.toFixed(1)}</strong>
                     </CardText>
                 </CardBody>
@@ -105,10 +105,12 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderTeacherRatingHistory() {
+        const averageMarks = this.props.statistics.teacherStatistics.averageMarks;
+        if (!averageMarks || averageMarks.length === 0)
+            return;
+
         var data = [];
         data.push(['Date', 'Rating']);
-
-        var averageMarks = this.props.statistics.teacherStatistics.averageMarks;
         averageMarks.forEach((dateMark) => {
             let statDate = new Date(dateMark.date);
             var dateString = `${statDate.getFullYear()}/${statDate.getMonth() + 1}/${statDate.getDate()}`;
@@ -117,7 +119,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
         return (
             <div className="my-pretty-chart-container">
-                {(data.length > 1) ? <Chart
+                <Chart
                     width={'1000px'}
                     height={'400px'}
                     chartType="LineChart"
@@ -137,7 +139,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                         legend: "none",
                     }}
                     rootProps={{ 'data-testid': '1' }}
-                /> : <Spinner type="grow" color="success" />}
+                />
             </div>
         )
     }
@@ -146,8 +148,8 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         const tagTextCounts = this.getTeacherTagTextCounts();
         return (
             <div className="tagbox">
-                {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount) =>
-                    <span>
+                {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount, index) =>
+                    <span key={index}>
                         {tagTextCount[0]} ({tagTextCount[1]})
                     </span>)}
             </div>

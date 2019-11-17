@@ -6,6 +6,7 @@ import { ApplicationState } from '../../store';
 import { LectureType } from '../../store/Teacher/TeacherActivities';
 import * as TeacherActivitiesStore from '../../store/Teacher/TeacherActivities';
 import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
+import * as CoursesStore from '../../store/Courses';
 
 interface OwnProps {
     teacherId: string
@@ -29,17 +30,17 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
+    private ensureDataFetched() {
+        this.props.requestTeacherCourses(this.props.teacherId);
+        this.props.requestTeacherActivities(this.props.teacherId);
+    }
+
     public render() {
         return (
             <React.Fragment>
                 {this.renderTeacherActivites()}
             </React.Fragment>
         );
-    }
-
-    private ensureDataFetched() {
-        this.props.requestTeacherCourses(this.props.teacherId);
-        this.props.requestTeacherActivities(this.props.teacherId);
     }
 
     private renderTeacherActivites() {
@@ -51,15 +52,15 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
                     <thead>
                         <tr>
                             <th>Course</th>
-                            <th>Date started</th>
-                            <th>Type</th>
+                            <th>Course type</th>
+                            <th>Teacher does</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr onClick={() => this.props.history.push(`/course-profile/${activity.courseId}`)}>
+                            <tr key={activity.id} onClick={() => this.props.history.push(`/course-profile/${activity.courseId}`)}>
                                 <td>{this.getCourseName(activity.courseId)}</td>
-                                <td>{new Date(activity.dateStarted).toISOString().split('T')[0]}</td>
+                                <td>{CoursesStore.CourseType[this.getCourseType(activity.courseId)]}</td>
                                 <td>{LectureType[activity.lectureType]}</td>
                             </tr>
                         )}
@@ -72,6 +73,11 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
     private getCourseName(courseId: string): string {
         const course = this.props.courses.courses.find(x => x.id === courseId);
         return course ? course.name : "Unknown";
+    }
+
+    private getCourseType(courseId: string): CoursesStore.CourseType {
+        const course = this.props.courses.courses.find(x => x.id === courseId);
+        return course ? course.courseType : 0;
     }
 }
 

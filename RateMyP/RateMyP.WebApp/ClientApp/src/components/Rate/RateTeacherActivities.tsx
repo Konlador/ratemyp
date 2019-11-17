@@ -6,7 +6,6 @@ import { ApplicationState } from '../../store';
 import * as TeacherActivitiesStore from '../../store/Teacher/TeacherActivities';
 import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
 
-
 interface OwnProps {
     teacherId: string;
     passSelectedTeacherActivities: (value: string) => void;
@@ -22,9 +21,6 @@ type Props =
     RouteComponentProps<{}>;
 
 class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
-    public setProp () {
-    }
-
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -33,22 +29,15 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
-    public render() {
-        return (
-            <React.Fragment>
-                {this.renderTeacherActivites()}
-            </React.Fragment>
-        );
-    }
-
     private ensureDataFetched() {
         this.props.requestTeacherCourses(this.props.teacherId);
         this.props.requestTeacherActivities(this.props.teacherId);
     }
 
-    private renderTeacherActivites() {
+    public render() {
         return (
-            <div>
+            <React.Fragment>
+                <div>
                 <h1>Activities</h1>
                 {this.props.activities.isLoading && <span>Loading...</span>}
                 <Table className='table table-striped' aria-labelledby="tabelLabel" size="sm" hover>
@@ -68,6 +57,7 @@ class RateTeacherActivities extends React.PureComponent<Props & OwnProps> {
                     </tbody>
                 </Table>
             </div>
+            </React.Fragment>
         );
     }
 

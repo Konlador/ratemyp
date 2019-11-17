@@ -5,9 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//
+
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ITeacherActivitiesController
+        {
+        Task<ActionResult<IEnumerable<TeacherActivity>>> GetTeacherActivities(Guid teacherId);
+        Task<ActionResult<IEnumerable<TeacherActivity>>> GetCourseTeacherActivities(Guid courseId);
+        }
+
     [Route("api/teacheractivities")]
     [ApiController]
     public class TeacherActivitiesController : ControllerBase

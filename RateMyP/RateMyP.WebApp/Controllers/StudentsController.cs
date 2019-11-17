@@ -1,16 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface IStudentsController
+        {
+        Task<ActionResult<IEnumerable<Student>>> GetStudents();
+        Task<ActionResult<Student>> GetStudent(string id);
+        Task<ActionResult<Student>> PostStudent(Student student);
+        }
+
     [Route("api/students")]
     [ApiController]
-    public class StudentsController : ControllerBase
+    public class StudentsController : ControllerBase, IStudentsController
         {
         private readonly RateMyPDbContext m_context;
 
@@ -40,9 +45,6 @@ namespace RateMyP.WebApp.Controllers
             return student;
             }
 
-        // POST: api/Students
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
             {
