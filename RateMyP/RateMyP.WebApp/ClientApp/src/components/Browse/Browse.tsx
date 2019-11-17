@@ -25,7 +25,7 @@ class Browse extends React.PureComponent<Props, State> {
                     return <Teachers search={this.props.location.state.search} />
                 else return <Teachers />
             }
-            else if (this.props.location.state.searchType == "course") {
+            else if (this.props.location.state.searchType === "course") {
                 if (this.props.location.state.search !== undefined)
                     return <Courses search={this.props.location.state.search} />
                 else return <Courses />

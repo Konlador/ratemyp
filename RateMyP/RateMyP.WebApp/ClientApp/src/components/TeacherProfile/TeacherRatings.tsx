@@ -53,8 +53,8 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.ratings.ratings.map((rating: RatingsStore.Rating) =>
-                                <tr>
+                            {this.props.ratings.ratings.map((rating: RatingsStore.Rating, index: number) =>
+                                <tr key={rating.id}>
                                     <td>{this.getCourseName(rating.courseId)}</td>
                                     <td>{this.renderRatingInfo(rating)}</td>
                                     <td>{this.renderComment(rating)}</td>
@@ -88,7 +88,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
             <div>
                 <div className="tagbox">
                     {rating.tags.map((tag: TagsStore.Tag) =>
-                        <span>
+                        <span key={tag.id}>
                             {tag.text}
                         </span>
                     )}

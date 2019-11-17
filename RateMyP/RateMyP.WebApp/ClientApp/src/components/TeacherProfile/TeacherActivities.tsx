@@ -30,17 +30,17 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
         this.ensureDataFetched();
     }
 
+    private ensureDataFetched() {
+        this.props.requestTeacherCourses(this.props.teacherId);
+        this.props.requestTeacherActivities(this.props.teacherId);
+    }
+
     public render() {
         return (
             <React.Fragment>
                 {this.renderTeacherActivites()}
             </React.Fragment>
         );
-    }
-
-    private ensureDataFetched() {
-        this.props.requestTeacherCourses(this.props.teacherId);
-        this.props.requestTeacherActivities(this.props.teacherId);
     }
 
     private renderTeacherActivites() {
@@ -58,7 +58,7 @@ class TeacherActivities extends React.PureComponent<Props & OwnProps> {
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr onClick={() => this.props.history.push(`/course-profile/${activity.courseId}`)}>
+                            <tr key={activity.id} onClick={() => this.props.history.push(`/course-profile/${activity.courseId}`)}>
                                 <td>{this.getCourseName(activity.courseId)}</td>
                                 <td>{CoursesStore.CourseType[this.getCourseType(activity.courseId)]}</td>
                                 <td>{LectureType[activity.lectureType]}</td>
