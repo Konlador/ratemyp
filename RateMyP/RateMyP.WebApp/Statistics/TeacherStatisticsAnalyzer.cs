@@ -13,7 +13,6 @@ namespace RateMyP.WebApp.Statistics
         Task<double> GetTeacherWouldTakeTeacherAgainRatio(Guid teacherId);
         Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year);
         Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount = 5);
-        Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year);
         Task<int> GetTeacherRatingCount(Guid teacherId, DateTime date);
         Task<TimeSpan> GetTeacherRatingDateRange(Guid teacherId, DateTime date);
         }

@@ -54,7 +54,7 @@ class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
     }
 
     getButtonStatus() {
-        return this.state.tab === 0;
+        return (this.state.tab == 0) ? true : false
     }
 
     public render() {

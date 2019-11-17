@@ -13,9 +13,6 @@ namespace RateMyP.WebApp
         {
         public static void Main(string[] args)
             {
-            ITeacherStatisticsAnalyzer stats = new TeacherStatisticsAnalyzer(new RateMyPDbContext());
-            var lbM = new LeaderboardManager(stats, new RateMyPDbContext());
-            lbM.RunFullLeaderboardUpdate();
             //DbDataLoader.LoadDataToDb();
             //LoadRating();
             CreateWebHostBuilder(args).Build().Run();
