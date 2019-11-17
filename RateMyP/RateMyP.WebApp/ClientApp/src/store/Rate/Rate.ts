@@ -102,7 +102,7 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(state.rating)
-            }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
+            }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_RATING'});
     },

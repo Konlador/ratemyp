@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 namespace RateMyP.WebApp.Models
     {
     public enum RatingType
-    {
+        {
         Teacher,
         Course
-    }
+        }
     public class Rating : IEquatable<Rating>
         {
         public Guid Id { get; set; }
@@ -39,5 +39,5 @@ namespace RateMyP.WebApp.Models
             other.DateCreated.Equals(DateCreated) &&
             other.Comment.Equals(Comment) &&
             other.RatingType.Equals(RatingType);
+        }
     }
-}

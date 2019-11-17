@@ -51,14 +51,14 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                             <Card>
                                 <CardBody>
                                     <CardTitle
-                                        style={{ fontSize: "10px" }}
-                                        body className="text-center">
+                                        className="text-center"
+                                        style={{ fontSize: "10px" }}>
                                         <strong>Would take again</strong>
                                     </CardTitle>
 
                                     <CardText
-                                        style={{ fontSize: "70px" }}
-                                        body className="text-center">
+                                        className="text-center"
+                                        style={{ fontSize: "70px" }}>
                                         <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
                                     </CardText>
                                 </CardBody>
@@ -89,14 +89,14 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
             <Card>
                 <CardBody>
                     <CardTitle
-                        style={{ fontSize: titleFontSize }}
-                        body className="text-center">
+                        className="text-center"
+                        style={{ fontSize: titleFontSize }}>
                         <strong>{title}</strong>
                     </CardTitle>
 
                     <CardText
-                        style={{ fontSize: bodyTextFontSize }}
-                        body className="text-center">
+                        className="text-center"
+                        style={{ fontSize: bodyTextFontSize }}>
                         <strong>{value.toFixed(1)}</strong>
                     </CardText>
                 </CardBody>
@@ -148,8 +148,8 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         const tagTextCounts = this.getTeacherTagTextCounts();
         return (
             <div className="tagbox">
-                {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount) =>
-                    <span>
+                {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount, index) =>
+                    <span key={index}>
                         {tagTextCount[0]} ({tagTextCount[1]})
                     </span>)}
             </div>

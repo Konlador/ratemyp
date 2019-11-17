@@ -72,7 +72,7 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ratingId, studentId: "studento idas", thumbUp } as RatingThumb)
-            }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
+            }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_RATING_THUMB'});
     },
@@ -123,7 +123,7 @@ export const reducer: Reducer<TeacherRatingsState> = (state: TeacherRatingsState
         case 'RECEIVE_TEACHER_RATING':
             let ratings = [...state.ratings];
             const ratingIndex = ratings.findIndex(r => r.id === action.rating.id);
-            if (ratingIndex != -1)
+            if (ratingIndex !== -1)
                 ratings[ratingIndex] = action.rating;
             return {
                 ratings: ratings,

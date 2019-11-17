@@ -46,13 +46,11 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
                     </h1>
                 </div>
                 
-                <p>
+                <div>
                     <p><strong>Faculty: </strong>{teacher.faculty}</p>
                     <p><strong>Rank: </strong>{teacher.rank}</p>
-                </p>
-                <p>
-                    {teacher.description && ("Description:" + teacher.description)}
-                </p>
+                    <p>{teacher.description && ("Description:" + teacher.description)}</p>
+                </div>
             </React.Fragment>
         );
     }

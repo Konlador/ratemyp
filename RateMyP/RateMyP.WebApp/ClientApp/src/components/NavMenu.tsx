@@ -22,7 +22,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                         <img width="50px" height="50px" src={require('../images/house.svg')} />
                                         <CardTitle className="text">
                                             Home
-                                            </CardTitle>
+                                        </CardTitle>
                                     </Card>
                                 </NavLink>
                             </NavItem>
@@ -32,7 +32,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                         <img width="50px" height="50px" src={require('../images/clipboard.svg')} />
                                         <CardTitle className="text">
                                             Browse
-                                            </CardTitle>
+                                        </CardTitle>
                                     </Card>
                                 </NavLink>
                             </NavItem>
@@ -42,7 +42,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                         <img width="50px" height="50px" src={require('../images/profile.svg')} />
                                         <CardTitle className="text">
                                             Login
-                                            </CardTitle>
+                                        </CardTitle>
                                     </Card>
                                 </NavLink>
                             </NavItem>
