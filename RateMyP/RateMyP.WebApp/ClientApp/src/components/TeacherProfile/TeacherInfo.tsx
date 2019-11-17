@@ -52,7 +52,7 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
                     <p><strong>Faculty: </strong>{teacher.faculty}</p>
                     <p><strong>Rank: </strong>{teacher.rank}</p>
                     <p>{teacher.description && ("Description:" + teacher.description)}</p>
-                    <Button className="add-rating" color="primary" tag={Link} to={`/profile-rating-picture/${this.props.teacherId}`}>Add profile rating picture</Button>
+                    <Button className="add-rating" color="primary" tag={Link} to={`/upload-custom-star/${this.props.teacherId}`}>Add a custom rating image</Button>
                 </div>
             </React.Fragment>
         );

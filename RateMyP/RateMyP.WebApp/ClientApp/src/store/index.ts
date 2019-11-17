@@ -10,7 +10,7 @@ import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as RatingReport from './Rate/RatingReport'
-import * as ProfileRatingPicture from './ProfileRatingPicture'
+import * as CustomStarUpload from './CustomStarUpload'
 
 // The top-level state object
 export interface ApplicationState {
@@ -29,7 +29,7 @@ export interface ApplicationState {
     rate: Rate.RateState | undefined; 
     ratingReport: RatingReport.RatingReportState | undefined;
 
-    profileRatingPicture: ProfileRatingPicture.ProfileRatingPictureStore | undefined;
+    customStarUpload: CustomStarUpload.CustomStar | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -51,7 +51,7 @@ export const reducers = {
     rate: Rate.reducer,
     ratingReport: RatingReport.reducer,
 
-    profileRatingPicture: ProfileRatingPicture.reducer,
+    customStarUpload: CustomStarUpload.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

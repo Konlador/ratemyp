@@ -3,22 +3,22 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 import { Col, Button, Form, FormGroup, Label, UncontrolledAlert, FormText } from 'reactstrap';
-import * as ProfileRatingPictureStore from '../store/ProfileRatingPicture'
+import * as CustomStarStore from '../store/CustomStarUpload'
 
 type Props =
     {
-    picture: ProfileRatingPictureStore.ProfileRatingPictureStore
+    image: CustomStarStore.CustomStar
     } &
-    typeof ProfileRatingPictureStore.actionCreators &
+    typeof CustomStarStore.actionCreators &
     RouteComponentProps<{ teacherId: string }>;
 
-class ProfileRatingPicture extends React.PureComponent<Props> {
+class CustomStarUpload extends React.PureComponent<Props> {
     public render() {
         var fileReader: FileReader;
 
         const handleFileRead = () => {
             const content = fileReader.result;
-                this.props.setPicture(content);   
+                this.props.setImage(content);   
         }
 
         const handleFileChosen = (file: Blob) => {
@@ -32,7 +32,7 @@ class ProfileRatingPicture extends React.PureComponent<Props> {
                 {this.renderAlerts()}
                 <FormGroup>
                     <Col sm={10}>
-                        <Label style={{fontSize: 32}}>Upload a teacher's rating pictures</Label>
+                        <Label style={{fontSize: 32}}>Upload a rating image</Label>
                     </Col>
                 </FormGroup>
                 <FormGroup>
@@ -56,18 +56,18 @@ class ProfileRatingPicture extends React.PureComponent<Props> {
     private onSubmitButtonPush(){
         this.props.setTeacherId(this.props.match.params.teacherId);
         this.props.submitButtonClicked();
-        if(this.props.picture.picture !== null){
-            this.props.uploadPicture();
+        if(this.props.image.image !== null){
+            this.props.uploadImage();
         }
     }
 
     private renderAlerts() {
         return(
           <div>
-            <UncontrolledAlert color="info" fade={false} isOpen = {!this.props.picture.picture && this.props.picture.submitButtonClicked} toggle={false}>
-              You must select a picture.
+            <UncontrolledAlert color="info" fade={false} isOpen = {!this.props.image.image && this.props.image.submitButtonClicked} toggle={false}>
+              You must select an image.
             </UncontrolledAlert>
-            <UncontrolledAlert color="success" fade={false} isOpen = {this.props.picture.picture && this.props.picture.submitButtonClicked} toggle={false}>
+            <UncontrolledAlert color="success" fade={false} isOpen = {this.props.image.image && this.props.image.submitButtonClicked} toggle={false}>
               You have successfully uploaded the picture
             </UncontrolledAlert>
           </div>
@@ -82,15 +82,15 @@ class ProfileRatingPicture extends React.PureComponent<Props> {
 
 function mapStateToProps(state: ApplicationState) {
     return {
-        picture: state.profileRatingPicture
+        image: state.customStarUpload
     }
   };
   
   const actions = {
-    ...ProfileRatingPictureStore.actionCreators,
+    ...CustomStarStore.actionCreators,
   }
   
   
   export default withRouter(
-      connect(mapStateToProps, actions)(ProfileRatingPicture as any) as React.ComponentType<any>
+      connect(mapStateToProps, actions)(CustomStarUpload as any) as React.ComponentType<any>
   );

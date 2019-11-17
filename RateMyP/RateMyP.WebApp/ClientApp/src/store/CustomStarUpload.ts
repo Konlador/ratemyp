@@ -5,8 +5,8 @@ import CryptoJS from 'crypto-js';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface ProfileRatingPictureStore {
-    picture: string | ArrayBuffer | null,
+export interface CustomStar {
+    image: string | ArrayBuffer | null,
     teacherId: string,
     submitButtonClicked: boolean
 }
@@ -16,8 +16,8 @@ export interface ProfileRatingPictureStore {
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 
-interface SetFullPictureAction {
-    type: 'SET_FULL_PICTURE';
+interface SetImageAction {
+    type: 'SET_IMAGE';
     value: string | ArrayBuffer | null;
 }
 
@@ -36,23 +36,23 @@ interface ClearStoreAction {
 }
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = SetFullPictureAction | SetTeacherIdAction | SubmitButtonClickedAction | ClearStoreAction;
+type KnownAction = SetImageAction | SetTeacherIdAction | SubmitButtonClickedAction | ClearStoreAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    setPicture: (value: string | ArrayBuffer | null): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_FULL_PICTURE', value: value });
+    setImage: (value: string | ArrayBuffer | null): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_IMAGE', value: value });
     },
     setTeacherId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_TEACHER_ID', value: value });
     },
     submitButtonClicked: () => ({ type: 'SUBMIT_BUTTON_CLICKED' } as SubmitButtonClickedAction),
-    uploadPicture: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const state = getState().profileRatingPicture;
-        if(state !== undefined && state.picture !== undefined){
+    uploadImage: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        const state = getState().customStarUpload;
+        if(state !== undefined && state.image !== undefined){
             var timeStamp = String(Date.now())
             var publicId = state.teacherId
             var stringToSign = 'public_id=' + publicId + '&timestamp=' + timeStamp +'7Ghux4duxnZD8JWDXZBPzond6X0';
@@ -63,7 +63,7 @@ export const actionCreators = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({file: state.picture,
+                body: JSON.stringify({file: state.image,
                                       api_key: '566771129442981',
                                       timestamp: timeStamp,
                                       public_id: publicId,
@@ -78,29 +78,29 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: ProfileRatingPictureStore = { picture: null, teacherId: '', submitButtonClicked: false };
+const unloadedState: CustomStar = { image: null, teacherId: '', submitButtonClicked: false };
 
-export const reducer: Reducer<ProfileRatingPictureStore> = (state: ProfileRatingPictureStore | undefined, incomingAction: Action): ProfileRatingPictureStore => {
+export const reducer: Reducer<CustomStar> = (state: CustomStar | undefined, incomingAction: Action): CustomStar => {
     if (state === undefined)
         return unloadedState;
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'SET_FULL_PICTURE':
+        case 'SET_IMAGE':
             return {
-                picture: action.value,
+                image: action.value,
                 teacherId: state.teacherId,
                 submitButtonClicked: state.submitButtonClicked,
             };
         case 'SET_TEACHER_ID':
             return {
-                picture: state.picture,
+                image: state.image,
                 teacherId: action.value,
                 submitButtonClicked: state.submitButtonClicked,
             };       
         case 'SUBMIT_BUTTON_CLICKED':
             return {
-                picture: state.picture,
+                image: state.image,
                 teacherId: state.teacherId,
                 submitButtonClicked: true,
             };   
