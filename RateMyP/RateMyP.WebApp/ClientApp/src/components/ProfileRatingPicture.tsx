@@ -13,9 +13,6 @@ type Props =
     RouteComponentProps<{ teacherId: string }>;
 
 class ProfileRatingPicture extends React.PureComponent<Props> {
-    public componentWillUnmount(){
-    }
-
     public render() {
         var fileReader: FileReader;
 
@@ -76,6 +73,9 @@ class ProfileRatingPicture extends React.PureComponent<Props> {
           </div>
         )
       }
+      componentWillUnmount() {
+        this.props.clearStore();
+    }
 }
 
 
