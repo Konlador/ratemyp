@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP.WebApp;
 
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191116170313_LeaderboardEntries")]
+    partial class LeaderboardEntries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.LeaderboardEntry", b =>
+            modelBuilder.Entity("RateMyP.WebApp.Models.CourseLeaderboardEntry", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,9 +59,6 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<int>("AllTimeRatingCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("EntryType")
-                        .HasColumnType("int");
-
                     b.Property<double>("ThisYearAverage")
                         .HasColumnType("float");
 
@@ -71,7 +70,7 @@ namespace RateMyP.WebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Leaderboard");
+                    b.ToTable("CourseLeaderboardEntries");
                 });
 
             modelBuilder.Entity("RateMyP.WebApp.Models.Rating", b =>
@@ -251,6 +250,35 @@ namespace RateMyP.WebApp.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("TeacherActivities");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.TeacherLeaderboardEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("AllTimeAverage")
+                        .HasColumnType("float");
+
+                    b.Property<int>("AllTimePosition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllTimeRatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ThisYearAverage")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ThisYearPosition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThisYearRatingCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TeacherLeaderboardEntries");
                 });
 
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>

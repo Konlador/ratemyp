@@ -13,6 +13,8 @@ namespace RateMyP.WebApp.Statistics
         Task<double> GetTeacherWouldTakeTeacherAgainRatio(Guid teacherId);
         Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year);
         Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount = 5);
+        Task<int> GetTeacherRatingCount(Guid teacherId, DateTime date);
+        Task<TimeSpan> GetTeacherRatingDateRange(Guid teacherId, DateTime date);
         }
 
     public class TeacherStatisticsAnalyzer : ITeacherStatisticsAnalyzer
@@ -101,6 +103,21 @@ namespace RateMyP.WebApp.Statistics
                 timeStamps.Add(currentTime);
 
             return timeStamps;
+            }
+
+        public async Task<int> GetTeacherRatingCount(Guid teacherId, DateTime date)
+            {
+            var ratings = await m_context.Ratings.ToListAsync();
+            return ratings.Where(r => r.TeacherId.Equals(teacherId) &&
+                                         r.DateCreated > date).ToList().Count;
+            }
+
+        public async Task<TimeSpan> GetTeacherRatingDateRange(Guid teacherId, DateTime date)
+            {
+            var allRatings = await m_context.Ratings.ToListAsync();
+            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId) &&
+                                                       r.DateCreated > date).ToList();
+            return teacherRatings.Max(r => r.DateCreated) - teacherRatings.Min(r => r.DateCreated);
             }
         }
     }
