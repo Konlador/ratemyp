@@ -25,8 +25,6 @@ namespace RateMyP.WebApp.Statistics
             {
             m_context = context;
             m_analyzer = analyzer;
-            // subscrive to event
-            // () => FullUpdate
             }
 
         public double GetGlobalScore(double averageRating, int ratingCount, TimeSpan ratingRange)
@@ -42,84 +40,68 @@ namespace RateMyP.WebApp.Statistics
         public async Task FullUpdate()
             {
             var teachers = await m_context.Teachers.ToListAsync();
-            var weightedTeachers = new List<Tuple<double, double, LeaderboardEntry>>();
+            var leaderboardEntries = new List<LeaderboardEntry>();
 
             foreach (var teacher in teachers)
                 {
-                var entryWithScores = await GetEntryWithScores(teacher.Id);
-                if (entryWithScores != null)
-                    weightedTeachers.Add(entryWithScores);
+                var entry = await GetEntry(teacher.Id);
+                if (entry != null)
+                    leaderboardEntries.Add(entry);
                 }
 
-            weightedTeachers.Sort((t1, t2) => t1.Item1.CompareTo(t2.Item1));
-
-            for (var i = 0; i < weightedTeachers.Count; i++)
-                {
-                var teacherPosition = weightedTeachers[i].Item3;
-                teacherPosition.AllTimePosition = i + 1;
-                weightedTeachers[i] =
-                    Tuple.Create(weightedTeachers[i].Item1, weightedTeachers[i].Item2, teacherPosition);
-                }
-
-            weightedTeachers.Sort((t1, t2) => t1.Item2.CompareTo(t2.Item2));
-
-            for (var i = 0; i < weightedTeachers.Count; i++)
-                {
-                var teacherPosition = weightedTeachers[i].Item3;
-                teacherPosition.ThisYearPosition = i + 1;
-                weightedTeachers[i] =
-                    Tuple.Create(weightedTeachers[i].Item1, weightedTeachers[i].Item2, teacherPosition);
-                }
-
-            await RefreshLeaderboardEntries(weightedTeachers.Select(t => t.Item3));
+            SetPositions(leaderboardEntries);
+            await RefreshLeaderboardEntries(leaderboardEntries);
             }
 
         public async Task UpdateFromTeacher(Guid teacherId)
             {
-            // This is where only the required entry should be updated and the leaderboard refreshed in some other way other than full update.
-            await FullUpdate();
+            var leaderboardEntries = await m_context.Leaderboard.ToListAsync();
+            var entry = await GetEntry(teacherId);
+            if (entry == null)
+                return;
+
+            var index = leaderboardEntries.FindIndex(x => x.Id.Equals(teacherId));
+            if (index != -1)
+                leaderboardEntries[index] = entry;
+            else
+                leaderboardEntries.Add(entry);
+
+            SetPositions(leaderboardEntries);
+            await RefreshLeaderboardEntries(leaderboardEntries);
             }
 
-        private async Task<Tuple<double, double, LeaderboardEntry>> GetEntryWithScores(Guid teacherId)
+        private static void SetPositions(List<LeaderboardEntry> entries)
+            {
+            entries.Sort((left, right) => right.AllTimeScore.CompareTo(left.AllTimeScore));
+            for (var i = 0; i < entries.Count; i++)
+                entries[i].AllTimePosition = i + 1;
+
+            entries.Sort((left, right) => right.ThisYearScore.CompareTo(left.ThisYearScore));
+            for (var i = 0; i < entries.Count; i++)
+                entries[i].ThisYearPosition = i + 1;
+            }
+
+        private async Task<LeaderboardEntry> GetEntry(Guid teacherId)
             {
             var globalRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId);
             if (globalRatingCount < m_minimumRatings)
                 return null;
-            var globalAverage = await m_analyzer.GetTeacherAverageMark(teacherId);
-            var globalRange = await GetRatingMaxTimeDifference(teacherId);
-            var globalTeacherScore = GetGlobalScore(globalAverage, globalRatingCount, globalRange);
 
-            var yearlyRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1));
-            var yearlyAverage = await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear);
-            var yearlyTeacherScore = GetYearlyScore(yearlyAverage, yearlyRatingCount);
-
-            var entry = await CreateOrUpdateTeacherLeaderboardEntry(teacherId, globalRatingCount, yearlyRatingCount, globalAverage, yearlyAverage);
-            return new Tuple<double, double, LeaderboardEntry>(globalTeacherScore, yearlyTeacherScore, entry);
-            }
-
-        private async Task<LeaderboardEntry> CreateOrUpdateTeacherLeaderboardEntry(Guid teacherId, int globalRatingCount, int yearRatingCount, double globalAverage, double yearAverage)
-            {
-            var entry = await m_context.Leaderboard.FindAsync(teacherId);
-            if (entry == null)
-                {
-                entry = new LeaderboardEntry
-                    {
-                    Id = teacherId,
-                    EntryType = EntryType.Teacher,
-                    AllTimePosition = 0,
-                    AllTimeRatingCount = globalRatingCount,
-                    AllTimeAverage = globalAverage,
-                    ThisYearPosition = 0,
-                    ThisYearRatingCount = yearRatingCount,
-                    ThisYearAverage = yearAverage,
-                    };
-                return entry;
-                }
+            var entry = await m_context.Leaderboard.FindAsync(teacherId) ??
+                        new LeaderboardEntry
+                            {
+                            Id = teacherId,
+                            EntryType = EntryType.Teacher
+                            };
 
             entry.AllTimeRatingCount = globalRatingCount;
-            entry.AllTimeAverage = globalAverage;
-            entry.ThisYearRatingCount = yearRatingCount;
-            entry.ThisYearAverage = yearAverage;
+            entry.AllTimeAverage = await m_analyzer.GetTeacherAverageMark(teacherId);
+            entry.ThisYearRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1));
+            entry.ThisYearAverage = await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear);
+
+            var globalRange = await GetRatingMaxTimeDifference(teacherId);
+            entry.AllTimeScore = GetGlobalScore(entry.AllTimeAverage, entry.AllTimeRatingCount, globalRange);
+            entry.ThisYearScore = GetYearlyScore(entry.ThisYearAverage, entry.ThisYearRatingCount);
             return entry;
             }
 
