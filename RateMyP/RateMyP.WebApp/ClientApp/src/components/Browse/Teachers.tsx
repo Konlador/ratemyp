@@ -18,8 +18,6 @@ type Props =
     RouteComponentProps<{}>;
 
 class Teachers extends React.PureComponent<Props & OwnProps> {
-
-
     tableOptions = {
         print: false,
         download: false,
@@ -29,7 +27,6 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         sort: false,
         searchText: this.props.search,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[4]}`);
           },
         onSearchOpen: () => {
@@ -77,7 +74,6 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     };
 
     hasReachedBottom() {
-        console.log(document.body.offsetHeight, document.body.scrollTop, document.body.scrollHeight)
         return (
             document.body.getBoundingClientRect().bottom < window.innerHeight
         );
@@ -85,7 +81,6 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
 
     private loadMoreTeachers() {
         if (this.state.canLoadMore) this.setState({currentIndex: this.state.currentIndex + 20});
-        console.log(this.state.currentIndex);
         if (this.state.currentIndex >= this.props.teachers.length) this.setState({canLoadMore: false})
         //this.props.requestTeachers();
     }

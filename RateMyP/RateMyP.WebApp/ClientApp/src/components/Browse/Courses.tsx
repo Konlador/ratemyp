@@ -27,13 +27,11 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         sort: false,
         searchText: this.props.search,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
           },
         customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
             let isFound = false;
             let matchString = currentRow[0];
-            console.log(searchQuery, currentRow, columns, matchString);
             if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
                 isFound = true;
             }       
@@ -65,7 +63,6 @@ class Courses extends React.PureComponent<Props & OwnProps> {
     };
 
     hasReachedBottom() {
-        console.log(document.body.offsetHeight, document.body.scrollTop, document.body.scrollHeight)
         return (
             document.body.getBoundingClientRect().bottom < window.innerHeight
         );

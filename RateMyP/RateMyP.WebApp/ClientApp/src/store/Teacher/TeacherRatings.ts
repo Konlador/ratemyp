@@ -72,7 +72,7 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ratingId, studentId: "studento idas", thumbUp } as RatingThumb)
-            }).then(res => res.json()).catch(error => console.error('Error:', error)).then(response => console.log('Success:', response));
+            }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_RATING_THUMB'});
     },

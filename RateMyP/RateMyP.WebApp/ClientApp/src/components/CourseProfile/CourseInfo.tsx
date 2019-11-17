@@ -46,7 +46,6 @@ class CourseInfo extends React.PureComponent<Props & OwnProps> {
                         {course.name}
                     </h1>
                 </div>
-                
                 <p>
                     <p><strong>Faculty: </strong>{course.faculty}</p>
                     <p><strong>Credits: </strong>{course.credits}</p>

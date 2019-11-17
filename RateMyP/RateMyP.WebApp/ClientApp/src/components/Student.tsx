@@ -17,15 +17,13 @@ class Student extends React.PureComponent<Props> {
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         callbacks: ({
-          signInSuccess: () => false
+            signInSuccess: () => false
         }) as any
       }
 
     public componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
-            console.log("user", user);
             if (!!user){
-                console.log("yes yra");
                 this.props.login(user);
             } else {
                 this.props.logout();
@@ -34,7 +32,6 @@ class Student extends React.PureComponent<Props> {
     }
 
     public render() {
-        console.log("arr logged in?: " + this.props.isLoggedIn);
         return (
             <div>
                 {this.props.isLoggedIn ? (

@@ -6,16 +6,16 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 import { Parallax } from 'react-parallax';
-import "./footer.css";
-import HomeStyles from "./Home.module.css";
 import "./Home.css";
 
-type Props = RouteComponentProps<{}>;
+const backgroundImage = require('../../images/image.jpg');
 
 enum SearchTypeButton {
     Staff,
     Course
 }
+
+type Props = RouteComponentProps<{}>;
 
 interface State {
     search: string | undefined,
@@ -26,11 +26,9 @@ interface State {
     searchToggle: string
 };
 
-const backgroundImage = require('../images/image.jpg');
-
 class Home extends React.Component<Props, State> {
 
-    constructor(props: Props & State) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -48,10 +46,9 @@ class Home extends React.Component<Props, State> {
     })
 
     private changeButtonStyle() {
-        var tmp = this.state.courseButtonStyle;
         this.setState({
             courseButtonStyle: this.state.staffButtonStyle,
-            staffButtonStyle: tmp
+            staffButtonStyle: this.state.courseButtonStyle
         })
     }
 
@@ -72,12 +69,10 @@ class Home extends React.Component<Props, State> {
     }
 
     private changeSearchType() {
-        if (this.state.searchType === "teacher") {
+        if (this.state.searchType === "teacher")
             this.setState({ searchType: "course" });
-        }
-        else if (this.state.searchType === "course") {
+        else if (this.state.searchType === "course")
             this.setState({ searchType: "teacher" });
-        }
     }
 
     private setPlaceholderText() {
@@ -196,7 +191,6 @@ class Home extends React.Component<Props, State> {
             </form>
         );
     }
-
 };
 
 export default connect()(Home as any) as React.ComponentType<any>;
