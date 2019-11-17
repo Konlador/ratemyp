@@ -10,7 +10,7 @@ import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as RatingReport from './Rate/RatingReport'
-import * as CustomStarUpload from './CustomStarUpload'
+import * as CustomStarUpload from './CustomStarStore'
 
 // The top-level state object
 export interface ApplicationState {
@@ -29,7 +29,7 @@ export interface ApplicationState {
     rate: Rate.RateState | undefined; 
     ratingReport: RatingReport.RatingReportState | undefined;
 
-    customStarUpload: CustomStarUpload.CustomStar | undefined;
+    customStarUpload: CustomStarUpload.CustomStarState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using

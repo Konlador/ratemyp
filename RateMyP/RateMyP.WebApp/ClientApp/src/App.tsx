@@ -31,7 +31,7 @@ class App extends React.Component<{}> {
                     <Route path='/rate-teacher/:teacherId' component={RateTeacher} />
                     <Route path='/rate-course/:courseId' component={RateCourse} />
                     <Route path='/rating-report/:ratingId' component={RatingReport} />
-                    <Route path='/upload-custom-star/:teacherId' component={CustomStarUpload} />
+                    <Route path='/add-custom-star/:teacherId' component={CustomStarUpload} />
                 </Layout>
             </div>
         );
