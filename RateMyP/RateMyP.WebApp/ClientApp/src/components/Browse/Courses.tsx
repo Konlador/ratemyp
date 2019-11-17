@@ -45,27 +45,10 @@ class Courses extends React.PureComponent<Props & OwnProps> {
 
     public componentDidMount() {
         if (this.props.courses.length === 0) this.props.requestCourses();
-        window.addEventListener("scroll", this.onScroll, false);
     }
 
     private loadMoreCourses() {
         this.props.requestCourses();
-    }
-
-    public componentWillUnmount() {
-        window.removeEventListener("scroll", this.onScroll, false);
-    }
-
-    onScroll = () => {
-        if (this.hasReachedBottom() && !this.props.isLoading) {
-            this.loadMoreCourses()
-        }
-    };
-
-    hasReachedBottom() {
-        return (
-            document.body.getBoundingClientRect().bottom < window.innerHeight
-        );
     }
 
     public render() {
@@ -118,7 +101,6 @@ class Courses extends React.PureComponent<Props & OwnProps> {
             </div>
         )
     }
-
 }
 
 export default withRouter(
