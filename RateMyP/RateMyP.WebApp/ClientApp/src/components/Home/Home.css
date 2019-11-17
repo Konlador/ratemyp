@@ -1,9 +1,10 @@
-.home-parallax {
+.home-img {
     display: flex;
     position: absolute;
+    z-index: 0;
 }
 
-.home-parallax-dimensions {
+.home-img-dimensions {
     height: 30vw;
     width: 100vw;
 }

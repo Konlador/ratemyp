@@ -5,7 +5,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
-import { Parallax } from 'react-parallax';
 import "./Home.css";
 
 const backgroundImage = require('../../images/image.jpg');
@@ -101,10 +100,8 @@ class Home extends React.Component<Props, State> {
     public render() {
         return (
             <div className="home-container">
-                <div className="home-parallax" style={{ zIndex: 0 }}>
-                    <Parallax bgImage={backgroundImage} strength={300}>
-                        <div className="home-parallax-dimensions" />
-                    </Parallax>
+                <div className="home-img">
+                    <img className="home-img-dimensions" src={backgroundImage} />
                 </div>
                 <div className="nzn-container">
                     <Grid
@@ -114,7 +111,7 @@ class Home extends React.Component<Props, State> {
                         alignItems="center"
                         justify="center"
                         style={{
-                            minHeight: '60vh',
+                            minHeight: '30vw',
                         }}>
                         <Grid item>
                             <ButtonGroup>
@@ -124,7 +121,7 @@ class Home extends React.Component<Props, State> {
                                     style={this.state.staffButtonStyle}
                                     disabled={this.state.searchToggle === SearchTypeButton[0]}
                                     onClick={() => this.changeSearchToggle()}>
-                                        <strong>Staff</strong>
+                                    <strong>Staff</strong>
                                 </Button>
                                 <Button variant="contained" color="primary" style={this.state.courseButtonStyle} disabled={this.state.searchToggle === SearchTypeButton[1]} onClick={() => this.changeSearchToggle()}><strong>Courses</strong></Button>
                             </ButtonGroup>
