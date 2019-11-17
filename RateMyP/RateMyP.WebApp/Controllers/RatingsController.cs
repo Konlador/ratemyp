@@ -145,9 +145,7 @@ namespace RateMyP.WebApp.Controllers
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
-#pragma warning disable 4014
-            m_updateLeaderboardAsync();
-#pragma warning restore 4014
+            await m_updateLeaderboardAsync();
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }

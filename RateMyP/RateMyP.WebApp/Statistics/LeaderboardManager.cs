@@ -71,7 +71,7 @@ namespace RateMyP.WebApp.Statistics
                     Tuple.Create(weightedTeachers[i].Item1, weightedTeachers[i].Item2, teacherPosition);
                 }
 
-            RefreshLeaderboardEntries(weightedTeachers.Select(t => t.Item3));
+            await RefreshLeaderboardEntries(weightedTeachers.Select(t => t.Item3));
             }
 
         public async Task UpdateFromTeacher(Guid teacherId)
@@ -131,7 +131,7 @@ namespace RateMyP.WebApp.Statistics
             return maxDate - minDate;
             }
 
-        public async void RefreshLeaderboardEntries(IEnumerable<LeaderboardEntry> entries)
+        public async Task RefreshLeaderboardEntries(IEnumerable<LeaderboardEntry> entries)
             {
             foreach (var entry in entries)
                 {
