@@ -6,13 +6,12 @@ import '../../extensions/StringExtensions';
 import './Leaderboard.css';
 
 class Leaderboard extends React.PureComponent {
-
     public render() {
         return (
             <React.Fragment>
             <div>
-                <div style={{maxWidth: '48%', display: 'inline-block', marginRight: '2%'}}><TeacherLeaderboard/></div>
-                <div style={{maxWidth: '48%', display: 'inline-block', verticalAlign: 'top'}}><CourseLeaderboard/></div>
+                <div className="teacher-leaderboard"><TeacherLeaderboard/></div>
+                <div className="course-leaderboard"><CourseLeaderboard/></div>
             </div>
             </React.Fragment>
         )

@@ -23,6 +23,7 @@ namespace RateMyP.WebApp
             {
             services.AddDbContext<RateMyPDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString:RateMyPDB"]));
             services.AddTransient<ITeacherStatisticsAnalyzer, TeacherStatisticsAnalyzer>();
+            services.AddTransient<ILeaderboardManager, LeaderboardManager>();
 
             services.AddControllersWithViews();
             services.AddMvc().AddNewtonsoftJson();

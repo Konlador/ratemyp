@@ -153,16 +153,16 @@ class RateCourse extends React.PureComponent<Props> {
         var maxTagsCount = 5
         return(
           <div>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.comment.length < minCommentLength && this.props.rating.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.comment.length < minCommentLength && this.props.rating.submitButtonClicked}>
               Comment length too short. It must be at least {minCommentLength} characters long.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.overallMark === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.overallMark === 0 && this.props.rating.submitButtonClicked}>
               You must select a rating.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.tags.length > maxTagsCount && this.props.rating.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.tags.length > maxTagsCount && this.props.rating.submitButtonClicked}>
               You cannot select more than {maxTagsCount} tags.
             </UncontrolledAlert>
-            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.levelOfDifficulty === 0 && this.props.rating.submitButtonClicked} toggle = {false}>
+            <UncontrolledAlert color="info" fade={false} isOpen = {this.props.rating.rating.levelOfDifficulty === 0 && this.props.rating.submitButtonClicked}>
               You must select a difficulty.
             </UncontrolledAlert>
           </div>

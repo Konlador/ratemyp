@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
-    [Route("api/leaderboard/")]
+    [Route("api/leaderboard")]
     [ApiController]
     public class LeaderboardController : ControllerBase
         {
@@ -19,7 +19,7 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        [HttpGet("teachers/all")]
+        [HttpGet("teachers/global")]
         public async Task<ActionResult<IEnumerable<object>>> GetTeacherEntriesAllTime()
             {
             return await m_context.Leaderboard.Join(m_context.Teachers, e => e.Id, t => t.Id, (e, t) => new
@@ -33,8 +33,9 @@ namespace RateMyP.WebApp.Controllers
                 e.ThisYearPosition,
                 e.ThisYearRatingCount,
                 e.ThisYearAverage
-                }).OrderBy(e => e.AllTimePosition).Take(20).ToListAsync();
-            //return await m_context.TeacherLeaderboard.Take(20).OrderBy(entry => entry.AllTimePosition).ToListAsync();
+                })
+                .OrderBy(e => e.AllTimePosition)
+                .Take(20).ToListAsync();
             }
 
         [HttpGet("teachers/year")]
@@ -65,6 +66,5 @@ namespace RateMyP.WebApp.Controllers
 
             return entry;
             }
-
         }
     }

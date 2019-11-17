@@ -55,8 +55,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     }
 
     public componentDidMount() {
-        if (this.props.teachers.length === 0)
-            this.props.requestAllTeachers();
+        this.props.requestAllTeachers();
         //window.addEventListener("scroll", () => this.handleScroll());
     }
 
@@ -64,16 +63,16 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         //window.removeEventListener("scroll", () => this.handleScroll());
     }
 
-    private handleScroll = () => {
-        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        const windowBottom = windowHeight + window.pageYOffset;
-        console.log("windowBottom: " + windowBottom + ", docHeight: " + docHeight);
-        if (windowBottom >= docHeight && !this.props.isLoading)
-            this.loadMoreTeachers()
-    }
+    // private handleScroll = () => {
+    //     const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    //     const body = document.body;
+    //     const html = document.documentElement;
+    //     const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    //     const windowBottom = windowHeight + window.pageYOffset;
+    //     console.log("windowBottom: " + windowBottom + ", docHeight: " + docHeight);
+    //     if (windowBottom >= docHeight && !this.props.isLoading)
+    //         this.loadMoreTeachers()
+    // }
 
     private loadMoreTeachers() {
         if (this.state.canLoadMore)

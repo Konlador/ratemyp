@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -20,15 +21,19 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
+    public delegate Task LeaderboardAction();
+
     [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
         private readonly RateMyPDbContext m_context;
+        private readonly LeaderboardAction m_updateLeaderboardAsync;
 
-        public RatingsController(RateMyPDbContext context)
+        public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
+            m_updateLeaderboardAsync = leaderboardManager.FullUpdate;
             }
 
         [HttpGet]
@@ -140,6 +145,9 @@ namespace RateMyP.WebApp.Controllers
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
+#pragma warning disable 4014
+            m_updateLeaderboardAsync();
+#pragma warning restore 4014
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }

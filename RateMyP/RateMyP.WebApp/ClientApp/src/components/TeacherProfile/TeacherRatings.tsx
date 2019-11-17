@@ -96,15 +96,10 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
                 <p>{rating.comment}</p>
                 <div>
                     <div>
-                        <a onClick={() => {
-                            this.props.sendRatingThumb(rating.id, true);
-                            this.props.updateRating(rating.id);
-                        }}>{rating.thumbUps} find this useful</a>
+                        <a onClick={() => this.props.sendRatingThumb(rating.id, true)}>{rating.thumbUps} find this useful</a>
                     </div>
-                    <div><a onClick={() => {
-                            this.props.sendRatingThumb(rating.id, false)
-                            this.props.updateRating(rating.id);
-                        }}>{rating.thumbDowns} find this not useful</a>
+                    <div>
+                        <a onClick={() => this.props.sendRatingThumb(rating.id, false)}>{rating.thumbDowns} find this not useful</a>
                     </div>
                     <div>
                         <Button color="primary" tag={Link} to={`/rating-report/${rating.id}`} size='sm'>Report rating</Button>{' '}

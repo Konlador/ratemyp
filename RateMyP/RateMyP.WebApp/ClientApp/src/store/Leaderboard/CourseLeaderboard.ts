@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
+import { AppThunkAction } from '..';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -67,7 +67,9 @@ type KnownAction = RequestAllTimeCourseLeaderboardAction | ReceiveAllTimeCourseL
 export const actionCreators = {
     requestAllTimeCourseLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.courseLeaderboardEntries && appState.courseLeaderboardEntries.isLoading === false) {
+        if (appState &&
+            appState.courseLeaderboard &&
+            appState.courseLeaderboard.isLoading === false) {
             fetch(`api/leaderboard/courses/all`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
                 .then(data => {
@@ -78,7 +80,9 @@ export const actionCreators = {
     },
     requestThisYearCourseLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.courseLeaderboardEntries && appState.courseLeaderboardEntries.isLoading === false) {
+        if (appState &&
+            appState.courseLeaderboard &&
+            appState.courseLeaderboard.isLoading === false) {
             fetch(`api/leaderboard/courses/year`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
                 .then(data => {
@@ -89,10 +93,11 @@ export const actionCreators = {
     },
     requestCourseEntry: (courseId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.courseLeaderboardEntries &&
-            appState.courseLeaderboardEntries.isLoading === false &&
-            (appState.courseLeaderboardEntries.selectedEntry === undefined ||
-            appState.courseLeaderboardEntries.selectedEntry.id !== courseId)) {
+        if (appState &&
+            appState.courseLeaderboard &&
+            appState.courseLeaderboard.isLoading === false &&
+            (appState.courseLeaderboard.selectedEntry === undefined ||
+            appState.courseLeaderboard.selectedEntry.id !== courseId)) {
             fetch(`api/leaderboard/course=${courseId}`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry>)
                 .then(data => {

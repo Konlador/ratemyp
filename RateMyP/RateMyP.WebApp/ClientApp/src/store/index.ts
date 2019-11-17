@@ -9,9 +9,9 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
-import * as RatingReport from './Rate/RatingReport'
-import * as TeacherLeaderboardEntries from './TeacherLeaderboardEntry'
-import * as CourseLeaderboardEntries from './CourseLeaderboardEntry'
+import * as RatingReport from './Rate/RatingReport';
+import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';
+import * as CourseLeaderboard from './Leaderboard/CourseLeaderboard';
 
 // The top-level state object
 export interface ApplicationState {
@@ -20,12 +20,12 @@ export interface ApplicationState {
     teacherActivites: TeacherActivites.TeacherActivitesState | undefined;
     teacherRatings: TeacherRatings.TeacherRatingsState | undefined;
     teacherStatistics: TeacherStatistics.TeacherStatisticsState | undefined;
-    teacherLeaderboardEntries: TeacherLeaderboardEntries.TeacherLeaderboardState | undefined;
+    teacherLeaderboard: TeacherLeaderboard.TeacherLeaderboardState | undefined;
 
     courses: Courses.CoursesState | undefined;
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
     courseTeacherActivities: CourseTeacherActivities.CourseTeacherActivitiesState | undefined;
-    courseLeaderboardEntries: CourseLeaderboardEntries.CourseLeaderboardState | undefined;
+    courseLeaderboard: CourseLeaderboard.CourseLeaderboardState | undefined;
 
     tags: Tags.TagsState | undefined;
     student: Student.StudentState | undefined;
@@ -42,12 +42,12 @@ export const reducers = {
     teacherActivites: TeacherActivites.reducer,
     teacherRatings: TeacherRatings.reducer,
     teacherStatistics: TeacherStatistics.reducer,
-    teacherLeaderboardEntries: TeacherLeaderboardEntries.reducer,
+    teacherLeaderboard: TeacherLeaderboard.reducer,
 
     courses: Courses.reducer,
     courseTeachers: CourseTeachers.reducer,
     courseTeacherActivities: CourseTeacherActivities.reducer,
-    courseLeaderboardEntries: CourseLeaderboardEntries.reducer,
+    courseLeaderboard: CourseLeaderboard.reducer,
 
     tags: Tags.reducer,
     student: Student.reducer,

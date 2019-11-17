@@ -130,7 +130,7 @@ class Home extends React.Component<Props, State> {
                             </ButtonGroup>
                         </Grid>
                         <Grid item style={{ zIndex: 1 }}>
-                            <this.SearchTextField />
+                            {this.randerSearchTextField()}
                         </Grid>
                         <Grid item>
                             <Button variant="contained" color="primary" style={{ background: 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%)', color: '#100E17' }} onClick={() => { this.redirectSearchToBrowsePage() }}>
@@ -173,7 +173,7 @@ class Home extends React.Component<Props, State> {
         );
     }
 
-    private SearchTextField = () => {
+    private randerSearchTextField() {
         return (
             <form className="search-container" noValidate autoComplete="off">
                 <div>
@@ -193,4 +193,4 @@ class Home extends React.Component<Props, State> {
     }
 };
 
-export default connect()(Home as any) as React.ComponentType<any>;
+export default Home;

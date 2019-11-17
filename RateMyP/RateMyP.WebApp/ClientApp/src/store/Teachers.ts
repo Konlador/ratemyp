@@ -116,8 +116,11 @@ export const actionCreators = {
     },
     requestAllTeachers: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.teachers && appState.teachers.isLoading === false) {
-            fetch(`api/teachers/`)
+        if (appState &&
+            appState.teachers &&
+            appState.teachers.isLoading === false &&
+            appState.teachers.teachers.length === 0) {
+            fetch(`api/teachers`)
                 .then(response => response.json() as Promise<Teacher[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_ALL_TEACHERS', teachers: data});

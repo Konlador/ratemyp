@@ -23,16 +23,16 @@
     text-transform: uppercase;
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
     -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 20px;
+    -webkit-text-fill-color: transparent;
+    font-size: 20px;
   }
-  .cardstyle {
-      background-color: #100E17;
-      justify-content: center;
-      align-items: center;
+  .nav-menu-item {
+    background-color: #100E17;
+    justify-content: center;
+    align-items: center;
   }
   .cardtitle {
-      color: white;
+    color: white;
   }
 
   .navbarstyle {

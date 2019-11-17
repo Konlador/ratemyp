@@ -27,8 +27,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Jobs\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Jobs\**" />
+    <EmbeddedResource Remove="Jobs\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="Jobs\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
@@ -65,10 +69,6 @@
     <EmbeddedResource Include="Db\SeedData\tags.csv" />
     <EmbeddedResource Include="Db\SeedData\teachers.csv" />
     <EmbeddedResource Include="Db\SeedData\teacher_activities.csv" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Jobs\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

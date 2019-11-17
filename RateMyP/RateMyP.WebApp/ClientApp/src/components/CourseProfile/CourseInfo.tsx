@@ -46,11 +46,11 @@ class CourseInfo extends React.PureComponent<Props & OwnProps> {
                         {course.name}
                     </h1>
                 </div>
-                <p>
+                <div>
                     <p><strong>Faculty: </strong>{course.faculty}</p>
                     <p><strong>Credits: </strong>{course.credits}</p>
                     <p><strong>Course type: </strong>{CourseType[course.courseType]}</p>
-                </p>
+                </div>
             </React.Fragment>
         );
     }

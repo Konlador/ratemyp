@@ -2,20 +2,25 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
-import * as TeacherLeaderboardStore from '../../store/TeacherLeaderboardEntry';
+import * as TeacherLeaderboardStore from '../../store/Leaderboard/TeacherLeaderboard';
 import { Button, ButtonGroup, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
-
-interface OwnProps {
-    teacherId: string
-};
 
 type Props =
     TeacherLeaderboardStore.TeacherLeaderboardState &
     typeof TeacherLeaderboardStore.actionCreators &
     RouteComponentProps<{}>;
 
-class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
+interface State {
+    tab: number
+}
+
+class TeacherLeaderboard extends React.PureComponent<Props, State> {
+
+    constructor(props: Props) {
+        super(props);
+        this.state = { tab: 0 };
+    };
 
     tableOptions = {
         print: false,
@@ -31,12 +36,8 @@ class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[3]}`);
           },
     };
-    state = {
-        tab: 0
-    }
 
     public componentDidMount() {
-        this.setState({tab: 0});
         this.ensureDataFetched();
     }
 
@@ -49,12 +50,12 @@ class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
         this.props.requestThisYearTeacherLeaderboard();
     }
 
-    switchTab() {
+    private switchTab() {
         this.setState({ tab: (this.state.tab + 1) % 2 });
     }
 
-    getButtonStatus() {
-        return (this.state.tab == 0) ? true : false
+    private getButtonStatus() {
+        return this.state.tab == 0;
     }
 
     public render() {
@@ -75,20 +76,10 @@ class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderComponents() {
-        if (this.state.tab === 0) return this.renderAllTimeTable()
-        else return this.renderThisYearTable()
+        return this.state.tab === 0 ? this.renderAllTimeTable() : this.renderThisYearTable();
     }
 
     private renderAllTimeTable() {
-        let data = this.props.allTimeEntries.map((entry: TeacherLeaderboardStore.TeacherLeaderboardEntry) => {
-            return [
-                entry.allTimePosition,
-                entry.name,
-                entry.allTimeAverage.toFixed(2),
-                entry.id
-            ]
-        });
-
         return (
             <MUIDataTable
                 title={"Teacher All Time"}
@@ -128,20 +119,12 @@ class TeacherLeaderboard extends React.PureComponent<Props & OwnProps> {
                 ]}
                 options={this.tableOptions}/>
         )
-
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
-    return {
-        ...state.teacherLeaderboardEntries,
-        teacherId: ownProps.teacherId
-    }
-};
-
 export default withRouter(
     connect(
-        mapStateToProps,
+        (state: ApplicationState) => state.teacherLeaderboard,
         TeacherLeaderboardStore.actionCreators
     )(TeacherLeaderboard as any) as React.ComponentType<any>
 );

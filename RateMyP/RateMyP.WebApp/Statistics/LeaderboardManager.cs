@@ -10,42 +10,45 @@ namespace RateMyP.WebApp.Statistics
     {
     public interface ILeaderboardManager
         {
-        void RunFullLeaderboardUpdate();
-        void UpdateSingleTeacherEntry(Guid teacherId);
-        }
-
-    public enum StatType
-        {
-        GlobalRatingAverage,
-        YearRatingAverage,
-        GlobalRatingCount,
-        YearRatingCount,
-        GlobalRatingRange,
-        YearRatingRange
+        Task FullUpdate();
+        Task UpdateFromTeacher(Guid teacherId);
         }
 
     public class LeaderboardManager : ILeaderboardManager
         {
-        private RateMyPDbContext m_context;
+        private readonly RateMyPDbContext m_context;
         private readonly ITeacherStatisticsAnalyzer m_analyzer;
-        private readonly int m_minimumRatings = Int32.Parse(ConfigurationManager.AppSettings["leaderboardEntryThreshold"]);
-        private readonly int m_currentYear = Int32.Parse(ConfigurationManager.AppSettings["currentAcademicYear"]);
+        private readonly int m_minimumRatings = int.Parse(ConfigurationManager.AppSettings["LeaderboardEntryThreshold"]);
+        private readonly int m_currentYear = int.Parse(ConfigurationManager.AppSettings["CurrentAcademicYear"]);
 
         public LeaderboardManager(ITeacherStatisticsAnalyzer analyzer, RateMyPDbContext context)
             {
             m_context = context;
             m_analyzer = analyzer;
+            // subscrive to event
+            // () => FullUpdate
             }
 
-        public async void RunFullLeaderboardUpdate()
+        public double GetGlobalScore(double averageRating, int ratingCount, TimeSpan ratingRange)
+            {
+            return averageRating * MathF.Log(ratingCount) * MathF.Log10(ratingRange.Hours + 1);
+            }
+
+        public double GetYearlyScore(double averageRating, int ratingCount)
+            {
+            return averageRating * MathF.Log2(ratingCount);
+            }
+
+        public async Task FullUpdate()
             {
             var teachers = await m_context.Teachers.ToListAsync();
             var weightedTeachers = new List<Tuple<double, double, LeaderboardEntry>>();
 
             foreach (var teacher in teachers)
                 {
-                var entry = await RecalculateTeacherEntryData(teacher.Id);
-                if (entry != null) weightedTeachers.Add(entry);
+                var entryWithScores = await GetEntryWithScores(teacher.Id);
+                if (entryWithScores != null)
+                    weightedTeachers.Add(entryWithScores);
                 }
 
             weightedTeachers.Sort((t1, t2) => t1.Item1.CompareTo(t2.Item1));
@@ -68,35 +71,33 @@ namespace RateMyP.WebApp.Statistics
                     Tuple.Create(weightedTeachers[i].Item1, weightedTeachers[i].Item2, teacherPosition);
                 }
 
-            RefreshLeaderboardEntries((weightedTeachers.Select(t => t.Item3).ToList()));
+            RefreshLeaderboardEntries(weightedTeachers.Select(t => t.Item3));
             }
 
-        private async Task<Tuple<double, double, LeaderboardEntry>> RecalculateTeacherEntryData(Guid teacherId)
+        public async Task UpdateFromTeacher(Guid teacherId)
             {
-            var globalRatingCount = await GetTeacherRatingCount(teacherId, StatType.GlobalRatingCount);
-
-            if (globalRatingCount >= m_minimumRatings)
-                {
-                var yearlyRatingCount = await GetTeacherRatingCount(teacherId, StatType.YearRatingCount);
-                var globalAverage = await GetTeacherRatingAverage(teacherId, StatType.GlobalRatingAverage);
-                var globalRange = await GetTeacherRatingRange(teacherId, StatType.GlobalRatingRange);
-                var yearlyAverage = await GetTeacherRatingAverage(teacherId, StatType.YearRatingAverage);
-                var yearlyRange = await GetTeacherRatingRange(teacherId, StatType.YearRatingRange);
-
-                var entry = await CreateOrUpdateTeacherLeaderboardEntry(teacherId, globalRatingCount,
-                    yearlyRatingCount, globalAverage, yearlyAverage);
-
-                var globalTeacherScore = ParseScore(globalAverage, globalRatingCount, globalRange);
-                var yearlyTeacherScore = ParseScore(yearlyAverage, yearlyRatingCount, yearlyRange);
-
-                return new Tuple<double, double, LeaderboardEntry>(globalTeacherScore, yearlyTeacherScore, entry);
-                }
-
-            return null;
+            // This is where only the required entry should be updated and the leaderboard refreshed in some other way other than full update.
+            await FullUpdate();
             }
 
-        private async Task<LeaderboardEntry> CreateOrUpdateTeacherLeaderboardEntry(Guid teacherId, int globalRatingCount, int yearRatingCount,
-                                                                                                          double globalAverage, double yearAverage)
+        private async Task<Tuple<double, double, LeaderboardEntry>> GetEntryWithScores(Guid teacherId)
+            {
+            var globalRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId);
+            if (globalRatingCount < m_minimumRatings)
+                return null;
+            var globalAverage = await m_analyzer.GetTeacherAverageMark(teacherId);
+            var globalRange = await GetRatingMaxTimeDifference(teacherId);
+            var globalTeacherScore = GetGlobalScore(globalAverage, globalRatingCount, globalRange);
+
+            var yearlyRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1));
+            var yearlyAverage = await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear);
+            var yearlyTeacherScore = GetYearlyScore(yearlyAverage, yearlyRatingCount);
+
+            var entry = await CreateOrUpdateTeacherLeaderboardEntry(teacherId, globalRatingCount, yearlyRatingCount, globalAverage, yearlyAverage);
+            return new Tuple<double, double, LeaderboardEntry>(globalTeacherScore, yearlyTeacherScore, entry);
+            }
+
+        private async Task<LeaderboardEntry> CreateOrUpdateTeacherLeaderboardEntry(Guid teacherId, int globalRatingCount, int yearRatingCount, double globalAverage, double yearAverage)
             {
             var entry = await m_context.Leaderboard.FindAsync(teacherId);
             if (entry == null)
@@ -122,61 +123,23 @@ namespace RateMyP.WebApp.Statistics
             return entry;
             }
 
-        private async Task<int> GetTeacherRatingCount(Guid teacherId, StatType type)
+        private async Task<TimeSpan> GetRatingMaxTimeDifference(Guid teacherId)
             {
-            return type switch
-                {
-                StatType.GlobalRatingCount => await m_analyzer.GetTeacherRatingCount(teacherId, DateTime.MinValue),
-                StatType.YearRatingCount => await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1)),
-                _ => throw new ArgumentException(),
-                };
+            var ratings = await m_context.Ratings.Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            var minDate = ratings.Min(rating => rating.DateCreated);
+            var maxDate = ratings.Max(rating => rating.DateCreated);
+            return maxDate - minDate;
             }
 
-        private async Task<double> GetTeacherRatingAverage(Guid teacherId, StatType type)
-            {
-            return type switch
-                {
-                StatType.GlobalRatingAverage => await m_analyzer.GetTeacherAverageMark(teacherId),
-                StatType.YearRatingAverage => await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear),
-                _ => throw new ArgumentException(),
-                };
-            }
-
-        private async Task<TimeSpan> GetTeacherRatingRange(Guid teacherId, StatType type)
-            {
-            return type switch
-                {
-                StatType.GlobalRatingRange => await m_analyzer.GetTeacherRatingDateRange(teacherId, DateTime.MinValue),
-                StatType.YearRatingRange => await m_analyzer.GetTeacherRatingDateRange(teacherId, new DateTime(2019, 9, 1)),
-                _ => throw new ArgumentException(),
-                };
-            }
-
-        public void UpdateSingleTeacherEntry(Guid teacherId)
-            {
-            // This is where only the required entry should be updated and the leaderboard refreshed in some other way other than full update.
-            RunFullLeaderboardUpdate();
-            }
-
-        public double ParseScore(double averageRating, int ratingCount, TimeSpan ratingRange)
-            {
-            if (ratingRange != TimeSpan.Zero)
-                return averageRating * MathF.Log(ratingCount) * MathF.Log10(ratingRange.Hours);
-            return averageRating * MathF.Log2(ratingCount);
-            }
-
-        public async void RefreshLeaderboardEntries(List<LeaderboardEntry> entries)
+        public async void RefreshLeaderboardEntries(IEnumerable<LeaderboardEntry> entries)
             {
             foreach (var entry in entries)
                 {
                 if (m_context.Leaderboard.Find(entry.Id) == null)
-                    {
                     m_context.Leaderboard.Add(entry);
-                    }
                 else m_context.Leaderboard.Update(entry);
                 }
             await m_context.SaveChangesAsync();
             }
-
         }
     }

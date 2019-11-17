@@ -2,20 +2,25 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
-import * as CourseLeaderboardStore from '../../store/CourseLeaderboardEntry';
+import * as CourseLeaderboardStore from '../../store/Leaderboard/CourseLeaderboard';
 import { Button, ButtonGroup, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
-
-interface OwnProps {
-    courseId: string
-};
 
 type Props =
     CourseLeaderboardStore.CourseLeaderboardState &
     typeof CourseLeaderboardStore.actionCreators &
     RouteComponentProps<{}>;
 
-class CourseLeaderboard extends React.PureComponent<Props & OwnProps> {
+interface State {
+    tab: number
+}
+
+class CourseLeaderboard extends React.PureComponent<Props, State> {
+
+    constructor(props: Props) {
+        super(props);
+        this.state = { tab: 0 };
+    };
 
     tableOptions = {
         print: false,
@@ -28,26 +33,21 @@ class CourseLeaderboard extends React.PureComponent<Props & OwnProps> {
         search: false,
     };
     
-    state = {
-        tab: 0
-    }
-
     tableColumns = [
-            {name: 'Rank', options: {sort: false}},
-            {name: 'Subject', options: {sort: false}},
-            {name: 'Rating'},
-        ]
+        {name: 'Rank', options: {sort: false}},
+        {name: 'Subject', options: {sort: false}},
+        {name: 'Rating'},
+    ];
 
     public componentDidMount() {
-        this.setState({tab: 0});
     }
 
-    switchTab() {
+    private switchTab() {
         this.setState({ tab: (this.state.tab + 1) % 2 });
     }
 
-    getButtonStatus() {
-        return (this.state.tab == 0) ? true : false
+    private getButtonStatus() {
+        return this.state.tab == 0;
     }
 
     public render() {
@@ -94,16 +94,9 @@ class CourseLeaderboard extends React.PureComponent<Props & OwnProps> {
     }
 }
 
-function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
-    return {
-        ...state.courseLeaderboardEntries,
-        courseId: ownProps.courseId
-    }
-};
-
 export default withRouter(
     connect(
-        mapStateToProps,
+        (state: ApplicationState) => state.courseLeaderboard,
         CourseLeaderboardStore.actionCreators
     )(CourseLeaderboard as any) as React.ComponentType<any>
 );

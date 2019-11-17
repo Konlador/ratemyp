@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
+import { AppThunkAction } from '..';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -67,9 +67,11 @@ type KnownAction = RequestAllTimeTeacherLeaderboardAction | ReceiveAllTimeTeache
 export const actionCreators = {
     requestAllTimeTeacherLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.teacherLeaderboardEntries && appState.teacherLeaderboardEntries.isLoading === false
-            && appState.teacherLeaderboardEntries.allTimeEntries.length === 0) {
-            fetch(`api/leaderboard/teachers/all`)
+        if (appState &&
+            appState.teacherLeaderboard &&
+            appState.teacherLeaderboard.isLoading === false &&
+            appState.teacherLeaderboard.allTimeEntries.length === 0) {
+            fetch(`api/leaderboard/teachers/global`)
                 .then(response => response.json() as Promise<TeacherLeaderboardEntry[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_ALLTIME_TEACHER_LEADERBOARD', allTimeEntries: data });
@@ -79,8 +81,10 @@ export const actionCreators = {
     },
     requestThisYearTeacherLeaderboard: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.teacherLeaderboardEntries && appState.teacherLeaderboardEntries.isLoading === false
-            && appState.teacherLeaderboardEntries.thisYearEntries.length === 0) {
+        if (appState &&
+            appState.teacherLeaderboard &&
+            appState.teacherLeaderboard.isLoading === false &&
+            appState.teacherLeaderboard.thisYearEntries.length === 0) {
             fetch(`api/leaderboard/teachers/year`)
                 .then(response => response.json() as Promise<TeacherLeaderboardEntry[]>)
                 .then(data => {
@@ -91,10 +95,11 @@ export const actionCreators = {
     },
     requestTeacherEntry: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState && appState.teacherLeaderboardEntries &&
-            appState.teacherLeaderboardEntries.isLoading === false &&
-            (appState.teacherLeaderboardEntries.selectedEntry === undefined ||
-            appState.teacherLeaderboardEntries.selectedEntry.id !== teacherId)) {
+        if (appState &&
+            appState.teacherLeaderboard &&
+            appState.teacherLeaderboard.isLoading === false &&
+            (appState.teacherLeaderboard.selectedEntry === undefined ||
+            appState.teacherLeaderboard.selectedEntry.id !== teacherId)) {
             fetch(`api/leaderboard/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<TeacherLeaderboardEntry>)
                 .then(data => {
@@ -103,13 +108,12 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_TEACHER_ENTRY' });
         }
     },
-
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: TeacherLeaderboardState= { allTimeEntries: [], thisYearEntries: [], selectedEntry: undefined, isLoading: false };
+const unloadedState: TeacherLeaderboardState = { allTimeEntries: [], thisYearEntries: [], selectedEntry: undefined, isLoading: false };
 
 export const reducer: Reducer<TeacherLeaderboardState> = (state: TeacherLeaderboardState | undefined, incomingAction: Action): TeacherLeaderboardState => {
     if (state === undefined)
@@ -160,6 +164,5 @@ export const reducer: Reducer<TeacherLeaderboardState> = (state: TeacherLeaderbo
                 isLoading: false
             };
     }
-
     return state;
 };

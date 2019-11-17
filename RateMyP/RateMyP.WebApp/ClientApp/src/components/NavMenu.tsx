@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Container, Navbar, NavbarBrand, NavItem, NavLink, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import LeaderboardLogo from "../images/leaderboard.png";
 import './NavMenu.css';
 
 
@@ -18,7 +19,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                         <ul className="NavMenu">
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">
-                                    <Card className="cardstyle">
+                                    <Card className="nav-menu-item">
                                         <img width="50px" height="50px" src={require('../images/house.svg')} />
                                         <CardTitle className="text">
                                             Home
@@ -27,8 +28,18 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                 </NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/leaderboard">
+                                    <Card className="nav-menu-item">
+                                        <img width="50px" height="50px" src={LeaderboardLogo} />
+                                        <CardTitle className="text">
+                                            Leaderboard
+                                        </CardTitle>
+                                    </Card>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/browse">
-                                    <Card className="cardstyle">
+                                    <Card className="nav-menu-item">
                                         <img width="50px" height="50px" src={require('../images/clipboard.svg')} />
                                         <CardTitle className="text">
                                             Browse
@@ -38,7 +49,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/student">
-                                    <Card className="cardstyle">
+                                    <Card className="nav-menu-item">
                                         <img width="50px" height="50px" src={require('../images/profile.svg')} />
                                         <CardTitle className="text">
                                             Login
