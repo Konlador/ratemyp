@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace RateMyP.WebApp.Models
     {
     [Flags]
-    public enum TagTypes 
-        { 
-        None = 0,
-        Teacher = 1,
-        Course = 2
+    public enum TagTypes
+        {
+        None,
+        Teacher,
+        Course
         }
+
     public class Tag : IEquatable<Tag>
         {
         public Guid Id { get; set; }
@@ -20,9 +20,10 @@ namespace RateMyP.WebApp.Models
             other != null &&
             other.Text.Equals(Text) &&
             other.Type.Equals(Type);
+
         public override string ToString()
             {
-            return this.Text;
+            return Text;
             }
         }
     }

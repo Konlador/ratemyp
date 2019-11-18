@@ -36,18 +36,6 @@
     font-size: 50px;
 }
 
-.buttoncolors1 {
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
-    color: #100E17;
-}
-
-.buttoncolors2 {
-    background-color: #100E17;
-    color: #F66A27;
-}
-
-
-
 html, body {
     height: 100%;
 }

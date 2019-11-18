@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace RateMyP.WebApp.Statistics
         Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year);
         Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount = 5);
         Task<int> GetTeacherRatingCount(Guid teacherId, DateTime? date = null);
+        Task<TimeSpan> GetRatingMaxTimeDifference(Guid teacherId);
         }
 
     public class TeacherStatisticsAnalyzer : ITeacherStatisticsAnalyzer
@@ -28,19 +30,31 @@ namespace RateMyP.WebApp.Statistics
         public async Task<double> GetTeacherAverageMark(Guid teacherId)
             {
             var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId)).ToListAsync();
-            return ratings.Count > 0 ? ratings.Average(rating => rating.OverallMark) : 0;
+
+            if (ratings.Count == 0)
+                throw new InvalidDataException("Teacher has no ratings.");
+
+            return ratings.Average(rating => rating.OverallMark);
             }
 
         public async Task<double> GetTeacherAverageLevelOfDifficulty(Guid teacherId)
             {
             var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId)).ToListAsync();
-            return ratings.Count > 0 ? ratings.Average(rating => rating.LevelOfDifficulty) : 0;
+
+            if (ratings.Count == 0)
+                throw new InvalidDataException("Teacher has no ratings.");
+
+            return ratings.Average(rating => rating.LevelOfDifficulty);
             }
 
         public async Task<double> GetTeacherWouldTakeTeacherAgainRatio(Guid teacherId)
             {
             var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId)).ToListAsync();
-            return ratings.Count > 0 ? ratings.Average(rating => rating.WouldTakeTeacherAgain ? 1 : 0) : 0;
+
+            if (ratings.Count == 0)
+                throw new InvalidDataException("Teacher has no ratings.");
+
+            return ratings.Average(rating => rating.WouldTakeTeacherAgain ? 1 : 0);
             }
 
         public async Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year)
@@ -52,13 +66,17 @@ namespace RateMyP.WebApp.Statistics
                                                      r.DateCreated >= startDate &&
                                                      r.DateCreated < endDate)
                                          .ToListAsync();
-            return ratings.Count > 0 ? ratings.Average(rating => rating.OverallMark) : 0;
+
+            if (ratings.Count == 0)
+                throw new InvalidDataException("Teacher has no ratings.");
+
+            return ratings.Average(rating => rating.OverallMark);
             }
 
         public async Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount = 5)
             {
-            if (timeStampCount <= 1)
-                return null;
+            if (timeStampCount < 2)
+                throw new InvalidDataException("Time stamp count can not be less than 2.");
 
             var ratings = m_context.Ratings
                                    .Where(r => r.TeacherId.Equals(teacherId))
@@ -67,7 +85,7 @@ namespace RateMyP.WebApp.Statistics
                                    .GetAsyncEnumerator();
 
             if (!await ratings.MoveNextAsync())
-                return null;
+                throw new InvalidDataException("Teacher has no ratings.");
 
             var firstDate = ratings.Current.DateCreated;
             var lastDate = DateTime.Now;
@@ -104,22 +122,26 @@ namespace RateMyP.WebApp.Statistics
             return timeStamps;
             }
 
-        public async Task<int> GetTeacherRatingCount(Guid teacherId, DateTime? date = null)
+        public async Task<int> GetTeacherRatingCount(Guid teacherId, DateTime? minDate = null)
             {
-            if (date == null)
-                date = DateTime.MinValue;
+            if (minDate == null)
+                minDate = DateTime.MinValue;
 
             var ratings = await m_context.Ratings.ToListAsync();
             return ratings.Where(r => r.TeacherId.Equals(teacherId) &&
-                                         r.DateCreated > date).ToList().Count;
+                                         r.DateCreated >= minDate).ToList().Count;
             }
 
-        public async Task<TimeSpan> GetTeacherRatingDateRange(Guid teacherId, DateTime date)
+        public async Task<TimeSpan> GetRatingMaxTimeDifference(Guid teacherId)
             {
-            var allRatings = await m_context.Ratings.ToListAsync();
-            var teacherRatings = allRatings.Where(r => r.TeacherId.Equals(teacherId) &&
-                                                       r.DateCreated > date).ToList();
-            return teacherRatings.Max(r => r.DateCreated) - teacherRatings.Min(r => r.DateCreated);
+            var ratings = await m_context.Ratings.Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+
+            if (ratings.Count == 0)
+                throw new InvalidDataException("Teacher has no ratings.");
+
+            var minDate = ratings.Min(rating => rating.DateCreated);
+            var maxDate = ratings.Max(rating => rating.DateCreated);
+            return maxDate - minDate;
             }
         }
     }

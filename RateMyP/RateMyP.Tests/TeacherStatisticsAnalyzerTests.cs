@@ -4,6 +4,7 @@ using RateMyP.WebApp.Models;
 using RateMyP.WebApp.Statistics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RateMyP.Tests
@@ -23,10 +24,10 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public async Task GetTeacherAverageMark_NoRating()
+        public void GetTeacherAverageMark_NoRating()
             {
-            var value = await m_analyzer.GetTeacherAverageMark(Guid.NewGuid());
-            Assert.AreEqual(0, value);
+            Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await m_analyzer.GetTeacherAverageMark(Guid.NewGuid()));
             }
 
         [Test]
@@ -46,10 +47,10 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public async Task GetTeacherAverageMarks_NoRating()
+        public void GetTeacherAverageMarks_NoRating()
             {
-            var dateMarks = await m_analyzer.GetTeacherAverageMarks(Guid.NewGuid(), 5);
-            Assert.IsNull(dateMarks);
+            Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await m_analyzer.GetTeacherAverageMarks(Guid.NewGuid(), 5));
             }
 
         [Test]
@@ -74,10 +75,10 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public async Task GetTeacherAverageLevelOfDifficulty_NoRating()
+        public void GetTeacherAverageLevelOfDifficulty_NoRating()
             {
-            var levelOfDifficulty = await m_analyzer.GetTeacherAverageLevelOfDifficulty(Guid.NewGuid());
-            Assert.AreEqual(0, levelOfDifficulty);
+            Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await m_analyzer.GetTeacherAverageLevelOfDifficulty(Guid.NewGuid()));
             }
 
         [Test]
@@ -97,10 +98,10 @@ namespace RateMyP.Tests
             }
 
         [Test]
-        public async Task GetTeacherWouldTakeTeacherAgainRatio_NoRating()
+        public void GetTeacherWouldTakeTeacherAgainRatio_NoRating()
             {
-            var averageRating = await m_analyzer.GetTeacherWouldTakeTeacherAgainRatio(Guid.NewGuid());
-            Assert.AreEqual(0, averageRating);
+            Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await m_analyzer.GetTeacherWouldTakeTeacherAgainRatio(Guid.NewGuid()));
             }
 
         [Test]

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using RateMyP.WebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using RateMyP.WebApp.Models;
 
 namespace RateMyP.WebApp.Statistics
     {
@@ -29,12 +29,12 @@ namespace RateMyP.WebApp.Statistics
 
         public double GetGlobalScore(double averageRating, int ratingCount, TimeSpan ratingRange)
             {
-            return averageRating * MathF.Log(ratingCount) * MathF.Log10(ratingRange.Hours + 1);
+            return averageRating; // * MathF.Log10(ratingCount + 1) * MathF.Log10(ratingRange.Hours + 1);
             }
 
         public double GetYearlyScore(double averageRating, int ratingCount)
             {
-            return averageRating * MathF.Log2(ratingCount);
+            return averageRating; // * MathF.Log10(ratingCount + 1);
             }
 
         public async Task FullUpdate()
@@ -95,22 +95,31 @@ namespace RateMyP.WebApp.Statistics
                             };
 
             entry.AllTimeRatingCount = globalRatingCount;
-            entry.AllTimeAverage = await m_analyzer.GetTeacherAverageMark(teacherId);
-            entry.ThisYearRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1));
-            entry.ThisYearAverage = await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear);
+            try
+                {
+                entry.AllTimeAverage = await m_analyzer.GetTeacherAverageMark(teacherId);
+                }
+            catch (InvalidDataException e)
+                {
+                if (e.Message.Equals("Teacher has no ratings."))
+                    entry.AllTimeAverage = 0;
+                }
 
-            var globalRange = await GetRatingMaxTimeDifference(teacherId);
+            entry.ThisYearRatingCount = await m_analyzer.GetTeacherRatingCount(teacherId, new DateTime(m_currentYear, 9, 1));
+            try
+                {
+                entry.ThisYearAverage = await m_analyzer.GetTeacherAverageMarkInYear(teacherId, m_currentYear);
+                }
+            catch (InvalidDataException e)
+                {
+                if (e.Message.Equals("Teacher has no ratings."))
+                    entry.ThisYearAverage = 0;
+                }
+
+            var globalRange = await m_analyzer.GetRatingMaxTimeDifference(teacherId);
             entry.AllTimeScore = GetGlobalScore(entry.AllTimeAverage, entry.AllTimeRatingCount, globalRange);
             entry.ThisYearScore = GetYearlyScore(entry.ThisYearAverage, entry.ThisYearRatingCount);
             return entry;
-            }
-
-        private async Task<TimeSpan> GetRatingMaxTimeDifference(Guid teacherId)
-            {
-            var ratings = await m_context.Ratings.Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
-            var minDate = ratings.Min(rating => rating.DateCreated);
-            var maxDate = ratings.Max(rating => rating.DateCreated);
-            return maxDate - minDate;
             }
 
         public async Task RefreshLeaderboardEntries(IEnumerable<LeaderboardEntry> entries)
