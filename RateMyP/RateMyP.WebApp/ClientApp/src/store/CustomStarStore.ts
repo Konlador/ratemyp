@@ -61,7 +61,7 @@ export const actionCreators = {
     getImage: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState) {
-            fetch(`api/images/${teacherId}`)
+            fetch(`api/images/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<ArrayBuffer>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_IMAGE', value: data });
@@ -78,7 +78,7 @@ export const actionCreators = {
         dispatch({ type: 'SET_TEACHER_ID', value: value });
     },
     submitButtonClick: () => ({ type: 'SUBMIT_BUTTON_CLICK' } as SubmitButtonClickAction),
-    uploadImage: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    uploadCustomStar : (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if(appState !== undefined &&
            appState.customStarUpload !== undefined &&
@@ -88,8 +88,8 @@ export const actionCreators = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({'image': appState.customStarUpload.image,
-                                      'teacherId' : appState.customStarUpload.teacherId})
+                body: JSON.stringify({image: appState.customStarUpload.image,
+                                      teacherId : appState.customStarUpload.teacherId})
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
     },

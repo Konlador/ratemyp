@@ -12,7 +12,7 @@ namespace RateMyP.WebApp.Controllers
 
     [Route("api/images")]
     [ApiController]
-    public class ImageController : ControllerBase
+    public class CustomStarController : ControllerBase
         {
         static HttpClient client = new HttpClient();
 
@@ -20,7 +20,7 @@ namespace RateMyP.WebApp.Controllers
         public async Task<byte[]> GetImageAsync(Guid id)
             {
             byte[] image = new byte[0];
-            HttpResponseMessage response = await client.GetAsync(ConfigurationManager.AppSettings["repURL"] + ConfigurationManager.AppSettings["apiName"] + "/image/upload/" + id);
+            HttpResponseMessage response = await client.GetAsync(ConfigurationManager.AppSettings["ImageRepURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/upload/" + id);
 
             if (response.IsSuccessStatusCode)
                 {
@@ -36,20 +36,20 @@ namespace RateMyP.WebApp.Controllers
             var publicId = (Guid)data["teacherId"];
             var image = (string)data["image"];
             var timeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            var stringToSign = "public_id=" + publicId + "&timestamp=" + timeStamp + ConfigurationManager.AppSettings["apiSecretKey"];
+            var stringToSign = "public_id=" + publicId + "&timestamp=" + timeStamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
             var sign = Hash(stringToSign);
 
             var imageFile = new
                 {
                 file = image,
-                api_key = ConfigurationManager.AppSettings["apiKey"],
+                api_key = ConfigurationManager.AppSettings["ImageApiKey"],
                 timestamp = timeStamp,
                 public_id = publicId,
                 signature = sign
                 };
 
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                ConfigurationManager.AppSettings["apiURL"] + ConfigurationManager.AppSettings["apiName"]  + "/image/upload", imageFile);
+                ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"]  + "/image/upload", imageFile);
             response.EnsureSuccessStatusCode();
 
             return response.Headers.Location;
