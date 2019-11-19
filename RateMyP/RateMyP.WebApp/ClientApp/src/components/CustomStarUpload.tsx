@@ -59,7 +59,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
                     <Col sm={10}>
                         <Button onClick={() => this.onSubmitButtonPush()}>Submit</Button> 
                     </Col>
-                </FormGroup>                
+                </FormGroup>  
             </Form>
         );
     }
