@@ -14,7 +14,7 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<IEnumerable<RatingReport>>> GetReports();
         Task<ActionResult<IEnumerable<RatingReport>>> GetRatingReports(Guid ratingId);
         Task<ActionResult<RatingReport>> GetReport(Guid id);
-        Task<ActionResult<RatingReport>> PostRating([FromBody] JObject data);
+        Task<ActionResult<RatingReport>> PostReport([FromBody] JObject data);
         }
 
     [Route("api/reports")]
@@ -53,13 +53,13 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpPost]
-        public async Task<ActionResult<RatingReport>> PostRating([FromBody] JObject data)
+        public async Task<ActionResult<RatingReport>> PostReport([FromBody] JObject data)
             {
             var report = new RatingReport
                 {
                 Id = Guid.NewGuid(),
                 DateCreated = DateTime.Now,
-                StudentId = (Guid)data["studentId"],
+                StudentId = (string)data["studentId"],
                 RatingId = (Guid)data["ratingId"],
                 Reason = (string)data["reason"]
                 };

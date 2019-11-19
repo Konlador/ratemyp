@@ -37,6 +37,8 @@ interface ReceiveTeacherRatingAction {
 
 interface SendRatingThumb {
     type: 'SEND_RATING_THUMB';
+    ratingId: string;
+    thumbUp: boolean;
 }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
@@ -72,9 +74,10 @@ export const actionCreators = {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ratingId, studentId: "studento idas", thumbUp } as RatingThumb)
-            }).then(res => res.json()).catch(error => console.error('Error:', error));
+            }).then(res => res.json())
+            .catch(error => console.error('Error:', error));
         }
-        dispatch({type: 'SEND_RATING_THUMB'});
+        dispatch({type: 'SEND_RATING_THUMB', ratingId, thumbUp });
     },
     updateRating: (ratingId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
@@ -122,12 +125,22 @@ export const reducer: Reducer<TeacherRatingsState> = (state: TeacherRatingsState
             };
         case 'RECEIVE_TEACHER_RATING':
             let ratings = [...state.ratings];
-            const ratingIndex = ratings.findIndex(r => r.id === action.rating.id);
+            let ratingIndex = ratings.findIndex(r => r.id === action.rating.id);
             if (ratingIndex !== -1)
                 ratings[ratingIndex] = action.rating;
             return {
                 ratings: ratings,
                 isLoading: false,
+                teacherId: state.teacherId
+            };
+        case 'SEND_RATING_THUMB':
+            ratings = [...state.ratings];
+            ratingIndex = ratings.findIndex(r => r.id === action.ratingId);
+            if (ratingIndex !== -1)
+                action.thumbUp ? ratings[ratingIndex].thumbUps!++ : ratings[ratingIndex].thumbDowns!++;
+            return {
+                ratings: ratings,
+                isLoading: state.isLoading,
                 teacherId: state.teacherId
             };
     }

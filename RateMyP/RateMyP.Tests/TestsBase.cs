@@ -18,6 +18,13 @@ namespace RateMyP.Tests
             Context = new RateMyPDbContext(options);
             }
 
+        [TearDown]
+        public void TearDown()
+            {
+            Context.Database.EnsureDeleted();
+            Context.Dispose();
+            }
+
         public void Dispose()
             {
             Context.Dispose();

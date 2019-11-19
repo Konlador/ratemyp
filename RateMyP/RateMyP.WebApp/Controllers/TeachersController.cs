@@ -39,7 +39,12 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet("startIndex={startIndex}")]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetTeachersIndexed(int startIndex)
             {
-            return await m_context.Teachers.OrderBy(teacher => teacher.LastName).Skip(startIndex).Take(Int32.Parse(ConfigurationManager.AppSettings["loadedTeachersNumber"])).ToListAsync();
+            var countToTake = int.Parse(ConfigurationManager.AppSettings["LoadedTeachersNumber"]);
+            return await m_context.Teachers
+                                  .OrderBy(teacher => teacher.LastName)
+                                  .Skip(startIndex)
+                                  .Take(countToTake)
+                                  .ToListAsync();
             }
 
         [HttpGet("{id}")]

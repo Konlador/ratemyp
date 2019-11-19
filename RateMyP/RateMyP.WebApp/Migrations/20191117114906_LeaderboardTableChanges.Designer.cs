@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP.WebApp;
 
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191117114906_LeaderboardTableChanges")]
+    partial class LeaderboardTableChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,6 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<int>("AllTimeRatingCount")
                         .HasColumnType("int");
 
-                    b.Property<double>("AllTimeScore")
-                        .HasColumnType("float");
-
                     b.Property<int>("EntryType")
                         .HasColumnType("int");
 
@@ -71,9 +70,6 @@ namespace RateMyP.WebApp.Migrations
 
                     b.Property<int>("ThisYearRatingCount")
                         .HasColumnType("int");
-
-                    b.Property<double>("ThisYearScore")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -139,8 +135,8 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

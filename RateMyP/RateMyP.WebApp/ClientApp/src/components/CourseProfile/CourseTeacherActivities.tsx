@@ -58,7 +58,7 @@ class CourseTeacherActivities extends React.PureComponent<Props & OwnProps> {
                     </thead>
                     <tbody>
                         {this.props.activities.teacherActivites.map((activity: TeacherActivitiesStore.TeacherActivity) =>
-                            <tr onClick={() => this.props.history.push(`/teacher-profile/${activity.teacherId}`)}>
+                            <tr key={activity.id} onClick={() => this.props.history.push(`/teacher-profile/${activity.teacherId}`)}>
                                 <td>{this.getTeacherName(activity.teacherId)}</td>
                                 <td>{LectureType[activity.lectureType]}</td>
                                 <td>{new Date(activity.dateStarted).toISOString().split('T')[0]}</td>

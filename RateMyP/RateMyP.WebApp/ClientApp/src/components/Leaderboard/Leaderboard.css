@@ -1,0 +1,15 @@
+.flexbox-container {
+    display: inline-block;
+}
+
+.teacher-leaderboard {
+    max-width: 48%;
+    display: inline-block;
+    margin-right: 2%;
+}
+
+.course-leaderboard {
+    max-width: 48%;
+    display: inline-block;
+    vertical-align: top;
+}

@@ -6,7 +6,7 @@ namespace RateMyP.WebApp.Models
         {
         public Guid Id { get; set; }
         public Guid RatingId { get; set; }
-        public Guid StudentId { get; set; }
+        public string StudentId { get; set; }
         public DateTime DateCreated { get; set; }
         public string Reason { get; set; }
 

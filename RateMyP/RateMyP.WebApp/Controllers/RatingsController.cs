@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -25,10 +26,12 @@ namespace RateMyP.WebApp.Controllers
     public class RatingsController : ControllerBase
         {
         private readonly RateMyPDbContext m_context;
+        private readonly ILeaderboardManager m_leaderboardManager;
 
-        public RatingsController(RateMyPDbContext context)
+        public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
+            m_leaderboardManager = leaderboardManager;
             }
 
         [HttpGet]
@@ -140,6 +143,7 @@ namespace RateMyP.WebApp.Controllers
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
+            await m_leaderboardManager.UpdateFromTeacher(teacherId);
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }

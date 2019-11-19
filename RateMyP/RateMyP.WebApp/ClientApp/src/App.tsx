@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Home from './components/Home/Home';
 import Browse from './components/Browse/Browse';
 import Student from './components/Student';
+import Leaderboard from './components/Leaderboard/Leaderboard';
 import TeacherProfile from './components/TeacherProfile/TeacherProfile';
 import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/Rate/RateTeacher';
@@ -26,6 +27,7 @@ class App extends React.Component<{}> {
                     <Route exact path='/' component={Home} />
                     <Route path='/browse' component={Browse} />
                     <Route path='/student' component={Student} />
+                    <Route path='/leaderboard' component={Leaderboard} />
                     <Route path='/teacher-profile/:teacherId' component={TeacherProfile} />
                     <Route path='/course-profile/:courseId' component={CourseProfile} />
                     <Route path='/rate-teacher/:teacherId' component={RateTeacher} />
