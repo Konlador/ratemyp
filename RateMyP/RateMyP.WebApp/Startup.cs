@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using RateMyP.WebApp.Statistics;
+using RateMyP.WebApp.Controllers;
 
 namespace RateMyP.WebApp
     {
@@ -34,7 +35,8 @@ namespace RateMyP.WebApp
                                        {
                                            c.SwaggerDoc("v1", new OpenApiInfo { Title = "RateMyP app", Version = "v1" });
                                        });
-            }
+            services.AddHttpClient();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {

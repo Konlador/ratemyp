@@ -68,7 +68,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
         this.props.setTeacherId(this.props.match.params.teacherId);
         this.props.submitButtonClick();
         if(this.props.image !== null && !(this.props.width > 256 || this.props.height > 256)){
-            this.props.uploadCustomStar ();
+            this.props.uploadCustomStar(this.props.match.params.teacherId);
         }
     }
 

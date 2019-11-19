@@ -58,7 +58,7 @@ type KnownAction = SetImageAction | SetTeacherIdAction | SubmitButtonClickAction
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    getImage: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    getCustomStar: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState) {
             fetch(`api/images/teacher=${teacherId}`)
@@ -78,18 +78,17 @@ export const actionCreators = {
         dispatch({ type: 'SET_TEACHER_ID', value: value });
     },
     submitButtonClick: () => ({ type: 'SUBMIT_BUTTON_CLICK' } as SubmitButtonClickAction),
-    uploadCustomStar : (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    uploadCustomStar : (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if(appState !== undefined &&
            appState.customStarUpload !== undefined &&
            appState.customStarUpload.image !== undefined){
-            fetch('api/images', {
+            fetch(`api/images/teacher=${teacherId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({image: appState.customStarUpload.image,
-                                      teacherId : appState.customStarUpload.teacherId})
+                body: JSON.stringify({image: appState.customStarUpload.image})
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
     },

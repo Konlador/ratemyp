@@ -10,17 +10,29 @@ using System.Configuration;
 namespace RateMyP.WebApp.Controllers
     {
 
+    public interface ICustomStarController
+    {
+        Task<byte[]> GetImageAsync(Guid teacherId);
+        Task<IActionResult> UploadImageAsync(Guid teacherId, [FromBody] JObject data);
+    }
+
     [Route("api/images")]
     [ApiController]
-    public class CustomStarController : ControllerBase
-        {
-        static HttpClient client = new HttpClient();
+    public class CustomStarController : ControllerBase, ICustomStarController
+    {
+        private readonly IHttpClientFactory _clientFactory;
 
-        [HttpGet("{id}")]
-        public async Task<byte[]> GetImageAsync(Guid id)
+        public CustomStarController(IHttpClientFactory clientFactory)
             {
+            _clientFactory = clientFactory;
+            }
+
+        [HttpGet("teacher={teacherId}")]
+        public async Task<byte[]> GetImageAsync(Guid teacherId)
+            {
+            var client = _clientFactory.CreateClient();
             byte[] image = new byte[0];
-            HttpResponseMessage response = await client.GetAsync(ConfigurationManager.AppSettings["ImageRepURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/upload/" + id);
+            HttpResponseMessage response = await client.GetAsync(ConfigurationManager.AppSettings["ImageRepURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/upload/" + teacherId);
 
             if (response.IsSuccessStatusCode)
                 {
@@ -30,10 +42,11 @@ namespace RateMyP.WebApp.Controllers
             return image;
             }
 
-        [HttpPost]
-        public async Task<Uri> UploadImageAsync([FromBody] JObject data)
+        [HttpPost("teacher={teacherId}")]
+        public async Task<IActionResult> UploadImageAsync(Guid teacherId, [FromBody] JObject data)
             {
-            var publicId = (Guid)data["teacherId"];
+            var client = _clientFactory.CreateClient();
+            var publicId = teacherId;
             var image = (string)data["image"];
             var timeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             var stringToSign = "public_id=" + publicId + "&timestamp=" + timeStamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
@@ -52,7 +65,7 @@ namespace RateMyP.WebApp.Controllers
                 ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"]  + "/image/upload", imageFile);
             response.EnsureSuccessStatusCode();
 
-            return response.Headers.Location;
+            return CreatedAtAction("GetImage", new { id = publicId }, image); ;
             }
 
         public static string Hash(string stringToHash)
