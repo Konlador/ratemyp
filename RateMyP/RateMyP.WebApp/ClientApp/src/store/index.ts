@@ -9,6 +9,7 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
+import * as CustomStarUpload from './CustomStarStore';
 import * as RatingReport from './Rate/RatingReport';
 import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';
 import * as CourseLeaderboard from './Leaderboard/CourseLeaderboard';
@@ -31,6 +32,8 @@ export interface ApplicationState {
     student: Student.StudentState | undefined;
     rate: Rate.RateState | undefined; 
     ratingReport: RatingReport.RatingReportState | undefined;
+
+    customStarUpload: CustomStarUpload.CustomStarState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -53,6 +56,8 @@ export const reducers = {
     student: Student.reducer,
     rate: Rate.reducer,
     ratingReport: RatingReport.reducer,
+
+    customStarUpload: CustomStarUpload.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

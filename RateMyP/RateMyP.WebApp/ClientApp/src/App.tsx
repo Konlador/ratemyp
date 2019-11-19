@@ -10,6 +10,7 @@ import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/Rate/RateCourse';
 import RatingReport from './components/RatingReport/RatingReport';
+import CustomStarUpload from './components/CustomStarUpload'
 import firebase from "firebase";
 import './custom.css'
 
@@ -32,6 +33,7 @@ class App extends React.Component<{}> {
                     <Route path='/rate-teacher/:teacherId' component={RateTeacher} />
                     <Route path='/rate-course/:courseId' component={RateCourse} />
                     <Route path='/rating-report/:ratingId' component={RatingReport} />
+                    <Route path='/add-custom-star/:teacherId' component={CustomStarUpload} />
                 </Layout>
             </div>
         );
