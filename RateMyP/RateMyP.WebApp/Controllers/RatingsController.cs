@@ -21,17 +21,19 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
+    public delegate Task UpdateLeaderboard(Guid teacherId);
+
     [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
         private readonly RateMyPDbContext m_context;
-        private readonly ILeaderboardManager m_leaderboardManager;
+        private readonly UpdateLeaderboard m_updateLeaderboardAsync;
 
         public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
-            m_leaderboardManager = leaderboardManager;
+            m_updateLeaderboardAsync = leaderboardManager.UpdateFromTeacher;
             }
 
         [HttpGet]
@@ -143,7 +145,7 @@ namespace RateMyP.WebApp.Controllers
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
-            await m_leaderboardManager.UpdateFromTeacher(teacherId);
+            await m_updateLeaderboardAsync(teacherId);
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }
