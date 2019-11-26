@@ -6,11 +6,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Configuration;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using RateMyP.WebApp.Models;
 
 namespace RateMyP.WebApp.Controllers
@@ -18,7 +16,7 @@ namespace RateMyP.WebApp.Controllers
 
     public interface ICustomStarController
         {
-        Task<IActionResult> GetImageAsync(Guid teacherId, string transformation);
+        Task<IActionResult> GetImageAsync(Guid teacherId);
         Task<IActionResult> GetImagesData(Guid teacherId);
         Task<IActionResult> PostImageAsync(Guid teacherId, [FromBody] JObject data);
         Task<ActionResult<CustomStarThumb>> PostCustomStarThumb(CustomStarThumb customStarThumb);
@@ -38,10 +36,11 @@ namespace RateMyP.WebApp.Controllers
             _clientFactory = clientFactory;
             }
 
-        [HttpGet("{transformation}/teacher={teacherId}")]
-        public async Task<IActionResult> GetImageAsync(Guid teacherId, string transformation)
+        [HttpGet("teacher={teacherId}")]
+        public async Task<IActionResult> GetImageAsync(Guid teacherId)
             {
             var client = _clientFactory.CreateClient();
+            var transformation = "w_50,h_50,f_png";
             byte[] image = null;
             HttpResponseMessage response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/{teacherId}");
 
@@ -63,23 +62,9 @@ namespace RateMyP.WebApp.Controllers
             var images = await m_context.CustomStarRatings
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
             var sortedImages = images.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).ToList();
-            return Ok(SerializeImages(sortedImages));
+            return Ok(sortedImages);
             }
 
-        private static JArray SerializeImages(IEnumerable<CustomStarRating> images)
-            {
-            return JArray.FromObject(images.Select(SerializeImageData));
-            }
-
-        private static JObject SerializeImageData(CustomStarRating image)
-            {
-            var serializer = new JsonSerializer
-                {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-            var serializedImageData = JObject.FromObject(image, serializer);
-            return serializedImageData;
-            }
 
         [HttpPost("thumb")]
         public async Task<ActionResult<CustomStarThumb>> PostCustomStarThumb(CustomStarThumb customStarThumb)
@@ -154,8 +139,8 @@ namespace RateMyP.WebApp.Controllers
 
             var images = await m_context.CustomStarRatings
                                          .Where(x => x.TeacherId.Equals(teacherId) && x.StudentId.Equals(studentId)).SingleOrDefaultAsync();
-            if (images == null) 
-                { 
+            if (images == null)
+                {
                 var customImage = new CustomStarRating
                     {
                     Id = new Guid(),
@@ -165,7 +150,7 @@ namespace RateMyP.WebApp.Controllers
                     ThumbDowns = 0,
                     ThumbUps = 0
                     };
-            m_context.CustomStarRatings.Add(customImage);
+                m_context.CustomStarRatings.Add(customImage);
                 await m_context.SaveChangesAsync();
                 }
             else

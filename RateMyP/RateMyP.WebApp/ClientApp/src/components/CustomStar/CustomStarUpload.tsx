@@ -63,7 +63,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
                 <Col sm={10}>
                 <Label>Current rating image:‎‎‎‏‏‎‏‏‎‏‏‎</Label>
                 <FormGroup>                    
-                    <img src={"api/images/w_30,h_30,f_png/teacher=" + this.props.match.params.teacherId} className="icon"/>
+                    <img src={"api/images/teacher=" + this.props.match.params.teacherId} className="icon"/>
                 </FormGroup>  
                 </Col>
             </Form>

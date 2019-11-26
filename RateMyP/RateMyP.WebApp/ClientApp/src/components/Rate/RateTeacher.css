@@ -1,0 +1,8 @@
+.iconEmpty{
+    opacity: 0.2;
+    filter: alpha(opacity=50);
+    padding: 2px;
+}
+.icon{
+   padding:2px;
+}
