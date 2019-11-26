@@ -94,14 +94,15 @@ export const actionCreators = {
     },
     submitReview: () => ({ type: 'SUBMIT_REVIEW' } as SubmitReviewAction),
     sendRating: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const state = getState().rate;
-        if(state !== undefined){
+        const state = getState();
+        if(state !== undefined &&
+           state.rate !== undefined){
             fetch('api/ratings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(state.rating)
+                body: JSON.stringify(state.rate.rating)
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_RATING'});

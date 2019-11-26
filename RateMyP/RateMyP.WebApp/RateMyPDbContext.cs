@@ -16,7 +16,9 @@ namespace RateMyP.WebApp
         DbSet<Tag> Tags { get; set; }
         DbSet<RatingReport> RatingReports { get; set; }
         DbSet<LeaderboardEntry> Leaderboard { get; set; }
-        }
+        DbSet<CustomStarRating> CustomStarRatings { get; set; }
+        DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+    }
 
     public class RateMyPDbContext : DbContext, IRateMyPDbContext
         {
@@ -30,6 +32,8 @@ namespace RateMyP.WebApp
         public DbSet<Tag> Tags { get; set; }
         public DbSet<RatingReport> RatingReports { get; set; }
         public DbSet<LeaderboardEntry> Leaderboard { get; set; }
+        public DbSet<CustomStarRating> CustomStarRatings { get; set; }
+        public DbSet <CustomStarThumb> CustomStarThumbs { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
@@ -47,6 +51,7 @@ namespace RateMyP.WebApp
         protected override void OnModelCreating(ModelBuilder builder)
             {
             builder.Entity<RatingThumb>().HasKey(table => new { table.RatingId, table.StudentId });
+            builder.Entity<CustomStarThumb>().HasKey(table => new { table.CustomStarId, table.StudentId });
             builder.Entity<RatingTag>().HasKey(table => new { table.RatingId, table.TagId });
             }
         }

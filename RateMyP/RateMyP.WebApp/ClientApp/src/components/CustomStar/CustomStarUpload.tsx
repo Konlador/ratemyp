@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../store';
+import { ApplicationState } from '../../store';
 import { Col, Button, Form, FormGroup, Label, UncontrolledAlert, FormText } from 'reactstrap';
-import * as CustomStarStore from '../store/CustomStarStore'
+import * as CustomStarStore from '../../store/CustomStar/CustomStarStore'
 
 type Props = 
     CustomStarStore.CustomStarState &
@@ -60,12 +60,17 @@ class CustomStarUpload extends React.PureComponent<Props> {
                         <Button onClick={() => this.onSubmitButtonPush()}>Submit</Button> 
                     </Col>
                 </FormGroup>  
+                <Col sm={10}>
+                <Label>Current rating image:‎‎‎‏‏‎‏‏‎‏‏‎</Label>
+                <FormGroup>                    
+                    <img src={"api/images/w_30,h_30,f_png/teacher=" + this.props.match.params.teacherId} className="icon"/>
+                </FormGroup>  
+                </Col>
             </Form>
         );
     }
 
     private onSubmitButtonPush(){
-        this.props.setTeacherId(this.props.match.params.teacherId);
         this.props.submitButtonClick();
         if(this.props.image !== null && !(this.props.width > 256 || this.props.height > 256)){
             this.props.uploadCustomStar(this.props.match.params.teacherId);

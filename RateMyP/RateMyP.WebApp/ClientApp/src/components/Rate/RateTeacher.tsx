@@ -85,8 +85,8 @@ class RateTeacher extends React.PureComponent<Props> {
                 <Rating
                 onClick={event => this.props.setOverallMark(event)}
                 initialRating={this.props.rating.rating.overallMark}
-                // emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
-                // fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
+                emptySymbol={<img src={"api/images/w_50,h_50,f_png,o_30,bo_2px_solid_white/teacher=" + this.props.match.params.teacherId} className="icon" />}
+                fullSymbol={<img src={"api/images/w_50,h_50,f_png,bo_2px_solid_white/teacher=" + this.props.match.params.teacherId} className="icon" />}
               />
             </div>
         </FormGroup>
