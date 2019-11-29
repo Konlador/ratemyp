@@ -9,6 +9,8 @@ export interface CustomStarState {
     submitButtonClicked: boolean,
     height: number,
     width: number,
+    zoomLevel: number,
+    imageUploaded: boolean
 }
 
 
@@ -30,12 +32,21 @@ interface SubmitButtonClickAction {
     type: 'SUBMIT_BUTTON_CLICK'
 }
 
+interface UploadCustomStarAction {
+    type: 'UPLOAD_CUSTOM_STAR'
+}
+
+interface SetZoomLevelAction {
+    type: 'SET_ZOOM_LEVEL';
+    value: number
+}
+
 interface ClearStoreAction {
     type: 'CLEAR_STORE'
 }
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = SetImageAction | SubmitButtonClickAction | ClearStoreAction | SetImageSizeAction;
+type KnownAction = SetImageAction | SubmitButtonClickAction | ClearStoreAction | SetImageSizeAction | SetZoomLevelAction | UploadCustomStarAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -48,8 +59,12 @@ export const actionCreators = {
     setImageSize: (width: number, height: number): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_IMAGE_SIZE', width: width, height: height });
     },
+    setZoomLevel: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_ZOOM_LEVEL', value: value,  });
+    },
     submitButtonClick: () => ({ type: 'SUBMIT_BUTTON_CLICK' } as SubmitButtonClickAction),
     uploadCustomStar : (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        console.log("sunns")
         const appState = getState();
         if(appState !== undefined &&
            appState.customStarUpload !== undefined &&
@@ -61,6 +76,7 @@ export const actionCreators = {
                 },
                 body: JSON.stringify({image: appState.customStarUpload.image})
             }).then(res => res.json()).catch(error => console.error('Error:', error));
+            dispatch({ type: 'UPLOAD_CUSTOM_STAR' });
         }
     },
     clearStore: () => ({ type: 'CLEAR_STORE'} as ClearStoreAction),
@@ -70,7 +86,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: CustomStarState = { image: null, submitButtonClicked: false, height: 0, width: 0, };
+const unloadedState: CustomStarState = { image: null, submitButtonClicked: false, height: 0, width: 0, zoomLevel: 1, imageUploaded: false};
 
 export const reducer: Reducer<CustomStarState> = (state: CustomStarState | undefined, incomingAction: Action): CustomStarState => {
     if (state === undefined)
@@ -83,22 +99,46 @@ export const reducer: Reducer<CustomStarState> = (state: CustomStarState | undef
                 image: action.value,
                 submitButtonClicked: false,
                 height: state.height,
-                width: state.width
+                width: state.width,
+                zoomLevel: state.zoomLevel,
+                imageUploaded: state.imageUploaded
             };
+        case 'SET_ZOOM_LEVEL':
+            return {
+                image: state.image,
+                submitButtonClicked: false,
+                height: state.height,
+                width: state.width,
+                zoomLevel: action.value,
+                imageUploaded: state.imageUploaded
+            };            
         case 'SET_IMAGE_SIZE':
             return {
                 image: state.image,
                 submitButtonClicked: state.submitButtonClicked,
                 height: action.height,
-                width: action.width
+                width: action.width,
+                zoomLevel: state.zoomLevel,
+                imageUploaded: state.imageUploaded
             };            
         case 'SUBMIT_BUTTON_CLICK':
             return {
                 image: state.image,
                 submitButtonClicked: true,
                 height: state.height,
-                width: state.width
+                width: state.width,
+                zoomLevel: state.zoomLevel,
+                imageUploaded: state.imageUploaded
             };   
+        case 'UPLOAD_CUSTOM_STAR':
+            return {
+                image: null,
+                submitButtonClicked: true,
+                height: 0,
+                width: 0,
+                zoomLevel: 1,
+                imageUploaded: true
+            };               
         case 'CLEAR_STORE':
             return unloadedState;                          
     }
