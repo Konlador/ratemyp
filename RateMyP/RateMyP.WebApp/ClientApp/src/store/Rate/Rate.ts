@@ -14,8 +14,8 @@ export interface RateState {
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe sometheState that is goeState to happen.
-interface SetOverallMarkAction { 
-    type: 'SET_OVERALL_MARK'; 
+interface SetOverallMarkAction {
+    type: 'SET_OVERALL_MARK';
     value: number;
 }
 
@@ -78,48 +78,49 @@ type KnownAction = SetOverallMarkAction | SetLevelOfDifficultyAction | SetWouldT
 // They don't directly mutate state, but they can have external side-effects (such as loadeState data).
 
 export const actionCreators = {
-    setOverallMark: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
+    setOverallMark: (value: number): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'SET_OVERALL_MARK', value: value });
     },
-    setLevelOfDifficulty: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
+    setLevelOfDifficulty: (value: number): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'SET_LEVEL_OF_DIFFICULTY', value: value });
     },
-    changeComment: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+    changeComment: (value: string): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'CHANGE_COMMENT', value: value });
     },
     setWouldTakeTeacherAgainTrue: () => ({ type: 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE' } as SetWouldTakeTeacherAgainTrueAction),
-    setWouldTakeTeacherAgainFalse: () => ({ type: 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE' } as SetWouldTakeTeacherAgainFalseAction),    
-    changeTags: (value: Array<Tag>): AppThunkAction<KnownAction> => (dispatch) => { 
+    setWouldTakeTeacherAgainFalse: () => ({ type: 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE' } as SetWouldTakeTeacherAgainFalseAction),
+    changeTags: (value: Array<Tag>): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'CHANGE_TAGS', tags: value });
     },
     submitReview: () => ({ type: 'SUBMIT_REVIEW' } as SubmitReviewAction),
     sendRating: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const state = getState().rate;
-        if(state !== undefined){
+        const state = getState();
+        if (state &&
+            state.rate) {
             fetch('api/ratings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(state.rating)
+                body: JSON.stringify(state.rate.rating)
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
-        dispatch({type: 'SEND_RATING'});
+        dispatch({ type: 'SEND_RATING' });
     },
-    setTeacherId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+    setTeacherId: (value: string): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'SET_TEACHER_ID', value: value });
     },
-    setCourseId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+    setCourseId: (value: string): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'SET_COURSE_ID', value: value });
     },
-    clearStore: () => ({ type: 'CLEAR_STORE'} as ClearStoreAction),
-    setRatingType: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
+    clearStore: () => ({ type: 'CLEAR_STORE' } as ClearStoreAction),
+    setRatingType: (value: number): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'SET_RATING_TYPE', value: value });
     },
 };
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedRating: Rating = {id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: '', ratingType: 0}
+const unloadedRating: Rating = { id: '', overallMark: 0, levelOfDifficulty: 0, wouldTakeTeacherAgain: false, comment: '', tags: [], dateCreated: new Date(), teacherId: '', courseId: '', ratingType: 0 }
 const unloadedState: RateState = { submitButtonClicked: false, rating: unloadedRating };
 
 export const reducer: Reducer<RateState> = (state: RateState | undefined, incomeStateAction: Action): RateState => {
@@ -133,66 +134,66 @@ export const reducer: Reducer<RateState> = (state: RateState | undefined, income
                 rating: Object.assign({}, state.rating, {
                     overallMark: action.value,
                 }),
-                });
+            });
         case 'SET_LEVEL_OF_DIFFICULTY':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
-                    levelOfDifficulty: action.value, 
+                    levelOfDifficulty: action.value,
                 }),
-                });
+            });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_TRUE':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
-                    wouldTakeTeacherAgain: true, 
+                    wouldTakeTeacherAgain: true,
                 }),
-                });
+            });
         case 'SET_WOULD_TAKE_TEACHER_AGAIN_FALSE':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
-                    wouldTakeTeacherAgain: false, 
+                    wouldTakeTeacherAgain: false,
                 }),
-                });
+            });
         case 'CHANGE_COMMENT':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
-                    comment: action.value, 
+                    comment: action.value,
                 }),
-                });
+            });
         case 'CHANGE_TAGS':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
-                    tags: action.tags, 
+                    tags: action.tags,
                 }),
-                });
+            });
         case 'SUBMIT_REVIEW':
             return Object.assign({}, state, {
                 submitButtonClicked: true,
-                });
+            });
         case 'SET_TEACHER_ID':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
                     teacherId: action.value,
                 }),
-                });
+            });
         case 'SEND_RATING':
             return Object.assign({}, state, {
-                });
+            });
         case 'SET_COURSE_ID':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
                     courseId: action.value,
                 }),
-                });
+            });
         case 'SET_RATING_TYPE':
             return Object.assign({}, state, {
                 rating: Object.assign({}, state.rating, {
                     ratingType: action.value,
                 }),
-                });
+            });
         case 'CLEAR_STORE':
             return unloadedState;
-                    
+
         default:
-                return state;
+            return state;
     }
 };

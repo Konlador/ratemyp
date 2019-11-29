@@ -6,6 +6,7 @@ import TeacherRatings from './TeacherRatings';
 import TeacherActivities from './TeacherActivities';
 import * as TeachersStore from '../../store/Teachers';
 import TeacherStatistics from './TeacherStatistics';
+import CustomStarLeaderboard from '../CustomStar/CustomStarLeaderboard'
 
 type Props =
     typeof TeachersStore.actionCreators &
@@ -23,6 +24,7 @@ class TeacherProfile extends React.PureComponent<Props> {
                 <TeacherStatistics teacherId={this.props.match.params.teacherId}/>
                 <TeacherActivities teacherId={this.props.match.params.teacherId}/>
                 <TeacherRatings teacherId={this.props.match.params.teacherId}/>
+                <CustomStarLeaderboard teacherId={this.props.match.params.teacherId} showItems = {3}/>
             </React.Fragment>
         );
     }

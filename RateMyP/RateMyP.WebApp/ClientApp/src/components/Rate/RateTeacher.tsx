@@ -9,6 +9,7 @@ import RateTeacherActivities from './RateTeacherActivities';
 import * as TagStore from '../../store/Tags'
 import { ApplicationState } from '../../store';
 import * as RateStore from '../../store/Rate/Rate';
+import './RateTeacher.css'
 
 type Props =
     {
@@ -85,8 +86,8 @@ class RateTeacher extends React.PureComponent<Props> {
                 <Rating
                 onClick={event => this.props.setOverallMark(event)}
                 initialRating={this.props.rating.rating.overallMark}
-                // emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
-                // fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
+                emptySymbol={<img src={"api/images/teacher=" + this.props.match.params.teacherId} className="iconEmpty" />}
+                fullSymbol={<img src={"api/images/teacher=" + this.props.match.params.teacherId} className="icon" />}
               />
             </div>
         </FormGroup>
