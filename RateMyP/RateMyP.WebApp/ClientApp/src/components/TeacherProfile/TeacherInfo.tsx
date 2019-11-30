@@ -42,7 +42,6 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
         return (
             <React.Fragment>
                 <div>
-                    Teacher
                     <h1>
                         {`${teacher.firstName} ${teacher.lastName}`}
                     </h1>

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RateMyP.WebApp.Helpers;
 using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -27,7 +29,7 @@ namespace RateMyP.WebApp.Statistics
             m_analyzer = analyzer;
             }
 
-        public double GetGlobalScore(double averageRating, int ratingCount, TimeSpan ratingRange)
+        public double GetGlobalScore(double averageRating, int ratingCount)
             {
             return averageRating; // * MathF.Log10(ratingCount + 1) * MathF.Log10(ratingRange.Hours + 1);
             }
@@ -35,6 +37,19 @@ namespace RateMyP.WebApp.Statistics
         public double GetYearlyScore(double averageRating, int ratingCount)
             {
             return averageRating; // * MathF.Log10(ratingCount + 1);
+            }
+
+        public double GetScore(double aR, int tR, int pR)
+            {
+            // Score is calculated by multiplying average rating by the lower bound of Wilson score confidence interval for a Bernoulli parameter
+            // https://www.evanmiller.org/how-not-to-sort-by-average-rating.html
+            // We assume that ratings of 3 and above are considered "positive", whereas 1 and 2 star ratings are "negative"
+
+            const double z = 1.96;
+            const double w = 1.9208;
+            const double u = 0.9604;
+            const double v = 3.8416;
+            return (((pR + w) / tR - z * Math.Sqrt((pR * (tR - pR)) / (double)tR + u) / tR) / (1 + v / tR)) * aR;
             }
 
         public async Task FullUpdate()
@@ -116,9 +131,11 @@ namespace RateMyP.WebApp.Statistics
                     entry.ThisYearAverage = 0;
                 }
 
-            var globalRange = await m_analyzer.GetRatingMaxTimeDifference(teacherId);
-            entry.AllTimeScore = GetGlobalScore(entry.AllTimeAverage, entry.AllTimeRatingCount, globalRange);
-            entry.ThisYearScore = GetYearlyScore(entry.ThisYearAverage, entry.ThisYearRatingCount);
+            //var globalRange = await m_analyzer.GetRatingMaxTimeDifference(teacherId);
+            var globalPositiveReviews = await m_analyzer.GetTeacherPositiveRatingCount(teacherId);
+            var yearlyPositiveReviews = await m_analyzer.GetTeacherPositiveRatingCountInYear(teacherId, m_currentYear);
+            entry.AllTimeScore = GetScore(entry.AllTimeAverage, entry.AllTimeRatingCount, globalPositiveReviews);
+            entry.ThisYearScore = GetScore(entry.ThisYearAverage, entry.ThisYearRatingCount, yearlyPositiveReviews);
             return entry;
             }
 
