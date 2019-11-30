@@ -37,6 +37,7 @@ class CustomStarReport extends React.PureComponent<Props> {
 
     private onSubmitButtonPush() {
         this.props.setCustomStarId(this.props.match.params.customStarId)
+        this.props.setStudentId(this.props.image? this.props.image.studentId : "Undefined")
         if(this.props.report.reason.length >= 30){
             this.props.sendReport()
             this.props.history.goBack()
