@@ -2,3 +2,8 @@
     width: 300px;
     padding: 20px;
 }
+
+.imgStar{
+    width: 100%;
+    display: block;
+}

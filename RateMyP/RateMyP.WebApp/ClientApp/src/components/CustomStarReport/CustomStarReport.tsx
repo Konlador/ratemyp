@@ -78,7 +78,7 @@ class CustomStarReport extends React.PureComponent<Props> {
                     <tbody>
                         <tr key={image.id}>
                             <td>{this.renderImageInfo(image)}</td>
-                            <td><img src={"https://res.cloudinary.com/drodzj9pr/image/upload/_" + image.id}/></td>
+                            <td><img className = "imgStar" src={"https://res.cloudinary.com/drodzj9pr/image/upload/_" + image.id}/></td>
                             <td>{this.renderThumbs(image)}</td>
                         </tr>
                     </tbody>

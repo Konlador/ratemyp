@@ -130,12 +130,12 @@ namespace RateMyP.WebApp.Controllers
             {
             var client = _clientFactory.CreateClient();
             var id = Guid.NewGuid();
-            var transformation = "w_120,h_120";
+            var uploadDate = DateTime.Now;
+            Int32 timestamp = (Int32)(uploadDate.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             var uri = ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/upload";
             var publicId = "_" + id.ToString();
             var image = (string)data["image"];
-            var timeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            var stringToSign = "public_id=" + publicId + "&tags=" + teacherId + "&timestamp=" + timeStamp + "&transformation=" + transformation + ConfigurationManager.AppSettings["ImageApiSecretKey"];
+            var stringToSign = "public_id=" + publicId + "&tags=" + teacherId + "&timestamp=" + timestamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
             var sign = Hash(stringToSign);
 
 
@@ -143,34 +143,15 @@ namespace RateMyP.WebApp.Controllers
                 {
                 file = image,
                 api_key = ConfigurationManager.AppSettings["ImageApiKey"],
-                timestamp = timeStamp,
+                timestamp = timestamp,
                 public_id = publicId,
                 signature = sign,
                 tags = teacherId,
-                transformation = transformation
                 };
 
             var json = JsonConvert.SerializeObject(imageFile);
             HttpResponseMessage response = await client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
-
-            var uploadDate = DateTime.Now;
-            Int32 spriteTimestamp = (Int32)(uploadDate.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            var uriSprite = ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/sprite";
-            var stringToSignSprite = "tag=" + teacherId + "&timestamp=" + spriteTimestamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
-            var signSprite = Hash(stringToSignSprite);
-
-            var imageSprite = new
-                {
-                api_key = ConfigurationManager.AppSettings["ImageApiKey"],
-                timestamp = spriteTimestamp,
-                signature = signSprite,
-                tag = teacherId.ToString()
-                };
-
-            var jsonSprite = JsonConvert.SerializeObject(imageSprite);
-            HttpResponseMessage responseSprite = await client.PostAsync(uriSprite, new StringContent(jsonSprite, Encoding.UTF8, "application/json"));
-            responseSprite.EnsureSuccessStatusCode();
 
             var images = await m_context.CustomStarRatings
                                          .Where(x => x.TeacherId.Equals(teacherId) && x.StudentId.Equals(studentId)).SingleOrDefaultAsync();

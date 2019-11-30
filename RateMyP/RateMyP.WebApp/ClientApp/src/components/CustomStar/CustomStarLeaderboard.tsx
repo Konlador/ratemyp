@@ -39,16 +39,6 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
         }
     }
 
-    private getTimes(data: any){
-        return data.map((image: ImageStore.Image) => new Date(image.dateCreated)).sort().slice(-1)[0];
-      }
-
-    private getMaxTime(items: any){
-        var dates = this.getTimes(items)
-        var date = dates? Math.floor(dates / 1000) : 0
-        return date;
-      }
-
     public render() {
         return (
             <React.Fragment>                
@@ -58,8 +48,6 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
                         <Button className="add-image" color="primary" tag={Link} to={`/add-custom-star/${this.teacherId()}`}>Add an image</Button>{' '}
                         {this.props.images.isLoading && <Spinner type="grow" color="success" />}
                     </div>
-                    {console.log(this.getMaxTime(this.props.images.images))}
-                    <link href={"https://res.cloudinary.com/drodzj9pr/image/sprite/v" + this.getMaxTime(this.props.images.images) + "/" +  this.teacherId() + ".css"} media="screen" rel="stylesheet" type="text/css" />
                     <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
                         <thead>
                             <tr>
@@ -72,7 +60,7 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
                             {this.props.images.images.slice(0, this.props.showItems? this.props.showItems : 100).map((image: ImageStore.Image, index: number) =>
                                 <tr key={image.id}>
                                     <td>{this.renderImageInfo(image)}</td>
-                                    <td><div className={'_' + image.id}></div></td>
+                                    <td><img className="imgStar" src={"https://res.cloudinary.com/drodzj9pr/image/upload/_" + image.id}/></td>
                                     <td>{this.renderThumbs(image)}</td>
                                 </tr>
                             )}
