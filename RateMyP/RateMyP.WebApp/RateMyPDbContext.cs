@@ -15,6 +15,7 @@ namespace RateMyP.WebApp
         DbSet<RatingTag> RatingTags { get; set; }
         DbSet<Tag> Tags { get; set; }
         DbSet<RatingReport> RatingReports { get; set; }
+        DbSet<CustomStarReport> CustomStarReports { get; set; }
         DbSet<LeaderboardEntry> Leaderboard { get; set; }
         DbSet<CustomStarRating> CustomStarRatings { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
@@ -31,6 +32,7 @@ namespace RateMyP.WebApp
         public DbSet<RatingTag> RatingTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<RatingReport> RatingReports { get; set; }
+        public DbSet<CustomStarReport> CustomStarReports { get; set; }
         public DbSet<LeaderboardEntry> Leaderboard { get; set; }
         public DbSet<CustomStarRating> CustomStarRatings { get; set; }
         public DbSet <CustomStarThumb> CustomStarThumbs { get; set; }

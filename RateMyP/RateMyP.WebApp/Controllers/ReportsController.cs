@@ -11,10 +11,13 @@ namespace RateMyP.WebApp.Controllers
     {
     public interface IReportsController
         {
-        Task<ActionResult<IEnumerable<RatingReport>>> GetReports();
+        Task<ActionResult<IEnumerable<RatingReport>>> GetRatingsReports();
+        Task<ActionResult<IEnumerable<CustomStarReport>>> GetCustomStarsReports();
         Task<ActionResult<IEnumerable<RatingReport>>> GetRatingReports(Guid ratingId);
-        Task<ActionResult<RatingReport>> GetReport(Guid id);
-        Task<ActionResult<RatingReport>> PostReport([FromBody] JObject data);
+        Task<ActionResult<IEnumerable<CustomStarReport>>> GetCustomStarReports(Guid customStarId);
+        Task<IActionResult> GetReport(Guid id);
+        Task<ActionResult<RatingReport>> PostRatingReport([FromBody] JObject data);
+        Task<ActionResult<CustomStarReport>> PostCustomStarReport([FromBody] JObject data);
         }
 
     [Route("api/reports")]
@@ -28,10 +31,22 @@ namespace RateMyP.WebApp.Controllers
             m_context = context;
             }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<RatingReport>>> GetReports()
+        [HttpGet("rating")]
+        public async Task<ActionResult<IEnumerable<RatingReport>>> GetRatingsReports()
             {
             return await m_context.RatingReports.ToListAsync();
+            }
+
+        [HttpGet("customStar")]
+        public async Task<ActionResult<IEnumerable<CustomStarReport>>> GetCustomStarsReports()
+            {
+            return await m_context.CustomStarReports.ToListAsync();
+            }
+
+        [HttpGet("custom-star={customStarId}")]
+        public async Task<ActionResult<IEnumerable<CustomStarReport>>> GetCustomStarReports(Guid customStarId)
+            {
+            return await m_context.CustomStarReports.Where(x => x.CustomStarId.Equals(customStarId)).ToListAsync();
             }
 
         [HttpGet("rating={ratingId}")]
@@ -41,19 +56,23 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<RatingReport>> GetReport(Guid id)
+        public async Task<IActionResult> GetReport(Guid id)
             {
-            var report = await m_context.RatingReports
+            var ratingReport = await m_context.RatingReports
                                         .SingleAsync(x => x.Id.Equals(id));
+            var customStarReport = await m_context.CustomStarReports
+                                                        .SingleAsync(x => x.Id.Equals(id));
 
-            if (report == null)
-                return NotFound();
+            if (ratingReport != null)
+                return Ok(ratingReport);
+            if (customStarReport != null)
+                return Ok(customStarReport);
 
-            return report;
+            return NotFound("Report not found");
             }
 
-        [HttpPost]
-        public async Task<ActionResult<RatingReport>> PostReport([FromBody] JObject data)
+        [HttpPost("rating")]
+        public async Task<ActionResult<RatingReport>> PostRatingReport([FromBody] JObject data)
             {
             var report = new RatingReport
                 {
@@ -67,6 +86,23 @@ namespace RateMyP.WebApp.Controllers
             await m_context.SaveChangesAsync();
 
             return CreatedAtAction("GetRatingReport", new { id = report.Id }, report);
+            }
+
+        [HttpPost("custom-star")]
+        public async Task<ActionResult<CustomStarReport>> PostCustomStarReport([FromBody] JObject data)
+            {
+            var report = new CustomStarReport
+                {
+                Id = Guid.NewGuid(),
+                DateCreated = DateTime.Now,
+                StudentId = (string)data["studentId"],
+                CustomStarId = (Guid)data["customStarId"],
+                Reason = (string)data["reason"]
+                };
+            m_context.CustomStarReports.Add(report);
+            await m_context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCustomStarReport", new { id = report.Id }, report);
             }
         }
     }

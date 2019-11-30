@@ -17,7 +17,8 @@ namespace RateMyP.WebApp.Controllers
     public interface ICustomStarController
         {
         Task<IActionResult> GetImageAsync(Guid teacherId);
-        Task<IActionResult> GetImagesData(Guid teacherId);
+        Task<IActionResult> GetImagesDataAsync(Guid teacherId);
+        Task<IActionResult> GetImageDataAsync(Guid id);
         Task<IActionResult> PostImageAsync(Guid teacherId, [FromBody] JObject data);
         Task<ActionResult<CustomStarThumb>> PostCustomStarThumb(CustomStarThumb customStarThumb);
         Task<IActionResult> PostImageWithTagAsync(string studentId, Guid teacherId, [FromBody] JObject data);
@@ -36,13 +37,25 @@ namespace RateMyP.WebApp.Controllers
             _clientFactory = clientFactory;
             }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetImageDataAsync(Guid id)
+            {
+            var images = await m_context.CustomStarRatings
+                                         .Where(x => x.Id.Equals(id)).FirstAsync();
+
+            if (images == null)
+                return NotFound();
+
+            return Ok(images);
+            }
+
         [HttpGet("teacher={teacherId}")]
         public async Task<IActionResult> GetImageAsync(Guid teacherId)
             {
             var client = _clientFactory.CreateClient();
             var transformation = "w_50,h_50,f_png";
             byte[] image = null;
-            HttpResponseMessage response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/{teacherId}");
+            HttpResponseMessage response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/s{teacherId}");
 
             if (response.IsSuccessStatusCode)
                 {
@@ -57,7 +70,7 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet("data/teacher={teacherId}")]
-        public async Task<IActionResult> GetImagesData(Guid teacherId)
+        public async Task<IActionResult> GetImagesDataAsync(Guid teacherId)
             {
             var images = await m_context.CustomStarRatings
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
@@ -116,12 +129,15 @@ namespace RateMyP.WebApp.Controllers
         public async Task<IActionResult> PostImageWithTagAsync(string studentId, Guid teacherId, [FromBody] JObject data)
             {
             var client = _clientFactory.CreateClient();
+            var id = Guid.NewGuid();
+            var transformation = "w_120,h_120";
             var uri = ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/upload";
-            var publicId = "_" + teacherId + "_" + studentId;
+            var publicId = "_" + id.ToString();
             var image = (string)data["image"];
             var timeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            var stringToSign = "public_id=" + publicId + "&tags=" + teacherId + "&timestamp=" + timeStamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
+            var stringToSign = "public_id=" + publicId + "&tags=" + teacherId + "&timestamp=" + timeStamp + "&transformation=" + transformation + ConfigurationManager.AppSettings["ImageApiSecretKey"];
             var sign = Hash(stringToSign);
+
 
             var imageFile = new
                 {
@@ -131,35 +147,46 @@ namespace RateMyP.WebApp.Controllers
                 public_id = publicId,
                 signature = sign,
                 tags = teacherId,
+                transformation = transformation
                 };
 
             var json = JsonConvert.SerializeObject(imageFile);
             HttpResponseMessage response = await client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
 
+            var uploadDate = DateTime.Now;
+            Int32 spriteTimestamp = (Int32)(uploadDate.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var uriSprite = ConfigurationManager.AppSettings["ImageApiURL"] + ConfigurationManager.AppSettings["ImageApiName"] + "/image/sprite";
+            var stringToSignSprite = "tag=" + teacherId + "&timestamp=" + spriteTimestamp + ConfigurationManager.AppSettings["ImageApiSecretKey"];
+            var signSprite = Hash(stringToSignSprite);
+
+            var imageSprite = new
+                {
+                api_key = ConfigurationManager.AppSettings["ImageApiKey"],
+                timestamp = spriteTimestamp,
+                signature = signSprite,
+                tag = teacherId.ToString()
+                };
+
+            var jsonSprite = JsonConvert.SerializeObject(imageSprite);
+            HttpResponseMessage responseSprite = await client.PostAsync(uriSprite, new StringContent(jsonSprite, Encoding.UTF8, "application/json"));
+            responseSprite.EnsureSuccessStatusCode();
+
             var images = await m_context.CustomStarRatings
                                          .Where(x => x.TeacherId.Equals(teacherId) && x.StudentId.Equals(studentId)).SingleOrDefaultAsync();
-            if (images == null)
+
+            var customImage = new CustomStarRating
                 {
-                var customImage = new CustomStarRating
-                    {
-                    Id = new Guid(),
-                    TeacherId = teacherId,
-                    DateCreated = DateTime.Now,
-                    StudentId = studentId,
-                    ThumbDowns = 0,
-                    ThumbUps = 0
-                    };
-                m_context.CustomStarRatings.Add(customImage);
-                await m_context.SaveChangesAsync();
-                }
-            else
-                {
-                images.DateCreated = DateTime.Now;
-                images.ThumbDowns = 0;
-                images.ThumbUps = 0;
-                await m_context.SaveChangesAsync();
-                }
+                Id = id,
+                TeacherId = teacherId,
+                DateCreated = uploadDate,
+                StudentId = studentId,
+                ThumbDowns = 0,
+                ThumbUps = 0
+                };
+            m_context.CustomStarRatings.Add(customImage);
+            await m_context.SaveChangesAsync();
+
 
             return CreatedAtAction("GetImage", new { id = publicId }, image); ;
             }

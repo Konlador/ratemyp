@@ -11,6 +11,7 @@ import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as CustomStarUpload from './CustomStar/CustomStarStore';
 import * as RatingReport from './Rate/RatingReport';
+import * as CustomStarReport from './CustomStar/CustomStarReport'
 import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';
 import * as CourseLeaderboard from './Leaderboard/CourseLeaderboard';
 import * as CustomStarLeaderboard from './CustomStar/CustomStarLeaderboard';
@@ -36,6 +37,7 @@ export interface ApplicationState {
 
     customStarUpload: CustomStarUpload.CustomStarState | undefined;
     customStarLeaderboard: CustomStarLeaderboard.CustomStarLeaderboardState | undefined;
+    customStarReport: CustomStarReport.CustomStarReportState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -61,6 +63,7 @@ export const reducers = {
 
     customStarUpload: CustomStarUpload.reducer,
     customStarLeaderboard: CustomStarLeaderboard.reducer,
+    customStarReport: CustomStarReport.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are
