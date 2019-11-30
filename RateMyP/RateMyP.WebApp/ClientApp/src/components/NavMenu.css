@@ -3,12 +3,14 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #100E17;
+    background-color: transparent;
 }
-  
+
 li {
     float: left;
     margin: 0;
+    border-right-style: groove;
+    border-right-color: #2E2E2E;
 }
   
 li a {
@@ -19,20 +21,56 @@ li a {
     margin: 0;
 }
 
-.text {
-    text-transform: uppercase;
+li:nth-child(5){
+    border: none;
+}
+.title h1 {
+    background: -webkit-linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
+    background: -moz-linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
+    background: -o-linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
     background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);
+    text-transform: uppercase;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 20px;
+    font-size: 30px;
+    opacity: 0.5;
+    transition: opacity .5s ease-in-out;
 }
+
+.title h1:hover {
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+}
+
+.text {
+    background: white;
+    margin-top: 10px;
+    justify-content: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 15px;
+    /*font-weight: bold;*/
+}
+
 .nav-menu-item {
-    background-color: #100E17;
+    background-color: transparent;
     justify-content: center;
     align-items: center;
+    width: 90px;
+    opacity: 0.5;
+    transition: opacity .15s ease-in-out;
 }
-.cardtitle {
-    color: white;
+
+.nav-menu-item img {
+    width: 40px;
+    height: 40px
+}
+
+.nav-menu-item:hover {
+    opacity: 1;
+    transition: opacity .15s ease-in-out;
 }
 
 .navbarstyle {

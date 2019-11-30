@@ -2,6 +2,11 @@ import * as React from 'react';
 import { Container, Navbar, NavbarBrand, NavItem, NavLink, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import LeaderboardLogo from "../images/leaderboard.png";
+import BrowseLogo from "../images/browse.png";
+import LoginLogo from "../images/login.png";
+import StoreLogo from "../images/store.png";
+import HomeLogo from "../images/home.png";
+
 import './NavMenu.css';
 
 
@@ -13,48 +18,58 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="navbarstyle" light>
+                <Navbar className="navbarstyle">
                     <Container>
-                        <NavbarBrand tag={Link} to="/"><h1 className="text"><strong>RateMyP.WebApp</strong></h1></NavbarBrand>
+                        <NavbarBrand tag={Link} to="/"><div className="title"><h1>RateMyP.WebApp</h1></div></NavbarBrand>
                         <ul className="NavMenu">
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/">
-                                    <Card className="nav-menu-item">
-                                        <img width="50px" height="50px" src={require('../images/house.svg')} />
-                                        <CardTitle className="text">
+                                    <div className="nav-menu-item">
+                                        <img src={HomeLogo} />
+                                        <p className="text">
                                             Home
-                                        </CardTitle>
-                                    </Card>
+                                        </p>
+                                    </div>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/leaderboard">
-                                    <Card className="nav-menu-item">
-                                        <img width="50px" height="50px" src={LeaderboardLogo} />
-                                        <CardTitle className="text">
+                                    <div className="nav-menu-item">
+                                        <img src={LeaderboardLogo} />
+                                        <p className="text">
                                             Leaderboard
-                                        </CardTitle>
-                                    </Card>
+                                        </p>
+                                    </div>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/browse">
-                                    <Card className="nav-menu-item">
-                                        <img width="50px" height="50px" src={require('../images/clipboard.svg')} />
-                                        <CardTitle className="text">
+                                    <div className="nav-menu-item">
+                                        <img src={BrowseLogo} />
+                                        <p className="text">
                                             Browse
-                                        </CardTitle>
-                                    </Card>
+                                        </p>
+                                    </div>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/">
+                                    <div className="nav-menu-item">
+                                        <img src={StoreLogo} />
+                                        <p className="text">
+                                            Store
+                                        </p>
+                                    </div>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={Link} className="text-dark" to="/student">
-                                    <Card className="nav-menu-item">
-                                        <img width="50px" height="50px" src={require('../images/profile.svg')} />
-                                        <CardTitle className="text">
+                                    <div className="nav-menu-item">
+                                        <img src={LoginLogo} />
+                                        <p className="text">
                                             Login
-                                        </CardTitle>
-                                    </Card>
+                                        </p>
+                                    </div>
                                 </NavLink>
                             </NavItem>
                         </ul>
