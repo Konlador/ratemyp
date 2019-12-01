@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import * as TeacherLeaderboardStore from '../../store/Leaderboard/TeacherLeaderboard';
 import { Button, ButtonGroup, Spinner } from 'reactstrap';
 import MUIDataTable, { SelectableRows } from 'mui-datatables';
+import './TeacherLeaderboard.css';
 
 type Props =
     TeacherLeaderboardStore.TeacherLeaderboardState &
@@ -61,12 +62,12 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
     public render() {
         return (
             <React.Fragment>
-                <ButtonGroup style={{left: '35%', marginBottom: '16px'}}>
+                <ButtonGroup id="leaderboard-teachers-scope-buttons">
                     <Button color="primary" disabled={this.getButtonStatus()} onClick={() => this.switchTab()}>All-Time</Button>
                     <Button color="primary" disabled={!this.getButtonStatus()} onClick={() => this.switchTab()}>This Year</Button>
                 </ButtonGroup>
                 {this.renderComponents()}
-                {this.props.isLoading && <Spinner type="grow" color ="primary" style={{
+                {this.props.isLoading && <Spinner type="grow" color="primary" style={{
                     position: 'absolute', 
                     left: '40%', 
                     marginTop: '16px'
