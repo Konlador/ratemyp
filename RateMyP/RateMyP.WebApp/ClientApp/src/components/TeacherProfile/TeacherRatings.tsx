@@ -40,7 +40,7 @@ class TeacherRatings extends React.PureComponent<Props & OwnProps> {
             <React.Fragment>
                 <div>
                     <div className="ratings-head">
-                        <h2 className="ratings">Ratings</h2>
+                        <h2 className="ratings">Ratings ({this.props.ratings.ratings.length})</h2>
                         <Button className="add-rating" color="primary" tag={Link} to={`/rate-teacher/${this.props.teacherId}`}>Add a rating</Button>{' '}
                         {this.props.ratings.isLoading && <Spinner type="grow" color="success" />}
                     </div>

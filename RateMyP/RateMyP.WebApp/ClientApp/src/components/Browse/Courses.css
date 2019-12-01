@@ -1,0 +1,24 @@
+
+
+.courses-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.courses-top #courses-label {
+    display: inline-block;
+    width: fit-content;
+}
+
+.courses-top input#courses-search-box {
+    display: inline-block;
+    flex: 1;
+    align-self: center;
+    margin-left: 5%;
+}
+
+.courses-top #courses-search-button {
+    display: inline-block;
+    align-self: center;
+    margin-left: 10px;
+}

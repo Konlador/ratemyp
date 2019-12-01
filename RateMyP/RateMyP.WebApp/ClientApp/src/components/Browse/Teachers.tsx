@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import * as TeachersStore from '../../store/Teachers';
 import { Input, Table, Button, Spinner } from 'reactstrap';
 import '../../extensions/StringExtensions'
+import './Teachers.css';
 
 interface OwnProps {
     teacherId: string,
@@ -68,6 +69,13 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     public render() {
         return (
             <React.Fragment>
+                <div className="teachers-top">
+                    <h2 id="academic-staff-label">
+                        Academic Staff {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
+                    </h2>
+                    <Input id="teacher-search-box" name="Search" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)}/>
+                    <Button id="teacher-search-button" onClick={() => this.search()} color="primary">Search</Button>
+                </div>
                 {this.renderTable()}
                 {this.props.teachers.length == 0 && <h4 style={{textAlign: 'center'}}>No results</h4>}
                 {this.state.canLoadMore &&
@@ -90,15 +98,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     private renderTable() {
         return (
             <div>
-                <div>
-                    <h2>Academic Staff
-                        {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
-                        <Input name="Search" id="searchBox" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)} 
-                               style={{width: '20%', display:'inline', marginInlineStart:'50%'}}/>
-                        <Button onClick={() => this.search()} color="primary" style={{display: 'inline', marginLeft: '24px'}}>Search</Button>
-                    </h2>
-                </div>
-                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
+                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
                             <th>Name</th>

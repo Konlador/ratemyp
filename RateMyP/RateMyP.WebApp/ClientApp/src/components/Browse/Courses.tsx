@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import * as CoursesStore from '../../store/Courses';
 import { Input, Button, Spinner, Table } from 'reactstrap';
 import '../../extensions/StringExtensions';
+import './Courses.css';
 
 interface OwnProps {
     courseId: string,
@@ -91,15 +92,14 @@ class Courses extends React.PureComponent<Props & OwnProps> {
     private renderTable() {
         return (
             <div>
-                <div>
-                    <h2>Courses
+                <div className="courses-top">
+                    <h2 id="courses-label">Courses
                         {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
-                        <Input name="Search" id="searchBox" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)} 
-                               style={{width: '20%', display:'inline', marginInlineStart:'59%'}}/>
-                        <Button onClick={() => this.search()} color="primary" style={{display: 'inline', marginLeft: '24px'}}>Search</Button>
                     </h2>
+                    <Input id="courses-search-box" name="Search" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)}/>
+                    <Button id="courses-search-button" onClick={() => this.search()} color="primary">Search</Button>
                 </div>
-                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
+                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
                             <th>Name</th>

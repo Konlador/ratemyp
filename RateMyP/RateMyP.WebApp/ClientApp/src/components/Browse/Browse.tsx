@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import Teachers from './Teachers';
 import Courses from './Courses';
 import { Button, ButtonGroup } from "reactstrap";
+import './Browse.css';
 
 type Props = RouteComponentProps<{}>;
 
@@ -46,13 +47,12 @@ class Browse extends React.PureComponent<Props, State> {
     public render() {
         return (
             <React.Fragment>
-                <div>
-                    <h1 id="tabelLabel" style={{ marginBottom: '16px' }}>Browse
-                        <ButtonGroup style={{ left: '75%' }}>
-                            <Button color="primary" disabled={this.getButtonStatus()} onClick={() => this.switchPage()}>Staff</Button>
-                            <Button color="primary" disabled={!this.getButtonStatus()} onClick={() => this.switchPage()}>Courses</Button>
-                        </ButtonGroup>
-                    </h1>
+                <div className="browse-top">
+                    <h1 id="browse-label" style={{ marginBottom: '16px' }}>Browse</h1>
+                    <ButtonGroup className="browse-button-group">
+                        <Button color="primary" disabled={this.getButtonStatus()} onClick={() => this.switchPage()}>Staff</Button>
+                        <Button color="primary" disabled={!this.getButtonStatus()} onClick={() => this.switchPage()}>Courses</Button>
+                    </ButtonGroup>
                 </div>
                 {this.renderComponents()}
             </React.Fragment>

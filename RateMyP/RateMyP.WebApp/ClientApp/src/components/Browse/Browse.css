@@ -1,0 +1,14 @@
+.browse-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.browse-top .browse-button-group {
+    align-self: center;
+    height: 80%;
+}
+
+
+#browse-label {
+    display: inline-block;
+}
