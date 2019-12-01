@@ -22,22 +22,13 @@ class CustomStarUpload extends React.PureComponent<Props> {
         this.fileReader.onloadend = this.handleFileRead;
         this.fileReader.readAsDataURL(file)
     }
+
     private handleFileRead = () => {
         const content = this.fileReader.result;
             this.props.setImage(content);   
-            // this.checkImageSize(content);
-    }
-    private checkImageSize = (image: any) => {
-        this.img = new Image();
-        this.img.onloadend = this.handleImageSize;
-        this.img.src = String(image);
     }
 
-    private handleImageSize = () => {
-        this.props.setImageSize(this.img.width, this.img.height)
-    }
     public render() {
-
         return (
             <Form>
                 {this.renderAlerts()}

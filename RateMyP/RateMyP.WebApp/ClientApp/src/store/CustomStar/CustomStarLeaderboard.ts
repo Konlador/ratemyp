@@ -11,6 +11,7 @@ export interface CustomStarLeaderboardState {
 
 export interface Image {
     id: string, 
+    teacherId: string,
     studentId: string,
     thumbUps: number,
     thumbDowns: number,

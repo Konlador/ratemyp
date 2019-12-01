@@ -1,19 +1,19 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
-import { Rating } from "../Ratings";
+import { Image } from './CustomStarLeaderboard';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface RatingReportState {
+export interface CustomStarReportState {
     submitButtonClicked: boolean;
-    ratingId : string;
-    rating: Rating | undefined;
-    report: RatingReport;
+    customStarId : string;
+    image: Image | undefined;
+    report: CustomStarReport;
 }
 
-export interface RatingReport {
-    ratingId: string;
+export interface CustomStarReport {
+    customStarId: string;
     studentId: string;
     reason: string;
 }
@@ -22,14 +22,14 @@ export interface RatingReport {
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe sometheState that is goeState to happen.
 
-interface RequestTeacherAction {
-    type: 'REQUEST_RATING';
-    ratingId: string;
+interface RequestCustomStarAction {
+    type: 'REQUEST_CUSTOM_STAR';
+    customStarId: string;
 }
 
-interface ReceiveTeacherAction {
-    type: 'RECEIVE_RATING';
-    rating: Rating;
+interface ReceiveCustomStarAction {
+    type: 'RECEIVE_CUSTOM_STAR';
+    image: Image;
 }
 
 interface ChangeReasonAction {
@@ -45,8 +45,8 @@ interface SendReportAction {
     type: 'SEND_REPORT'
 }
 
-interface SetRatingIdAction {
-    type: 'SET_RATING_ID'
+interface SetCustomStarIdAction {
+    type: 'SET_CUSTOM_STAR_ID'
     value: string
 }
 
@@ -62,26 +62,25 @@ interface ClearStoreAction {
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type streStates (and not any other arbitrary streState).
-type KnownAction = RequestTeacherAction | ReceiveTeacherAction | ChangeReasonAction | SubmitReportAction | SendReportAction | SetRatingIdAction |  ClearStoreAction | SetStudentIdAction;
+type KnownAction = RequestCustomStarAction | ReceiveCustomStarAction | ChangeReasonAction | SubmitReportAction | SendReportAction | SetCustomStarIdAction |  ClearStoreAction | SetStudentIdAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loadeState data).
 
 export const actionCreators = {
-    requestRating: (ratingId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestCustomStar: (customStarId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
-            appState.ratingReport &&
-            (appState.ratingReport.rating === undefined ||
-            appState.ratingReport.rating.id !== ratingId)) {
-            fetch(`api/ratings/${ratingId}`)
-                .then(response => response.json() as Promise<Rating>)
+            appState.customStarReport &&
+            (appState.customStarReport.image === undefined ||
+            appState.customStarReport.image.id !== customStarId)) {
+            fetch(`api/images/${customStarId}`)
+                .then(response => response.json() as Promise<Image>)
                 .then(data => {
-                    dispatch({ type: 'RECEIVE_RATING', rating: data });
+                    dispatch({ type: 'RECEIVE_CUSTOM_STAR', image: data });
                 });
-
-            dispatch({ type: 'REQUEST_RATING', ratingId });
+            dispatch({ type: 'REQUEST_CUSTOM_STAR', customStarId });
         }
     },
     changeReason: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
@@ -89,20 +88,20 @@ export const actionCreators = {
     },
     submitReport: () => ({ type: 'SUBMIT_REPORT' } as SubmitReportAction),
     sendReport: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const state = getState().ratingReport;
-        if(state !== undefined){
-            fetch('api/reports/rating', {
+        const state = getState();
+        if(state.customStarReport !== undefined){
+            fetch('api/reports/custom-star', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(state.report)
+                body: JSON.stringify(state.customStarReport.report)
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({type: 'SEND_REPORT'});
     },
-    setRatingId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_RATING_ID', value: value });
+    setCustomStarId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
+        dispatch({ type: 'SET_CUSTOM_STAR_ID', value: value });
     },
     setStudentId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_STUDENT_ID', value: value });
@@ -111,26 +110,26 @@ export const actionCreators = {
 };
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedRatingReport: RatingReport = { ratingId: '', reason: '', studentId: '' }
-const unloadedState: RatingReportState = { ratingId: '', rating: undefined, submitButtonClicked: false, report: unloadedRatingReport };
+const unloadedCustomStarReport: CustomStarReport = { customStarId: '', reason: '', studentId: '' }
+const unloadedState: CustomStarReportState = { customStarId: '', image: undefined, submitButtonClicked: false, report: unloadedCustomStarReport };
 
-export const reducer: Reducer<RatingReportState> = (state: RatingReportState | undefined, incomeStateAction: Action): RatingReportState => {
+export const reducer: Reducer<CustomStarReportState> = (state: CustomStarReportState | undefined, incomeStateAction: Action): CustomStarReportState => {
     if (state === undefined)
         return unloadedState;
 
     const action = incomeStateAction as KnownAction;
     switch (action.type) {
-        case 'REQUEST_RATING':
+        case 'REQUEST_CUSTOM_STAR':
             return {
-                rating: undefined,
-                ratingId: action.ratingId,
+                image: state.image,
+                customStarId: action.customStarId,
                 report: state.report,
                 submitButtonClicked: state.submitButtonClicked
             };
-        case 'RECEIVE_RATING':
+        case 'RECEIVE_CUSTOM_STAR':
             return {
-                rating: action.rating,
-                ratingId: state.ratingId,
+                image: action.image,
+                customStarId: state.customStarId,
                 report: state.report,
                 submitButtonClicked: state.submitButtonClicked
             };
@@ -144,10 +143,10 @@ export const reducer: Reducer<RatingReportState> = (state: RatingReportState | u
             return Object.assign({}, state, {
                 submitButtonClicked: true,
                 });
-        case 'SET_RATING_ID':
+        case 'SET_CUSTOM_STAR_ID':
             return Object.assign({}, state, {
                     report: Object.assign({}, state.report, {
-                        ratingId: action.value,
+                        customStarId: action.value,
                     }),
                 });
         case 'SET_STUDENT_ID':
