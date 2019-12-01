@@ -39,6 +39,7 @@
     "reactstrap": "^8.1.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
+    "semantic-ui-react": "^0.88.1",
     "typescript": "3.2.2"
   },
   "devDependencies": {

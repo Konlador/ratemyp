@@ -78,10 +78,14 @@ interface ClearSelectedTeacher {
     type: 'CLEAR_SELECTED_TEACHER'
 }
 
+interface ClearAllTeachers {
+    type: 'CLEAR_ALL_TEACHERS'
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
 type KnownAction = RequestTeachersAction | ReceiveTeachersAction | RequestTeacherAction | ReceiveTeacherAction | CheckTeacherAvailabilityAction | ClearSelectedTeacher |
-                   RequestAllTeachersAction | ReceiveAllTeachersAction | RequestSearchedTeachersAction | ReceiveSearchedTeachersAction;
+                   RequestAllTeachersAction | ReceiveAllTeachersAction | RequestSearchedTeachersAction | ReceiveSearchedTeachersAction | ClearAllTeachers;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -139,7 +143,8 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_SEARCHED_TEACHERS'});
         }
     },
-    clearSelectedTeacher: () => ({ type: 'CLEAR_SELECTED_TEACHER' } as ClearSelectedTeacher)
+    clearSelectedTeacher: () => ({ type: 'CLEAR_SELECTED_TEACHER' } as ClearSelectedTeacher),
+    clearAllTeachers: () => ({ type: 'CLEAR_ALL_TEACHERS' } as ClearAllTeachers)
 };
 
 // ----------------
@@ -233,6 +238,14 @@ export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined
                     currentIndex: state.currentIndex,
                     canLoadMore: state.canLoadMore
                 };
+        case 'CLEAR_ALL_TEACHERS':
+            return {
+                teachers: [],
+                selectedTeacher: state.selectedTeacher,
+                isLoading: state.isLoading,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
     }
 
     return state;

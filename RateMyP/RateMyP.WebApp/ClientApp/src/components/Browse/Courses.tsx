@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
 import * as CoursesStore from '../../store/Courses';
-import { Button, Spinner } from 'reactstrap';
-import MUIDataTable, { SelectableRows } from 'mui-datatables';
+import { Input, Button, Spinner, Table } from 'reactstrap';
 import '../../extensions/StringExtensions';
 
 interface OwnProps {
-    search: string
+    courseId: string,
 };
 
 type Props =
@@ -18,44 +17,45 @@ type Props =
 
 class Courses extends React.PureComponent<Props & OwnProps> {
 
-    tableOptions = {
-        print: false,
-        download: false,
-        viewColumns: false,
-        selectableRows: "none" as SelectableRows,
-        pagination: false,
-        sort: false,
-        searchText: this.props.search,
-        onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[4]}`);
-          },
-        customSearch: (searchQuery:string, currentRow:any[], columns:any[]) => {
-            let isFound = false;
-            let matchString = currentRow[0];
-            if (matchString.toUpperCase().denationalize().includes(searchQuery.toUpperCase().denationalize())) {
-                isFound = true;
-            }       
-            return isFound;
-        }
-    };
-    
     state = {
-        data: [],
+        currentIndex: 20,
+        canLoadMore: true,
+        searchString: "",
     }
 
     public componentDidMount() {
-        if (this.props.courses.length === 0) this.props.requestCourses();
+        this.props.requestAllCourses();
+        window.addEventListener("scroll", () => this.handleScroll());
+    }
+
+    public componentWillUnmount() {
+        window.removeEventListener("scroll", () => this.handleScroll());
+    }
+
+    private handleScroll = () => {
+        const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.pageYOffset;
+        console.log("windowBottom: " + windowBottom + ", docHeight: " + docHeight);
+        if (windowBottom >= docHeight && !this.props.isLoading)
+            this.loadMoreCourses()
     }
 
     private loadMoreCourses() {
-        this.props.requestCourses();
+        if (this.state.canLoadMore)
+            this.setState({currentIndex: this.state.currentIndex + 20});
+        if (this.state.currentIndex >= this.props.courses.length)
+            this.setState({canLoadMore: false})
     }
 
     public render() {
         return (
             <React.Fragment>
                 {this.renderTable()}
-                {this.props.canLoadMore && 
+                {this.props.courses.length == 0 && <h4 style={{textAlign: 'center'}}>No results</h4>}
+                {this.state.canLoadMore && 
                 <div>
                     <Button onClick={() => this.loadMoreCourses()} color="primary" style={{ 
                         position: 'absolute', 
@@ -73,39 +73,67 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         );
     }
 
+    private search() {
+        this.props.clearAllCourses();
+        if (this.state.searchString == "") {
+            this.setState({canLoadMore: true})
+            this.props.requestAllCourses()
+        } else {
+            this.setState({canLoadMore: false})
+            this.props.searchCourse(this.state.searchString);
+        }
+    }
+
+    private searchChanged(searchString: string) {
+        this.setState({searchString: searchString})
+    }
+
     private renderTable() {
         return (
             <div>
-                <MUIDataTable
-                    title={"Course List"}
-                    data={this.props.courses.map((course: CoursesStore.Course) => {
-                    return [
-                        course.name,
-                        CoursesStore.CourseType[course.courseType],
-                        course.credits,
-                        course.faculty,
-                        course.id
-                    ]})
-                    }
-                    columns={
-                        [
-                            {name: 'Name', options: { filter: false}},
-                            {name: 'Type'},
-                            {name: 'Credits'},
-                            {name: 'Faculty'},
-                            {name: 'Id', options: {filter: false, display: 'excluded'}}
-                        ]
-                    }
-                    options={this.tableOptions}
-                />
+                <div>
+                    <h2>Courses
+                        {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
+                        <Input name="Search" id="searchBox" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)} 
+                               style={{width: '20%', display:'inline', marginInlineStart:'59%'}}/>
+                        <Button onClick={() => this.search()} color="primary" style={{display: 'inline', marginLeft: '24px'}}>Search</Button>
+                    </h2>
+                </div>
+                <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Credits</th>
+                            <th>Faculty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.courses.slice(0, this.state.currentIndex).map((course: CoursesStore.Course) =>
+                            <tr key={course.id} onClick={() => this.props.history.push(`/course-profile/${course.id}`)}>
+                                <td>{course.name}</td>
+                                <td>{CoursesStore.CourseType[course.courseType]}</td>
+                                <td>{course.credits}</td>
+                                <td>{course.faculty}</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
             </div>
         )
     }
 }
 
+function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
+    return {
+        ...state.courses,
+        courseId: ownProps.courseId
+    }
+};
+
 export default withRouter(
     connect(
-        (state: ApplicationState) => state.courses,
+        mapStateToProps,
         CoursesStore.actionCreators
     )(Courses as any) as React.ComponentType<any>
 );

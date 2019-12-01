@@ -12,6 +12,8 @@ namespace RateMyP.WebApp.Statistics
         Task<double> GetTeacherAverageMark(Guid teacherId);
         Task<double> GetTeacherAverageLevelOfDifficulty(Guid teacherId);
         Task<double> GetTeacherWouldTakeTeacherAgainRatio(Guid teacherId);
+        Task<int> GetTeacherPositiveRatingCount(Guid teacherId);
+        Task<int> GetTeacherPositiveRatingCountInYear(Guid teacherId, int year);
         Task<double> GetTeacherAverageMarkInYear(Guid teacherId, int year);
         Task<List<DateMark>> GetTeacherAverageMarks(Guid teacherId, int timeStampCount = 5);
         Task<int> GetTeacherRatingCount(Guid teacherId, DateTime? date = null);
@@ -35,6 +37,27 @@ namespace RateMyP.WebApp.Statistics
                 throw new InvalidDataException("Teacher has no ratings.");
 
             return ratings.Average(rating => rating.OverallMark);
+            }
+
+        public async Task<int> GetTeacherPositiveRatingCount(Guid teacherId)
+            {
+            var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId) &&
+                                                             r.OverallMark >= 3)
+                                                 .ToListAsync();
+            return ratings.Count;
+            }
+
+        public async Task<int> GetTeacherPositiveRatingCountInYear(Guid teacherId, int year)
+            {
+            var startDate = new DateTime(year, 9, 1);
+            var endDate = new DateTime(year + 1, 9, 1);
+            var ratings = await m_context.Ratings
+                                                .Where(r => r.TeacherId.Equals(teacherId) &&
+                                                            r.DateCreated >= startDate &&
+                                                            r.DateCreated < endDate &&
+                                                            r.OverallMark >= 3)
+                                                .ToListAsync();
+            return ratings.Count;
             }
 
         public async Task<double> GetTeacherAverageLevelOfDifficulty(Guid teacherId)

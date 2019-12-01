@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using RateMyP.WebApp.Helpers;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -30,7 +32,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
             {
-            return await m_context.Courses.ToListAsync();
+            return await m_context.Courses.OrderBy(x => x.Name).ToListAsync();
             }
 
         [HttpGet("{id}")]
@@ -48,6 +50,21 @@ namespace RateMyP.WebApp.Controllers
         public async Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex)
             {
             return await m_context.Courses.OrderBy(course => course.Name).Skip(startIndex).Take(20).ToListAsync();
+            }
+
+        [HttpGet("search={searchString}")]
+        public async Task<ActionResult<IEnumerable<Course>>> GetSearchedCourses(string searchString)
+            {
+            var countToTake = int.Parse(ConfigurationManager.AppSettings["LoadedCoursesNumber"]);
+            var search = searchString.ToLower().Denationalize();
+            var courses = await m_context.Courses.ToListAsync();
+            return courses.Where(x => x.Name
+                                .ToLower()
+                                .Denationalize()
+                                .Contains(search))
+                                .OrderBy(x => x.Name)
+                                .Take(countToTake)
+                          .ToList();
             }
 
         [HttpGet("teacher={teacherId}")]

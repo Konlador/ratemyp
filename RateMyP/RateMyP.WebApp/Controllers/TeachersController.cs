@@ -61,13 +61,16 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet("search={searchString}")]
         public async Task<ActionResult<IEnumerable<Teacher>>> GetSearchedTeachers(string searchString)
             {
+            var countToTake = int.Parse(ConfigurationManager.AppSettings["LoadedTeachersNumber"]);
             var search = searchString.ToLower().Denationalize();
-            return await m_context.Teachers
-                                         .Where(x => (x.FirstName + " " + x.LastName)
-                                                     .ToLower()
-                                                     .Denationalize()
-                                                     .Contains(search))
-                                         .ToListAsync();
+            var teachers = await m_context.Teachers.ToListAsync();
+            return teachers.Where(x => (x.FirstName + " " + x.LastName)
+                                .ToLower()
+                                .Denationalize()
+                                .Contains(search))
+                                .OrderBy(x => x.LastName)
+                                .Take(countToTake)
+                            .ToList();
             }
 
         [HttpGet("course={courseId}")]

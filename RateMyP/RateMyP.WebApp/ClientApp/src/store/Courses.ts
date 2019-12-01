@@ -51,8 +51,30 @@ interface ReceiveCourseAction {
     course: Course;
 }
 
+interface RequestAllCoursesAction {
+    type: 'REQUEST_ALL_COURSES';
+}
+
+interface ReceiveAllCoursesAction {
+    type: 'RECEIVE_ALL_COURSES';
+    courses: Course[]
+}
+
+interface RequestSearchedCoursesAction {
+    type: 'REQUEST_SEARCHED_COURSES'
+}
+
+interface ReceiveSearchedCoursesAction {
+    type: 'RECEIVE_SEARCHED_COURSES';
+    courses: Course[];
+}
+
 interface ClearSelectedCourse {
     type: 'CLEAR_SELECTED_COURSE'
+}
+
+interface ClearAllCourses {
+    type: 'CLEAR_ALL_COURSES'
 }
 
 interface CheckCourseAvailabilityAction {
@@ -61,7 +83,8 @@ interface CheckCourseAvailabilityAction {
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse | CheckCourseAvailabilityAction;
+type KnownAction = RequestCoursesAction | ReceiveCoursesAction | RequestCourseAction | ReceiveCourseAction | ClearSelectedCourse | ClearAllCourses |
+                   CheckCourseAvailabilityAction | RequestAllCoursesAction | ReceiveAllCoursesAction | RequestSearchedCoursesAction | ReceiveSearchedCoursesAction ;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -99,7 +122,33 @@ export const actionCreators = {
             dispatch({ type: 'REQUEST_COURSE', courseId });
         }
     },
-    clearSelectedCourse: () => ({ type: 'CLEAR_SELECTED_COURSE' } as ClearSelectedCourse)
+    requestAllCourses: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        const appState = getState();
+        if (appState &&
+            appState.courses &&
+            appState.courses.isLoading === false &&
+            appState.courses.courses.length === 0) {
+            fetch(`api/courses`)
+                .then(response => response.json() as Promise<Course[]>)
+                .then(data => {
+                    dispatch({ type: 'RECEIVE_ALL_COURSES', courses: data});
+                });
+            dispatch({ type: 'REQUEST_ALL_COURSES' });
+        }
+    },
+    searchCourse: (searchString: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        const appState = getState();
+        if (appState && appState.courses && appState.courses.isLoading === false) {
+            fetch(`api/courses/search=${searchString}`)
+                .then(response => response.json() as Promise<Course[]>)
+                .then(data => {
+                    dispatch({ type: 'RECEIVE_SEARCHED_COURSES', courses: data});
+                });
+            dispatch({ type: 'REQUEST_SEARCHED_COURSES'});
+        }
+    },
+    clearSelectedCourse: () => ({ type: 'CLEAR_SELECTED_COURSE' } as ClearSelectedCourse),
+    clearAllCourses: () => ({ type: 'CLEAR_ALL_COURSES' } as ClearAllCourses)
 };
 
 // ----------------
@@ -161,6 +210,46 @@ export const reducer: Reducer<CoursesState> = (state: CoursesState | undefined, 
                 currentIndex: state.currentIndex,
                 canLoadMore: false
             }
+        case 'REQUEST_ALL_COURSES':
+            return {
+                courses: state.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: true,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
+        case 'RECEIVE_ALL_COURSES':
+            return {
+                courses: [...state.courses, ...action.courses],
+                selectedCourse: state.selectedCourse,
+                isLoading: false,
+                currentIndex: state.currentIndex + action.courses.length,
+                canLoadMore: state.canLoadMore
+            };    
+        case 'REQUEST_SEARCHED_COURSES':
+            return {
+                courses: state.courses,
+                selectedCourse: state.selectedCourse,
+                isLoading: true,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
+        case 'RECEIVE_SEARCHED_COURSES':
+            return {
+                courses: [...state.courses, ...action.courses],
+                selectedCourse: state.selectedCourse,
+                isLoading: false,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
+        case 'CLEAR_ALL_COURSES':
+            return {
+                courses: [],
+                selectedCourse: state.selectedCourse,
+                isLoading: state.isLoading,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
     }
 
     return state;

@@ -41,7 +41,6 @@ class CourseInfo extends React.PureComponent<Props & OwnProps> {
         return (
             <React.Fragment>
                 <div>
-                    Course
                     <h1>
                         {course.name}
                     </h1>
