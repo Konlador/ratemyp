@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import * as ImageStore from '../../store/CustomStar/CustomStarLeaderboard';
+import './CustomStarLeaderboard.css'
 
 interface OwnProps {
     teacherId: string,
@@ -44,7 +45,7 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
             <React.Fragment>                
                 <div>
                     <div className="images-head">
-                        <h2 className="images">Proposed star rating images</h2>
+                        <h2 className="images">Custom star showcase</h2>
                         <Button className="add-image" color="primary" tag={Link} to={`/add-custom-star/${this.teacherId()}`}>Add an image</Button>{' '}
                         {this.props.images.isLoading && <Spinner type="grow" color="success" />}
                     </div>
@@ -66,6 +67,9 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
                             )}
                         </tbody>
                     </Table>
+                    <div className="add-image-container">
+                        <Button className="add-image2" color="primary" tag={Link} to={`/add-custom-star/${this.teacherId()}`}>Add an image</Button>{' '}
+                    </div>                   
                 </div>
             </React.Fragment>
         );
@@ -84,14 +88,22 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
         return (
             <div>
                 <div>
-                    <div>
-                        <a onClick={() => this.props.sendCustomStarThumb(image.id, true)}>{image.thumbUps} Like this image</a>
-                    </div>
-                    <div>
-                        <a onClick={() => this.props.sendCustomStarThumb(image.id, false)}>{image.thumbDowns} Dislike this image</a>
-                    </div>
-                    <div>
-                        <Button color="primary" tag={Link} to={`/custom-star-report/${image.id}`} size='sm'>Report image</Button>{' '}
+                <div>
+                    <a className = "rating-item" onClick={() => this.props.sendCustomStarThumb(image.id, true)}>
+                        <img src="http://free-icon-rainbow.com/i/icon_01693/icon_016930_256.png" className="thumbs" id="thumbsUp"/>
+                        {image.thumbUps + " "} 
+                        Like this star
+                    </a>
+                </div>
+                <div>
+                    <a className = "rating-item" onClick={() => this.props.sendCustomStarThumb(image.id, false)}>
+                        <img src="http://free-icon-rainbow.com/i/icon_01693/icon_016930_256.png" className="thumbs" id="thumbsDown"/>
+                        {image.thumbDowns + " "} 
+                        Dislike this star
+                    </a>
+                </div>
+                    <div className = "report-container">
+                        <Button className = "report-button" color="primary" tag={Link} to={`/custom-star-report/${image.id}`} size='sm'>Report image</Button>{' '}
                     </div>
                 </div>
             </div>

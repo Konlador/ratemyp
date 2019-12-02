@@ -40,7 +40,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetImageDataAsync(Guid id)
             {
-            var images = await m_context.CustomStarRatings
+            var images = await m_context.CustomStars
                                          .Where(x => x.Id.Equals(id)).FirstAsync();
 
             if (images == null)
@@ -53,26 +53,33 @@ namespace RateMyP.WebApp.Controllers
         public async Task<IActionResult> GetImageAsync(Guid teacherId)
             {
             var client = _clientFactory.CreateClient();
+            var customStarScoreThreshold = 5;
             var transformation = "w_50,h_50,f_png";
             byte[] image = null;
-            HttpResponseMessage response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/s{teacherId}");
+            var imageId = "";
+            var images = await m_context.CustomStars
+                                         .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            var topImage = images.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).First();
+
+            if (topImage != null && topImage.ThumbUps > customStarScoreThreshold)
+                imageId = "_" + topImage.Id;
+            else
+                imageId = "default_full";
+
+            HttpResponseMessage response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/{imageId}");
 
             if (response.IsSuccessStatusCode)
-                {
                 image = await response.Content.ReadAsByteArrayAsync();
-                }
             else
-                {
-                response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/default_full");
-                image = await response.Content.ReadAsByteArrayAsync();
-                }
+                return NotFound();
+
             return File(image, "image/png");
             }
 
         [HttpGet("data/teacher={teacherId}")]
         public async Task<IActionResult> GetImagesDataAsync(Guid teacherId)
             {
-            var images = await m_context.CustomStarRatings
+            var images = await m_context.CustomStars
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
             var sortedImages = images.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).ToList();
             return Ok(sortedImages);
@@ -82,7 +89,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpPost("thumb")]
         public async Task<ActionResult<CustomStarThumb>> PostCustomStarThumb(CustomStarThumb customStarThumb)
             {
-            var customStarRating = m_context.CustomStarRatings.Find(customStarThumb.CustomStarId);
+            var customStarRating = m_context.CustomStars.Find(customStarThumb.CustomStarId);
             if (customStarRating == null)
                 return NotFound("Rating not found");
 
@@ -153,9 +160,6 @@ namespace RateMyP.WebApp.Controllers
             HttpResponseMessage response = await client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
 
-            var images = await m_context.CustomStarRatings
-                                         .Where(x => x.TeacherId.Equals(teacherId) && x.StudentId.Equals(studentId)).SingleOrDefaultAsync();
-
             var customImage = new CustomStarRating
                 {
                 Id = id,
@@ -165,7 +169,7 @@ namespace RateMyP.WebApp.Controllers
                 ThumbDowns = 0,
                 ThumbUps = 0
                 };
-            m_context.CustomStarRatings.Add(customImage);
+            m_context.CustomStars.Add(customImage);
             await m_context.SaveChangesAsync();
 
 
