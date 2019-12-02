@@ -11,7 +11,7 @@ import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/Rate/RateCourse';
 import RatingReport from './components/RatingReport/RatingReport';
 import CustomStarUpload from './components/CustomStar/CustomStarUpload'
-import CustomStarLeaderboard from './components/CustomStar/CustomStarLeaderboard'
+import CustomStarLeaderboard from './components/CustomStar/CustomStarShowcase'
 import CustomStarReport from './components/CustomStarReport/CustomStarReport'
 import firebase from "firebase";
 import './custom.css'
