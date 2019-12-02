@@ -92,7 +92,7 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
                         entry.id
                     ]})}
                 columns={[
-                    {name: 'Rank', options: {sort: false}},
+                    {name: 'Rank', options: {sort: true}},
                     {name: 'Name', options: {sort: false}},
                     {name: 'Rating'},
                     {name: 'Id', options: {display: 'excluded'}}  

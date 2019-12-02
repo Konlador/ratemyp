@@ -6,6 +6,8 @@ import * as TeacherStatistics from './TeacherStatistics';
 import * as Courses from './Courses';
 import * as CourseTeachers from './Course/CourseTeachers';
 import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
+import * as CourseStatistics from './CourseStatistics';
+import * as CourseRatings from './Course/CourseRatings';
 import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
@@ -28,7 +30,9 @@ export interface ApplicationState {
     courses: Courses.CoursesState | undefined;
     courseTeachers: CourseTeachers.CourseTeachersState | undefined;
     courseTeacherActivities: CourseTeacherActivities.CourseTeacherActivitiesState | undefined;
+    courseStatistics: CourseStatistics.CourseStatisticsState | undefined;
     courseLeaderboard: CourseLeaderboard.CourseLeaderboardState | undefined;
+    courseRatings: CourseRatings.CourseRatingsState | undefined;
 
     tags: Tags.TagsState | undefined;
     student: Student.StudentState | undefined;
@@ -54,7 +58,9 @@ export const reducers = {
     courses: Courses.reducer,
     courseTeachers: CourseTeachers.reducer,
     courseTeacherActivities: CourseTeacherActivities.reducer,
+    courseStatistics: CourseStatistics.reducer,
     courseLeaderboard: CourseLeaderboard.reducer,
+    courseRatings: CourseRatings.reducer,
 
     tags: Tags.reducer,
     student: Student.reducer,

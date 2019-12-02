@@ -32,15 +32,22 @@ class CourseLeaderboard extends React.PureComponent<Props, State> {
         sort: true,
         filter: false,
         search: false,
+        onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
+            !this.props.isLoading && this.props.history.push(`/course-profile/${rowData[3]}`);
+          },
     };
     
-    tableColumns = [
-        {name: 'Rank', options: {sort: false}},
-        {name: 'Subject', options: {sort: false}},
-        {name: 'Rating'},
-    ];
-
     public componentDidMount() {
+        this.ensureDataFetched();
+    }
+
+    public componentDidUpdate() {
+        this.ensureDataFetched();
+    }
+
+    public ensureDataFetched() {
+        this.props.requestAllTimeCourseLeaderboard();
+        this.props.requestThisYearCourseLeaderboard();
     }
 
     private switchTab() {
@@ -69,16 +76,26 @@ class CourseLeaderboard extends React.PureComponent<Props, State> {
     }
 
     private renderComponents() {
-        if (this.state.tab === 0) return this.renderAllTimeTable()
-        else return this.renderThisYearTable()
+        return this.state.tab === 0 ? this.renderAllTimeTable() : this.renderThisYearTable();
     }
 
     private renderAllTimeTable() {
         return (
             <MUIDataTable
                 title={"Course All Time"}
-                data={[]}
-                columns={this.tableColumns}
+                data={this.props.allTimeEntries.map((entry: CourseLeaderboardStore.CourseLeaderboardEntry) => {
+                    return [
+                        entry.allTimePosition,
+                        entry.name,
+                        entry.allTimeAverage.toFixed(2),
+                        entry.id
+                    ]})}
+                columns={[
+                    {name: 'Rank', options: {sort: true}},
+                    {name: 'Name', options: {sort: false}},
+                    {name: 'Rating'},
+                    {name: 'Id', options: {display: 'excluded'}}  
+                ]}
                 options={this.tableOptions}/>
         )
     }
@@ -87,8 +104,19 @@ class CourseLeaderboard extends React.PureComponent<Props, State> {
         return (
             <MUIDataTable
                 title={"Course This Year"}
-                data={[]}
-                columns={this.tableColumns}
+                data={this.props.thisYearEntries.map((entry: CourseLeaderboardStore.CourseLeaderboardEntry) => {
+                    return [
+                        entry.thisYearPosition,
+                        entry.name,
+                        entry.thisYearAverage.toFixed(2),
+                        entry.id
+                    ]})}
+                columns={[
+                    {name: 'Rank', options: {sort: false}},
+                    {name: 'Name', options: {sort: false}},
+                    {name: 'Rating'},
+                    {name: 'Id', options: {display: 'excluded'}}  
+                ]}
                 options={this.tableOptions}/>
         )
 

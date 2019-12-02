@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CourseInfo from './CourseInfo';
-// import CourseRatings from './CourseRatings';
+import CourseRatings from './CourseRatings';
+import CourseStatistics from './CourseStatistics';
 import CourseTeacherActivities from './CourseTeacherActivities';
 import * as CoursesStore from '../../store/Courses';
 
@@ -22,10 +23,10 @@ class CourseProfile extends React.PureComponent<Props> {
         return (
             <React.Fragment>
                 <CourseInfo courseId={this.props.match.params.courseId}/>
-                <div>TODO: Course statistics</div>
+                <CourseStatistics courseId={this.props.match.params.courseId}/>
                 <Button color="primary" tag={Link} to={`/rate-course/${this.props.match.params.courseId}`}>Add a rating</Button>{' '}
                 <CourseTeacherActivities courseId={this.props.match.params.courseId}/>
-                {/* <CourseRatings teacherId={this.props.match.params.courseId}/> */}
+                <CourseRatings courseId={this.props.match.params.courseId}/>
             </React.Fragment>
         );
     }
