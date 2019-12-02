@@ -20,10 +20,8 @@ export interface Image {
 
 export interface CustomStarThumb {
     customStarId: string;
-    studentId: string;
     thumbUp: boolean;
 }
-
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
@@ -58,7 +56,7 @@ export const actionCreators = {
         if (appState &&
             appState.customStarLeaderboard &&
             appState.customStarLeaderboard.isLoading === false) {
-            fetch(`api/images/data/teacher=${teacherId}`)
+            fetch(`api/customstar/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<Image[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_CUSTOM_STARS', images: data });
@@ -69,17 +67,22 @@ export const actionCreators = {
     },
     sendCustomStarThumb: (imageId: string, thumbUp: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState) {
-            fetch('api/images/thumb', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({'customStarId': imageId, studentId: "spagetio", thumbUp } as CustomStarThumb)
-            }).then(res => res.json())
-            .catch(error => console.error('Error:', error));
+        if (appState &&
+            appState.student &&
+            appState.student.user) {
+            appState.student.user.getIdToken().then(userToken => {
+                fetch('api/customstar/thumb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`,
+                    },
+                    body: JSON.stringify({ customStarId: imageId, thumbUp } as CustomStarThumb)
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error));
+            });
+            dispatch({type: 'SEND_CUSTOM_STAR_THUMB', imageId, thumbUp });
         }
-        dispatch({type: 'SEND_CUSTOM_STAR_THUMB', imageId, thumbUp });
     },
 };
 

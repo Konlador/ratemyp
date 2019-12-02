@@ -8,6 +8,7 @@ import firebase from "firebase";
 export interface StudentState {
     isLoggedIn: boolean;
     student: Student | undefined;
+    user: firebase.User | undefined;
 }
 
 export interface Student {
@@ -22,6 +23,7 @@ export interface Student {
 interface RequestStudentAction {
     type: 'REQUEST_STUDENT';
     studentId: string;
+    user: firebase.User;
 }
 
 interface ReceiveStudentAction {
@@ -43,6 +45,7 @@ type KnownAction = RequestStudentAction | ReceiveStudentAction | ClearStudentAct
 
 export const actionCreators = {
     login: (user: firebase.User): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        console.log(user)
         const studentId = user.uid;
         fetch(`api/students/${studentId}`)
             .then(response => response.json() as Promise<Student>)
@@ -50,7 +53,7 @@ export const actionCreators = {
                 dispatch({ type: 'RECEIVE_STUDENT', student: data });
             });
 
-        dispatch({ type: 'REQUEST_STUDENT', studentId });
+        dispatch({ type: 'REQUEST_STUDENT', studentId, user });
     },
     logout: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         dispatch({ type: 'CLEAR_STUDENT' });
@@ -60,7 +63,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: StudentState = { student: undefined, isLoggedIn: false };
+const unloadedState: StudentState = { student: undefined, isLoggedIn: false, user: undefined };
 
 export const reducer: Reducer<StudentState> = (state: StudentState | undefined, incomingAction: Action): StudentState => {
     if (state === undefined)
@@ -71,18 +74,17 @@ export const reducer: Reducer<StudentState> = (state: StudentState | undefined, 
         case 'REQUEST_STUDENT':
             return {
                 student: state.student,
-                isLoggedIn: false
+                isLoggedIn: false,
+                user: action.user
             };
         case 'RECEIVE_STUDENT':
             return {
                 student: action.student,
-                isLoggedIn: true
+                isLoggedIn: true,
+                user: state.user
             };
         case 'CLEAR_STUDENT':
-            return {
-                student: undefined,
-                isLoggedIn: false
-            };
+            return unloadedState;
     }
 
     return state;

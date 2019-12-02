@@ -3,9 +3,9 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import { CustomInput, Col, Button, Form, FormGroup, Label, UncontrolledAlert, FormText } from 'reactstrap';
-import * as CustomStarStore from '../../store/CustomStar/CustomStarStore'
-import AvatarEditor from 'react-avatar-editor'
-import './CustomStarUpload.css'
+import * as CustomStarStore from '../../store/CustomStar/CustomStar';
+import AvatarEditor from 'react-avatar-editor';
+import './CustomStarUpload.css';
 
 type Props = 
     CustomStarStore.CustomStarState &
@@ -55,7 +55,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
                 <Col sm={10}>
                 <Label>Current rating image:‎‎‎‏‏‎‏‏‎‏‏‎</Label>
                 <FormGroup>                    
-                    <img src={"api/images/teacher=" + this.props.match.params.teacherId} className="icon"/>
+                    <img src={"api/customstar/teacher=" + this.props.match.params.teacherId} className="icon"/>
                 </FormGroup>  
                 </Col>
             </Form>

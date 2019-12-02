@@ -32,6 +32,7 @@
     "react-parallax": "^3.0.0-rc2",
     "react-rating": "^2.0.1",
     "react-redux": "6.0.0",
+    "react-redux-firebase": "^3.0.5",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
     "react-scripts": "^3.0.1",

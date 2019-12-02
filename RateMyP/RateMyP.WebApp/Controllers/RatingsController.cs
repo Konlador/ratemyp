@@ -7,7 +7,9 @@ using RateMyP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
@@ -88,31 +90,47 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpPost("thumb")]
-        public async Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb)
+        public async Task<ActionResult<RatingThumb>> PostRatingThumb([FromBody]JObject ratingThumbJObject)
             {
+            var ratingThumb = new RatingThumb
+                {
+                RatingId = (Guid)ratingThumbJObject["ratingId"],
+                ThumbUp = (bool)ratingThumbJObject["thumbUp"]
+                };
+
+            var identity = (ClaimsIdentity)User.Identity;
+            var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
+            if (studentId == null || m_context.Students.Find(studentId) == null)
+                return NotFound("Student not found");
+
             var rating = m_context.Ratings.Find(ratingThumb.RatingId);
             if (rating == null)
                 return NotFound("Rating not found");
 
-            ratingThumb.StudentId = Guid.NewGuid().ToString();
+            ratingThumb.StudentId = studentId;
+
+            if (m_context.RatingThumbs.Find(rating.Id, studentId) != null)
+                return Conflict("Rating thumb already exists for specified rating and student");
+
             m_context.RatingThumbs.Add(ratingThumb);
 
             if (ratingThumb.ThumbUp)
-                rating.ThumbUps++;
+                rating.ThumbUps = m_context.RatingThumbs.Count(rt => rt.RatingId.Equals(rating.Id) && rt.ThumbUp);
             else
-                rating.ThumbDowns++;
+                rating.ThumbDowns = m_context.RatingThumbs.Count(rt => rt.RatingId.Equals(rating.Id) && !rt.ThumbUp);
 
             await m_context.SaveChangesAsync();
             return Created("RatingThumb", ratingThumb);
             }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
             {
             var ratingId = Guid.NewGuid();
 
             var ratingTags = new List<RatingTag>();
-            var tags = JsonConvert.DeserializeObject<List<Tag>>(data["tags"].ToString());
+            var tags = JsonConvert.DeserializeObject<List<Tag>>((string)data["tags"]);
             foreach (var tag in tags)
                 {
                 if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))

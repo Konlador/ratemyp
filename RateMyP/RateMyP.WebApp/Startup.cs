@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -5,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RateMyP.WebApp.Statistics;
-using RateMyP.WebApp.Controllers;
 
 namespace RateMyP.WebApp
     {
@@ -36,7 +37,22 @@ namespace RateMyP.WebApp
                                            c.SwaggerDoc("v1", new OpenApiInfo { Title = "RateMyP app", Version = "v1" });
                                        });
             services.AddHttpClient();
-        }
+
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                                  {
+                                      options.Authority = "https://securetoken.google.com/ratemyp-44d4c";
+                                      options.TokenValidationParameters = new TokenValidationParameters
+                                          {
+                                          ValidateIssuer = true,
+                                          ValidIssuer = "https://securetoken.google.com/ratemyp-44d4c",
+                                          ValidateAudience = true,
+                                          ValidAudience = "ratemyp-44d4c",
+                                          ValidateLifetime = true
+                                          };
+                                  });
+            }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
             {
@@ -54,6 +70,9 @@ namespace RateMyP.WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -66,7 +85,7 @@ namespace RateMyP.WebApp
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseReactDevelopmentServer("start");
             });
 
             app.UseSwagger();

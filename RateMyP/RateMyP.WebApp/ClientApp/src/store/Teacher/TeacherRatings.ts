@@ -50,32 +50,36 @@ type KnownAction = RequestTeacherRatingsAction | ReceiveTeacherRatingsAction | S
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    requestTeacherRatings: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    requestTeacherRatings: (teacherId: string): AppThunkAction<KnownAction> => async (dispatch, getState) => {
         const appState = getState();
         if (appState &&
             appState.teacherRatings &&
             appState.teacherRatings.isLoading === false &&
             appState.teacherRatings.teacherId !== teacherId) {
-            fetch(`api/ratings/teacher=${teacherId}`)
-                .then(response => response.json() as Promise<Rating[]>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_TEACHER_RATINGS', ratings: data });
-                });
-
+                fetch(`api/ratings/teacher=${teacherId}`)
+                    .then(response => response.json() as Promise<Rating[]>)
+                    .then(data => {
+                        dispatch({ type: 'RECEIVE_TEACHER_RATINGS', ratings: data });
+                    });
             dispatch({ type: 'REQUEST_TEACHER_RATINGS', teacherId: teacherId });
         }
     },
     sendRatingThumb: (ratingId: string, thumbUp: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
-        if (appState) {
-            fetch('api/ratings/thumb', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ratingId, studentId: "studento idas", thumbUp } as RatingThumb)
-            }).then(res => res.json())
-            .catch(error => console.error('Error:', error));
+        if (appState &&
+            appState.student &&
+            appState.student.user) {
+            appState.student.user.getIdToken().then(userToken => {
+                fetch('api/ratings/thumb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`,
+                    },
+                    body: JSON.stringify({ ratingId, thumbUp } as RatingThumb)
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error));
+            });
         }
         dispatch({type: 'SEND_RATING_THUMB', ratingId, thumbUp });
     },

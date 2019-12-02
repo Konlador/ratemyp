@@ -23,7 +23,7 @@ class CustomStarReport extends React.PureComponent<Props> {
                     {this.renderAlerts()}
                     {this.renderCustomStar()}
                     <FormGroup>
-                        <Label style={{fontSize: 30}}>Report a Student's uploaded image</Label>
+                        <Label style={{fontSize: 30}}>Report a Student's star</Label>
                     </FormGroup>
                     <FormGroup>
                         <Label for="report">What is wrong with this image?</Label>

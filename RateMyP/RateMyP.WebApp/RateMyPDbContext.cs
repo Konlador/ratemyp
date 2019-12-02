@@ -17,9 +17,9 @@ namespace RateMyP.WebApp
         DbSet<RatingReport> RatingReports { get; set; }
         DbSet<CustomStarReport> CustomStarReports { get; set; }
         DbSet<LeaderboardEntry> Leaderboard { get; set; }
-        DbSet<CustomStarRating> CustomStarRatings { get; set; }
+        DbSet<CustomStar> CustomStars { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
-    }
+        }
 
     public class RateMyPDbContext : DbContext, IRateMyPDbContext
         {
@@ -34,8 +34,8 @@ namespace RateMyP.WebApp
         public DbSet<RatingReport> RatingReports { get; set; }
         public DbSet<CustomStarReport> CustomStarReports { get; set; }
         public DbSet<LeaderboardEntry> Leaderboard { get; set; }
-        public DbSet<CustomStarRating> CustomStarRatings { get; set; }
-        public DbSet <CustomStarThumb> CustomStarThumbs { get; set; }
+        public DbSet<CustomStar> CustomStars { get; set; }
+        public DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())

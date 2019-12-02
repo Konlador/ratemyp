@@ -54,28 +54,30 @@ type KnownAction = SetImageAction | SubmitButtonClickAction | ClearStoreAction |
 
 export const actionCreators = {
     setImage: (value: string | ArrayBuffer | null): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_IMAGE', value: value });
+        dispatch({ type: 'SET_IMAGE', value });
     },
     setImageSize: (width: number, height: number): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_IMAGE_SIZE', width: width, height: height });
+        dispatch({ type: 'SET_IMAGE_SIZE', width, height });
     },
     setZoomLevel: (value: number): AppThunkAction<KnownAction> => (dispatch) => { 
-        dispatch({ type: 'SET_ZOOM_LEVEL', value: value,  });
+        dispatch({ type: 'SET_ZOOM_LEVEL', value,  });
     },
     submitButtonClick: () => ({ type: 'SUBMIT_BUTTON_CLICK' } as SubmitButtonClickAction),
     uploadCustomStar : (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        console.log("sunns")
         const appState = getState();
-        if(appState !== undefined &&
-           appState.customStarUpload !== undefined &&
-           appState.customStarUpload.image !== undefined){
-            fetch(`api/images/teacher=${teacherId}/student=${appState.student && appState.student.student?appState.student.student.id:'spageti'}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({image: appState.customStarUpload.image})
-            }).then(res => res.json()).catch(error => console.error('Error:', error));
+        if (appState &&
+            appState.student && appState.student.user &&
+            appState.customStarUpload && appState.customStarUpload.image){
+            appState.student.user.getIdToken().then(userToken => {
+                fetch(`api/customstar/teacher=${teacherId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`,
+                    },
+                    body: JSON.stringify({image: appState.customStarUpload!.image})
+                }).then(res => res.json()).catch(error => console.error('Error:', error));
+            });
             dispatch({ type: 'UPLOAD_CUSTOM_STAR' });
         }
     },

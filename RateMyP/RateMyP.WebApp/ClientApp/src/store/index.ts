@@ -9,7 +9,7 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as Tags from './Tags';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
-import * as CustomStarUpload from './CustomStar/CustomStarStore';
+import * as CustomStarUpload from './CustomStar/CustomStar';
 import * as RatingReport from './Rate/RatingReport';
 import * as CustomStarReport from './CustomStar/CustomStarReport'
 import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';

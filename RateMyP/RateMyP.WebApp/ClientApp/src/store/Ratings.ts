@@ -17,6 +17,5 @@ export interface Rating {
 
 export interface RatingThumb {
     ratingId: string;
-    studentId: string;
     thumbUp: boolean;
 }

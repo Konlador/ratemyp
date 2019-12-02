@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { ApplicationState } from '../store';
 import { Container, Navbar, NavbarBrand, NavItem, NavLink, Card, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import LeaderboardLogo from "../images/leaderboard.png";
@@ -9,8 +11,7 @@ import HomeLogo from "../images/home.png";
 
 import './NavMenu.css';
 
-
-export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
+class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
     public state = {
         isOpen: false
     };
@@ -78,10 +79,18 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
             </header>
         );
     }
-
-    private toggle = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
 }
+
+
+
+function mapStateToProps(state: ApplicationState) {
+    console.log(state);
+    return {
+        
+    }
+};
+
+export default connect(
+    mapStateToProps
+)(NavMenu as any);
+

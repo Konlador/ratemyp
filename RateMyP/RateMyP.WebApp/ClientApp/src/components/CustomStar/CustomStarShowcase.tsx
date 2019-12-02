@@ -5,6 +5,7 @@ import { ApplicationState } from '../../store';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import * as ImageStore from '../../store/CustomStar/CustomStarLeaderboard';
+import './CustomStarShowcase.css';
 
 interface OwnProps {
     teacherId: string,
@@ -18,7 +19,7 @@ type Props =
     typeof ImageStore.actionCreators &
     RouteComponentProps<{ teacherId: string }>;
 
-class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
+class CustomStarShowcase extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -31,12 +32,9 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
     }
 
     private teacherId() {
-        if(this.props.teacherId && this.props.teacherId.length > 5) {
+        if (this.props.teacherId && this.props.teacherId.length > 5)
             return this.props.teacherId
-        }
-        else {
-            return this.props.match.params.teacherId
-        }
+        return this.props.match.params.teacherId
     }
 
     public render() {
@@ -73,9 +71,9 @@ class StarImageLeaderboard extends React.PureComponent<Props & OwnProps> {
 
     private renderImageInfo(image: ImageStore.Image) {
         return (
-            <div>
-                <p>Date added: {new Date(image.dateCreated).toISOString().split('T')[0]}</p>
-                <p>Student Id: {image.studentId}</p>
+            <div className="custom-star-create-date">
+                <strong>Date added</strong>
+                <p>{new Date(image.dateCreated).toISOString().split('T')[0]}</p>
             </div>
         );
     }
@@ -110,5 +108,5 @@ const actions = {
     ...ImageStore.actionCreators
 }
 
-export default connect(mapStateToProps, actions)(StarImageLeaderboard as any);
+export default connect(mapStateToProps, actions)(CustomStarShowcase as any);
 

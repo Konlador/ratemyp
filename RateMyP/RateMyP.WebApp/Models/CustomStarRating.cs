@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.WebApp.Models
     {
-    public class CustomStarRating
+    public class CustomStar
         {
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
