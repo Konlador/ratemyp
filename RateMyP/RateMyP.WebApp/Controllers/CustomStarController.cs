@@ -59,7 +59,7 @@ namespace RateMyP.WebApp.Controllers
             var imageId = "";
             var images = await m_context.CustomStars
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
-            var topImage = images.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).First();
+            var topImage = images.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstOrDefault();
 
             if (topImage != null && topImage.ThumbUps > customStarScoreThreshold)
                 imageId = "_" + topImage.Id;
