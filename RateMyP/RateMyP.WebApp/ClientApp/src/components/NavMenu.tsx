@@ -12,10 +12,6 @@ import HomeLogo from "../images/home.png";
 import './NavMenu.css';
 
 class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
-    public state = {
-        isOpen: false
-    };
-
     public render() {
         return (
             <header>
@@ -80,8 +76,6 @@ class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
         );
     }
 }
-
-
 
 function mapStateToProps(state: ApplicationState) {
     console.log(state);

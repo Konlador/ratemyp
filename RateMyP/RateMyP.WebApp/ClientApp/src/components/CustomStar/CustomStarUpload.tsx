@@ -17,6 +17,10 @@ class CustomStarUpload extends React.PureComponent<Props> {
     fileReader!: FileReader;
     img!: HTMLImageElement;
 
+    public componentWillUnmount() {
+        this.props.clearStore();
+    }
+
     private handleFileChosen = (file: Blob) => {
         this.fileReader = new FileReader();
         this.fileReader.onloadend = this.handleFileRead;
@@ -25,7 +29,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
 
     private handleFileRead = () => {
         const content = this.fileReader.result;
-            this.props.setImage(content);   
+        this.props.setImage(content);   
     }
 
     public render() {
@@ -55,17 +59,16 @@ class CustomStarUpload extends React.PureComponent<Props> {
                 <Col sm={10}>
                 <Label>Current rating image:‎‎‎‏‏‎‏‏‎‏‏‎</Label>
                 <FormGroup>                    
-                    <img src={"api/customstar/teacher=" + this.props.match.params.teacherId} className="icon"/>
-                </FormGroup>  
+                    <img src={`api/customstar/teacher=${this.props.match.params.teacherId}/image`} className="icon"/>
+                </FormGroup>
                 </Col>
             </Form>
         );
     }
 
     private onSubmitButtonPush(){
-        if (this.editor) {
+        if (this.editor)
             this.props.setImage(this.editor.getImageScaledToCanvas().toDataURL());
-        }
         this.props.submitButtonClick();
         if(this.props.image !== null){
             this.props.uploadCustomStar(this.props.match.params.teacherId);
@@ -98,6 +101,7 @@ class CustomStarUpload extends React.PureComponent<Props> {
             </div>
         )
     }
+
     private renderAlerts() {
         return(
           <div>
@@ -112,12 +116,9 @@ class CustomStarUpload extends React.PureComponent<Props> {
             </UncontrolledAlert>
           </div>
         )
-      }
-      componentWillUnmount() {
-        this.props.clearStore();
     }
 }
   
-  export default withRouter(
-      connect((state: ApplicationState) => state.customStarUpload, CustomStarStore.actionCreators)(CustomStarUpload as any) as React.ComponentType<any>
-  );
+export default withRouter(
+    connect((state: ApplicationState) => state.customStarUpload, CustomStarStore.actionCreators)(CustomStarUpload as any) as React.ComponentType<any>
+);

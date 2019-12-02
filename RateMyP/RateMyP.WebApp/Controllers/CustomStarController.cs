@@ -40,24 +40,6 @@ namespace RateMyP.WebApp.Controllers
             return Ok(images);
             }
 
-        [HttpGet("teacher={teacherId}/image")]
-        public async Task<IActionResult> GetCustomStarImageAsync(Guid teacherId)
-            {
-            var client = m_clientFactory.CreateClient();
-            var transformation = "w_50,h_50,f_png";
-            byte[] image;
-            var response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/s{teacherId}");
-
-            if (response.IsSuccessStatusCode)
-                image = await response.Content.ReadAsByteArrayAsync();
-            else
-                {
-                response = await client.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/default_full");
-                image = await response.Content.ReadAsByteArrayAsync();
-                }
-            return File(image, "image/png");
-            }
-
         [HttpGet("teacher={teacherId}")]
         public async Task<IActionResult> GetTeacherCustomStarsAsync(Guid teacherId)
             {
@@ -65,6 +47,29 @@ namespace RateMyP.WebApp.Controllers
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
             var sortedStars = customStars.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).ToList();
             return Ok(sortedStars);
+            }
+
+        [HttpGet("teacher={teacherId}/image")]
+        public async Task<IActionResult> GetCustomStarImageAsync(Guid teacherId)
+            {
+            var customStar = await m_context.CustomStars
+                                            .Where(x => x.TeacherId.Equals(teacherId))
+                                            .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstAsync();
+
+            var imageId = "default_full";
+            const int customStarScoreThreshold = 5;
+            if (customStar!.ThumbUps >= customStarScoreThreshold)
+                imageId = "_" + customStar.Id;
+
+            const string transformation = "w_50,h_50,f_png";
+            var htppClient = m_clientFactory.CreateClient();
+            var imageResponse = await htppClient.GetAsync($"{ConfigurationManager.AppSettings["ImageRepURL"]}{ConfigurationManager.AppSettings["ImageApiName"]}/{transformation}/{imageId}");
+
+            if (!imageResponse.IsSuccessStatusCode)
+                return NotFound();
+
+            var image = await imageResponse.Content.ReadAsByteArrayAsync();
+            return File(image, "image/png");
             }
 
         [Authorize]
@@ -116,7 +121,7 @@ namespace RateMyP.WebApp.Controllers
 
         [Authorize]
         [HttpPost("thumb")]
-        public async Task<ActionResult<CustomStarThumb>> PostCustomStarThumb([FromBody]JObject customStarThumbJObject)
+        public async Task<ActionResult<CustomStarThumb>> PostCustomStarThumbAsync([FromBody]JObject customStarThumbJObject)
             {
             var customStarThumb = new CustomStarThumb
                 {

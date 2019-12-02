@@ -13,6 +13,14 @@ export interface CustomStarState {
     imageUploaded: boolean
 }
 
+export interface CustomStar {
+    id: string, 
+    teacherId: string,
+    studentId: string,
+    thumbUps: number,
+    thumbDowns: number,
+    dateCreated: Date,
+}
 
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.

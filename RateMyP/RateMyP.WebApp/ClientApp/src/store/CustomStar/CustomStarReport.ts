@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
-import { Image } from './CustomStarLeaderboard';
+import { CustomStar } from './CustomStar';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -8,7 +8,7 @@ import { Image } from './CustomStarLeaderboard';
 export interface CustomStarReportState {
     submitButtonClicked: boolean;
     customStarId : string;
-    image: Image | undefined;
+    customStar: CustomStar | undefined;
     report: CustomStarReport;
 }
 
@@ -29,7 +29,7 @@ interface RequestCustomStarAction {
 
 interface ReceiveCustomStarAction {
     type: 'RECEIVE_CUSTOM_STAR';
-    image: Image;
+    customStar: CustomStar;
 }
 
 interface ChangeReasonAction {
@@ -73,12 +73,12 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.customStarReport &&
-            (appState.customStarReport.image === undefined ||
-            appState.customStarReport.image.id !== customStarId)) {
+            (appState.customStarReport.customStar === undefined ||
+            appState.customStarReport.customStar.id !== customStarId)) {
             fetch(`api/images/${customStarId}`)
-                .then(response => response.json() as Promise<Image>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_CUSTOM_STAR', image: data });
+                .then(response => response.json() as Promise<CustomStar>)
+                .then(customStar => {
+                    dispatch({ type: 'RECEIVE_CUSTOM_STAR', customStar });
                 });
             dispatch({ type: 'REQUEST_CUSTOM_STAR', customStarId });
         }
@@ -111,7 +111,7 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 const unloadedCustomStarReport: CustomStarReport = { customStarId: '', reason: '', studentId: '' }
-const unloadedState: CustomStarReportState = { customStarId: '', image: undefined, submitButtonClicked: false, report: unloadedCustomStarReport };
+const unloadedState: CustomStarReportState = { customStarId: '', customStar: undefined, submitButtonClicked: false, report: unloadedCustomStarReport };
 
 export const reducer: Reducer<CustomStarReportState> = (state: CustomStarReportState | undefined, incomeStateAction: Action): CustomStarReportState => {
     if (state === undefined)
@@ -121,14 +121,14 @@ export const reducer: Reducer<CustomStarReportState> = (state: CustomStarReportS
     switch (action.type) {
         case 'REQUEST_CUSTOM_STAR':
             return {
-                image: state.image,
+                customStar: state.customStar,
                 customStarId: action.customStarId,
                 report: state.report,
                 submitButtonClicked: state.submitButtonClicked
             };
         case 'RECEIVE_CUSTOM_STAR':
             return {
-                image: action.image,
+                customStar: action.customStar,
                 customStarId: state.customStarId,
                 report: state.report,
                 submitButtonClicked: state.submitButtonClicked

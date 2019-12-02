@@ -1,21 +1,13 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
+import { CustomStar } from './CustomStar';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface CustomStarLeaderboardState {
+export interface CustomStarShowcaseState {
     isLoading: boolean,
-    images: Image[]
-}
-
-export interface Image {
-    id: string, 
-    teacherId: string,
-    studentId: string,
-    thumbUps: number,
-    thumbDowns: number,
-    dateCreated: Date,
+    customStars: CustomStar[]
 }
 
 export interface CustomStarThumb {
@@ -32,15 +24,14 @@ interface RequestCustomStarsAction {
 
 interface ReceiveCustomStarsAction {
     type: 'RECEIVE_CUSTOM_STARS';
-    images: Image[];
+    customStars: CustomStar[];
 }
 
 interface SendCustomStarThumb {
     type: 'SEND_CUSTOM_STAR_THUMB';
-    imageId: string;
+    customStarId: string;
     thumbUp: boolean;
 }
-
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
@@ -54,18 +45,18 @@ export const actionCreators = {
     requestCustomStars: (teacherId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
-            appState.customStarLeaderboard &&
-            appState.customStarLeaderboard.isLoading === false) {
+            appState.customStarShowcase &&
+            appState.customStarShowcase.isLoading === false) {
             fetch(`api/customstar/teacher=${teacherId}`)
-                .then(response => response.json() as Promise<Image[]>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_CUSTOM_STARS', images: data });
+                .then(response => response.json() as Promise<CustomStar[]>)
+                .then(customStars => {
+                    dispatch({ type: 'RECEIVE_CUSTOM_STARS', customStars });
                 });
 
             dispatch({ type: 'REQUEST_CUSTOM_STARS' });
         }
     },
-    sendCustomStarThumb: (imageId: string, thumbUp: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    sendCustomStarThumb: (customStarId: string, thumbUp: boolean): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
             appState.student &&
@@ -77,11 +68,11 @@ export const actionCreators = {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${userToken}`,
                     },
-                    body: JSON.stringify({ customStarId: imageId, thumbUp } as CustomStarThumb)
+                    body: JSON.stringify({ customStarId, thumbUp } as CustomStarThumb)
                 }).then(res => res.json())
                 .catch(error => console.error('Error:', error));
             });
-            dispatch({type: 'SEND_CUSTOM_STAR_THUMB', imageId, thumbUp });
+            dispatch({type: 'SEND_CUSTOM_STAR_THUMB', customStarId, thumbUp });
         }
     },
 };
@@ -90,9 +81,9 @@ export const actionCreators = {
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-const unloadedState: CustomStarLeaderboardState = { images: [], isLoading: false };
+const unloadedState: CustomStarShowcaseState = { customStars: [], isLoading: false };
 
-export const reducer: Reducer<CustomStarLeaderboardState> = (state: CustomStarLeaderboardState | undefined, incomingAction: Action): CustomStarLeaderboardState => {
+export const reducer: Reducer<CustomStarShowcaseState> = (state: CustomStarShowcaseState | undefined, incomingAction: Action): CustomStarShowcaseState => {
     if (state === undefined)
         return unloadedState;
 
@@ -100,21 +91,21 @@ export const reducer: Reducer<CustomStarLeaderboardState> = (state: CustomStarLe
     switch (action.type) {
         case 'REQUEST_CUSTOM_STARS':
             return {
-                images: state.images,
+                customStars: state.customStars,
                 isLoading: true,
             };
         case 'RECEIVE_CUSTOM_STARS':
             return {
-                images: action.images,
+                customStars: action.customStars,
                 isLoading: false
             };          
         case 'SEND_CUSTOM_STAR_THUMB':
-            let images = [...state.images];
-            let imageIndex = images.findIndex(r => r.id === action.imageId);
+            let customStars = [...state.customStars];
+            let imageIndex = customStars.findIndex(r => r.id === action.customStarId);
             if (imageIndex !== -1)
-                action.thumbUp ? images[imageIndex].thumbUps!++ : images[imageIndex].thumbDowns!++;
+                action.thumbUp ? customStars[imageIndex].thumbUps!++ : customStars[imageIndex].thumbDowns!++;
             return {
-                images: images,
+                customStars,
                 isLoading: state.isLoading,
             };                 
     }

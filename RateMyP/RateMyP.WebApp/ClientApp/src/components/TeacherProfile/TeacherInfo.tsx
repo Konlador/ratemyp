@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ApplicationState } from '../../store';
 import * as TeachersStore from '../../store/Teachers';
-import { Button } from 'reactstrap';
 
 interface OwnProps {
     teacherId: string
@@ -51,7 +49,6 @@ class TeacherInfo extends React.PureComponent<Props & OwnProps> {
                     <p><strong>Faculty: </strong>{teacher.faculty}</p>
                     <p><strong>Rank: </strong>{teacher.rank}</p>
                     <p>{teacher.description && ("Description:" + teacher.description)}</p>
-                    <Button className="add-rating" color="primary" tag={Link} to={`/custom-star/${this.props.teacherId}`}>View custom rating images</Button>
                 </div>
             </React.Fragment>
         );

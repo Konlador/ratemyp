@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { Button, Form, FormGroup, Label, Input, UncontrolledAlert, Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
 import * as CustomStarReportStore from '../../store/CustomStar/CustomStarReport';
-import { Image } from '../../store/CustomStar/CustomStarLeaderboard';
+import { CustomStar } from '../../store/CustomStar/CustomStar';
 
 type Props =
     CustomStarReportStore.CustomStarReportState &
@@ -37,7 +37,7 @@ class CustomStarReport extends React.PureComponent<Props> {
 
     private onSubmitButtonPush() {
         this.props.setCustomStarId(this.props.match.params.customStarId)
-        this.props.setStudentId(this.props.image? this.props.image.studentId : "Undefined")
+        this.props.setStudentId(this.props.customStar ? this.props.customStar.studentId : "Undefined")
         if(this.props.report.reason.length >= 30){
             this.props.sendReport()
             this.props.history.goBack()
@@ -60,8 +60,8 @@ class CustomStarReport extends React.PureComponent<Props> {
     }
 
     private renderCustomStar() {
-        var image = this.props.image;
-        if (!image)
+        var customStar = this.props.customStar;
+        if (!customStar)
             return;
 
         return (
@@ -76,10 +76,10 @@ class CustomStarReport extends React.PureComponent<Props> {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr key={image.id}>
-                            <td>{this.renderImageInfo(image)}</td>
-                            <td><img className = "imgStar" src={"https://res.cloudinary.com/drodzj9pr/image/upload/_" + image.id}/></td>
-                            <td>{this.renderThumbs(image)}</td>
+                        <tr key={customStar.id}>
+                            <td>{this.renderImageInfo(customStar)}</td>
+                            <td><img className = "imgStar" src={"https://res.cloudinary.com/drodzj9pr/image/upload/_" + customStar.id}/></td>
+                            <td>{this.renderThumbs(customStar)}</td>
                         </tr>
                     </tbody>
                 </Table>
@@ -87,23 +87,23 @@ class CustomStarReport extends React.PureComponent<Props> {
         );
     }
 
-    private renderImageInfo(image: Image) {
+    private renderImageInfo(customStar: CustomStar) {
         return (
             <div>
-                <p>Date added: {new Date(image.dateCreated).toISOString().split('T')[0]}</p>
-                <p>Student Id: {image.studentId}</p>
+                <p>Date added: {new Date(customStar.dateCreated).toISOString().split('T')[0]}</p>
+                <p>Student Id: {customStar.studentId}</p>
             </div>
         );
     }
 
-    private renderThumbs(image: Image) {
+    private renderThumbs(customStar: CustomStar) {
         return (
             <div>
                 <div>
-                    {image.thumbUps} Like this image
+                    {customStar.thumbUps} Like this image
                 </div>
                 <div>
-                    {image.thumbDowns} Dislike this image
+                    {customStar.thumbDowns} Dislike this image
                 </div>
             </div>
         );

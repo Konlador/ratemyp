@@ -14,7 +14,7 @@ import * as RatingReport from './Rate/RatingReport';
 import * as CustomStarReport from './CustomStar/CustomStarReport'
 import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';
 import * as CourseLeaderboard from './Leaderboard/CourseLeaderboard';
-import * as CustomStarLeaderboard from './CustomStar/CustomStarLeaderboard';
+import * as CustomStarShowcase from './CustomStar/CustomStarShowcase';
 
 // The top-level state object
 export interface ApplicationState {
@@ -36,7 +36,7 @@ export interface ApplicationState {
     ratingReport: RatingReport.RatingReportState | undefined;
 
     customStarUpload: CustomStarUpload.CustomStarState | undefined;
-    customStarLeaderboard: CustomStarLeaderboard.CustomStarLeaderboardState | undefined;
+    customStarShowcase: CustomStarShowcase.CustomStarShowcaseState | undefined;
     customStarReport: CustomStarReport.CustomStarReportState | undefined;
 }
 
@@ -62,7 +62,7 @@ export const reducers = {
     ratingReport: RatingReport.reducer,
 
     customStarUpload: CustomStarUpload.reducer,
-    customStarLeaderboard: CustomStarLeaderboard.reducer,
+    customStarShowcase: CustomStarShowcase.reducer,
     customStarReport: CustomStarReport.reducer,
 };
 
