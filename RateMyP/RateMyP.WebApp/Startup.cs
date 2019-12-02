@@ -23,6 +23,7 @@ namespace RateMyP.WebApp
         public void ConfigureServices(IServiceCollection services)
             {
             services.AddDbContext<RateMyPDbContext>(opt => opt.UseSqlServer(Configuration["ConnectionString:RateMyPDB"]));
+            services.AddTransient<ICourseStatisticsAnalyzer, CourseStatisticsAnalyzer>();
             services.AddTransient<ITeacherStatisticsAnalyzer, TeacherStatisticsAnalyzer>();
             services.AddTransient<ILeaderboardManager, LeaderboardManager>();
 

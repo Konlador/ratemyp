@@ -16,12 +16,13 @@ namespace RateMyP.WebApp.Controllers
         {
         Task<IActionResult> GetRatings();
         Task<IActionResult> GetTeacherRatings(Guid teacherId);
+        Task<IActionResult> GetCourseRatings(Guid courseId);
         Task<IActionResult> GetRating(Guid id);
         Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb);
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
-    public delegate Task UpdateLeaderboard(Guid teacherId);
+    public delegate Task UpdateLeaderboard(Guid id, EntryType type);
 
     [Route("api/ratings")]
     [ApiController]
@@ -33,7 +34,7 @@ namespace RateMyP.WebApp.Controllers
         public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
-            m_updateLeaderboardAsync = leaderboardManager.UpdateFromTeacher;
+            m_updateLeaderboardAsync = leaderboardManager.Update;
             }
 
         [HttpGet]
@@ -53,6 +54,16 @@ namespace RateMyP.WebApp.Controllers
                                          .Include(rating => rating.Tags)
                                          .ThenInclude(ratingTag => ratingTag.Tag)
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+            return Ok(SerializeRatings(ratings));
+            }
+
+        [HttpGet("course={courseId}")]
+        public async Task<IActionResult> GetCourseRatings(Guid courseId)
+            {
+            var ratings = await m_context.Ratings
+                .Include(rating => rating.Tags)
+                .ThenInclude(ratingTag => ratingTag.Tag)
+                .Where(x => x.CourseId.Equals(courseId)).ToListAsync();
             return Ok(SerializeRatings(ratings));
             }
 
@@ -127,6 +138,7 @@ namespace RateMyP.WebApp.Controllers
                 }
 
             Guid.TryParse((string)data["teacherId"], out var teacherId);
+            Guid.TryParse((string) data["courseId"], out var courseId);
 
             var rating = new Rating
                 {
@@ -135,7 +147,7 @@ namespace RateMyP.WebApp.Controllers
                 TeacherId = teacherId,
                 Tags = ratingTags,
                 Comment = (string)data["comment"],
-                CourseId = (Guid)data["courseId"],
+                CourseId = courseId,
                 LevelOfDifficulty = (int)data["levelOfDifficulty"],
                 OverallMark = (int)data["overallMark"],
                 WouldTakeTeacherAgain = (bool)data["wouldTakeTeacherAgain"],
@@ -145,7 +157,10 @@ namespace RateMyP.WebApp.Controllers
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
-            await m_updateLeaderboardAsync(teacherId);
+
+            if (teacherId != Guid.Empty)
+                await m_updateLeaderboardAsync(teacherId, EntryType.Teacher);
+            await m_updateLeaderboardAsync(courseId, EntryType.Course);
 
             return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
             }

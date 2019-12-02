@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using RateMyP.WebApp.Db;
-using RateMyP.WebApp.Models;
 using RateMyP.WebApp.Statistics;
+
 
 namespace RateMyP.WebApp
     {
@@ -15,7 +11,15 @@ namespace RateMyP.WebApp
             {
             //DbDataLoader.LoadDataToDb();
             //LoadRating();
+            //RunLeaderboardUpdate();
             CreateWebHostBuilder(args).Build().Run();
+            }
+
+        private static async void RunLeaderboardUpdate()
+            {
+            RateMyPDbContext dbC = new RateMyPDbContext();
+            LeaderboardManager lbM = new LeaderboardManager(new TeacherStatisticsAnalyzer(dbC), new CourseStatisticsAnalyzer(dbC), dbC);
+            await lbM.FullUpdate();
             }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

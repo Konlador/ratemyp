@@ -2,27 +2,27 @@ import * as React from 'react';
 import { Spinner } from 'reactstrap';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
-import * as TeacherStatisticsStore from '../../store/TeacherStatistics';
-import * as TeacherRatingsStore from "../../store/Teacher/TeacherRatings";
+import * as CourseStatisticsStore from '../../store/CourseStatistics';
+import * as CourseRatingsStore from "../../store/Course/CourseRatings";
 import * as TagsStore from "../../store/Tags";
 import { Card, CardTitle, CardText, CardBody, UncontrolledCollapse, Row, Col, Button } from 'reactstrap';
 import { Chart } from "react-google-charts";
 
 interface OwnProps {
-    teacherId: string
+    courseId: string
 };
 
 type Props =
     {
-    statistics: TeacherStatisticsStore.TeacherStatisticsState,
-    ratings: TeacherRatingsStore.TeacherRatingsState,
+    statistics: CourseStatisticsStore.CourseStatisticsState,
+    ratings: CourseRatingsStore.CourseRatingsState,
     tags: TagsStore.TagsState
     } &
-    typeof TeacherStatisticsStore.actionCreators &
-    typeof TeacherRatingsStore.actionCreators &
+    typeof CourseStatisticsStore.actionCreators &
+    typeof CourseRatingsStore.actionCreators &
     typeof TagsStore.actionCreators;
 
-class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
+class CourseStatistics extends React.PureComponent<Props & OwnProps> {
     public componentDidMount() {
         this.ensureDataFetched();
     }
@@ -32,8 +32,9 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     }
 
     private ensureDataFetched() {
-        this.props.requestTeacherRatings(this.props.teacherId);
-        this.props.requestTeacherStatistics(this.props.teacherId);
+        this.props.requestCourseRatings(this.props.courseId);
+        this.props.requestCourseStatistics(this.props.courseId);
+        console.log("length:", this.props.statistics.courseStatistics.averageMark)
         this.props.requestTags();
     }
 
@@ -44,10 +45,10 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <h1>Statistics</h1>
                     <Row>
                         <Col sm="4">
-                            {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.teacherStatistics.averageMark)}
+                            {this.renderNumber("Average rating", "25px", "170px", this.props.statistics.courseStatistics.averageMark)}
                         </Col>
                         <Col sm="4">
-                            {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.teacherStatistics.averageLevelOfDifficulty)}
+                            {this.renderNumber("Level of difficulty", "12px", "70px", this.props.statistics.courseStatistics.averageLevelOfDifficulty)}
                             <Card>
                                 <CardBody>
                                     <CardTitle
@@ -55,11 +56,10 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                                         style={{ fontSize: "10px" }}>
                                         <strong>Would take again</strong>
                                     </CardTitle>
-
                                     <CardText
                                         className="text-center"
                                         style={{ fontSize: "70px" }}>
-                                        <strong>{(this.props.statistics.teacherStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
+                                        <strong>{(this.props.statistics.courseStatistics.wouldTakeAgainRatio * 100).toFixed(0)}%</strong>
                                     </CardText>
                                 </CardBody>
                             </Card>
@@ -75,7 +75,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     <UncontrolledCollapse toggler="#toggler">
                         <Card>
                             <CardBody>
-                                {!this.props.statistics.isLoading ? this.renderTeacherRatingHistory() : <Spinner type="grow" color="success" />}
+                                {!this.props.statistics.isLoading ? this.renderCourseRatingHistory() : <Spinner type="grow" color="success" />}
                             </CardBody>
                         </Card>
                     </UncontrolledCollapse>
@@ -104,8 +104,8 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         )
     }
 
-    private renderTeacherRatingHistory() {
-        const averageMarks = this.props.statistics.teacherStatistics.averageMarks;
+    private renderCourseRatingHistory() {
+        const averageMarks = this.props.statistics.courseStatistics.averageMarks;
         if (!averageMarks || averageMarks.length === 0)
             return;
 
@@ -127,7 +127,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
                     data={data}
                     options={{
                         hAxis: {
-                            title: 'Part',                          
+                            title: 'Part',
                         },
                         vAxis: {
                             title: 'Rating',
@@ -145,7 +145,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
     }
 
     private renderTags() {
-        const tagTextCounts = this.getTeacherTagTextCounts();
+        const tagTextCounts = this.getCourseTagTextCounts();
         return (
             <div className="tagbox">
                 {Array.from(tagTextCounts).sort((a, b) => b[1] - a[1]).map((tagTextCount, index) =>
@@ -156,7 +156,7 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
         )
     }
 
-    private getTeacherTagTextCounts(): Map<string, number> {
+    private getCourseTagTextCounts(): Map<string, number> {
         let tagTextCounts = new Map<string, number>();
         var ratings = this.props.ratings.ratings;
 
@@ -170,21 +170,21 @@ class TeacherStatistics extends React.PureComponent<Props & OwnProps> {
 
 function mapStateToProps(state: ApplicationState, ownProps: OwnProps) {
     return {
-        statistics: state.teacherStatistics,
-        ratings: state.teacherRatings,
+        statistics: state.courseStatistics,
+        ratings: state.courseRatings,
         tags: state.tags,
-        teacherId: ownProps.teacherId
+        courseId: ownProps.courseId
     }
 };
 
 const actions = {
-    ...TeacherStatisticsStore.actionCreators,
-    ...TeacherRatingsStore.actionCreators,
+    ...CourseStatisticsStore.actionCreators,
+    ...CourseRatingsStore.actionCreators,
     ...TagsStore.actionCreators
 }
 
 export default connect(
     mapStateToProps,
     actions
-)(TeacherStatistics as any);
+)(CourseStatistics as any);
 

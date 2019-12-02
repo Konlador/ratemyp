@@ -69,8 +69,9 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.courseLeaderboard &&
-            appState.courseLeaderboard.isLoading === false) {
-            fetch(`api/leaderboard/courses/all`)
+            appState.courseLeaderboard.isLoading === false &&
+            appState.courseLeaderboard.allTimeEntries.length == 0) {
+            fetch(`api/leaderboard/courses/global`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_ALLTIME_COURSE_LEADERBOARD', allTimeEntries: data });
@@ -82,7 +83,8 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.courseLeaderboard &&
-            appState.courseLeaderboard.isLoading === false) {
+            appState.courseLeaderboard.isLoading === false &&
+            appState.courseLeaderboard.thisYearEntries.length == 0) {
             fetch(`api/leaderboard/courses/year`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
                 .then(data => {
