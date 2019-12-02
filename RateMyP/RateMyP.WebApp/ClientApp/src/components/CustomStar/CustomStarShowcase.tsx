@@ -35,7 +35,7 @@ class CustomStarShowcase extends React.PureComponent<Props & OwnProps> {
                 <div>
                     <div className="images-head">
                         <h2 className="images">Custom star showcase</h2>
-                        <Button className="add-image" color="primary" tag={Link} to={`/add-custom-star/${this.teacherId()}`}>Add an image</Button>{' '}
+                        <Button className="add-star" color="primary" tag={Link} to={`/add-custom-star/${this.teacherId()}`}>Add a star</Button>{' '}
                         {this.props.isLoading && <Spinner type="grow" color="success" />}
                     </div>
                     <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm">
