@@ -40,7 +40,7 @@ class Courses extends React.PureComponent<Props & OwnProps> {
             this.props.clearAllCourses();
             this.updateSearchText(this.props.search);
             this.props.searchCourse(this.props.search);
-            if (this.props.courses.length < 20) this.setState({canLoadMore: false})
+            if (this.props.courses.length < 20) this.setState({canLoadMore: false});
         } else {
             this.props.clearAllCourses();
             this.props.requestAllCourses();

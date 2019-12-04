@@ -21,8 +21,8 @@ class Browse extends React.PureComponent<Props, State> {
 
     public componentDidMount() {
         if (this.props.location.state !== undefined) {
-            if (this.props.location.state.searchType === "teacher") this.setState({page: 0})
-            else this.setState({page: 1})
+            if (this.props.location.state.searchType === "teacher") this.setState({page: 0});
+            else this.setState({page: 1});
         }
     }
 
@@ -44,7 +44,7 @@ class Browse extends React.PureComponent<Props, State> {
     }
 
     private switchPage() {
-        this.props.location.state = undefined
+        this.props.location.state = undefined;
         this.setState({ page: (this.state.page + 1) % 2 });
     }
 

@@ -26,7 +26,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
             currentIndex: 20,
             canLoadMore: true,
             searchString: "",
-        }
+        };
     }
 
     state = {
@@ -40,7 +40,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
             this.props.clearAllTeachers();
             this.updateSearchText(this.props.search);
             this.props.searchTeacher(this.props.search);
-            if (this.props.teachers.length < 20) this.setState({canLoadMore: false})
+            if (this.props.teachers.length < 20) this.setState({canLoadMore: false});
         } else {
             this.props.clearAllTeachers();
             this.props.requestAllTeachers();
