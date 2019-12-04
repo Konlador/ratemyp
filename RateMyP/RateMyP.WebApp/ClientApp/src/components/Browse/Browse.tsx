@@ -19,6 +19,13 @@ class Browse extends React.PureComponent<Props, State> {
         this.state = { page: 0 };
     };
 
+    public componentDidMount() {
+        if (this.props.location.state !== undefined) {
+            if (this.props.location.state.searchType === "teacher") this.setState({page: 0})
+            else this.setState({page: 1})
+        }
+    }
+
     private renderComponents() {
         if (this.props.location.state !== undefined) {
             if (this.props.location.state.searchType === "teacher") {
@@ -37,6 +44,7 @@ class Browse extends React.PureComponent<Props, State> {
     }
 
     private switchPage() {
+        this.props.location.state = undefined
         this.setState({ page: (this.state.page + 1) % 2 });
     }
 
@@ -56,7 +64,7 @@ class Browse extends React.PureComponent<Props, State> {
                 </div>
                 {this.renderComponents()}
             </React.Fragment>
-        );
+        )
     }
 }
 

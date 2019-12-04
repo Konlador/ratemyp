@@ -69,8 +69,7 @@ namespace RateMyP.WebApp.Controllers
                                 .Denationalize()
                                 .Contains(search))
                                 .OrderBy(x => x.LastName)
-                                .Take(countToTake)
-                            .ToList();
+                                .ToList();
             }
 
         [HttpGet("course={courseId}")]
