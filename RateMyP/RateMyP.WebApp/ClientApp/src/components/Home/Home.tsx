@@ -29,6 +29,7 @@ class Home extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
+        this.keyPressHandler = this.keyPressHandler.bind(this);
 
         this.state = {
             search: undefined,
@@ -44,6 +45,11 @@ class Home extends React.Component<Props, State> {
         search: e.target.value
     })
 
+    private keyPressHandler = (e: any) => {
+        if (e.key === "Enter") {
+            this.redirectSearchToBrowsePage();
+        }
+    }
     private changeButtonStyle() {
         this.setState({
             courseButtonStyle: this.state.staffButtonStyle,
@@ -180,6 +186,7 @@ class Home extends React.Component<Props, State> {
                         placeholder={this.state.searchPlaceholder}
                         style={{ borderRadius: 25 }}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => this.textChangeHandler(event)}
+                        onKeyPress={this.keyPressHandler}
                         id="standard-basic"
                         margin="normal"
                         InputProps={{ spellCheck: false }}

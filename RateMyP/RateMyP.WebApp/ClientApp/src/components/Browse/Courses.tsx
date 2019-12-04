@@ -64,7 +64,7 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         const windowBottom = windowHeight + window.pageYOffset;
         console.log("windowBottom: " + windowBottom + ", docHeight: " + docHeight);
         if (windowBottom >= docHeight && !this.props.isLoading)
-            this.loadMoreCourses()
+            this.loadMoreCourses();
     }
 
     private loadMoreCourses() {
@@ -77,15 +77,15 @@ class Courses extends React.PureComponent<Props & OwnProps> {
     private search() {
         this.props.clearAllCourses();
         if (this.state.searchString == "") {
-            this.setState({canLoadMore: true})
-            this.props.requestAllCourses()
+            this.setState({canLoadMore: true});
+            this.props.requestAllCourses();
         } else {
             this.props.searchCourse(this.state.searchString);
         }
     }
 
     private searchChanged(searchString: string) {
-        this.setState({searchString: searchString})
+        this.setState({searchString: searchString});
     }
 
     keyPressed = (e: any) => {

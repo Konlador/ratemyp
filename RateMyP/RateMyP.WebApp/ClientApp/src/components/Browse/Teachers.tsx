@@ -77,15 +77,15 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     private search() {
         this.props.clearAllTeachers();
         if (this.state.searchString == "") {
-            this.setState({canLoadMore: true})
-            this.props.requestAllTeachers()
+            this.setState({canLoadMore: true});
+            this.props.requestAllTeachers();
         } else {
-            this.props.searchTeacher(this.state.searchString)
+            this.props.searchTeacher(this.state.searchString);
         }
     }
 
     private searchChanged(searchString: string) {
-        this.setState({searchString: searchString})
+        this.setState({searchString: searchString});
     }
 
     keyPressed = (e: any) => {
