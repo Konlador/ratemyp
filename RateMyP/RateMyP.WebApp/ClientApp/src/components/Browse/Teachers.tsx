@@ -9,6 +9,7 @@ import './Teachers.css';
 
 interface OwnProps {
     teacherId: string,
+    search: string,
 };
 
 type Props =
@@ -18,6 +19,16 @@ type Props =
 
 class Teachers extends React.PureComponent<Props & OwnProps> {
 
+    constructor(props: Props & OwnProps) {
+        super(props);
+        this.keyPressed = this.keyPressed.bind(this);
+        this.state = {
+            currentIndex: 20,
+            canLoadMore: true,
+            searchString: "",
+        };
+    }
+
     state = {
         currentIndex: 20,
         canLoadMore: true,
@@ -25,8 +36,20 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
     }
 
     public componentDidMount() {
-        this.props.requestAllTeachers();
+        if (this.props.search !== undefined) {
+            this.props.clearAllTeachers();
+            this.updateSearchText(this.props.search);
+            this.props.searchTeacher(this.props.search);
+            if (this.props.teachers.length < 20) this.setState({canLoadMore: false});
+        } else {
+            this.props.clearAllTeachers();
+            this.props.requestAllTeachers();
+        }
         window.addEventListener("scroll", () => this.handleScroll());
+    }
+
+    private updateSearchText(searchString: string) {
+        this.setState({searchString: searchString});
     }
 
     public componentWillUnmount() {
@@ -48,22 +71,27 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
         if (this.state.canLoadMore)
             this.setState({currentIndex: this.state.currentIndex + 20});
         if (this.state.currentIndex >= this.props.teachers.length)
-            this.setState({canLoadMore: false})
+            this.setState({canLoadMore: false});
     }
 
     private search() {
         this.props.clearAllTeachers();
         if (this.state.searchString == "") {
-            this.setState({canLoadMore: true})
-            this.props.requestAllTeachers()
+            this.setState({canLoadMore: true});
+            this.props.requestAllTeachers();
         } else {
-            this.setState({canLoadMore: false})
-            this.props.searchTeacher(this.state.searchString)
+            this.props.searchTeacher(this.state.searchString);
         }
     }
 
     private searchChanged(searchString: string) {
-        this.setState({searchString: searchString})
+        this.setState({searchString: searchString});
+    }
+
+    keyPressed = (e: any) => {
+        if (e.key === "Enter") {
+            this.search();
+        }
     }
 
     public render() {
@@ -73,12 +101,14 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
                     <h2 id="academic-staff-label">
                         Academic Staff {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
                     </h2>
-                    <Input id="teacher-search-box" name="Search" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)}/>
+                    <Input id="teacher-search-box" value={this.state.searchString} name="Search" placeholder="Type here..." 
+                        onChange={(e) => this.searchChanged(`${e.target.value}`)} 
+                        onKeyPress={this.keyPressed}/>
                     <Button id="teacher-search-button" onClick={() => this.search()} color="primary">Search</Button>
                 </div>
                 {this.renderTable()}
                 {this.props.teachers.length == 0 && <h4 style={{textAlign: 'center'}}>No results</h4>}
-                {this.state.canLoadMore &&
+                {this.state.canLoadMore && (this.props.teachers.length >= 20) &&
                 <Button onClick={() => this.loadMoreTeachers()} color="primary" style={{
                     position: 'absolute', 
                     left: '46%', 
@@ -92,7 +122,7 @@ class Teachers extends React.PureComponent<Props & OwnProps> {
                     marginTop: '16px'
                 }}/>}
             </React.Fragment>          
-        );
+        )
     }
 
     private renderTable() {

@@ -223,21 +223,21 @@ export const reducer: Reducer<TeachersState> = (state: TeachersState | undefined
                 canLoadMore: state.canLoadMore
             };
         case 'REQUEST_SEARCHED_TEACHERS':
-                return {
-                    teachers: state.teachers,
-                    selectedTeacher: state.selectedTeacher,
-                    isLoading: true,
-                    currentIndex: state.currentIndex,
-                    canLoadMore: state.canLoadMore
-                };
+            return {
+                teachers: state.teachers,
+                selectedTeacher: state.selectedTeacher,
+                isLoading: true,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
         case 'RECEIVE_SEARCHED_TEACHERS':
-                return {
-                    teachers: [...state.teachers, ...action.teachers],
-                    selectedTeacher: state.selectedTeacher,
-                    isLoading: false,
-                    currentIndex: state.currentIndex,
-                    canLoadMore: state.canLoadMore
-                };
+            return {
+                teachers: [...state.teachers, ...action.teachers],
+                selectedTeacher: state.selectedTeacher,
+                isLoading: false,
+                currentIndex: state.currentIndex,
+                canLoadMore: state.canLoadMore
+            };
         case 'CLEAR_ALL_TEACHERS':
             return {
                 teachers: [],
