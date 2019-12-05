@@ -15,9 +15,17 @@ using RateMyP.WebApp.Models;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ICustomStarController
+        {
+        Task<IActionResult> GetCustomStarAsync(Guid id);
+        Task<IActionResult> GetTeacherCustomStarsAsync(Guid teacherId);
+        Task<IActionResult> GetCustomStarImageAsync(Guid teacherId);
+        Task<IActionResult> PostCustomStarAsync(Guid teacherId, [FromBody] JObject data);
+        Task<ActionResult<CustomStarThumb>> PostCustomStarThumbAsync([FromBody]JObject customStarThumbJObject);
+        }
     [Route("api/customstar")]
     [ApiController]
-    public class CustomStarController : ControllerBase
+    public class CustomStarController : ControllerBase, ICustomStarController
         {
         private readonly IHttpClientFactory m_clientFactory;
         private readonly RateMyPDbContext m_context;
@@ -32,7 +40,7 @@ namespace RateMyP.WebApp.Controllers
         public async Task<IActionResult> GetCustomStarAsync(Guid id)
             {
             var images = await m_context.CustomStars
-                                         .Where(x => x.Id.Equals(id)).FirstAsync();
+                                         .Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
 
             if (images == null)
                 return NotFound();
@@ -45,6 +53,7 @@ namespace RateMyP.WebApp.Controllers
             {
             var customStars = await m_context.CustomStars
                                          .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
+
             var sortedStars = customStars.OrderByDescending(g => g.ThumbUps - g.ThumbDowns).ToList();
             return Ok(sortedStars);
             }
@@ -54,7 +63,10 @@ namespace RateMyP.WebApp.Controllers
             {
             var customStar = await m_context.CustomStars
                                             .Where(x => x.TeacherId.Equals(teacherId))
-                                            .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstAsync();
+                                            .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstOrDefaultAsync();
+
+            if (customStar == null)
+                return NotFound();
 
             var imageId = "default_full";
             const int customStarScoreThreshold = 5;
