@@ -59,16 +59,16 @@ namespace RateMyP.WebApp.Controllers
         public async Task<IActionResult> GetReport(Guid id)
             {
             var ratingReport = await m_context.RatingReports
-                                        .SingleAsync(x => x.Id.Equals(id));
+                                        .SingleOrDefaultAsync(x => x.Id.Equals(id));
             var customStarReport = await m_context.CustomStarReports
-                                                        .SingleAsync(x => x.Id.Equals(id));
+                                                        .SingleOrDefaultAsync(x => x.Id.Equals(id));
 
             if (ratingReport != null)
                 return Ok(ratingReport);
             if (customStarReport != null)
                 return Ok(customStarReport);
 
-            return NotFound("Report not found");
+            return NotFound();
             }
 
         [HttpPost("rating")]
