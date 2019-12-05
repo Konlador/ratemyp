@@ -8,9 +8,19 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
+    public interface ILeaderboardController
+        {
+        Task<ActionResult<IEnumerable<object>>> GetTeacherEntriesAllTime();
+        Task<ActionResult<IEnumerable<object>>> GetTeacherEntriesThisYear();
+        Task<ActionResult<LeaderboardEntry>> GetTeacherEntry(Guid id);
+        Task<ActionResult<IEnumerable<object>>> GetCourseEntriesAllTime();
+        Task<ActionResult<IEnumerable<object>>> GetCourseEntriesThisYear();
+        Task<ActionResult<LeaderboardEntry>> GetCourseEntry(Guid id);
+        }
+
     [Route("api/leaderboard")]
     [ApiController]
-    public class LeaderboardController : ControllerBase
+    public class LeaderboardController : ControllerBase, ILeaderboardController
         {
         private readonly RateMyPDbContext m_context;
 
