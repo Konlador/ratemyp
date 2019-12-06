@@ -16,7 +16,7 @@ namespace RateMyP.Tests.Controllers
 
         private Course m_course;
         private List<DateMark> m_averageMarks;
-        private DateMark m_dateMark1;
+        private DateMark m_dateMark;
         private CourseStatistics m_courseStatistics;
 
         [SetUp]
@@ -30,7 +30,7 @@ namespace RateMyP.Tests.Controllers
         [Test]
         public async Task GetCourseStatistics_InvalidCourseId_ReturnsEmptyCourseStatistic()
             {
-            var courseStatisticResult = await m_controller.GetCourseStatistics(Guid.NewGuid(), 5);
+            var courseStatisticResult = await m_controller.GetCourseStatistics(Guid.NewGuid(), 3);
             Assert.AreEqual(courseStatisticResult.Value.AverageMark, 0);
             CollectionAssert.IsEmpty(courseStatisticResult.Value.AverageMarks);
             Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, 0);
@@ -43,7 +43,7 @@ namespace RateMyP.Tests.Controllers
             var courseStatisticResult = await m_controller.GetCourseStatistics(m_course.Id, 3);
             Assert.AreEqual(courseStatisticResult.Value.AverageMark, m_courseStatistics.AverageMark);
             CollectionAssert.IsNotEmpty(courseStatisticResult.Value.AverageMarks);
-            CollectionAssert.Contains(courseStatisticResult.Value.AverageMarks, m_dateMark1);
+            Assert.Contains(m_dateMark, courseStatisticResult.Value.AverageMarks);
             Assert.AreEqual(courseStatisticResult.Value.CourseId, m_courseStatistics.CourseId);
             Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, m_courseStatistics.AverageLevelOfDifficulty);
             Assert.AreEqual(courseStatisticResult.Value.WouldTakeAgainRatio, m_courseStatistics.WouldTakeAgainRatio);
@@ -51,14 +51,14 @@ namespace RateMyP.Tests.Controllers
 
         private void Seed(RateMyPDbContext context)
             {
-            m_dateMark1 = new DateMark
+            m_dateMark = new DateMark
                 {
                 Date = DateTime.Now.AddDays(-5),
                 Mark = 6
                 };
 
             m_averageMarks = new List<DateMark>();
-            m_averageMarks.Add(m_dateMark1);
+            m_averageMarks.Add(m_dateMark);
 
             m_course = new Course
                 {
@@ -80,7 +80,7 @@ namespace RateMyP.Tests.Controllers
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = true,
                 Tags = new List<RatingTag>(),
-                DateCreated = m_dateMark1.Date,
+                DateCreated = m_dateMark.Date,
                 Comment = "rating comment",
                 StudentId = null,
                 RatingType = RatingType.Course,

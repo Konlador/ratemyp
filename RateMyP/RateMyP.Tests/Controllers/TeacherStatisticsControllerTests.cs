@@ -4,10 +4,8 @@ using RateMyP.WebApp.Controllers;
 using RateMyP.WebApp.Models;
 using RateMyP.WebApp.Statistics;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Configuration;
 using System.Collections.Generic;
 
 namespace RateMyP.Tests.Controllers
@@ -18,6 +16,9 @@ namespace RateMyP.Tests.Controllers
         private ITeacherStatisticsController m_controller;
 
         private Teacher m_teacher;
+        private List<DateMark> m_averageMarks;
+        private DateMark m_dateMark;
+        private TeacherStatistics m_teacherStatistics;
 
         [SetUp]
         public new void SetUp()
@@ -30,7 +31,7 @@ namespace RateMyP.Tests.Controllers
         [Test]
         public async Task GetTeacherStatistics_InvalidTeacherId_ReturnsEmptyTeacherStatistic()
             {
-            var teacherStatisticResult = await m_controller.GetTeacherStatistics(Guid.NewGuid(), 5);
+            var teacherStatisticResult = await m_controller.GetTeacherStatistics(Guid.NewGuid(), 3);
             Assert.IsFalse(teacherStatisticResult.Result is NotFoundResult);
             Assert.AreEqual(teacherStatisticResult.Value.AverageMark, 0);
             CollectionAssert.IsEmpty(teacherStatisticResult.Value.AverageMarks);
@@ -41,15 +42,26 @@ namespace RateMyP.Tests.Controllers
         [Test]
         public async Task GetTeacherStatistics_ReturnsValidTeacherStatistic()
             {
-            var courseStatisticResult = await m_controller.GetTeacherStatistics(m_teacher.Id, 5);
-            Assert.AreEqual(courseStatisticResult.Value.AverageMark, 5);
-            CollectionAssert.IsNotEmpty(courseStatisticResult.Value.AverageMarks);
-            Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, 6);
-            Assert.AreEqual(courseStatisticResult.Value.WouldTakeAgainRatio, 1);
+            var teacherStatisticResult = await m_controller.GetTeacherStatistics(m_teacher.Id, 3);
+            Assert.AreEqual(teacherStatisticResult.Value.AverageMark, m_teacherStatistics.AverageMark);
+            CollectionAssert.IsNotEmpty(teacherStatisticResult.Value.AverageMarks);
+            Assert.Contains(m_dateMark, teacherStatisticResult.Value.AverageMarks);
+            Assert.AreEqual(teacherStatisticResult.Value.TeacherId, m_teacherStatistics.TeacherId);
+            Assert.AreEqual(teacherStatisticResult.Value.AverageLevelOfDifficulty, m_teacherStatistics.AverageLevelOfDifficulty);
+            Assert.AreEqual(teacherStatisticResult.Value.WouldTakeAgainRatio, m_teacherStatistics.WouldTakeAgainRatio);
             }
 
         private void Seed(RateMyPDbContext context)
             {
+            m_dateMark = new DateMark
+                {
+                Date = DateTime.Now.AddDays(-5),
+                Mark = 6
+                };
+
+            m_averageMarks = new List<DateMark>();
+            m_averageMarks.Add(m_dateMark);
+
             m_teacher = new Teacher
                 {
                 Id = Guid.NewGuid(),
@@ -67,11 +79,11 @@ namespace RateMyP.Tests.Controllers
                 Id = Guid.NewGuid(),
                 TeacherId = m_teacher.Id,
                 CourseId = Guid.NewGuid(),
-                OverallMark = 5,
+                OverallMark = 6,
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = true,
                 Tags = new List<RatingTag>(),
-                DateCreated = DateTime.Now,
+                DateCreated = m_dateMark.Date,
                 Comment = "rating comment",
                 StudentId = null,
                 RatingType = RatingType.Teacher,
@@ -80,6 +92,17 @@ namespace RateMyP.Tests.Controllers
                 };
 
             context.Ratings.Add(rating1);
+
+            m_teacherStatistics = new TeacherStatistics
+                {
+                Id = Guid.NewGuid(),
+                TeacherId = m_teacher.Id,
+                AverageMark = 6,
+                AverageMarks = m_averageMarks,
+                AverageLevelOfDifficulty = 6,
+                WouldTakeAgainRatio = 1
+
+                };
 
             context.SaveChanges();
             }

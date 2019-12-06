@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace RateMyP.Tests.Controllers
     {
@@ -23,6 +24,10 @@ namespace RateMyP.Tests.Controllers
         private Rating m_rating3;
         private Teacher m_teacher;
         private Course m_course;
+        private RatingTag m_ratingTag1;
+        private RatingTag m_ratingTag2;
+        private Tag m_tag1;
+        private Tag m_tag2;
 
         [SetUp]
         public new void SetUp()
@@ -40,6 +45,9 @@ namespace RateMyP.Tests.Controllers
             var ratingsResultValue = (ratingsResult as OkObjectResult).Value;
             var ratings = DeserializeRatings(ratingsResultValue.ToString());
             Assert.AreEqual(ratings.Count(), 3);
+            Assert.Contains(m_rating1, ratings);
+            Assert.Contains(m_rating2, ratings);
+            Assert.Contains(m_rating3, ratings);
             }
 
         [Test]
@@ -49,6 +57,8 @@ namespace RateMyP.Tests.Controllers
             var teacherRatingsResultValue = (teacherRatingsResult as OkObjectResult).Value;
             var ratings = DeserializeRatings(teacherRatingsResultValue.ToString());
             Assert.AreEqual(ratings.Count(), 2);
+            Assert.Contains(m_rating1, ratings);
+            Assert.Contains(m_rating2, ratings);
             }
 
         [Test]
@@ -58,15 +68,26 @@ namespace RateMyP.Tests.Controllers
             var courseRatingsResultValue = (courseRatingsResult as OkObjectResult).Value;
             var ratings = DeserializeRatings(courseRatingsResultValue.ToString());
             Assert.AreEqual(ratings.Count(), 1);
+            Assert.Contains(m_rating3, ratings);
             }
 
         [Test]
-        public async Task GetRating_ReturnsRating()
+        public async Task GetRating_ValidRatingId_ReturnsRating()
             {
             var ratingResult = await m_controller.GetRating(m_rating1.Id);
             var ratingResultValue = (ratingResult as OkObjectResult).Value;
             var rating = DeserializeRating(ratingResultValue.ToString());
-            Assert.AreEqual(rating.Id, m_rating1.Id);
+            Assert.AreEqual(rating, m_rating1);
+            }
+
+        [Test]
+        public async Task GetRating_RatingWithRatingTags_ReturnsRating()
+            {
+            var ratingResult = await m_controller.GetRating(m_rating1.Id);
+            var ratingResultValue = (ratingResult as OkObjectResult).Value;
+            var ratingTags = DeserializeTagsFromRating(ratingResultValue.ToString());
+            Assert.Contains(m_tag1, ratingTags);
+            Assert.Contains(m_tag2, ratingTags);
             }
 
         [Test]
@@ -101,6 +122,34 @@ namespace RateMyP.Tests.Controllers
 
             context.Teachers.Add(m_teacher);
 
+            m_tag1 = new Tag
+                {
+                Id = Guid.NewGuid(),
+                Text = "A TAG",
+                Type = TagTypes.Teacher
+                };
+
+            m_tag2 = new Tag
+                {
+                Id = Guid.NewGuid(),
+                Text = "B TAG",
+                Type = TagTypes.Teacher
+                };
+
+            m_ratingTag1 = new RatingTag
+                {
+                TagId = m_tag1.Id,
+                Tag = m_tag1
+                };
+
+            m_ratingTag2 = new RatingTag
+                {
+                TagId = m_tag2.Id,
+                Tag = m_tag2
+                };
+
+            var ratingTags = new List<RatingTag>() { m_ratingTag1, m_ratingTag2 };
+
             m_rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
@@ -109,14 +158,17 @@ namespace RateMyP.Tests.Controllers
                 OverallMark = 5,
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = true,
-                Tags = new List<RatingTag>(),
+                Tags = ratingTags,
                 DateCreated = DateTime.Now,
                 Comment = "rating comment",
-                StudentId = null,
+                StudentId = "159",
                 RatingType = RatingType.Teacher,
                 ThumbUps = 3,
                 ThumbDowns = 1
                 };
+
+            m_ratingTag1.RatingId = m_rating1.Id;
+            m_ratingTag2.RatingId = m_rating1.Id;
 
             m_rating2 = new Rating
                 {
@@ -129,7 +181,7 @@ namespace RateMyP.Tests.Controllers
                 Tags = new List<RatingTag>(),
                 DateCreated = DateTime.Now,
                 Comment = "rating comment",
-                StudentId = null,
+                StudentId = "357",
                 RatingType = RatingType.Teacher,
                 ThumbUps = 4,
                 ThumbDowns = 9
@@ -146,7 +198,7 @@ namespace RateMyP.Tests.Controllers
                 Tags = new List<RatingTag>(),
                 DateCreated = DateTime.Now,
                 Comment = "rating comment",
-                StudentId = null,
+                StudentId = "456",
                 RatingType = RatingType.Course,
                 ThumbUps = 2,
                 ThumbDowns = 1
@@ -161,6 +213,14 @@ namespace RateMyP.Tests.Controllers
             {
             Rating deserializedRating = JsonConvert.DeserializeObject<Rating>(rating);
             return deserializedRating;
+            }
+
+        private static List<Tag> DeserializeTagsFromRating(string rating)
+            {
+            var parsedObject = JObject.Parse(rating);
+            var tagsJson = parsedObject["tags"].ToString();
+            var deserializedTags = JsonConvert.DeserializeObject<List<Tag>>(tagsJson);
+            return deserializedTags;
             }
 
         private static List<Rating> DeserializeRatings(string ratings)

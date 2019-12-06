@@ -32,6 +32,9 @@ namespace RateMyP.Tests.Controllers
 
             Assert.IsNull(studentsResult.Result);
             Assert.AreEqual(3, studentsResult.Value.Count());
+            Assert.Contains(m_student1, studentsResult.Value.ToList());
+            Assert.Contains(m_student2, studentsResult.Value.ToList());
+            Assert.Contains(m_student3, studentsResult.Value.ToList());
             }
 
         [Test]
@@ -39,6 +42,7 @@ namespace RateMyP.Tests.Controllers
             {
             var studentResult = await m_controller.GetStudent("1954658");
             Assert.IsNull(studentResult.Result);
+            Assert.AreEqual(m_student1, studentResult.Value);
             }
 
         private void Seed(RateMyPDbContext context)

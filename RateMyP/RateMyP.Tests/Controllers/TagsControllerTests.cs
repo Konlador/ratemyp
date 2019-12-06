@@ -14,6 +14,10 @@ namespace RateMyP.Tests.Controllers
         {
         private ITagsController m_controller;
 
+        private Tag m_tag1;
+        private Tag m_tag2;
+        private Tag m_tag3;
+
         [SetUp]
         public new void SetUp()
             {
@@ -28,32 +32,35 @@ namespace RateMyP.Tests.Controllers
 
             Assert.IsNull(tagsResult.Result);
             Assert.AreEqual(3, tagsResult.Value.Count());
+            Assert.Contains(m_tag1, tagsResult.Value.ToList());
+            Assert.Contains(m_tag2, tagsResult.Value.ToList());
+            Assert.Contains(m_tag3, tagsResult.Value.ToList());
             }
 
         private void Seed(RateMyPDbContext context)
             {
-            var tag1 = new Tag
+            m_tag1 = new Tag
                 {
                 Id = Guid.NewGuid(),
                 Text = "A TAG",
                 Type = TagTypes.Teacher
                 };
 
-            var tag2 = new Tag
+            m_tag2 = new Tag
                 {
                 Id = Guid.NewGuid(),
                 Text = "B TAG",
                 Type = TagTypes.None
                 };
 
-            var tag3 = new Tag
+            m_tag3 = new Tag
                 {
                 Id = Guid.NewGuid(),
                 Text = "C TAG",
                 Type = TagTypes.Course
                 };
 
-            context.Tags.AddRange(tag1, tag2, tag3);
+            context.Tags.AddRange(m_tag1, m_tag2, m_tag3);
             context.SaveChanges();
             }
         }

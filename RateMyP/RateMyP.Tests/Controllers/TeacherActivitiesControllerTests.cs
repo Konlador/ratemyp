@@ -16,6 +16,8 @@ namespace RateMyP.Tests.Controllers
 
         private Course m_course;
         private Teacher m_teacher;
+        private TeacherActivity m_teacherActivity1;
+        private TeacherActivity m_courseTeacherActivity1;
 
         [SetUp]
         public new void SetUp()
@@ -30,7 +32,8 @@ namespace RateMyP.Tests.Controllers
             var teacherActivitiesResult = await m_controller.GetTeacherActivities(m_teacher.Id);
 
             Assert.IsNull(teacherActivitiesResult.Result);
-            Assert.AreEqual(2, teacherActivitiesResult.Value.Count());
+            Assert.AreEqual(1, teacherActivitiesResult.Value.Count());
+            Assert.Contains(m_teacherActivity1, teacherActivitiesResult.Value.ToList());
             }
 
         [Test]
@@ -39,7 +42,8 @@ namespace RateMyP.Tests.Controllers
             var courseTeacherActivitiesResult = await m_controller.GetCourseTeacherActivities(m_course.Id);
 
             Assert.IsNull(courseTeacherActivitiesResult.Result);
-            Assert.AreEqual(2, courseTeacherActivitiesResult.Value.Count());
+            Assert.AreEqual(1, courseTeacherActivitiesResult.Value.Count());
+            Assert.Contains(m_courseTeacherActivity1, courseTeacherActivitiesResult.Value.ToList());
             }
 
         private void Seed(RateMyPDbContext context)
@@ -66,23 +70,23 @@ namespace RateMyP.Tests.Controllers
                 };
             context.Teachers.AddRange(m_teacher);
 
-            var teacherActivity1 = new TeacherActivity
+            m_teacherActivity1 = new TeacherActivity
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = m_teacher.Id,
+                CourseId = Guid.NewGuid(),
+                DateStarted = DateTime.Now,
+                LectureType = LectureType.Practice
+                };
+            m_courseTeacherActivity1 = new TeacherActivity
+                {
+                Id = Guid.NewGuid(),
+                TeacherId = Guid.NewGuid(),
                 CourseId = m_course.Id,
                 DateStarted = DateTime.Now,
                 LectureType = LectureType.Practice
                 };
-            var teacherActivity2 = new TeacherActivity
-                {
-                Id = Guid.NewGuid(),
-                TeacherId = m_teacher.Id,
-                CourseId = m_course.Id,
-                DateStarted = DateTime.Now,
-                LectureType = LectureType.Practice
-                };
-            context.TeacherActivities.AddRange(teacherActivity1, teacherActivity2);
+            context.TeacherActivities.AddRange(m_teacherActivity1, m_courseTeacherActivity1);
             context.SaveChanges();
             }
         }
