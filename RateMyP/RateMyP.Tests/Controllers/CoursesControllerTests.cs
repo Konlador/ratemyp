@@ -49,10 +49,6 @@ namespace RateMyP.Tests.Controllers
             var courseResult = await m_controller.GetCourse(m_course1.Id);
             Assert.IsNull(courseResult.Result);
             Assert.AreEqual(m_course1, courseResult.Value);
-            Assert.AreEqual(m_course1.Name, courseResult.Value.Name);
-            Assert.AreEqual(m_course1.Faculty, courseResult.Value.Faculty);
-            Assert.AreEqual(m_course1.Credits, courseResult.Value.Credits);
-            Assert.AreEqual(m_course1.CourseType, courseResult.Value.CourseType);
             }
 
         [Test]
@@ -92,7 +88,7 @@ namespace RateMyP.Tests.Controllers
                 Credits = 5,
                 Faculty = "MIF",
                 CourseType = CourseType.BUS
-                }; 
+                };
 
             m_course2 = new Course
                 {
@@ -103,7 +99,7 @@ namespace RateMyP.Tests.Controllers
                 CourseType = CourseType.Complimentary
                 };
 
-             m_course3 = new Course
+            m_course3 = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "malkos",

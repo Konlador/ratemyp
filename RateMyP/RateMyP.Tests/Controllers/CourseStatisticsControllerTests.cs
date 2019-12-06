@@ -4,10 +4,8 @@ using RateMyP.WebApp.Controllers;
 using RateMyP.WebApp.Models;
 using RateMyP.WebApp.Statistics;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RateMyP.Tests.Controllers
     {
@@ -16,7 +14,10 @@ namespace RateMyP.Tests.Controllers
         private ICourseStatisticsAnalyzer m_analyzer;
         private ICourseStatisticsController m_controller;
 
-        private Course m_course1;
+        private Course m_course;
+        private List<DateMark> m_averageMarks;
+        private DateMark m_dateMark1;
+        private CourseStatistics m_courseStatistics;
 
         [SetUp]
         public new void SetUp()
@@ -30,7 +31,6 @@ namespace RateMyP.Tests.Controllers
         public async Task GetCourseStatistics_InvalidCourseId_ReturnsEmptyCourseStatistic()
             {
             var courseStatisticResult = await m_controller.GetCourseStatistics(Guid.NewGuid(), 5);
-            Assert.IsFalse(courseStatisticResult.Result is NotFoundResult);
             Assert.AreEqual(courseStatisticResult.Value.AverageMark, 0);
             CollectionAssert.IsEmpty(courseStatisticResult.Value.AverageMarks);
             Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, 0);
@@ -40,16 +40,27 @@ namespace RateMyP.Tests.Controllers
         [Test]
         public async Task GetCourseStatistics_ReturnsValidCourseStatistic()
             {
-            var courseStatisticResult = await m_controller.GetCourseStatistics(m_course1.Id, 5);
-            Assert.AreEqual(courseStatisticResult.Value.AverageMark, 5);
+            var courseStatisticResult = await m_controller.GetCourseStatistics(m_course.Id, 3);
+            Assert.AreEqual(courseStatisticResult.Value.AverageMark, m_courseStatistics.AverageMark);
             CollectionAssert.IsNotEmpty(courseStatisticResult.Value.AverageMarks);
-            Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, 6);
-            Assert.AreEqual(courseStatisticResult.Value.WouldTakeAgainRatio, 1);
+            CollectionAssert.Contains(courseStatisticResult.Value.AverageMarks, m_dateMark1);
+            Assert.AreEqual(courseStatisticResult.Value.CourseId, m_courseStatistics.CourseId);
+            Assert.AreEqual(courseStatisticResult.Value.AverageLevelOfDifficulty, m_courseStatistics.AverageLevelOfDifficulty);
+            Assert.AreEqual(courseStatisticResult.Value.WouldTakeAgainRatio, m_courseStatistics.WouldTakeAgainRatio);
             }
 
         private void Seed(RateMyPDbContext context)
             {
-            m_course1 = new Course
+            m_dateMark1 = new DateMark
+                {
+                Date = DateTime.Now.AddDays(-5),
+                Mark = 6
+                };
+
+            m_averageMarks = new List<DateMark>();
+            m_averageMarks.Add(m_dateMark1);
+
+            m_course = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "Komparchas",
@@ -58,18 +69,18 @@ namespace RateMyP.Tests.Controllers
                 CourseType = CourseType.BUS
                 };
 
-            context.Courses.Add(m_course1);
+            context.Courses.Add(m_course);
 
             var rating1 = new Rating
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = Guid.NewGuid(),
-                CourseId = m_course1.Id,
-                OverallMark = 5,
+                CourseId = m_course.Id,
+                OverallMark = 6,
                 LevelOfDifficulty = 6,
                 WouldTakeTeacherAgain = true,
                 Tags = new List<RatingTag>(),
-                DateCreated = DateTime.Now,
+                DateCreated = m_dateMark1.Date,
                 Comment = "rating comment",
                 StudentId = null,
                 RatingType = RatingType.Course,
@@ -77,7 +88,18 @@ namespace RateMyP.Tests.Controllers
                 ThumbDowns = 1
                 };
 
-            context.Ratings.Add(rating1);
+            context.Ratings.AddRange(rating1);
+
+            m_courseStatistics = new CourseStatistics
+                {
+                Id = Guid.NewGuid(),
+                CourseId = m_course.Id,
+                AverageMark = 6,
+                AverageMarks = m_averageMarks,
+                AverageLevelOfDifficulty = 6,
+                WouldTakeAgainRatio = 1
+
+                };
 
             context.SaveChanges();
             }
