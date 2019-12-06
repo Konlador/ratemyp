@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 
 namespace RateMyP.Tests.Controllers
     {
@@ -15,6 +16,7 @@ namespace RateMyP.Tests.Controllers
 
         private Course m_course1;
         private Course m_course2;
+        private Course m_course3;
         private Teacher m_teacher;
 
         [SetUp]
@@ -22,6 +24,7 @@ namespace RateMyP.Tests.Controllers
             {
             Seed(Context);
             m_controller = new CoursesController(Context);
+            ConfigurationManager.AppSettings.Set("LoadedCoursesNumber", "20");
             }
 
         [Test]
@@ -41,11 +44,33 @@ namespace RateMyP.Tests.Controllers
             }
 
         [Test]
+        public async Task GetCourse_ValidCourseId_ReturnsCourse()
+            {
+            var courseResult = await m_controller.GetCourse(m_course1.Id);
+            Assert.IsNull(courseResult.Result);
+            Assert.AreEqual(m_course1, courseResult.Value);
+            Assert.AreEqual(m_course1.Name, courseResult.Value.Name);
+            Assert.AreEqual(m_course1.Faculty, courseResult.Value.Faculty);
+            Assert.AreEqual(m_course1.Credits, courseResult.Value.Credits);
+            Assert.AreEqual(m_course1.CourseType, courseResult.Value.CourseType);
+            }
+
+        [Test]
+        public async Task GetSearchedCourses_ValidCourseId_ReturnsCourse()
+            {
+            var coursesResult = await m_controller.GetSearchedCourses("Komparchas");
+            Assert.IsNull(coursesResult.Result);
+            Assert.AreEqual(1, coursesResult.Value.Count());
+            Assert.Contains(m_course1, coursesResult.Value.ToList());
+            }
+
+        [Test]
         public async Task GetCoursesIndexed_StartIndexNonZero_SkipsSomeCourses()
             {
             var coursesResult = await m_controller.GetCoursesIndexed(2);
             Assert.IsNull(coursesResult.Result);
             Assert.AreEqual(1, coursesResult.Value.Count());
+            Assert.Contains(m_course3, coursesResult.Value.ToList());
             }
 
         [Test]
@@ -67,7 +92,7 @@ namespace RateMyP.Tests.Controllers
                 Credits = 5,
                 Faculty = "MIF",
                 CourseType = CourseType.BUS
-                };
+                }; 
 
             m_course2 = new Course
                 {
@@ -78,7 +103,7 @@ namespace RateMyP.Tests.Controllers
                 CourseType = CourseType.Complimentary
                 };
 
-            var course3 = new Course
+             m_course3 = new Course
                 {
                 Id = Guid.NewGuid(),
                 Name = "malkos",
@@ -87,7 +112,7 @@ namespace RateMyP.Tests.Controllers
                 CourseType = CourseType.BUS
                 };
 
-            context.Courses.AddRange(m_course1, m_course2, course3);
+            context.Courses.AddRange(m_course1, m_course2, m_course3);
 
             m_teacher = new Teacher
                 {
@@ -107,6 +132,7 @@ namespace RateMyP.Tests.Controllers
                 Rank = "Professor",
                 Faculty = "MIF"
                 };
+
             context.Teachers.AddRange(m_teacher, teacherSingleCourse);
 
             var teacherActivity1 = new TeacherActivity
@@ -129,10 +155,11 @@ namespace RateMyP.Tests.Controllers
                 {
                 Id = Guid.NewGuid(),
                 TeacherId = teacherSingleCourse.Id,
-                CourseId = course3.Id,
+                CourseId = m_course3.Id,
                 DateStarted = DateTime.Now,
                 LectureType = LectureType.Seminar
                 };
+
             context.TeacherActivities.AddRange(teacherActivity1, teacherActivity2, teacherSingleCourseActivity);
             context.SaveChanges();
             }
