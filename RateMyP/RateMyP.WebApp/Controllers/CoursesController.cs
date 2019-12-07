@@ -15,6 +15,7 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<IEnumerable<Course>>> GetCourses();
         Task<ActionResult<Course>> GetCourse(Guid id);
         Task<ActionResult<IEnumerable<Course>>> GetCoursesIndexed(int startIndex);
+        Task<ActionResult<IEnumerable<Course>>> GetSearchedCourses(string searchString);
         Task<ActionResult<IEnumerable<Course>>> GetTeacherCourses(Guid teacherId);
         }
 

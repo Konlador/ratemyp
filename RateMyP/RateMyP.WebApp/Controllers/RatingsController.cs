@@ -20,7 +20,7 @@ namespace RateMyP.WebApp.Controllers
         Task<IActionResult> GetTeacherRatings(Guid teacherId);
         Task<IActionResult> GetCourseRatings(Guid courseId);
         Task<IActionResult> GetRating(Guid id);
-        Task<ActionResult<RatingThumb>> PostRatingThumb(RatingThumb ratingThumb);
+        Task<ActionResult<RatingThumb>> PostRatingThumb([FromBody]JObject ratingThumbJObject);
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
@@ -28,7 +28,7 @@ namespace RateMyP.WebApp.Controllers
 
     [Route("api/ratings")]
     [ApiController]
-    public class RatingsController : ControllerBase
+    public class RatingsController : ControllerBase, IRatingsController
         {
         private readonly RateMyPDbContext m_context;
         private readonly UpdateLeaderboard m_updateLeaderboardAsync;
@@ -75,7 +75,7 @@ namespace RateMyP.WebApp.Controllers
             var rating = await m_context.Ratings
                                         .Include(r => r.Tags)
                                         .ThenInclude(ratingTag => ratingTag.Tag)
-                                        .SingleAsync(x => x.Id.Equals(id));
+                                        .SingleOrDefaultAsync(x => x.Id.Equals(id));
 
             if (rating == null)
                 return NotFound();

@@ -9,12 +9,12 @@ namespace RateMyP.WebApp.Controllers
     {
     public interface ICourseStatisticsController
         {
-        Task<ActionResult<TeacherStatistics>> GetCourseStatistics(Guid teacherId, int timeStamps);
+        Task<ActionResult<CourseStatistics>> GetCourseStatistics(Guid teacherId, int timeStamps);
         }
 
     [Route("api/statistics")]
     [ApiController]
-    public class CourseStatisticsController : ControllerBase
+    public class CourseStatisticsController : ControllerBase, ICourseStatisticsController
         {
         private readonly ICourseStatisticsAnalyzer m_analyzer;
 

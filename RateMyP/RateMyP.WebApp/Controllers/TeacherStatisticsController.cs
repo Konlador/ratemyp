@@ -14,7 +14,7 @@ namespace RateMyP.WebApp.Controllers
 
     [Route("api/statistics")]
     [ApiController]
-    public class TeacherStatisticsController : ControllerBase
+    public class TeacherStatisticsController : ControllerBase, ITeacherStatisticsController
         {
         private readonly ITeacherStatisticsAnalyzer m_analyzer;
 

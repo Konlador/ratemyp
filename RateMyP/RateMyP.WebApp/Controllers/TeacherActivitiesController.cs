@@ -16,7 +16,7 @@ namespace RateMyP.WebApp.Controllers
 
     [Route("api/teacheractivities")]
     [ApiController]
-    public class TeacherActivitiesController : ControllerBase
+    public class TeacherActivitiesController : ControllerBase, ITeacherActivitiesController
         {
         private readonly RateMyPDbContext m_context;
 
