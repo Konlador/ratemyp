@@ -11,7 +11,6 @@ namespace RateMyP.Tests.Controllers
     {
     public class CourseStatisticsControllerTests : TestsBase
         {
-        private ICourseStatisticsAnalyzer m_analyzer;
         private ICourseStatisticsController m_controller;
 
         private Course m_course;
@@ -23,7 +22,7 @@ namespace RateMyP.Tests.Controllers
         public new void SetUp()
             {
             Seed(Context);
-            m_analyzer = new CourseStatisticsAnalyzer(Context);
+            ICourseStatisticsAnalyzer m_analyzer = new CourseStatisticsAnalyzer(Context);
             m_controller = new CourseStatisticsController(m_analyzer);
             }
 
