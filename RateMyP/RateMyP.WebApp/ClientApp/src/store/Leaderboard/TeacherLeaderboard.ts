@@ -1,5 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
+import { Teacher } from '../Teachers';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -12,9 +13,8 @@ export interface TeacherLeaderboardState {
 }
 
 export interface TeacherLeaderboardEntry {
-    id: string,
-    entryType: number,
-    name: string,
+    teacherId: string,
+    teacher: Teacher,
     allTimePosition: number,
     allTimeRatingCount: number,
     allTimeAverage: number,
@@ -99,7 +99,7 @@ export const actionCreators = {
             appState.teacherLeaderboard &&
             appState.teacherLeaderboard.isLoading === false &&
             (appState.teacherLeaderboard.selectedEntry === undefined ||
-            appState.teacherLeaderboard.selectedEntry.id !== teacherId)) {
+            appState.teacherLeaderboard.selectedEntry.teacherId !== teacherId)) {
             fetch(`api/leaderboard/teacher=${teacherId}`)
                 .then(response => response.json() as Promise<TeacherLeaderboardEntry>)
                 .then(data => {

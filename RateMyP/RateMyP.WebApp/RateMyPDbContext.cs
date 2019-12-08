@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
 using Microsoft.Extensions.Configuration;
+using RateMyP.WebApp.Models.Leaderboard;
 using RateMyP.WebApp.Models.Reports;
 
 namespace RateMyP.WebApp
@@ -17,7 +18,8 @@ namespace RateMyP.WebApp
         DbSet<Tag> Tags { get; set; }
         DbSet<RatingReport> RatingReports { get; set; }
         DbSet<CustomStarReport> CustomStarReports { get; set; }
-        DbSet<LeaderboardEntry> Leaderboard { get; set; }
+        DbSet<TeacherLeaderboardEntry> TeacherLeaderboard { get; set; }
+        DbSet<CourseLeaderboardEntry> CourseLeaderboard { get; set; }
         DbSet<CustomStar> CustomStars { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
         DbSet<Merchandise> Merchandises { get; set; }
@@ -35,7 +37,8 @@ namespace RateMyP.WebApp
         public DbSet<Tag> Tags { get; set; }
         public DbSet<RatingReport> RatingReports { get; set; }
         public DbSet<CustomStarReport> CustomStarReports { get; set; }
-        public DbSet<LeaderboardEntry> Leaderboard { get; set; }
+        public DbSet<TeacherLeaderboardEntry> TeacherLeaderboard { get; set; }
+        public DbSet<CourseLeaderboardEntry> CourseLeaderboard { get; set; }
         public DbSet<CustomStar> CustomStars { get; set; }
         public DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
         public DbSet<Merchandise> Merchandises { get; set; }

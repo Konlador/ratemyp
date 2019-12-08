@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using RateMyP.WebApp.Helpers;
 
 namespace RateMyP.WebApp.Models
     {
@@ -13,6 +15,7 @@ namespace RateMyP.WebApp.Models
     public class Rating : IEquatable<Rating>
         {
         public Guid Id { get; set; }
+        [JsonConverter(typeof(NullToDefaultConverter<Guid>))]
         public Guid TeacherId { get; set; }
         public Guid CourseId { get; set; }
         [Range(1, 5, ErrorMessage = "Value for {0} must be between {1} and {2}.")]

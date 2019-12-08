@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RateMyP.WebApp.Models;
+using RateMyP.WebApp.Models.Leaderboard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,52 +20,31 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet("teachers/global")]
-        public async Task<ActionResult<IEnumerable<object>>> GetTeacherEntriesAllTime()
+        public ActionResult<IEnumerable<TeacherLeaderboardEntry>> GetTopTeachersAllTime()
             {
-            return await m_context.Leaderboard.Join(m_context.Teachers, e => e.Id, t => t.Id, (e, t) => new
-                {
-                t.Id,
-                e.EntryType,
-                Name = t.FirstName + " " + t.LastName,
-                e.AllTimePosition,
-                e.AllTimeRatingCount,
-                e.AllTimeAverage,
-                e.ThisYearPosition,
-                e.ThisYearRatingCount,
-                e.ThisYearAverage
-                })
-                .Where(e => e.EntryType == EntryType.Teacher)
-                .OrderBy(e => e.AllTimePosition)
-                .Take(20).ToListAsync();
+            var entries = m_context.TeacherLeaderboard
+                            .Include(x => x.Teacher)
+                            .OrderBy(x => x.AllTimePosition)
+                            .Take(20);
+            return Ok(entries);
             }
 
         [HttpGet("teachers/year")]
-        public async Task<ActionResult<IEnumerable<object>>> GetTeacherEntriesThisYear()
+        public ActionResult<IEnumerable<object>> GetTopTeachersThisYear()
             {
-            return await m_context.Leaderboard.Join(m_context.Teachers, e => e.Id, t => t.Id, (e, t) => new
-                {
-                t.Id,
-                e.EntryType,
-                Name = t.FirstName + " " + t.LastName,
-                e.AllTimePosition,
-                e.AllTimeRatingCount,
-                e.AllTimeAverage,
-                e.ThisYearPosition,
-                e.ThisYearRatingCount,
-                e.ThisYearAverage
-                })
-                .Where(e => e.EntryType == EntryType.Teacher)
-                .OrderBy(e => e.ThisYearPosition)
-                .Take(20).ToListAsync();
+            var entries = m_context.TeacherLeaderboard
+                                   .Include(x => x.Teacher)
+                                   .OrderBy(x => x.ThisYearPosition)
+                                   .Take(20);
+            return Ok(entries);
             }
 
-        [HttpGet("teacher={id}")]
-        public async Task<ActionResult<LeaderboardEntry>> GetTeacherEntry(Guid id)
+        [HttpGet("teacher={teacherId}")]
+        public async Task<ActionResult<LeaderboardEntry>> GetTeacherEntryAsync(Guid teacherId)
             {
-            var entry = await m_context.Leaderboard
-                .Where(e => e.EntryType == EntryType.Teacher)
-                .FirstOrDefaultAsync(i => i.Id.Equals(id));
-
+            var entry = await m_context.TeacherLeaderboard
+                                       .Include(x => x.Teacher)
+                                       .FirstAsync(x => x.TeacherId.Equals(teacherId));
             if (entry == null)
                 return NotFound();
 
@@ -73,52 +52,31 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet("courses/global")]
-        public async Task<ActionResult<IEnumerable<object>>> GetCourseEntriesAllTime()
+        public ActionResult<IEnumerable<object>> GetCourseEntriesAllTime()
             {
-            return await m_context.Leaderboard.Join(m_context.Courses, e => e.Id, t => t.Id, (e, t) => new
-                    {
-                    t.Id,
-                    e.EntryType,
-                    t.Name,
-                    e.AllTimePosition,
-                    e.AllTimeRatingCount,
-                    e.AllTimeAverage,
-                    e.ThisYearPosition,
-                    e.ThisYearRatingCount,
-                    e.ThisYearAverage
-                    })
-                .Where(e => e.EntryType == EntryType.Course)
-                .OrderBy(e => e.AllTimePosition)
-                .Take(20).ToListAsync();
+            var entries = m_context.CourseLeaderboard
+                                   .Include(x => x.Course)
+                                   .OrderBy(x => x.AllTimePosition)
+                                   .Take(20);
+            return Ok(entries);
             }
 
         [HttpGet("courses/year")]
-        public async Task<ActionResult<IEnumerable<object>>> GetCourseEntriesThisYear()
+        public ActionResult<IEnumerable<object>> GetCourseEntriesThisYear()
             {
-            return await m_context.Leaderboard.Join(m_context.Courses, e => e.Id, t => t.Id, (e, t) => new
-                    {
-                    t.Id,
-                    e.EntryType,
-                    t.Name,
-                    e.AllTimePosition,
-                    e.AllTimeRatingCount,
-                    e.AllTimeAverage,
-                    e.ThisYearPosition,
-                    e.ThisYearRatingCount,
-                    e.ThisYearAverage
-                    })
-                .Where(e => e.EntryType == EntryType.Course)
-                .OrderBy(e => e.ThisYearPosition)
-                .Take(20).ToListAsync();
+            var entries = m_context.CourseLeaderboard
+                                   .Include(x => x.Course)
+                                   .OrderBy(x => x.ThisYearPosition)
+                                   .Take(20);
+            return Ok(entries);
             }
 
-        [HttpGet("course={id}")]
-        public async Task<ActionResult<LeaderboardEntry>> GetCourseEntry(Guid id)
+        [HttpGet("course={courseId}")]
+        public async Task<ActionResult<LeaderboardEntry>> GetCourseEntryAsync(Guid courseId)
             {
-            var entry = await m_context.Leaderboard
-                .Where(e => e.EntryType == EntryType.Course)
-                .FirstOrDefaultAsync(i => i.Id.Equals(id));
-
+            var entry = await m_context.CourseLeaderboard
+                                       .Include(x => x.Course)
+                                       .FirstAsync(x => x.CourseId.Equals(courseId));
             if (entry == null)
                 return NotFound();
 

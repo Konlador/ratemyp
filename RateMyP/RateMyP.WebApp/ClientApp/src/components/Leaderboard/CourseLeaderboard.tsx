@@ -86,9 +86,9 @@ class CourseLeaderboard extends React.PureComponent<Props, State> {
                 data={this.props.allTimeEntries.map((entry: CourseLeaderboardStore.CourseLeaderboardEntry) => {
                     return [
                         entry.allTimePosition,
-                        entry.name,
+                        entry.course.name,
                         entry.allTimeAverage.toFixed(2),
-                        entry.id
+                        entry.courseId
                     ]})}
                 columns={[
                     {name: 'Rank', options: {sort: true}},
@@ -107,9 +107,9 @@ class CourseLeaderboard extends React.PureComponent<Props, State> {
                 data={this.props.thisYearEntries.map((entry: CourseLeaderboardStore.CourseLeaderboardEntry) => {
                     return [
                         entry.thisYearPosition,
-                        entry.name,
+                        entry.course.name,
                         entry.thisYearAverage.toFixed(2),
-                        entry.id
+                        entry.courseId
                     ]})}
                 columns={[
                     {name: 'Rank', options: {sort: false}},

@@ -25,19 +25,17 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
-    public delegate Task UpdateLeaderboard(Guid id, EntryType type);
-
     [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
         private readonly RateMyPDbContext m_context;
-        private readonly UpdateLeaderboard m_updateLeaderboardAsync;
+        private readonly ILeaderboardManager m_leaderboardManager;
 
         public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
-            m_updateLeaderboardAsync = leaderboardManager.Update;
+            m_leaderboardManager = leaderboardManager;
             }
 
         [HttpGet]
@@ -112,17 +110,15 @@ namespace RateMyP.WebApp.Controllers
             return Created("RatingThumb", ratingThumb);
             }
 
-        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
+        public async Task<ActionResult<Rating>> PostRating(RatingDto ratingDto)
             {
             var ratingId = Guid.NewGuid();
-
             var ratingTags = new List<RatingTag>();
-            var tags = JsonConvert.DeserializeObject<List<Tag>>((string)data["tags"]);
-            foreach (var tag in tags)
+            var validTags = await m_context.Tags.ToListAsync();
+            foreach (var tag in ratingDto.Tags)
                 {
-                if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
+                if (validTags.Any(t => t.Id.Equals(tag.Id)))
                     ratingTags.Add(new RatingTag
                         {
                         RatingId = ratingId,
@@ -133,32 +129,29 @@ namespace RateMyP.WebApp.Controllers
                     return NotFound("Tag not found");
                 }
 
-            Guid.TryParse((string)data["teacherId"], out var teacherId);
-            Guid.TryParse((string)data["courseId"], out var courseId);
-
             var rating = new Rating
                 {
                 Id = ratingId,
                 DateCreated = DateTime.Now,
-                TeacherId = teacherId,
+                TeacherId = ratingDto.TeacherId,
                 Tags = ratingTags,
-                Comment = (string)data["comment"],
-                CourseId = courseId,
-                LevelOfDifficulty = (int)data["levelOfDifficulty"],
-                OverallMark = (int)data["overallMark"],
-                WouldTakeTeacherAgain = (bool)data["wouldTakeTeacherAgain"],
-                RatingType = (RatingType)(int)data["ratingType"],
+                Comment = ratingDto.Comment,
+                CourseId = ratingDto.CourseId,
+                LevelOfDifficulty = ratingDto.LevelOfDifficulty,
+                OverallMark = ratingDto.OverallMark,
+                WouldTakeTeacherAgain = ratingDto.WouldTakeTeacherAgain,
+                RatingType = ratingDto.RatingType,
                 ThumbUps = 0,
                 ThumbDowns = 0
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 
-            if (teacherId != Guid.Empty)
-                await m_updateLeaderboardAsync(teacherId, EntryType.Teacher);
-            await m_updateLeaderboardAsync(courseId, EntryType.Course);
+            if (rating.TeacherId != Guid.Empty)
+                await m_leaderboardManager.UpdateTeacherAsync(rating.TeacherId);
+            await m_leaderboardManager.UpdateCourseAsync(rating.CourseId);
 
-            return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
+            return CreatedAtAction(nameof(GetRatingAsync), new { id = rating.Id });
             }
         }
     }

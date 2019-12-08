@@ -18,15 +18,16 @@ namespace RateMyP.WebApp
             //    var dataLoader = new DbDataLoader(context);
             //    dataLoader.LoadDataToDb();
             //    }
+            //RunLeaderboardUpdate();
 
             CreateWebHostBuilder(args).Build().Run();
             }
 
         private static async void RunLeaderboardUpdate()
             {
-            RateMyPDbContext dbC = new RateMyPDbContext();
-            LeaderboardManager lbM = new LeaderboardManager(new TeacherStatisticsAnalyzer(dbC), new CourseStatisticsAnalyzer(dbC), dbC);
-            await lbM.FullUpdate();
+            var dbC = new RateMyPDbContext();
+            var lbM = new LeaderboardManager(new TeacherStatisticsAnalyzer(dbC), new CourseStatisticsAnalyzer(dbC), dbC);
+            await lbM.FullUpdateAsync();
             }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
