@@ -63,8 +63,7 @@ namespace RateMyP.WebApp.Controllers
                                 .Denationalize()
                                 .Contains(search))
                                 .OrderBy(x => x.Name)
-                                .Take(countToTake)
-                          .ToList();
+                                .ToList();
             }
 
         [HttpGet("teacher={teacherId}")]

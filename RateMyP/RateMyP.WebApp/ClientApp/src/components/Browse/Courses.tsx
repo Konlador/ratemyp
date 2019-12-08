@@ -8,6 +8,7 @@ import './Courses.css';
 
 interface OwnProps {
     courseId: string,
+    search: string,
 };
 
 type Props =
@@ -17,6 +18,16 @@ type Props =
 
 class Courses extends React.PureComponent<Props & OwnProps> {
 
+    constructor(props: Props & OwnProps) {
+        super(props);
+        this.keyPressed = this.keyPressed.bind(this);
+        this.state = {
+            currentIndex: 20,
+            canLoadMore: true,
+            searchString: ""
+        }
+    }
+
     state = {
         currentIndex: 20,
         canLoadMore: true,
@@ -24,8 +35,20 @@ class Courses extends React.PureComponent<Props & OwnProps> {
     }
 
     public componentDidMount() {
-        this.props.requestAllCourses();
+        if (this.props.search !== undefined) {
+            this.props.clearAllCourses();
+            this.updateSearchText(this.props.search);
+            this.props.searchCourse(this.props.search);
+            if (this.props.courses.length < 20) this.setState({canLoadMore: false});
+        } else {
+            this.props.clearAllCourses();
+            this.props.requestAllCourses();
+        }
         window.addEventListener("scroll", () => this.handleScroll());
+    }
+
+    private updateSearchText(searchString: string) {
+        this.setState({searchString: searchString});
     }
 
     public componentWillUnmount() {
@@ -39,7 +62,7 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
         if (windowBottom >= docHeight && !this.props.isLoading)
-            this.loadMoreCourses()
+            this.loadMoreCourses();
     }
 
     private loadMoreCourses() {
@@ -49,12 +72,41 @@ class Courses extends React.PureComponent<Props & OwnProps> {
             this.setState({canLoadMore: false})
     }
 
+    private search() {
+        this.props.clearAllCourses();
+        if (this.state.searchString == "") {
+            this.setState({canLoadMore: true});
+            this.props.requestAllCourses();
+        } else {
+            this.props.searchCourse(this.state.searchString);
+        }
+    }
+
+    private searchChanged(searchString: string) {
+        this.setState({searchString: searchString});
+    }
+
+    keyPressed = (e: any) => {
+        if (e.key === "Enter") {
+            this.search();
+        }
+    }
+
     public render() {
         return (
             <React.Fragment>
+                <div className="courses-top">
+                    <h2 id="courses-label">Courses
+                        {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
+                    </h2>
+                    <Input id="courses-search-box" value={this.state.searchString} name="Search" placeholder="Type here..." 
+                        onChange={(e) => this.searchChanged(`${e.target.value}`)}
+                        onKeyPress={this.keyPressed}/>
+                    <Button id="courses-search-button" onClick={() => this.search()} color="primary">Search</Button>
+                </div>
                 {this.renderTable()}
                 {this.props.courses.length == 0 && <h4 style={{textAlign: 'center'}}>No results</h4>}
-                {this.state.canLoadMore && 
+                {this.state.canLoadMore && (this.props.courses.length >= 20) && 
                 <div>
                     <Button onClick={() => this.loadMoreCourses()} color="primary" style={{ 
                         position: 'absolute', 
@@ -72,31 +124,9 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         );
     }
 
-    private search() {
-        this.props.clearAllCourses();
-        if (this.state.searchString == "") {
-            this.setState({canLoadMore: true})
-            this.props.requestAllCourses()
-        } else {
-            this.setState({canLoadMore: false})
-            this.props.searchCourse(this.state.searchString);
-        }
-    }
-
-    private searchChanged(searchString: string) {
-        this.setState({searchString: searchString})
-    }
-
     private renderTable() {
         return (
             <div>
-                <div className="courses-top">
-                    <h2 id="courses-label">Courses
-                        {this.props.isLoading && <Spinner type="grow" color= "primary" style={{display: 'inline'}}></Spinner>}
-                    </h2>
-                    <Input id="courses-search-box" name="Search" placeholder="Type here..." onChange={(e) => this.searchChanged(`${e.target.value}`)}/>
-                    <Button id="courses-search-button" onClick={() => this.search()} color="primary">Search</Button>
-                </div>
                 <Table className="table table-striped" aria-labelledby="tabelLabel" size="sm" hover>
                     <thead>
                         <tr>
