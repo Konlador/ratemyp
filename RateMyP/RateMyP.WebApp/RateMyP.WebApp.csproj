@@ -55,10 +55,13 @@
     <Compile Remove="Migrations\20191109163123_RatingTypes.Designer.cs" />
     <Compile Remove="Migrations\20191111191225_test.cs" />
     <Compile Remove="Migrations\20191111191225_test.Designer.cs" />
+    <Compile Remove="Migrations\20191208093925_ReportsReworked.cs" />
+    <Compile Remove="Migrations\20191208093925_ReportsReworked.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Db\SeedData\courses.csv" />
+    <None Remove="Db\SeedData\merch.csv" />
     <None Remove="Db\SeedData\students.csv" />
     <None Remove="Db\SeedData\tags.csv" />
     <None Remove="Db\SeedData\teachers.csv" />
@@ -66,6 +69,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Db\SeedData\merch.csv" />
     <EmbeddedResource Include="Db\SeedData\courses.csv" />
     <EmbeddedResource Include="Db\SeedData\students.csv" />
     <EmbeddedResource Include="Db\SeedData\tags.csv" />

@@ -5,8 +5,8 @@ import { ApplicationState } from '../../store';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
 import * as CustomStarShowcaseStore from '../../store/CustomStar/CustomStarShowcase';
-import './CustomStarShowcase.css';
 import { CustomStar } from '../../store/CustomStar/CustomStar';
+import './CustomStarShowcase.css';
 
 interface OwnProps {
     teacherId: string,

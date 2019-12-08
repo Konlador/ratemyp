@@ -1,5 +1,9 @@
+using System;
+using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using RateMyP.WebApp.Db;
 using RateMyP.WebApp.Statistics;
 
 
@@ -9,9 +13,12 @@ namespace RateMyP.WebApp
         {
         public static void Main(string[] args)
             {
-            //DbDataLoader.LoadDataToDb();
-            //LoadRating();
-            //RunLeaderboardUpdate();
+            //using (var context = new RateMyPDbContext())
+            //    {
+            //    var dataLoader = new DbDataLoader(context);
+            //    dataLoader.LoadDataToDb();
+            //    }
+
             CreateWebHostBuilder(args).Build().Run();
             }
 

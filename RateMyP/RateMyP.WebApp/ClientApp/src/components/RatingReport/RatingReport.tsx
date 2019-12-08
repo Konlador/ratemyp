@@ -3,24 +3,23 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Button, Form, FormGroup, Label, Input, UncontrolledAlert, Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
-import * as ReportRatingStore from '../../store/Rate/RatingReport';
+import * as RatingReportCreationStore from '../../store/Reports/RatingReportCreation';
 import * as TeacherCoursesStore from '../../store/Teacher/TeacherCourses';
 import * as RatingsStore from '../../store/Ratings'
 import * as TagsStore from '../../store/Tags';
 
 type Props =
     {
-    report: ReportRatingStore.RatingReportState,
+    report: RatingReportCreationStore.RatingReportCreationState,
     courses: TeacherCoursesStore.TeacherCoursesState
     } &
-    typeof ReportRatingStore.actionCreators &
+    typeof RatingReportCreationStore.actionCreators &
     typeof TeacherCoursesStore.actionCreators &
     RouteComponentProps<{ ratingId: string }>
 
 class RatingReport extends React.PureComponent<Props> {
     public componentDidMount() {
         this.props.requestRating(this.props.match.params.ratingId);
-        
     }
 
     public componentDidUpdate() {
@@ -48,10 +47,10 @@ class RatingReport extends React.PureComponent<Props> {
       }
 
     private onSubmitButtonPush() {
-        this.props.setRatingId(this.props.match.params.ratingId)
+        this.props.setRatingId(this.props.match.params.ratingId);
         if(this.props.report.report.reason.length >= 30){
-            this.props.sendReport()
-            this.props.history.goBack()
+            this.props.sendReport();
+            this.props.history.goBack();
         }
     }
       
@@ -132,13 +131,13 @@ class RatingReport extends React.PureComponent<Props> {
 
 function mapStateToProps(state: ApplicationState) {
     return {
-        report: state.ratingReport,
+        report: state.ratingReportCreation,
         courses: state.teacherCourses,
     }
 };
 
 const actions = {
-  ...ReportRatingStore.actionCreators,
+  ...RatingReportCreationStore.actionCreators,
   ...TeacherCoursesStore.actionCreators,
 }
 

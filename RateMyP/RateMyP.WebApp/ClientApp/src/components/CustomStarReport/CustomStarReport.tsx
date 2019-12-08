@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Button, Form, FormGroup, Label, Input, UncontrolledAlert, Table } from 'reactstrap';
 import { ApplicationState } from '../../store';
-import * as CustomStarReportStore from '../../store/CustomStar/CustomStarReport';
+import * as CustomStarReportCreationStore from '../../store/Reports/CustomStarReportCreation';
 import { CustomStar } from '../../store/CustomStar/CustomStar';
 
 type Props =
-    CustomStarReportStore.CustomStarReportState &
-    typeof CustomStarReportStore.actionCreators &
+    CustomStarReportCreationStore.CustomStarReportCreationState &
+    typeof CustomStarReportCreationStore.actionCreators &
     RouteComponentProps<{ customStarId: string }>
 
 class CustomStarReport extends React.PureComponent<Props> {
@@ -36,11 +36,11 @@ class CustomStarReport extends React.PureComponent<Props> {
       }
 
     private onSubmitButtonPush() {
-        this.props.setCustomStarId(this.props.match.params.customStarId)
-        this.props.setStudentId(this.props.customStar ? this.props.customStar.studentId : "Undefined")
+        this.props.setCustomStarId(this.props.match.params.customStarId);
+        this.props.setStudentId(this.props.customStar ? this.props.customStar.studentId : "Undefined");
         if(this.props.report.reason.length >= 30){
-            this.props.sendReport()
-            this.props.history.goBack()
+            this.props.sendReport();
+            this.props.history.goBack();
         }
     }
       
@@ -111,6 +111,6 @@ class CustomStarReport extends React.PureComponent<Props> {
 }
 
 export default connect(
-    (state: ApplicationState) => state.customStarReport,
-    CustomStarReportStore.actionCreators
+    (state: ApplicationState) => state.customStarReportCreation,
+    CustomStarReportCreationStore.actionCreators
   )(CustomStarReport as any);

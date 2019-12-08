@@ -33,7 +33,6 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
         filter: false,
         search: false,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[3]}`);
           },
     };

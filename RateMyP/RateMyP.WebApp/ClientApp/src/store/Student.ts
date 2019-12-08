@@ -44,8 +44,8 @@ type KnownAction = RequestStudentAction | ReceiveStudentAction | ClearStudentAct
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    login: (user: firebase.User): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        console.log(user)
+    login: (user: firebase.User): AppThunkAction<KnownAction> => (dispatch) => {
+        //console.log(user)
         const studentId = user.uid;
         fetch(`api/students/${studentId}`)
             .then(response => response.json() as Promise<Student>)
@@ -55,7 +55,7 @@ export const actionCreators = {
 
         dispatch({ type: 'REQUEST_STUDENT', studentId, user });
     },
-    logout: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    logout: (): AppThunkAction<KnownAction> => (dispatch) => {
         dispatch({ type: 'CLEAR_STUDENT' });
     },
 };

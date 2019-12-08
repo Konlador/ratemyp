@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
 using Microsoft.Extensions.Configuration;
+using RateMyP.WebApp.Models.Reports;
 
 namespace RateMyP.WebApp
     {
@@ -19,6 +20,7 @@ namespace RateMyP.WebApp
         DbSet<LeaderboardEntry> Leaderboard { get; set; }
         DbSet<CustomStar> CustomStars { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+        DbSet<Merchandise> Merchandises { get; set; }
         }
 
     public class RateMyPDbContext : DbContext, IRateMyPDbContext
@@ -36,6 +38,8 @@ namespace RateMyP.WebApp
         public DbSet<LeaderboardEntry> Leaderboard { get; set; }
         public DbSet<CustomStar> CustomStars { get; set; }
         public DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+        public DbSet<Merchandise> Merchandises { get; set; }
+        public DbSet<MerchandiseOrder> MerchandiseOrders { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
@@ -55,6 +59,14 @@ namespace RateMyP.WebApp
             builder.Entity<RatingThumb>().HasKey(table => new { table.RatingId, table.StudentId });
             builder.Entity<CustomStarThumb>().HasKey(table => new { table.CustomStarId, table.StudentId });
             builder.Entity<RatingTag>().HasKey(table => new { table.RatingId, table.TagId });
+            builder.Entity<RatingReport>()
+                   .HasOne(rr => rr.Rating)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<CustomStarReport>()
+                   .HasOne(cr => cr.CustomStar)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
             }
         }
     }

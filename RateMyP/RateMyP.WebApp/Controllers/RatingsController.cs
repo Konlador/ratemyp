@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using RateMyP.WebApp.Helpers;
 using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
@@ -40,64 +41,41 @@ namespace RateMyP.WebApp.Controllers
             }
 
         [HttpGet]
-        public async Task<IActionResult> GetRatings()
+        public ActionResult<IEnumerable<RatingDto>> GetRatings()
             {
-            var ratings = await m_context.Ratings
-                                         .Include(rating => rating.Tags)
-                                         .ThenInclude(ratingTag => ratingTag.Tag)
-                                         .ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings.SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("teacher={teacherId}")]
-        public async Task<IActionResult> GetTeacherRatings(Guid teacherId)
+        public ActionResult<IEnumerable<RatingDto>> GetTeacherRatings(Guid teacherId)
             {
-            var ratings = await m_context.Ratings
-                                         .Include(rating => rating.Tags)
-                                         .ThenInclude(ratingTag => ratingTag.Tag)
-                                         .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings
+                                   .Where(x => x.TeacherId.Equals(teacherId))
+                                   .SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("course={courseId}")]
-        public async Task<IActionResult> GetCourseRatings(Guid courseId)
+        public ActionResult<IEnumerable<RatingDto>> GetCourseRatings(Guid courseId)
             {
-            var ratings = await m_context.Ratings
-                .Include(rating => rating.Tags)
-                .ThenInclude(ratingTag => ratingTag.Tag)
-                .Where(x => x.CourseId.Equals(courseId)).ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings
+                                   .Where(x => x.CourseId.Equals(courseId))
+                                   .SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRating(Guid id)
+        public async Task<IActionResult> GetRatingAsync(Guid id)
             {
             var rating = await m_context.Ratings
                                         .Include(r => r.Tags)
-                                        .ThenInclude(ratingTag => ratingTag.Tag)
+                                        .ThenInclude(rt => rt.Tag)
                                         .SingleAsync(x => x.Id.Equals(id));
-
             if (rating == null)
                 return NotFound();
 
-            return Ok(SerializeRating(rating));
-            }
-
-        private static JArray SerializeRatings(IEnumerable<Rating> ratings)
-            {
-            return JArray.FromObject(ratings.Select(SerializeRating));
-            }
-
-        private static JObject SerializeRating(Rating rating)
-            {
-            var serializer = new JsonSerializer
-                {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-            var serializedRating = JObject.FromObject(rating, serializer);
-            var serializedTagsList = rating.Tags.Select(ratingTag => JObject.FromObject(ratingTag.Tag, serializer)).ToList();
-            serializedRating["tags"] = JArray.FromObject(serializedTagsList, serializer);
-            return serializedRating;
+            return Ok(rating.SelectRatingDto());
             }
 
         [HttpPost("thumb")]
@@ -156,7 +134,7 @@ namespace RateMyP.WebApp.Controllers
                 }
 
             Guid.TryParse((string)data["teacherId"], out var teacherId);
-            Guid.TryParse((string) data["courseId"], out var courseId);
+            Guid.TryParse((string)data["courseId"], out var courseId);
 
             var rating = new Rating
                 {

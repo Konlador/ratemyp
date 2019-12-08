@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RateMyP.WebApp;
 
 namespace RateMyP.WebApp.Migrations
 {
     [DbContext(typeof(RateMyPDbContext))]
-    partial class RateMyPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191208100133_ReportsReworked")]
+    partial class ReportsReworked
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,6 +68,29 @@ namespace RateMyP.WebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomStars");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.CustomStarReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomStarId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomStarReports");
                 });
 
             modelBuilder.Entity("RateMyP.WebApp.Models.CustomStarThumb", b =>
@@ -206,6 +231,31 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("Ratings");
                 });
 
+            modelBuilder.Entity("RateMyP.WebApp.Models.RatingReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("RatingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RatingId");
+
+                    b.ToTable("RatingReports");
+                });
+
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>
                 {
                     b.Property<Guid>("RatingId")
@@ -237,63 +287,10 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("RatingThumbs");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.CustomStarReport", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CustomStarId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomStarId");
-
-                    b.ToTable("CustomStarReports");
-                });
-
-            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.RatingReport", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("RatingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RatingId");
-
-                    b.ToTable("RatingReports");
-                });
-
             modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Points")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Studies")
                         .HasColumnType("nvarchar(max)");
@@ -371,6 +368,15 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("TeacherActivities");
                 });
 
+            modelBuilder.Entity("RateMyP.WebApp.Models.RatingReport", b =>
+                {
+                    b.HasOne("RateMyP.WebApp.Models.Rating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>
                 {
                     b.HasOne("RateMyP.WebApp.Models.Rating", null)
@@ -383,24 +389,6 @@ namespace RateMyP.WebApp.Migrations
                         .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.CustomStarReport", b =>
-                {
-                    b.HasOne("RateMyP.WebApp.Models.CustomStar", "CustomStar")
-                        .WithMany()
-                        .HasForeignKey("CustomStarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.RatingReport", b =>
-                {
-                    b.HasOne("RateMyP.WebApp.Models.Rating", "Rating")
-                        .WithMany()
-                        .HasForeignKey("RatingId")
-                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

@@ -9,6 +9,7 @@ namespace RateMyP.WebApp.Models
         Teacher,
         Course
         }
+
     public class Rating : IEquatable<Rating>
         {
         public Guid Id { get; set; }
@@ -22,7 +23,7 @@ namespace RateMyP.WebApp.Models
         public List<RatingTag> Tags { get; set; }
         public DateTime DateCreated { get; set; }
         public string Comment { get; set; }
-        public string? StudentId { get; set; }
+        public string StudentId { get; set; }
         public RatingType RatingType { get; set; }
         public int ThumbUps { get; set; }
         public int ThumbDowns { get; set; }
@@ -40,4 +41,22 @@ namespace RateMyP.WebApp.Models
             other.Comment.Equals(Comment) &&
             other.RatingType.Equals(RatingType);
         }
+
+    public class RatingDto
+        {
+        public Guid? Id { get; set; }
+        public Guid TeacherId { get; set; }
+        public Guid CourseId { get; set; }
+        public int OverallMark { get; set; }
+        public int LevelOfDifficulty { get; set; }
+        public bool WouldTakeTeacherAgain { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string Comment { get; set; }
+        public RatingType RatingType { get; set; }
+        public int ThumbUps { get; set; }
+        public int ThumbDowns { get; set; }
+
+        public List<Tag> Tags { get; set; }
+        }
+
     }

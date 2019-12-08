@@ -1,26 +1,14 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
-import { CustomStar } from './CustomStar';
+import { CustomStar } from '../CustomStar/CustomStar';
+import { CustomStarReport } from "./CustomStarReports";
 
-// -----------------
-// STATE - This defines the type of data maintained in the Redux store.
-
-export interface CustomStarReportState {
+export interface CustomStarReportCreationState {
     submitButtonClicked: boolean;
     customStarId : string;
     customStar: CustomStar | undefined;
     report: CustomStarReport;
 }
-
-export interface CustomStarReport {
-    customStarId: string;
-    studentId: string;
-    reason: string;
-}
-
-// -----------------
-// ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
-// They do not themselves have any side-effects; they just describe sometheState that is goeState to happen.
 
 interface RequestCustomStarAction {
     type: 'REQUEST_CUSTOM_STAR';
@@ -59,22 +47,15 @@ interface ClearStoreAction {
     type: 'CLEAR_STORE'
 }
 
-
-// Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
-// declared type streStates (and not any other arbitrary streState).
 type KnownAction = RequestCustomStarAction | ReceiveCustomStarAction | ChangeReasonAction | SubmitReportAction | SendReportAction | SetCustomStarIdAction |  ClearStoreAction | SetStudentIdAction;
-
-// ----------------
-// ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
-// They don't directly mutate state, but they can have external side-effects (such as loadeState data).
 
 export const actionCreators = {
     requestCustomStar: (customStarId: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
         const appState = getState();
         if (appState &&
-            appState.customStarReport &&
-            (appState.customStarReport.customStar === undefined ||
-            appState.customStarReport.customStar.id !== customStarId)) {
+            appState.customStarReportCreation &&
+            (appState.customStarReportCreation.customStar === undefined ||
+            appState.customStarReportCreation.customStar.id !== customStarId)) {
             fetch(`api/images/${customStarId}`)
                 .then(response => response.json() as Promise<CustomStar>)
                 .then(customStar => {
@@ -88,17 +69,22 @@ export const actionCreators = {
     },
     submitReport: () => ({ type: 'SUBMIT_REPORT' } as SubmitReportAction),
     sendReport: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        const state = getState();
-        if(state.customStarReport !== undefined){
-            fetch('api/reports/custom-star', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(state.customStarReport.report)
-            }).then(res => res.json()).catch(error => console.error('Error:', error));
+        const appState = getState();
+        if (appState &&
+            appState.student && appState.student.user &&
+            appState.customStarReportCreation) {
+            appState.student.user.getIdToken().then(userToken => {
+                fetch('api/reports/custom-star', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`,
+                    },
+                    body: JSON.stringify(appState.customStarReportCreation!.report)
+                }).then(res => res.json()).catch(error => console.error('Error:', error));
+            });
+            dispatch({type: 'SEND_REPORT'});
         }
-        dispatch({type: 'SEND_REPORT'});
     },
     setCustomStarId: (value: string): AppThunkAction<KnownAction> => (dispatch) => { 
         dispatch({ type: 'SET_CUSTOM_STAR_ID', value: value });
@@ -108,12 +94,11 @@ export const actionCreators = {
     },
     clearStore: () => ({ type: 'CLEAR_STORE'} as ClearStoreAction),
 };
-// ----------------
-// REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
-const unloadedCustomStarReport: CustomStarReport = { customStarId: '', reason: '', studentId: '' }
-const unloadedState: CustomStarReportState = { customStarId: '', customStar: undefined, submitButtonClicked: false, report: unloadedCustomStarReport };
 
-export const reducer: Reducer<CustomStarReportState> = (state: CustomStarReportState | undefined, incomeStateAction: Action): CustomStarReportState => {
+const unloadedCustomStarReport: CustomStarReport = { id: '', customStarId: '', reason: '', studentId: '', dateCreated: undefined };
+const unloadedState: CustomStarReportCreationState = { customStarId: '', customStar: undefined, submitButtonClicked: false, report: unloadedCustomStarReport };
+
+export const reducer: Reducer<CustomStarReportCreationState> = (state: CustomStarReportCreationState | undefined, incomeStateAction: Action): CustomStarReportCreationState => {
     if (state === undefined)
         return unloadedState;
 

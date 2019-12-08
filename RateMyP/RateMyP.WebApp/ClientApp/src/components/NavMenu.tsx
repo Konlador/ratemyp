@@ -50,7 +50,7 @@ class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/">
+                                <NavLink tag={Link} className="text-dark" to="/shop">
                                     <div className="nav-menu-item">
                                         <img src={StoreLogo} />
                                         <p className="text">
@@ -69,6 +69,16 @@ class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
                                     </div>
                                 </NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/reports">
+                                    <div className="nav-menu-item">
+                                        <img src={LoginLogo} />
+                                        <p className="text">
+                                            Admin
+                                        </p>
+                                    </div>
+                                </NavLink>
+                            </NavItem>
                         </ul>
                     </Container>
                 </Navbar>
@@ -78,7 +88,6 @@ class NavMenu extends React.PureComponent<{}, { isOpen: boolean }> {
 }
 
 function mapStateToProps(state: ApplicationState) {
-    console.log(state);
     return {
         
     }

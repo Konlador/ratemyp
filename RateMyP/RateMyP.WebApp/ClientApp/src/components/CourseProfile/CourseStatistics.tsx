@@ -34,7 +34,6 @@ class CourseStatistics extends React.PureComponent<Props & OwnProps> {
     private ensureDataFetched() {
         this.props.requestCourseRatings(this.props.courseId);
         this.props.requestCourseStatistics(this.props.courseId);
-        console.log("length:", this.props.statistics.courseStatistics.averageMark)
         this.props.requestTags();
     }
 
