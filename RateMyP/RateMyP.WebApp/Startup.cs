@@ -27,6 +27,7 @@ namespace RateMyP.WebApp
             services.AddTransient<ICourseStatisticsAnalyzer, CourseStatisticsAnalyzer>();
             services.AddTransient<ITeacherStatisticsAnalyzer, TeacherStatisticsAnalyzer>();
             services.AddTransient<ILeaderboardManager, LeaderboardManager>();
+            services.AddTransient<IBadgeManager, BadgeManager>();
 
             services.AddControllersWithViews();
             services.AddMvc()

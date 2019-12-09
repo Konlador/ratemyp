@@ -19,7 +19,7 @@ namespace RateMyP.WebApp
             //    dataLoader.LoadDataToDb();
             //    }
             //RunLeaderboardUpdate();
-
+            //RunBadgeUpdates();
             CreateWebHostBuilder(args).Build().Run();
             }
 
@@ -30,11 +30,13 @@ namespace RateMyP.WebApp
             await lbM.FullUpdateAsync();
             }
 
-        private byte[] LoadImage(string name)
+        private static async void RunBadgeUpdates()
             {
-            var assembly = Assembly.GetExecutingAssembly();
-            using var stream = assembly.GetManifestResourceStream($"RateMyP.WebApp.Db.SeedData.{name}");
+            var dbC = new RateMyPDbContext();
+            var bM = new BadgeManager(dbC, new TeacherStatisticsAnalyzer(dbC));
+            await bM.FullUpdateAsync();
             }
+
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

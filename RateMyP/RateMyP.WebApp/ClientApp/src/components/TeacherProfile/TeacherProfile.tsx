@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import TeacherInfo from './TeacherInfo';
+import TeacherBadges from './TeacherBadges';
 import TeacherStatistics from './TeacherStatistics';
 import TeacherActivities from './TeacherActivities';
 import TeacherRatings from './TeacherRatings';
@@ -20,6 +21,7 @@ class TeacherProfile extends React.PureComponent<Props> {
     public render() {
         return (
             <React.Fragment>
+                <TeacherBadges teacherId={this.props.match.params.teacherId}/>
                 <TeacherInfo teacherId={this.props.match.params.teacherId}/>
                 <TeacherStatistics teacherId={this.props.match.params.teacherId}/>
                 <TeacherActivities teacherId={this.props.match.params.teacherId}/>

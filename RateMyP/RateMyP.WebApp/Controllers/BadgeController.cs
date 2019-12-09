@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using RateMyP.WebApp.Helpers;
 
 namespace RateMyP.WebApp.Controllers
     {
@@ -14,7 +14,7 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<IEnumerable<Badge>>> GetBadges();
         Task<ActionResult<Badge>> GetBadge(Guid id);
         Task<ActionResult<IEnumerable<TeacherBadge>>> GetTeacherBadges(Guid teacherId);
-        Task<ActionResult<byte[]>> GetBadgeImage(Guid id);
+        ActionResult GetBadgeImage(Guid id);
 
         }
 
@@ -35,7 +35,7 @@ namespace RateMyP.WebApp.Controllers
             return await m_context.Badges.ToListAsync();
             }
 
-        [HttpGet("{id}")]
+        [HttpGet("badge={id}")]
         public async Task<ActionResult<Badge>> GetBadge(Guid id)
             {
             var badge = await m_context.Badges.FindAsync(id);
@@ -56,48 +56,39 @@ namespace RateMyP.WebApp.Controllers
             return badges;
             }
 
-        [HttpGet("image/{id}")]
-        public async Task<ActionResult<byte[]>> GetBadgeImage(Guid id)
+        public byte[] GetImageMetadata(Guid id, out string type)
             {
             byte[] imageData = null;
-            await using (m_context)
+            string imageType = null;
+            Badge badge = GetBadgeImageFromDb(id).Result.Value;
+            if (badge != null)
                 {
-                var image = await m_context.Badges.FirstAsync(i => i.Id == id);
-                if (image != null)
-                    {
-                    imageData = image.Data;
-                    }
+                imageType = badge.Type;
+                imageData = badge.Data;
                 }
 
+            type = imageType;
             return imageData;
             }
 
-        public void Upload(Stream fileStream, string name, string description, long size)
+        public async Task<ActionResult<Badge>> GetBadgeImageFromDb(Guid id)
             {
-            try
+            await using (m_context)
                 {
-                var imageData = new byte[fileStream.Length];
-                fileStream.Read(imageData, 0, imageData.Length);
-
-                var badge = new Badge
-                    {
-                    Id = new Guid(),
-                    Data = imageData,
-                    Description = description,
-                    Image = name,
-                    Size = size,
-                    };
-
-                using (m_context)
-                    {
-                    m_context.Badges.Add(badge);
-                    m_context.SaveChanges();
-                    }
+                var badge = await m_context.Badges.FirstAsync(i => i.Id == id);
+                if (badge != null)
+                    return badge;
                 }
-            catch (Exception ex)
-                {
-                Console.WriteLine("Shit's fucked: " + ex.Message);
-                }
+
+            return null;
+            }
+
+        [HttpGet("image={id}")]
+        public ActionResult GetBadgeImage(Guid id)
+            {
+            string mime;
+            byte[] bytes = GetImageMetadata(id, out mime);
+            return File(bytes, "image/" + mime);
             }
         }
     }

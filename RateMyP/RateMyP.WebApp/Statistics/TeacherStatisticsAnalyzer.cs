@@ -9,6 +9,7 @@ namespace RateMyP.WebApp.Statistics
     {
     public interface ITeacherStatisticsAnalyzer
         {
+        Task<bool> GetIfTeacherHasRatings(Guid teacherId);
         Task<double> GetTeacherAverageMark(Guid teacherId);
         Task<double> GetTeacherAverageLevelOfDifficulty(Guid teacherId);
         Task<double> GetTeacherWouldTakeTeacherAgainRatio(Guid teacherId);
@@ -27,6 +28,13 @@ namespace RateMyP.WebApp.Statistics
         public TeacherStatisticsAnalyzer(RateMyPDbContext context)
             {
             m_context = context;
+            }
+
+        public async Task<bool> GetIfTeacherHasRatings(Guid teacherId)
+            {
+            var ratings = await m_context.Ratings.Where(r => r.TeacherId.Equals(teacherId)).ToListAsync();
+            if (ratings.Count == 0) return false;
+            return true;
             }
 
         public async Task<double> GetTeacherAverageMark(Guid teacherId)

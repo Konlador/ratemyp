@@ -13,6 +13,9 @@ export interface Badge {
     id: string,
     image: string;
     description: string;
+    size: number,
+    type: string,
+    data: ByteBuffer,
 }
 
 // -----------------
@@ -65,7 +68,7 @@ export const actionCreators = {
         if (appState &&
             appState.badges &&
             appState.badges.isLoading === false) {
-            fetch(`api/badges/${badgeId}`)
+            fetch(`api/badges/badge=${badgeId}`)
                 .then(response => response.json() as Promise<Badge>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_BADGE', badges: data });
@@ -73,7 +76,7 @@ export const actionCreators = {
 
             dispatch({ type: 'REQUEST_BADGE'});
         }
-    },
+    }
 };
 
 // ----------------
