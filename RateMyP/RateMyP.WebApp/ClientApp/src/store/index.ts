@@ -1,4 +1,5 @@
 import * as Teachers from './Teachers';
+import * as TeacherBadges from './Teacher/TeacherBadges'
 import * as TeacherCourses from './Teacher/TeacherCourses';
 import * as TeacherActivites from './Teacher/TeacherActivities';
 import * as TeacherRatings from './Teacher/TeacherRatings';
@@ -9,6 +10,7 @@ import * as CourseTeacherActivities from './Course/CourseTeacherActivities';
 import * as CourseStatistics from './CourseStatistics';
 import * as CourseRatings from './Course/CourseRatings';
 import * as Tags from './Tags';
+import * as Badges from './Badges';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as CustomStarUpload from './CustomStar/CustomStar';
@@ -21,6 +23,7 @@ import * as CustomStarShowcase from './CustomStar/CustomStarShowcase';
 // The top-level state object
 export interface ApplicationState {
     teachers: Teachers.TeachersState | undefined;
+    teacherBadges: TeacherBadges.TeacherBadgesState | undefined;
     teacherCourses: TeacherCourses.TeacherCoursesState | undefined;
     teacherActivites: TeacherActivites.TeacherActivitesState | undefined;
     teacherRatings: TeacherRatings.TeacherRatingsState | undefined;
@@ -34,6 +37,7 @@ export interface ApplicationState {
     courseLeaderboard: CourseLeaderboard.CourseLeaderboardState | undefined;
     courseRatings: CourseRatings.CourseRatingsState | undefined;
 
+    badges: Badges.BadgesState | undefined;
     tags: Tags.TagsState | undefined;
     student: Student.StudentState | undefined;
     rate: Rate.RateState | undefined; 
@@ -49,6 +53,7 @@ export interface ApplicationState {
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
     teachers: Teachers.reducer,
+    teacherBadges: TeacherBadges.reducer,
     teacherCourses: TeacherCourses.reducer,
     teacherActivites: TeacherActivites.reducer,
     teacherRatings: TeacherRatings.reducer,
@@ -62,6 +67,7 @@ export const reducers = {
     courseLeaderboard: CourseLeaderboard.reducer,
     courseRatings: CourseRatings.reducer,
 
+    badges: Badges.reducer,
     tags: Tags.reducer,
     student: Student.reducer,
     rate: Rate.reducer,

@@ -1,3 +1,5 @@
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using RateMyP.WebApp.Statistics;
@@ -22,6 +24,11 @@ namespace RateMyP.WebApp
             await lbM.FullUpdate();
             }
 
+        private byte[] LoadImage(string name)
+            {
+            var assembly = Assembly.GetExecutingAssembly();
+            using var stream = assembly.GetManifestResourceStream($"RateMyP.WebApp.Db.SeedData.{name}");
+            }
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

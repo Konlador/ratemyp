@@ -19,6 +19,8 @@ namespace RateMyP.WebApp
         DbSet<LeaderboardEntry> Leaderboard { get; set; }
         DbSet<CustomStar> CustomStars { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+        DbSet<Badge> Badges { get; set; }
+        DbSet<TeacherBadge> TeacherBadges { get; set; } 
         }
 
     public class RateMyPDbContext : DbContext, IRateMyPDbContext
@@ -36,6 +38,8 @@ namespace RateMyP.WebApp
         public DbSet<LeaderboardEntry> Leaderboard { get; set; }
         public DbSet<CustomStar> CustomStars { get; set; }
         public DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+        public DbSet<Badge> Badges { get; set; }
+        public DbSet<TeacherBadge> TeacherBadges { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
