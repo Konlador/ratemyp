@@ -33,7 +33,6 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
         filter: false,
         search: false,
         onRowClick: (rowData: string[], rowState: {rowIndex: number, dataIndex: number}) => {
-            console.log(rowData, rowState);
             !this.props.isLoading && this.props.history.push(`/teacher-profile/${rowData[3]}`);
           },
     };
@@ -87,9 +86,9 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
                 data={this.props.allTimeEntries.map((entry: TeacherLeaderboardStore.TeacherLeaderboardEntry) => {
                     return [
                         entry.allTimePosition,
-                        entry.name,
+                        `${entry.teacher.firstName} ${entry.teacher.lastName}`,
                         entry.allTimeAverage.toFixed(2),
-                        entry.id
+                        entry.teacherId
                     ]})}
                 columns={[
                     {name: 'Rank', options: {sort: true}},
@@ -108,9 +107,9 @@ class TeacherLeaderboard extends React.PureComponent<Props, State> {
                 data={this.props.thisYearEntries.map((entry: TeacherLeaderboardStore.TeacherLeaderboardEntry) => {
                     return [
                         entry.thisYearPosition,
-                        entry.name,
+                        `${entry.teacher.firstName} ${entry.teacher.lastName}`,
                         entry.thisYearAverage.toFixed(2),
-                        entry.id,
+                        entry.teacherId
                     ]})}
                 columns={[
                     {name: 'Rank', options: {sort: false}},

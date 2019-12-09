@@ -14,11 +14,14 @@ import * as Badges from './Badges';
 import * as Student from './Student';
 import * as Rate from './Rate/Rate';
 import * as CustomStarUpload from './CustomStar/CustomStar';
-import * as RatingReport from './Rate/RatingReport';
-import * as CustomStarReport from './CustomStar/CustomStarReport'
+import * as RatingReportCreation from './Reports/RatingReportCreation';
+import * as RatingReports from './Reports/RatingReports';
+import * as CustomStarReportCreation from './Reports/CustomStarReportCreation';
+import * as CustomStarReports from './Reports/CustomStarReports';
 import * as TeacherLeaderboard from './Leaderboard/TeacherLeaderboard';
 import * as CourseLeaderboard from './Leaderboard/CourseLeaderboard';
 import * as CustomStarShowcase from './CustomStar/CustomStarShowcase';
+import * as Shop from './Shop/Shop';
 
 // The top-level state object
 export interface ApplicationState {
@@ -41,11 +44,15 @@ export interface ApplicationState {
     tags: Tags.TagsState | undefined;
     student: Student.StudentState | undefined;
     rate: Rate.RateState | undefined; 
-    ratingReport: RatingReport.RatingReportState | undefined;
+    ratingReportCreation: RatingReportCreation.RatingReportCreationState | undefined;
+    ratingReports: RatingReports.RatingReportsState | undefined;
 
     customStarUpload: CustomStarUpload.CustomStarState | undefined;
     customStarShowcase: CustomStarShowcase.CustomStarShowcaseState | undefined;
-    customStarReport: CustomStarReport.CustomStarReportState | undefined;
+    customStarReportCreation: CustomStarReportCreation.CustomStarReportCreationState | undefined;
+    customStarReports: CustomStarReports.CustomStarReportsState | undefined;
+
+    shop: Shop.ShopState | undefined;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -71,11 +78,15 @@ export const reducers = {
     tags: Tags.reducer,
     student: Student.reducer,
     rate: Rate.reducer,
-    ratingReport: RatingReport.reducer,
+    ratingReportCreation: RatingReportCreation.reducer,
+    ratingReports: RatingReports.reducer,
 
     customStarUpload: CustomStarUpload.reducer,
     customStarShowcase: CustomStarShowcase.reducer,
-    customStarReport: CustomStarReport.reducer,
+    customStarReportCreation: CustomStarReportCreation.reducer,
+    customStarReports: CustomStarReports.reducer,
+
+    shop: Shop.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

@@ -29,7 +29,8 @@ namespace RateMyP.WebApp
             services.AddTransient<ILeaderboardManager, LeaderboardManager>();
 
             services.AddControllersWithViews();
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc()
+                    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
 

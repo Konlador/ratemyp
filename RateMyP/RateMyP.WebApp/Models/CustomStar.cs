@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace RateMyP.WebApp.Models
     {
@@ -9,7 +7,7 @@ namespace RateMyP.WebApp.Models
         public Guid Id { get; set; }
         public Guid TeacherId { get; set; }
         public DateTime DateCreated { get; set; }
-        public string? StudentId { get; set; }
+        public string StudentId { get; set; }
         public int ThumbUps { get; set; }
         public int ThumbDowns { get; set; }
 

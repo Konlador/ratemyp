@@ -68,29 +68,6 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("CustomStars");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.CustomStarReport", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CustomStarId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomStarReports");
-                });
-
             modelBuilder.Entity("RateMyP.WebApp.Models.CustomStarThumb", b =>
                 {
                     b.Property<Guid>("CustomStarId")
@@ -107,10 +84,9 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("CustomStarThumbs");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.LeaderboardEntry", b =>
+            modelBuilder.Entity("RateMyP.WebApp.Models.Leaderboard.CourseLeaderboardEntry", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("AllTimeAverage")
@@ -125,8 +101,39 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<double>("AllTimeScore")
                         .HasColumnType("float");
 
-                    b.Property<int>("EntryType")
+                    b.Property<double>("ThisYearAverage")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ThisYearPosition")
                         .HasColumnType("int");
+
+                    b.Property<int>("ThisYearRatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ThisYearScore")
+                        .HasColumnType("float");
+
+                    b.HasKey("CourseId");
+
+                    b.ToTable("CourseLeaderboard");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Leaderboard.TeacherLeaderboardEntry", b =>
+                {
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("AllTimeAverage")
+                        .HasColumnType("float");
+
+                    b.Property<int>("AllTimePosition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AllTimeRatingCount")
+                        .HasColumnType("int");
+
+                    b.Property<double>("AllTimeScore")
+                        .HasColumnType("float");
 
                     b.Property<double>("ThisYearAverage")
                         .HasColumnType("float");
@@ -140,9 +147,46 @@ namespace RateMyP.WebApp.Migrations
                     b.Property<double>("ThisYearScore")
                         .HasColumnType("float");
 
+                    b.HasKey("TeacherId");
+
+                    b.ToTable("TeacherLeaderboard");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Merchandise", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Leaderboard");
+                    b.ToTable("Merchandises");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.MerchandiseOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MerchandiseOrders");
                 });
 
             modelBuilder.Entity("RateMyP.WebApp.Models.Rating", b =>
@@ -189,29 +233,6 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("RateMyP.WebApp.Models.RatingReport", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("RatingId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RatingReports");
-                });
-
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>
                 {
                     b.Property<Guid>("RatingId")
@@ -243,10 +264,63 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("RatingThumbs");
                 });
 
+            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.CustomStarReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomStarId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomStarId");
+
+                    b.ToTable("CustomStarReports");
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.RatingReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("RatingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RatingId");
+
+                    b.ToTable("RatingReports");
+                });
+
             modelBuilder.Entity("RateMyP.WebApp.Models.Student", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Points")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Studies")
                         .HasColumnType("nvarchar(max)");
@@ -324,6 +398,24 @@ namespace RateMyP.WebApp.Migrations
                     b.ToTable("TeacherActivities");
                 });
 
+            modelBuilder.Entity("RateMyP.WebApp.Models.Leaderboard.CourseLeaderboardEntry", b =>
+                {
+                    b.HasOne("RateMyP.WebApp.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Leaderboard.TeacherLeaderboardEntry", b =>
+                {
+                    b.HasOne("RateMyP.WebApp.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("RateMyP.WebApp.Models.RatingTag", b =>
                 {
                     b.HasOne("RateMyP.WebApp.Models.Rating", null)
@@ -336,6 +428,24 @@ namespace RateMyP.WebApp.Migrations
                         .WithMany()
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.CustomStarReport", b =>
+                {
+                    b.HasOne("RateMyP.WebApp.Models.CustomStar", "CustomStar")
+                        .WithMany()
+                        .HasForeignKey("CustomStarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RateMyP.WebApp.Models.Reports.RatingReport", b =>
+                {
+                    b.HasOne("RateMyP.WebApp.Models.Rating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

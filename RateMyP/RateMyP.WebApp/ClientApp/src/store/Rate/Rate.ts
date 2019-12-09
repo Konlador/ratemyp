@@ -104,7 +104,7 @@ export const actionCreators = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(state.rate.rating)
+                body: JSON.stringify({ ...state.rate.rating, teacherId: undefined })
             }).then(res => res.json()).catch(error => console.error('Error:', error));
         }
         dispatch({ type: 'SEND_RATING' });

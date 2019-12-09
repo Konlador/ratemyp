@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import TeacherLeaderboard from './TeacherLeaderboard';
 import CourseLeaderboard from './CourseLeaderboard';
-import '../../extensions/StringExtensions';
 import './Leaderboard.css';
 
 class Leaderboard extends React.PureComponent {

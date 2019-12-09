@@ -54,11 +54,11 @@ namespace RateMyP.WebApp.Controllers
             {
             var customStar = await m_context.CustomStars
                                             .Where(x => x.TeacherId.Equals(teacherId))
-                                            .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstAsync();
+                                            .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstOrDefaultAsync();
 
             var imageId = "default_full";
             const int customStarScoreThreshold = 5;
-            if (customStar!.ThumbUps >= customStarScoreThreshold)
+            if (customStar != null && customStar!.ThumbUps >= customStarScoreThreshold)
                 imageId = "_" + customStar.Id;
 
             const string transformation = "w_50,h_50,f_png";

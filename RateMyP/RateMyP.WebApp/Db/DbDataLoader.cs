@@ -23,6 +23,7 @@ namespace RateMyP.WebApp.Db
             LoadTeacherActivitiesToDb();
             LoadStudentsToDb();
             LoadTagsToDb();
+            LoadMerchToDb();
             }
 
         private void LoadTeachersToDb()
@@ -57,6 +58,13 @@ namespace RateMyP.WebApp.Db
             {
             var tags = ParseEntitiesFromCsv<Tag>("tags.csv");
             m_context.Tags.AddRange(tags);
+            m_context.SaveChanges();
+            }
+
+        private void LoadMerchToDb()
+            {
+            var merchandises = ParseEntitiesFromCsv<Merchandise>("merch.csv");
+            m_context.Merchandises.AddRange(merchandises);
             m_context.SaveChanges();
             }
 

@@ -4,7 +4,6 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { ApplicationState } from '../../store';
 import * as CoursesStore from '../../store/Courses';
 import { Input, Button, Spinner, Table } from 'reactstrap';
-import '../../extensions/StringExtensions';
 import './Courses.css';
 
 interface OwnProps {
@@ -62,7 +61,6 @@ class Courses extends React.PureComponent<Props & OwnProps> {
         const html = document.documentElement;
         const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
-        console.log("windowBottom: " + windowBottom + ", docHeight: " + docHeight);
         if (windowBottom >= docHeight && !this.props.isLoading)
             this.loadMoreCourses();
     }

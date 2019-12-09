@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using RateMyP.WebApp.Helpers;
 using RateMyP.WebApp.Statistics;
 
 namespace RateMyP.WebApp.Controllers
@@ -24,80 +25,55 @@ namespace RateMyP.WebApp.Controllers
         Task<ActionResult<Rating>> PostRating([FromBody] JObject data);
         }
 
-    public delegate Task UpdateLeaderboard(Guid id, EntryType type);
-
     [Route("api/ratings")]
     [ApiController]
     public class RatingsController : ControllerBase
         {
         private readonly RateMyPDbContext m_context;
-        private readonly UpdateLeaderboard m_updateLeaderboardAsync;
+        private readonly ILeaderboardManager m_leaderboardManager;
 
         public RatingsController(RateMyPDbContext context, ILeaderboardManager leaderboardManager)
             {
             m_context = context;
-            m_updateLeaderboardAsync = leaderboardManager.Update;
+            m_leaderboardManager = leaderboardManager;
             }
 
         [HttpGet]
-        public async Task<IActionResult> GetRatings()
+        public ActionResult<IEnumerable<RatingDto>> GetRatings()
             {
-            var ratings = await m_context.Ratings
-                                         .Include(rating => rating.Tags)
-                                         .ThenInclude(ratingTag => ratingTag.Tag)
-                                         .ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings.SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("teacher={teacherId}")]
-        public async Task<IActionResult> GetTeacherRatings(Guid teacherId)
+        public ActionResult<IEnumerable<RatingDto>> GetTeacherRatings(Guid teacherId)
             {
-            var ratings = await m_context.Ratings
-                                         .Include(rating => rating.Tags)
-                                         .ThenInclude(ratingTag => ratingTag.Tag)
-                                         .Where(x => x.TeacherId.Equals(teacherId)).ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings
+                                   .Where(x => x.TeacherId.Equals(teacherId))
+                                   .SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("course={courseId}")]
-        public async Task<IActionResult> GetCourseRatings(Guid courseId)
+        public ActionResult<IEnumerable<RatingDto>> GetCourseRatings(Guid courseId)
             {
-            var ratings = await m_context.Ratings
-                .Include(rating => rating.Tags)
-                .ThenInclude(ratingTag => ratingTag.Tag)
-                .Where(x => x.CourseId.Equals(courseId)).ToListAsync();
-            return Ok(SerializeRatings(ratings));
+            var ratings = m_context.Ratings
+                                   .Where(x => x.CourseId.Equals(courseId))
+                                   .SelectRatingDto();
+            return Ok(ratings);
             }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetRating(Guid id)
+        public async Task<IActionResult> GetRatingAsync(Guid id)
             {
             var rating = await m_context.Ratings
                                         .Include(r => r.Tags)
-                                        .ThenInclude(ratingTag => ratingTag.Tag)
+                                        .ThenInclude(rt => rt.Tag)
                                         .SingleAsync(x => x.Id.Equals(id));
-
             if (rating == null)
                 return NotFound();
 
-            return Ok(SerializeRating(rating));
-            }
-
-        private static JArray SerializeRatings(IEnumerable<Rating> ratings)
-            {
-            return JArray.FromObject(ratings.Select(SerializeRating));
-            }
-
-        private static JObject SerializeRating(Rating rating)
-            {
-            var serializer = new JsonSerializer
-                {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
-            var serializedRating = JObject.FromObject(rating, serializer);
-            var serializedTagsList = rating.Tags.Select(ratingTag => JObject.FromObject(ratingTag.Tag, serializer)).ToList();
-            serializedRating["tags"] = JArray.FromObject(serializedTagsList, serializer);
-            return serializedRating;
+            return Ok(rating.SelectRatingDto());
             }
 
         [HttpPost("thumb")]
@@ -134,17 +110,15 @@ namespace RateMyP.WebApp.Controllers
             return Created("RatingThumb", ratingThumb);
             }
 
-        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Rating>> PostRating([FromBody]JObject data)
+        public async Task<ActionResult<Rating>> PostRating(RatingDto ratingDto)
             {
             var ratingId = Guid.NewGuid();
-
             var ratingTags = new List<RatingTag>();
-            var tags = JsonConvert.DeserializeObject<List<Tag>>((string)data["tags"]);
-            foreach (var tag in tags)
+            var validTags = await m_context.Tags.ToListAsync();
+            foreach (var tag in ratingDto.Tags)
                 {
-                if (await m_context.Tags.AnyAsync(t => t.Id.Equals(tag.Id)))
+                if (validTags.Any(t => t.Id.Equals(tag.Id)))
                     ratingTags.Add(new RatingTag
                         {
                         RatingId = ratingId,
@@ -155,32 +129,29 @@ namespace RateMyP.WebApp.Controllers
                     return NotFound("Tag not found");
                 }
 
-            Guid.TryParse((string)data["teacherId"], out var teacherId);
-            Guid.TryParse((string) data["courseId"], out var courseId);
-
             var rating = new Rating
                 {
                 Id = ratingId,
                 DateCreated = DateTime.Now,
-                TeacherId = teacherId,
+                TeacherId = ratingDto.TeacherId,
                 Tags = ratingTags,
-                Comment = (string)data["comment"],
-                CourseId = courseId,
-                LevelOfDifficulty = (int)data["levelOfDifficulty"],
-                OverallMark = (int)data["overallMark"],
-                WouldTakeTeacherAgain = (bool)data["wouldTakeTeacherAgain"],
-                RatingType = (RatingType)(int)data["ratingType"],
+                Comment = ratingDto.Comment,
+                CourseId = ratingDto.CourseId,
+                LevelOfDifficulty = ratingDto.LevelOfDifficulty,
+                OverallMark = ratingDto.OverallMark,
+                WouldTakeTeacherAgain = ratingDto.WouldTakeTeacherAgain,
+                RatingType = ratingDto.RatingType,
                 ThumbUps = 0,
                 ThumbDowns = 0
                 };
             m_context.Ratings.Add(rating);
             await m_context.SaveChangesAsync();
 
-            if (teacherId != Guid.Empty)
-                await m_updateLeaderboardAsync(teacherId, EntryType.Teacher);
-            await m_updateLeaderboardAsync(courseId, EntryType.Course);
+            if (rating.TeacherId != Guid.Empty)
+                await m_leaderboardManager.UpdateTeacherAsync(rating.TeacherId);
+            await m_leaderboardManager.UpdateCourseAsync(rating.CourseId);
 
-            return CreatedAtAction("GetRating", new { id = rating.Id }, rating);
+            return CreatedAtAction(nameof(GetRatingAsync), new { id = rating.Id });
             }
         }
     }

@@ -75,7 +75,7 @@ export const actionCreators = {
         const appState = getState();
         if (appState &&
             appState.student && appState.student.user &&
-            appState.customStarUpload && appState.customStarUpload.image){
+            appState.customStarUpload && appState.customStarUpload.image) {
             appState.student.user.getIdToken().then(userToken => {
                 fetch(`api/customstar/teacher=${teacherId}`, {
                     method: 'POST',

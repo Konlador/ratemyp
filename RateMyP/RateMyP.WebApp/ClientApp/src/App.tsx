@@ -10,11 +10,13 @@ import CourseProfile from './components/CourseProfile/CourseProfile';
 import RateTeacher from './components/Rate/RateTeacher';
 import RateCourse from './components/Rate/RateCourse';
 import RatingReport from './components/RatingReport/RatingReport';
-import CustomStarUpload from './components/CustomStar/CustomStarUpload'
-import CustomStarLeaderboard from './components/CustomStar/CustomStarShowcase'
-import CustomStarReport from './components/CustomStarReport/CustomStarReport'
+import CustomStarUpload from './components/CustomStar/CustomStarUpload';
+import CustomStarLeaderboard from './components/CustomStar/CustomStarShowcase';
+import CustomStarReport from './components/CustomStarReport/CustomStarReport';
+import ReportManager from './components/ReportManager/ReportManager';
+import Shop from './components/Shop/Shop';
 import firebase from "firebase";
-import './custom.css'
+import './custom.css';
 
 firebase.initializeApp({
     apiKey: "AIzaSyATzXFbDyQYupqUw_va7NKEgPVOGfCFWb4",
@@ -38,6 +40,8 @@ class App extends React.Component<{}> {
                     <Route path='/add-custom-star/:teacherId' component={CustomStarUpload} />
                     <Route path='/custom-star/:teacherId' component={CustomStarLeaderboard} />
                     <Route path='/custom-star-report/:customStarId' component={CustomStarReport} />
+                    <Route path='/reports' component={ReportManager} />
+                    <Route path='/shop' component={Shop} />
                 </Layout>
             </div>
         );

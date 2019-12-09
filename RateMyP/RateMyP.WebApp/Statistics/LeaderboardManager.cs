@@ -1,20 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RateMyP.WebApp.Helpers;
-using RateMyP.WebApp.Models;
+using RateMyP.WebApp.Models.Leaderboard;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Statistics
     {
     public interface ILeaderboardManager
         {
-        Task FullUpdate();
-        Task Update(Guid id, EntryType type);
+        Task FullUpdateAsync();
+        Task UpdateTeacherAsync(Guid teacherId);
+        Task UpdateCourseAsync(Guid courseId);
         }
 
     public class LeaderboardManager : ILeaderboardManager
@@ -45,76 +43,68 @@ namespace RateMyP.WebApp.Statistics
             return (((pR + w) / tR - z * Math.Sqrt((pR * (tR - pR)) / (double)tR + u) / tR) / (1 + v / tR)) * aR;
             }
 
-        public async Task FullUpdate()
+        public async Task FullUpdateAsync()
             {
             var teachers = await m_context.Teachers.ToListAsync();
             var courses = await m_context.Courses.ToListAsync();
-            var teacherLeaderboardEntries = new List<LeaderboardEntry>();
-            var courseLeaderboardEntries = new List<LeaderboardEntry>();
+            var teacherLeaderboardEntries = new List<TeacherLeaderboardEntry>();
+            var courseLeaderboardEntries = new List<CourseLeaderboardEntry>();
 
             foreach (var teacher in teachers)
                 {
-                var entry = await GetTeacherEntry(teacher.Id);
+                var entry = await GetTeacherEntryAsync(teacher.Id);
                 if (entry != null)
                     teacherLeaderboardEntries.Add(entry);
                 }
 
             foreach (var course in courses)
                 {
-                var entry = await GetCourseEntry(course.Id);
+                var entry = await GetCourseEntryAsync(course.Id);
                 if (entry != null)
                     courseLeaderboardEntries.Add(entry);
                 }
 
             SetPositions(teacherLeaderboardEntries);
             SetPositions(courseLeaderboardEntries);
-            await RefreshLeaderboardEntries(teacherLeaderboardEntries);
-            await RefreshLeaderboardEntries(courseLeaderboardEntries);
+            await RefreshTeacherLeaderboardEntriesAsync(teacherLeaderboardEntries);
+            await RefreshCourseLeaderboardEntriesAsync(courseLeaderboardEntries);
             }
 
-        public async Task Update(Guid id, EntryType type)
+        public async Task UpdateTeacherAsync(Guid teacherId)
             {
-            if (type == EntryType.Teacher)
-                await UpdateFromTeacher(id);
-            else
-                await UpdateFromCourse(id);
-            }
-
-        public async Task UpdateFromTeacher(Guid teacherId)
-            {
-            var leaderboardEntries = await m_context.Leaderboard.Where(e => e.EntryType == EntryType.Teacher).ToListAsync();
-            var entry = await GetTeacherEntry(teacherId);
+            var leaderboardEntries = await m_context.TeacherLeaderboard.ToListAsync();
+            var entry = await GetTeacherEntryAsync(teacherId);
             if (entry == null)
                 return;
 
-            var index = leaderboardEntries.FindIndex(x => x.Id.Equals(teacherId));
+            var index = leaderboardEntries.FindIndex(x => x.TeacherId.Equals(teacherId));
             if (index != -1)
                 leaderboardEntries[index] = entry;
             else
                 leaderboardEntries.Add(entry);
 
             SetPositions(leaderboardEntries);
-            await RefreshLeaderboardEntries(leaderboardEntries);
+            await RefreshTeacherLeaderboardEntriesAsync(leaderboardEntries);
             }
 
-        public async Task UpdateFromCourse(Guid courseId)
+        public async Task UpdateCourseAsync(Guid courseId)
             {
-            var leaderboardEntries = await m_context.Leaderboard.Where(e => e.EntryType == EntryType.Course).ToListAsync();
-            var entry = await GetCourseEntry(courseId);
+            var leaderboardEntries = await m_context.CourseLeaderboard.ToListAsync();
+            var entry = await GetCourseEntryAsync(courseId);
             if (entry == null)
                 return;
 
-            var index = leaderboardEntries.FindIndex(x => x.Id.Equals(courseId));
+            var index = leaderboardEntries.FindIndex(x => x.CourseId.Equals(courseId));
             if (index != -1)
                 leaderboardEntries[index] = entry;
             else
                 leaderboardEntries.Add(entry);
 
             SetPositions(leaderboardEntries);
-            await RefreshLeaderboardEntries(leaderboardEntries);
+            await RefreshCourseLeaderboardEntriesAsync(leaderboardEntries);
             }
 
-        private static void SetPositions(List<LeaderboardEntry> entries)
+        private static void SetPositions<T>(List<T> entries) where T : LeaderboardEntry
             {
             entries.Sort((left, right) => right.AllTimeScore.CompareTo(left.AllTimeScore));
             for (var i = 0; i < entries.Count; i++)
@@ -125,25 +115,17 @@ namespace RateMyP.WebApp.Statistics
                 entries[i].ThisYearPosition = i + 1;
             }
 
-        private async Task<LeaderboardEntry> GetTeacherEntry(Guid teacherId)
+        private async Task<TeacherLeaderboardEntry> GetTeacherEntryAsync(Guid teacherId)
             {
             var globalRatingCount = await m_teacherAnalyzer.GetTeacherRatingCount(teacherId);
             if (globalRatingCount < m_minimumRatings)
                 return null;
 
-            var entry = new LeaderboardEntry();
-            try
-                {
-                entry = await m_context.Leaderboard.FirstAsync(e => e.Id == teacherId && e.EntryType == EntryType.Teacher);
-                }
-            catch (InvalidOperationException)
-                {
-                entry = new LeaderboardEntry
-                        {
-                        Id = teacherId,
-                        EntryType = EntryType.Teacher
-                        };
-                }
+            var entry = await m_context.TeacherLeaderboard.FindAsync(teacherId) ??
+                        new TeacherLeaderboardEntry
+                            {
+                            TeacherId = teacherId,
+                            };
 
             entry.AllTimeRatingCount = globalRatingCount;
             try
@@ -174,25 +156,18 @@ namespace RateMyP.WebApp.Statistics
             return entry;
             }
 
-        private async Task<LeaderboardEntry> GetCourseEntry(Guid courseId)
+        private async Task<CourseLeaderboardEntry> GetCourseEntryAsync(Guid courseId)
             {
             var globalRatingCount = await m_courseAnalyzer.GetCourseRatingCount(courseId);
             if (globalRatingCount < m_minimumRatings)
                 return null;
 
-            var entry = new LeaderboardEntry();
-            try
-                {
-                entry = await m_context.Leaderboard.FirstAsync(e => e.Id == courseId && e.EntryType == EntryType.Course);
-                }
-            catch (InvalidOperationException)
-                {
-                entry = new LeaderboardEntry
-                    {
-                    Id = courseId,
-                    EntryType = EntryType.Course
-                    };
-                }
+            var entry = await m_context.CourseLeaderboard.FindAsync(courseId) ??
+                        new CourseLeaderboardEntry
+                            {
+                            CourseId = courseId,
+                            };
+
 
             entry.AllTimeRatingCount = globalRatingCount;
             try
@@ -223,13 +198,24 @@ namespace RateMyP.WebApp.Statistics
             return entry;
             }
 
-        public async Task RefreshLeaderboardEntries(IEnumerable<LeaderboardEntry> entries)
+        private async Task RefreshTeacherLeaderboardEntriesAsync(IEnumerable<TeacherLeaderboardEntry> entries)
             {
             foreach (var entry in entries)
                 {
-                if (m_context.Leaderboard.Find(entry.Id) == null)
-                    m_context.Leaderboard.Add(entry);
-                else m_context.Leaderboard.Update(entry);
+                if (m_context.TeacherLeaderboard.Find(entry.TeacherId) == null)
+                    m_context.TeacherLeaderboard.Add(entry);
+                else m_context.TeacherLeaderboard.Update(entry);
+                }
+            await m_context.SaveChangesAsync();
+            }
+
+        private async Task RefreshCourseLeaderboardEntriesAsync(IEnumerable<CourseLeaderboardEntry> entries)
+            {
+            foreach (var entry in entries)
+                {
+                if (m_context.CourseLeaderboard.Find(entry.CourseId) == null)
+                    m_context.CourseLeaderboard.Add(entry);
+                else m_context.CourseLeaderboard.Update(entry);
                 }
             await m_context.SaveChangesAsync();
             }

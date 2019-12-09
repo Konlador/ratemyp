@@ -1,5 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '..';
+import { Course } from '../Courses';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -12,9 +13,8 @@ export interface CourseLeaderboardState {
 }
 
 export interface CourseLeaderboardEntry {
-    id: string,
-    entryType: number,
-    name: string,
+    courseId: string,
+    course: Course,
     allTimePosition: number,
     allTimeRatingCount: number,
     allTimeAverage: number,
@@ -73,8 +73,8 @@ export const actionCreators = {
             appState.courseLeaderboard.allTimeEntries.length == 0) {
             fetch(`api/leaderboard/courses/global`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_ALLTIME_COURSE_LEADERBOARD', allTimeEntries: data });
+                .then(allTimeEntries => {
+                    dispatch({ type: 'RECEIVE_ALLTIME_COURSE_LEADERBOARD', allTimeEntries });
                 });
             dispatch({ type: 'REQUEST_ALLTIME_COURSE_LEADERBOARD' });
         }
@@ -87,8 +87,8 @@ export const actionCreators = {
             appState.courseLeaderboard.thisYearEntries.length == 0) {
             fetch(`api/leaderboard/courses/year`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry[]>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_THIS_YEAR_COURSE_LEADERBOARD', thisYearEntries: data });
+                .then(thisYearEntries => {
+                    dispatch({ type: 'RECEIVE_THIS_YEAR_COURSE_LEADERBOARD', thisYearEntries });
                 });
             dispatch({ type: 'REQUEST_THIS_YEAR_COURSE_LEADERBOARD' });
         }
@@ -99,11 +99,11 @@ export const actionCreators = {
             appState.courseLeaderboard &&
             appState.courseLeaderboard.isLoading === false &&
             (appState.courseLeaderboard.selectedEntry === undefined ||
-            appState.courseLeaderboard.selectedEntry.id !== courseId)) {
+            appState.courseLeaderboard.selectedEntry.courseId !== courseId)) {
             fetch(`api/leaderboard/course=${courseId}`)
                 .then(response => response.json() as Promise<CourseLeaderboardEntry>)
-                .then(data => {
-                    dispatch({ type: 'RECEIVE_COURSE_ENTRY', selectedEntry: data });
+                .then(selectedEntry => {
+                    dispatch({ type: 'RECEIVE_COURSE_ENTRY', selectedEntry });
                 });
             dispatch({ type: 'REQUEST_COURSE_ENTRY' });
         }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RateMyP.WebApp.Models;
 using Microsoft.Extensions.Configuration;
+using RateMyP.WebApp.Models.Leaderboard;
+using RateMyP.WebApp.Models.Reports;
 
 namespace RateMyP.WebApp
     {
@@ -16,9 +18,11 @@ namespace RateMyP.WebApp
         DbSet<Tag> Tags { get; set; }
         DbSet<RatingReport> RatingReports { get; set; }
         DbSet<CustomStarReport> CustomStarReports { get; set; }
-        DbSet<LeaderboardEntry> Leaderboard { get; set; }
+        DbSet<TeacherLeaderboardEntry> TeacherLeaderboard { get; set; }
+        DbSet<CourseLeaderboardEntry> CourseLeaderboard { get; set; }
         DbSet<CustomStar> CustomStars { get; set; }
         DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
+        DbSet<Merchandise> Merchandises { get; set; }
         DbSet<Badge> Badges { get; set; }
         DbSet<TeacherBadge> TeacherBadges { get; set; } 
         }
@@ -35,11 +39,14 @@ namespace RateMyP.WebApp
         public DbSet<Tag> Tags { get; set; }
         public DbSet<RatingReport> RatingReports { get; set; }
         public DbSet<CustomStarReport> CustomStarReports { get; set; }
-        public DbSet<LeaderboardEntry> Leaderboard { get; set; }
+        public DbSet<TeacherLeaderboardEntry> TeacherLeaderboard { get; set; }
+        public DbSet<CourseLeaderboardEntry> CourseLeaderboard { get; set; }
         public DbSet<CustomStar> CustomStars { get; set; }
         public DbSet<CustomStarThumb> CustomStarThumbs { get; set; }
         public DbSet<Badge> Badges { get; set; }
         public DbSet<TeacherBadge> TeacherBadges { get; set; }
+        public DbSet<Merchandise> Merchandises { get; set; }
+        public DbSet<MerchandiseOrder> MerchandiseOrders { get; set; }
 
         public RateMyPDbContext()
             : base(new DbContextOptions<RateMyPDbContext>())
@@ -59,6 +66,14 @@ namespace RateMyP.WebApp
             builder.Entity<RatingThumb>().HasKey(table => new { table.RatingId, table.StudentId });
             builder.Entity<CustomStarThumb>().HasKey(table => new { table.CustomStarId, table.StudentId });
             builder.Entity<RatingTag>().HasKey(table => new { table.RatingId, table.TagId });
+            builder.Entity<RatingReport>()
+                   .HasOne(rr => rr.Rating)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<CustomStarReport>()
+                   .HasOne(cr => cr.CustomStar)
+                   .WithMany()
+                   .OnDelete(DeleteBehavior.Restrict);
             }
         }
     }
