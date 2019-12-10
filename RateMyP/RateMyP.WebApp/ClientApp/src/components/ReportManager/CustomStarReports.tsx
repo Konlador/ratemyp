@@ -47,7 +47,7 @@ class CustomStarReports extends React.PureComponent<Props> {
         return (
             <div>
                 <p>What's your verdict?</p>
-                <Button className="add-rating" color="success" onClick={() => this.props.deleteCustomStarReport(report.id)}>Rating is ok</Button>{' '}
+                <Button className="add-rating" color="success" onClick={() => this.props.deleteCustomStarReport(report.id)}>Custom star is ok</Button>{' '}
                 <Button className="add-rating" color="danger" onClick={() => this.props.deleteCustomStarReport(report.id)}>Remove custom star</Button>{' '}
             </div>
         );

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as ShopStore from '../../store/Shop/Shop';
 import './Shop.css';
 
+const vuShop = require('../../images/vushop.png');
+
 type Props =
     typeof ShopStore.actionCreators &
     RouteComponentProps<{ teacherId: string }>;
@@ -12,14 +14,11 @@ class Shop extends React.PureComponent<Props> {
     public render() {
         return (
             <React.Fragment>
-                <div>
-                    Shopas
-                </div>
+                <img className="shop" src={vuShop} />
             </React.Fragment>
         );
     }
 }
-
 
 export default connect(
     undefined

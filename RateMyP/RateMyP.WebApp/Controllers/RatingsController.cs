@@ -85,6 +85,7 @@ namespace RateMyP.WebApp.Controllers
                 ThumbUp = (bool)ratingThumbJObject["thumbUp"]
                 };
 
+            // getting the authorized students id
             var identity = (ClaimsIdentity)User.Identity;
             var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             if (studentId == null || m_context.Students.Find(studentId) == null)

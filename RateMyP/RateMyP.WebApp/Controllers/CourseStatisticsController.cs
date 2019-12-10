@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 
 namespace RateMyP.WebApp.Controllers
     {
-    public interface ICourseStatisticsController
-        {
-        Task<ActionResult<TeacherStatistics>> GetCourseStatistics(Guid teacherId, int timeStamps);
-        }
-
     [Route("api/statistics")]
     [ApiController]
     public class CourseStatisticsController : ControllerBase

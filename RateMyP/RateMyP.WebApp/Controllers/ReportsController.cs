@@ -69,6 +69,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpPost("rating")]
         public async Task<ActionResult<RatingReportDto>> PostRatingReportAsync(RatingReportDto ratingReportDto)
             {
+            // getting the authorized students id
             var identity = (ClaimsIdentity)User.Identity;
             var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             if (studentId == null || m_context.Students.Find(studentId) == null)
@@ -130,6 +131,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpPost("custom-star")]
         public async Task<ActionResult<CustomStarReport>> PostCustomStarReportAsync(CustomStarReportDto customStarReportDto)
             {
+            // getting the authorized students id
             var identity = (ClaimsIdentity)User.Identity;
             var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             if (studentId == null || m_context.Students.Find(studentId) == null)

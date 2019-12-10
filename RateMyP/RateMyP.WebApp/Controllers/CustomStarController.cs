@@ -56,8 +56,9 @@ namespace RateMyP.WebApp.Controllers
                                             .Where(x => x.TeacherId.Equals(teacherId))
                                             .OrderByDescending(g => g.ThumbUps - g.ThumbDowns).FirstOrDefaultAsync();
 
+            // using a third party image storage service https://cloudinary.com
             var imageId = "default_full";
-            const int customStarScoreThreshold = 5;
+            const int customStarScoreThreshold = 1;
             if (customStar != null && customStar!.ThumbUps >= customStarScoreThreshold)
                 imageId = "_" + customStar.Id;
 
@@ -76,6 +77,7 @@ namespace RateMyP.WebApp.Controllers
         [HttpPost("teacher={teacherId}")]
         public async Task<IActionResult> PostCustomStarAsync(Guid teacherId, [FromBody] JObject data)
             {
+            // getting the authorized students id
             var identity = (ClaimsIdentity)User.Identity;
             var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             if (studentId == null || m_context.Students.Find(studentId) == null)
@@ -133,6 +135,7 @@ namespace RateMyP.WebApp.Controllers
             if (customStar == null)
                 return NotFound("Custom star not found");
 
+            // getting the authorized students id
             var identity = (ClaimsIdentity)User.Identity;
             var studentId = identity.Claims.FirstOrDefault(x => x.Type == "user_id")?.Value;
             if (studentId == null || m_context.Students.Find(studentId) == null)
